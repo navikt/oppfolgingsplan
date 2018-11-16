@@ -42,6 +42,7 @@ global.navigator = {
     userAgent: 'node.js',
 };
 global.window.APP_SETTINGS = {
-    APP_ROOT: '/sykefravaer',
+    APP_ROOT: '/oppfolgingsplan',
+    REST_ROOT: '/syforest',
 };
 copyProps(window, global);

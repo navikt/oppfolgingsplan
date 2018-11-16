@@ -3,8 +3,6 @@ import deepFreeze from 'deep-freeze';
 
 import dineSykmeldinger from '../../js/reducers/dineSykmeldinger';
 import * as actions from '../../js/actions/dineSykmeldinger_actions';
-import * as brukerActions from '../../js/actions/brukerinfo_actions';
-
 
 export function getSykmelding(soknad = {}) {
     return Object.assign({}, {
@@ -302,34 +300,6 @@ describe('dineSykmeldingerReducer', () => {
             henter: false,
             hentingFeilet: true,
             hentet: true,
-        });
-    });
-
-    it('håndterer SET_SORTERING dersom man ikke har sortering fra før', () => {
-        const initialState = deepFreeze({});
-        const action = actions.sorterSykmeldinger('arbeidsgiver', 'tidligere');
-        const nextState = dineSykmeldinger(initialState, action);
-
-        expect(nextState).to.deep.equal({
-            sortering: {
-                tidligere: 'arbeidsgiver',
-            },
-        });
-    });
-
-    it('håndterer SET_SORTERING dersom man har sortering fra før', () => {
-        const initialState = deepFreeze({
-            sortering: {
-                tidligere: 'dato',
-            },
-        });
-        const action = actions.sorterSykmeldinger('arbeidsgiver', 'tidligere');
-        const nextState = dineSykmeldinger(initialState, action);
-
-        expect(nextState).to.deep.equal({
-            sortering: {
-                tidligere: 'arbeidsgiver',
-            },
         });
     });
 });

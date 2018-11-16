@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import { get } from 'digisyfo-npm';
 import { put, call } from 'redux-saga/effects';
-import { oppdaterDineSykmeldinger } from '../../js/sagas/dineSykmeldingerSagas';
+import { hentDineSykmeldinger } from '../../js/sagas/dineSykmeldingerSagas';
 import * as actiontyper from '../../js/actions/actiontyper';
 
 describe('dineSykmeldingerSagas', () => {
-    const generator = oppdaterDineSykmeldinger();
+    const generator = hentDineSykmeldinger();
 
     it('Skal dispatche HENTER_DINE_SYKMELDINGER', () => {
         const nextPut = put({ type: actiontyper.HENTER_DINE_SYKMELDINGER });
@@ -13,7 +13,7 @@ describe('dineSykmeldingerSagas', () => {
     });
 
     it('Skal dernest hente dine sykmeldinger', () => {
-        const nextCall = call(get, '/syforest/sykmeldinger');
+        const nextCall = call(get, 'http://tjenester.nav.no/syforest/sykmeldinger');
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 
