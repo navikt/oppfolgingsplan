@@ -152,7 +152,7 @@
         var script = document.createElement("script");
 
         {{#isProd}}
-        script.src = "/oppfolgigsplan/resources/bundle-prod.{{timestamp}}.js";
+        script.src = "/oppfolgingsplan/resources/bundle-prod.{{timestamp}}.js";
         {{/isProd}}
             {{^isProd}}
             script.src = "http://localhost:7172/assets/bundle.js";
