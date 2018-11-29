@@ -12,7 +12,7 @@
     {{{NAV_MEGAMENU_RESOURCES}}}
     {{{NAV_SCRIPTS}}}
     {{#isProd}}
-    <link href="/oppfolgingsplan/resources/styles.{{{timestamp}}}.css" rel="stylesheet" id="oppfolgingsplan-styles" />
+    <link href="/oppfolgingsplan/resources/styles.css?ts={{{timestamp}}}" rel="stylesheet" id="oppfolgingsplan-styles" />
     {{/isProd}}
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <style>
@@ -152,7 +152,7 @@
         var script = document.createElement("script");
 
         {{#isProd}}
-        script.src = "/oppfolgingsplan/resources/bundle-prod.{{timestamp}}.js";
+        script.src = "/oppfolgingsplan/resources/bundle-prod.js?ts={{timestamp}}";
         {{/isProd}}
             {{^isProd}}
             script.src = "http://localhost:7172/assets/bundle.js";
