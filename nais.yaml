@@ -1,5 +1,5 @@
 name: oppfolgingsplan
-team: digisyfo
+team: teamsykefravr
 image: repo.adeo.no:5443/digisyfo/oppfolgingsplan
 replicas:
   min: 2
