@@ -103,7 +103,7 @@ class Brodsmuler extends Component {
                         .map((smule, index) => {
                             return <Brodsmule key={index} {...smule} />;
                         })
-                }k
+                }
             </div>
         </nav>);
     }
