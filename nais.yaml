@@ -1,4 +1,4 @@
-name: sykefravaer
+name: oppfolgingsplan
 team: digisyfo
 image: repo.adeo.no:5443/digisyfo/oppfolgingsplan
 replicas:
