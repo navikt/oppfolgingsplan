@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import getContextRoot from '../utils/getContextRoot';
 import { brodsmule as brodsmuleProptype } from '../propTypes';
+import { getSykefravaerUrl } from '../utils/urlUtils';
 
 const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }) => {
-    const root = sti && sti.indexOf('/sykefravaer') > -1 ? '' : getContextRoot();
+    const nySti = sti && sti.indexOf('/sykefravaer') > -1
+        ? getSykefravaerUrl()
+        : sti;
+    const root = sti && sti.indexOf('/sykefravaer') > -1
+        ? ''
+        : getContextRoot();
     const link = root === ''
-        ? <a className="js-smule js-smule-a brodsmuler__smule" href={sti}>{tittel}</a>
-        : <Link className="js-smule brodsmuler__smule" to={root + sti}>{tittel}</Link>;
+        ? <a className="js-smule js-smule-a brodsmuler__smule" href={nySti}>{tittel}</a>
+        : <Link className="js-smule brodsmuler__smule" to={root + nySti}>{tittel}</Link>;
     if (sisteSmule) {
         return (<span className="js-smuletekst">
             <span className="vekk">Du er her:</span> <span className="brodsmule">{tittel}</span>
