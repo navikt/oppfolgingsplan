@@ -96,6 +96,13 @@ function mockTekster(server) {
     });
 }
 
+function mockOpprettetIdResultat(res) {
+    mockOpprettetIdResultat.rollingCounter += 1;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(mockOpprettetIdResultat.rollingCounter));
+}
+mockOpprettetIdResultat.rollingCounter = 100;
+
 function mockEndepunkterSomEndrerState(server) {
     server.post('/syfoapi/syfosoknad/api/opprettSoknadUtland', (req, res) => {
         if (!mockData.soknader.find((soknad) => {
@@ -200,6 +207,55 @@ function mockEndepunkterSomEndrerState(server) {
         mockData.soknader = mockData.soknader.filter(soknad => soknad.id !== req.params.id);
         res.send(JSON.stringify({}));
     })
+}
+
+function mockForLokaltMiljo(server) {
+    server.use(express.json());
+    server.use(express.urlencoded());
+
+    server.post('/restoppfoelgingsdialog/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
+        mockOpprettetIdResultat(res);
+    });
+
+    server.post('/restoppfoelgingsdialog/api/kommentar/actions/:response/slett', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/arbeidsoppgave/actions/:id/slett', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/tiltak/actions/:id/slett', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/lagreArbeidsoppgave', (req, res) => {
+        mockOpprettetIdResultat(res);
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/lagreTiltak', (req, res) => {
+        mockOpprettetIdResultat(res);
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/godkjenn', (req, res) => {
+        res.send({
+            fom: req.body.fom,
+            tom: req.body.tom,
+            evalueres: req.body.evalueres,
+        });
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/samtykke', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/nullstillGodkjenning', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/forespoerRevidering', (req, res) => {
+        res.send();
+    });
 }
 
 function mockForOpplaeringsmiljo(server) {
@@ -391,6 +447,7 @@ function mockUnleashLokal(server) {
 }
 
 module.exports = {
+    mockForLokaltMiljo,
     mockForOpplaeringsmiljo,
     mockEndepunkterSomEndrerState,
     mockUnleashOpplaeringsmiljo,
