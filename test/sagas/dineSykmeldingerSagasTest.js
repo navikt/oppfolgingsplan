@@ -13,7 +13,7 @@ describe('dineSykmeldingerSagas', () => {
     });
 
     it('Skal dernest hente dine sykmeldinger', () => {
-        const nextCall = call(get, 'http://tjenester.nav.no/syforest/sykmeldinger');
+        const nextCall = call(get, '/syforest/sykmeldinger');
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 

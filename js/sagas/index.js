@@ -25,12 +25,13 @@ import {
     kommentarSagas,
     kopierOppfolgingsdialogSagas,
 } from 'oppfolgingsdialog-npm';
+import { all } from 'redux-saga/effects';
 import dineSykmeldingerSagas from './dineSykmeldingerSagas';
 import sykeforloepSagas from './sykeforloepSagas';
 import ledereSagas from './ledereSagas';
 
 export default function* rootSaga() {
-    yield [
+    yield all([
         arbeidsforholdSagas(),
         dineSykmeldingerSagas(),
         ledeteksterSagas(),
@@ -57,5 +58,5 @@ export default function* rootSaga() {
         sykeforlopsPerioderSagas(),
         sykeforloepSagas(),
         ledereSagas(),
-    ];
+    ]);
 }

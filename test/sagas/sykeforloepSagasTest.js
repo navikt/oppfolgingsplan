@@ -15,7 +15,7 @@ describe('sykeforloepSagas', () => {
     });
 
     it('Skal hente sykeforloep', () => {
-        const nextCall = call(get, 'http://tjenester.nav.no/syforest/sykeforloep');
+        const nextCall = call(get, '/syforest/sykeforloep');
         expect(generator.next().value).to.deep.equal(nextCall);
     });
 

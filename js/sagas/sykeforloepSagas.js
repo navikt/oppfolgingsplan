@@ -1,5 +1,9 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
+import {
+    call,
+    put,
+    fork,
+    takeEvery,
+} from 'redux-saga/effects';
 import { get, log } from 'digisyfo-npm';
 import * as actions from '../actions/sykeforloep_actions';
 import {
@@ -9,7 +13,7 @@ import {
 export function* hentSykeforloep() {
     yield put(actions.henterSykeforloep());
     try {
-        const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/sykeforloep`);
+        const data = yield call(get, `${process.env.REACT_APP_SYFOREST_ROOT}/sykeforloep`);
         yield put(actions.sykeforloepHentet(data));
     } catch (e) {
         log(e);
@@ -18,7 +22,7 @@ export function* hentSykeforloep() {
 }
 
 function* watchHentSykeforloep() {
-    yield* takeEvery(HENT_SYKEFORLOEP_FORESPURT, hentSykeforloep);
+    yield takeEvery(HENT_SYKEFORLOEP_FORESPURT, hentSykeforloep);
 }
 
 export default function* sykeforloepSagas() {
