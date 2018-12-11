@@ -119,17 +119,42 @@
     ],
     "tiltakListe": [
       {
-        "tiltakId": 3581,
-        "tiltaknavn": "Redusert arbeidstid",
+        "tiltakId": 3580,
+        "tiltaknavn": "Høyere kaloriinntak",
         "knyttetTilArbeidsoppgaveId": null,
         "fom": "2018-10-01T12:00:00+02:00",
-        "tom": "2018-12-31T12:00:00+01:00",
-        "beskrivelse": "En dag fri i uken, til medisinsk oppfølging. ",
+        "tom": "2018-10-31T12:00:00+01:00",
+        "beskrivelse": "Jeg vil spise kake!",
         "beskrivelseIkkeAktuelt": null,
         "opprettetDato": "2018-10-18T14:44:46.956+02:00",
-        "sistEndretDato": "2018-10-18T14:44:46.956+02:00",
-        "kommentarer": [],
-        "status": "FORSLAG",
+        "sistEndretDato": "2018-10-19T15:44:46.956+02:00",
+        "kommentarer": [{
+          "id": 122,
+          "tekst": "Tulleforslag!!",
+          "opprettetTidspunkt": "2018-10-18T15:44:46.956+02:00",
+          "sistEndretDato": "2018-10-18T15:44:46.956+02:00",
+          "opprettetAv": {
+            "navn": " ",
+            "fnr": null,
+            "epost": null,
+            "tlf": null,
+            "sistInnlogget": null,
+            "samtykke": null,
+            "evaluering": null,
+            "stillinger": []
+          },
+          "sistEndretAv": {
+            "navn": " ",
+            "fnr": null,
+            "epost": null,
+            "tlf": null,
+            "sistInnlogget": null,
+            "samtykke": null,
+            "evaluering": null,
+            "stillinger": []
+          }
+        }],
+        "status": "IKKE_AKTUELT",
         "gjennomfoering": null,
         "opprettetAv": {
           "navn": " ",
@@ -143,7 +168,92 @@
         },
         "sistEndretAv": {
           "navn": " ",
+          "fnr": null,
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        }
+      },
+      {
+        "tiltakId": 3581,
+        "tiltaknavn": "Redusert arbeidstid",
+        "knyttetTilArbeidsoppgaveId": null,
+        "fom": "2018-10-01T12:00:00+02:00",
+        "tom": "2018-12-31T12:00:00+01:00",
+        "beskrivelse": "En dag fri i uken, til medisinsk oppfølging. ",
+        "beskrivelseIkkeAktuelt": null,
+        "opprettetDato": "2018-10-18T14:44:46.956+02:00",
+        "sistEndretDato": "2018-10-18T15:44:46.956+02:00",
+        "kommentarer": [{
+          "id": 123,
+          "tekst": "Dette høres bra ut!",
+          "opprettetTidspunkt": "2018-10-18T15:44:46.956+02:00",
+          "sistEndretDato": "2018-10-18T16:44:46.956+02:00",
+          "opprettetAv": {
+            "navn": " ",
+            "fnr": null,
+            "epost": null,
+            "tlf": null,
+            "sistInnlogget": null,
+            "samtykke": null,
+            "evaluering": null,
+            "stillinger": []
+          },
+          "sistEndretAv": {
+            "navn": " ",
+            "fnr": null,
+            "epost": null,
+            "tlf": null,
+            "sistInnlogget": null,
+            "samtykke": null,
+            "evaluering": null,
+            "stillinger": []
+          }
+        },
+          {
+            "id": 124,
+            "tekst": "Så bra, jeg synes i hvert fall at dette er et godt tiltak!",
+            "opprettetTidspunkt": "2018-10-18T15:45:46.956+02:00",
+            "sistEndretDato": "2018-10-18T16:45:46.956+02:00",
+            "opprettetAv": {
+              "navn": " ",
+              "fnr": "110110110110",
+              "epost": null,
+              "tlf": null,
+              "sistInnlogget": null,
+              "samtykke": null,
+              "evaluering": null,
+              "stillinger": []
+            },
+            "sistEndretAv": {
+              "navn": " ",
+              "fnr": "110110110110",
+              "epost": null,
+              "tlf": null,
+              "sistInnlogget": null,
+              "samtykke": null,
+              "evaluering": null,
+              "stillinger": []
+            }
+          }],
+        "status": "AVTALT",
+        "gjennomfoering": null,
+        "opprettetAv": {
+          "navn": " ",
           "fnr": "110110110110",
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        },
+        "sistEndretAv": {
+          "navn": " ",
+          "fnr": null,
           "epost": null,
           "tlf": null,
           "sistInnlogget": null,
@@ -161,7 +271,7 @@
         "beskrivelse": "Ønskelig at jobben bestiller en tilpasset ergonomisk slange.",
         "beskrivelseIkkeAktuelt": null,
         "opprettetDato": "2018-10-18T14:46:43.574+02:00",
-        "sistEndretDato": "2018-10-18T14:46:43.574+02:00",
+        "sistEndretDato": "2018-10-18T117:46:43.574+02:00",
         "kommentarer": [],
         "status": "FORSLAG",
         "gjennomfoering": null,
