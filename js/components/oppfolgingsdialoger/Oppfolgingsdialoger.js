@@ -19,7 +19,6 @@ import {
     finnOgHentPersonerSomMangler,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentForrigeNaermesteLedereSomMangler,
-    UnderUtviklingVarsel,
     OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
@@ -145,10 +144,6 @@ class Oppfolgingsdialoger extends Component {
                 rootUrl={getContextRoot()}
             />
             }
-            <UnderUtviklingVarsel
-                ledetekster={ledetekster}
-                rootUrl={getContextRoot()}
-            />
             <Sidetopp
                 tittel={getLedetekst('oppfolgingsdialoger.sidetittel')}
             />
