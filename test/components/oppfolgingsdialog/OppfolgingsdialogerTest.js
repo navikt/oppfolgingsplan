@@ -5,7 +5,6 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import {
     NyNaermestelederInfoboks,
-    UnderUtviklingVarsel,
     OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
@@ -106,10 +105,6 @@ describe('Oppfolgingsdialoger', () => {
 
     afterEach(() => {
         clock.restore();
-    });
-
-    it('Skal vise UnderUtviklingVarsel', () => {
-        expect(component.find(UnderUtviklingVarsel)).to.have.length(1);
     });
 
     it('Skal vise overskrift for Oppfolgingsdialoger', () => {
