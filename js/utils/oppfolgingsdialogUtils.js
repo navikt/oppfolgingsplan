@@ -5,7 +5,6 @@ import {
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
     harTidligereOppfolgingsdialoger,
 } from 'oppfolgingsdialog-npm';
-import { finnArbeidsgivereForGyldigeSykmeldinger } from './sykmeldingUtils';
 
 export const harForrigeNaermesteLeder = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder;
@@ -61,10 +60,8 @@ export const erOppfolgingsdialogOpprettbarMedMinstEnArbeidsgiver = (oppfolgingsd
     }).length > 0;
 };
 
-export const erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere = (oppfolgingsdialoger, sykmeldinger, naermesteLedere) => {
-    return oppfolgingsdialoger.length === 0 && finnArbeidsgivereForGyldigeSykmeldinger(sykmeldinger, naermesteLedere).filter((arbeidsgiver) => {
-        return arbeidsgiver.harNaermesteLeder;
-    }).length === 0;
+export const erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere = (oppfolgingsdialoger, naermesteLedere) => {
+    return oppfolgingsdialoger.length === 0 && naermesteLedere.length === 0;
 };
 
 export const isEmpty = (array) => {

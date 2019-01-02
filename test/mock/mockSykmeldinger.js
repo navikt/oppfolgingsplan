@@ -296,6 +296,7 @@ const getSykmelding = (skmld = {}) => {
 
 export const hentSykmeldingIkkeGyldigForOppfoelging = (dagensDato) => {
     return getSykmelding({
+        orgnummer: '',
         mulighetForArbeid: {
             perioder: [
                 {
