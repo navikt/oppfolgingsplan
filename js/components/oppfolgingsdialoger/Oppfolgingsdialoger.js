@@ -19,13 +19,9 @@ import {
     finnOgHentPersonerSomMangler,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentForrigeNaermesteLedereSomMangler,
-    OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
-import {
-    dinesykmeldingerReducerPt,
-    ledereReducerPt,
-} from '../../propTypes';
+import { ledereReducerPt } from '../../propTypes';
 import Sidetopp from '../Sidetopp';
 import {
     harForrigeNaermesteLeder,
@@ -33,9 +29,9 @@ import {
     isEmpty,
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
 } from '../../utils/oppfolgingsdialogUtils';
-import { sykmeldtHarGyldigSykmelding } from '../../utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
 import getContextRoot from '../../utils/getContextRoot';
+import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 
@@ -78,14 +74,13 @@ class Oppfolgingsdialoger extends Component {
             bekreftNyNaermesteLeder,
             kopierOppfolgingsdialog,
             opprettOppfolgingsdialog,
-            dinesykmeldinger,
             naermesteLedere,
             toggles,
         } = this.props;
         let panel;
         const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger, BRUKERTYPE.ARBEIDSTAKER);
         const oppfolgingsdialogMedNyNaermesteLeder = finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder(oppfolgingsdialoger);
-        if (erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere(oppfolgingsdialoger, dinesykmeldinger.data, naermesteLedere.data)) {
+        if (erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere(oppfolgingsdialoger, naermesteLedere.data)) {
             panel = (<IngenledereInfoboks />);
         } else if (!bekreftetNyNaermesteLeder && oppfolgingsdialogMedNyNaermesteLeder) {
             panel = (<NyNaermestelederInfoboks
@@ -96,7 +91,7 @@ class Oppfolgingsdialoger extends Component {
                 brukerType={BRUKERTYPE.ARBEIDSTAKER}
                 rootUrlImg={getContextRoot()}
             />);
-        } else if (!sykmeldtHarGyldigSykmelding(dinesykmeldinger.data)) {
+        } else if (naermesteLedere.data.length === 0) {
             panel = (
                 <div>
                     <div className="blokk--l">
@@ -119,7 +114,6 @@ class Oppfolgingsdialoger extends Component {
                 <OppfolgingsdialogerVisning
                     ledetekster={ledetekster}
                     oppfolgingsdialoger={oppfolgingsdialoger}
-                    dinesykmeldinger={dinesykmeldinger}
                     naermesteLedere={naermesteLedere}
                     kopierOppfolgingsdialog={kopierOppfolgingsdialog}
                     opprettOppfolgingsdialog={opprettOppfolgingsdialog}
@@ -156,7 +150,6 @@ class Oppfolgingsdialoger extends Component {
     }
 }
 Oppfolgingsdialoger.propTypes = {
-    dinesykmeldinger: dinesykmeldingerReducerPt,
     naermesteleder: oppfolgingProptypes.naermestelederReducerPt,
     forrigenaermesteleder: oppfolgingProptypes.forrigenaermestelederReducerPt,
     naermesteLedere: ledereReducerPt,

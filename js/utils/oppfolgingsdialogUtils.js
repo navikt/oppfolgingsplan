@@ -1,11 +1,28 @@
 import {
-    finnAktiveOppfolgingsdialoger,
     finnNyesteGodkjenning,
     finnTidligereOppfolgingsdialoger,
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
     harTidligereOppfolgingsdialoger,
 } from 'oppfolgingsdialog-npm';
-import { finnArbeidsgivereForGyldigeSykmeldinger } from './sykmeldingUtils';
+import { erGyldigDatoIFortiden } from './datoUtils';
+
+export const STATUS = {
+    AKTIV: 'AKTIV',
+    AVBRUTT: 'AVBRUTT',
+    UNDER_ARBEID: 'UNDER_ARBEID',
+    UTDATERT: 'UTDATERT',
+};
+
+export const erOppfolgingsdialogAktiv = (oppfolgingsdialog) => {
+    return !oppfolgingsdialog.godkjentPlan ||
+        (oppfolgingsdialog.status !== STATUS.AVBRUTT && !erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom));
+};
+
+export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger) => {
+    return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
+        return !oppfolgingsdialog.godkjentPlan || erOppfolgingsdialogAktiv(oppfolgingsdialog);
+    });
+};
 
 export const harForrigeNaermesteLeder = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder;
@@ -61,10 +78,8 @@ export const erOppfolgingsdialogOpprettbarMedMinstEnArbeidsgiver = (oppfolgingsd
     }).length > 0;
 };
 
-export const erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere = (oppfolgingsdialoger, sykmeldinger, naermesteLedere) => {
-    return oppfolgingsdialoger.length === 0 && finnArbeidsgivereForGyldigeSykmeldinger(sykmeldinger, naermesteLedere).filter((arbeidsgiver) => {
-        return arbeidsgiver.harNaermesteLeder;
-    }).length === 0;
+export const erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere = (oppfolgingsdialoger, naermesteLedere) => {
+    return oppfolgingsdialoger.length === 0 && naermesteLedere.length === 0;
 };
 
 export const isEmpty = (array) => {

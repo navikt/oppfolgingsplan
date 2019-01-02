@@ -5,7 +5,6 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import {
     NyNaermestelederInfoboks,
-    OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
 import Sidetopp from '../../../js/components/Sidetopp';
@@ -13,6 +12,7 @@ import Oppfolgingsdialoger from '../../../js/components/oppfolgingsdialoger/Oppf
 import IngenledereInfoboks from '../../../js/components/oppfolgingsdialoger/IngenledereInfoboks';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerInfoPersonvern';
+import OppfolgingsdialogUtenSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenSykmelding';
 import getOppfolgingsdialog, { getOppfolgingsdialoger } from '../../mock/mockOppfolgingsdialoger';
 import {
     hentSykmeldingIkkeGyldigForOppfoelging,
@@ -152,7 +152,7 @@ describe('Oppfolgingsdialoger', () => {
         });
     });
 
-    describe('Uten gyldig sykmelding', () => {
+    describe('Uten ledere', () => {
         let component1;
         let sykmeldingListe;
 

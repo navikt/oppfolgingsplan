@@ -7,10 +7,6 @@ import {
     OppfolgingsdialogInfoboks,
 } from 'oppfolgingsdialog-npm';
 import {
-    hentSykmeldingGyldigForOppfoelging,
-    hentSykmeldingIkkeGyldigForOppfoelging,
-} from '../mock/mockSykmeldinger';
-import {
     mapStateToProps,
     Container,
 } from '../../js/sider/OppfolgingsdialogSide';
@@ -104,67 +100,7 @@ describe('Container', () => {
 
         it('Skal returnere props', () => {
             const res = mapStateToProps(state, ownProps);
-            expect(res.erOppfolgingsdialogTilgjengelig).to.deep.equal(false);
-        });
-
-        it('Skal returnere erOppfolgingsdialogTilgjengelig lik false, om oppfolgingdialog ikke er knyttet til gyldig sykmelding(feil orgnummer) og ikke er godkjent', () => {
-            const res = mapStateToProps(Object.assign({}, state, {
-                dineSykmeldinger: {
-                    data: [Object.assign({}, hentSykmeldingGyldigForOppfoelging(dagensDato), {
-                        orgnummer: '',
-                    })],
-                },
-            }), ownProps);
-            expect(res.erOppfolgingsdialogTilgjengelig).to.deep.equal(false);
-        });
-
-        it('Skal returnere erOppfolgingsdialogTilgjengelig lik false, om oppfolgingdialog ikke er knyttet til gyldig sykmelding(for gammel sykmelding) og ikke er godkjent', () => {
-            const res = mapStateToProps(Object.assign({}, state, {
-                dineSykmeldinger: {
-                    data: [Object.assign({}, hentSykmeldingIkkeGyldigForOppfoelging(dagensDato), {
-                        orgnummer: '12345678',
-                    })],
-                },
-            }), ownProps);
-            expect(res.erOppfolgingsdialogTilgjengelig).to.deep.equal(false);
-        });
-
-        it('Skal returnere erOppfolgingsdialogTilgjengelig lik true, om oppfolgingdialog ikke er knyttet til gyldig sykmelding men er godkjent', () => {
-            const res = mapStateToProps(Object.assign({}, state, {
-                oppfolgingsdialoger: {
-                    data: [Object.assign({}, state.oppfolgingsdialoger.data[0], {
-                        godkjentPlan: {
-                            gyldighetstidspunkt: {
-                                tom: '2016-12-31',
-                            },
-                        },
-                    }),
-                    ],
-                },
-                dineSykmeldinger: {
-                    data: [Object.assign({}, hentSykmeldingGyldigForOppfoelging(dagensDato), {
-                        orgnummer: '12345678',
-                    })],
-                },
-            }), ownProps);
-            expect(res.erOppfolgingsdialogTilgjengelig).to.deep.equal(true);
-        });
-
-        it('Skal returnere erOppfolgingsdialogTilgjengelig lik true, om oppfolgingdialog er knyttet til gyldig sykmelding, men ikke er godkjent', () => {
-            const res = mapStateToProps(Object.assign({}, state, {
-                oppfolgingsdialoger: {
-                    data: [Object.assign({}, state.oppfolgingsdialoger.data[0], {
-                        godkjentPlan: null,
-                    }),
-                    ],
-                },
-                dineSykmeldinger: {
-                    data: [Object.assign({}, hentSykmeldingGyldigForOppfoelging(dagensDato), {
-                        orgnummer: '12345678',
-                    })],
-                },
-            }), ownProps);
-            expect(res.erOppfolgingsdialogTilgjengelig).to.deep.equal(true);
+            expect(res.henter).to.deep.equal(undefined);
         });
     });
 
@@ -300,25 +236,6 @@ describe('Container', () => {
                 hentArbeidsforhold={hentArbeidsforhold}
                 hentDineSykmeldinger={hentDineSykmeldinger}
                 hentToggles={hentToggles}
-            />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
-        });
-
-        it('Skal vise OppfolgingsdialogInfoboks dersom henting er OK, og erOppfolgingsdialogTilgjengelig er false', () => {
-            const component = shallow(<Container
-                oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-                dineSykmeldinger={dineSykmeldinger}
-                oppfolgingsdialoger={[]}
-                tilgang={{ data: harTilgang }}
-                toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
-                sjekkTilgang={sjekkTilgang}
-                settDialog={settDialog}
-                hentArbeidsforhold={hentArbeidsforhold}
-                hentDineSykmeldinger={hentDineSykmeldinger}
-                hentToggles={hentToggles}
-                navigasjontoggles={navigasjontoggles}
-                erOppfolgingsdialogTilgjengelig={false}
             />);
             expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
         });
