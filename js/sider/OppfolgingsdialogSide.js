@@ -43,8 +43,6 @@ import {
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittAvbrutt,
     populerDialogFraState,
-    erOppfolgingsdialogTidligere,
-    erOppfolgingsdialogKnyttetTilGyldigSykmelding,
 } from 'oppfolgingsdialog-npm';
 import getContextRoot from '../utils/getContextRoot';
 import history from '../history';
@@ -120,7 +118,6 @@ export class Container extends Component {
             sendingFeilet,
             tilgang,
             navigasjontoggles,
-            erOppfolgingsdialogTilgjengelig,
         } = this.props;
         return (<Side tittel={getLedetekst('oppfolgingsdialog.sidetittel')} brodsmuler={brodsmuler} laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}>
             { (() => {
@@ -128,12 +125,6 @@ export class Container extends Component {
                     return <AppSpinner />;
                 } else if (hentingFeilet || sendingFeilet) {
                     return (<Feilmelding />);
-                } else if (!erOppfolgingsdialogTilgjengelig) {
-                    return (<OppfolgingsdialogInfoboks
-                        svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
-                        svgAlt="ikkeTilgang"
-                        tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}
-                    />);
                 } else if (!tilgang.data.harTilgang) {
                     return (<OppfolgingsdialogInfoboks
                         svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
@@ -178,7 +169,6 @@ Container.propTypes = {
     sykeforlopsPerioder: sykeforlopsPerioderReducerPt,
     toggles: togglesPt,
     brodsmuler: PropTypes.arrayOf(brodsmulePt),
-    erOppfolgingsdialogTilgjengelig: PropTypes.bool,
     lagreArbeidsoppgave: PropTypes.func,
     slettArbeidsoppgave: PropTypes.func,
     lagreTiltak: PropTypes.func,
@@ -213,9 +203,6 @@ export function mapStateToProps(state, ownProps) {
     const id = ownProps.params.oppfolgingsdialogId;
     let oppfolgingsdialog = getOppfolgingsdialog(state.oppfolgingsdialoger.data, id);
     oppfolgingsdialog = oppfolgingsdialog && populerDialogFraState(oppfolgingsdialog, state);
-    const erOppfolgingsdialogTilgjengelig = oppfolgingsdialog
-        && (erOppfolgingsdialogTidligere(oppfolgingsdialog)
-        || erOppfolgingsdialogKnyttetTilGyldigSykmelding(oppfolgingsdialog, state.dineSykmeldinger.data));
 
     return {
         henter: state.oppfolgingsdialoger.henter
@@ -266,7 +253,6 @@ export function mapStateToProps(state, ownProps) {
         oppfolgingsdialog,
         oppfolgingsdialoger: state.oppfolgingsdialoger.data,
         virksomhet: state.virksomhet,
-        erOppfolgingsdialogTilgjengelig,
         brodsmuler: [{
             tittel: getLedetekst('landingsside.sidetittel'),
             sti: '/sykefravaer',

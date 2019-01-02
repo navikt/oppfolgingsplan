@@ -15,7 +15,6 @@ import {
     hentAktivOppfolgingsdialogOpprettetMedArbeidsgiver,
 } from '../../../utils/oppfolgingsdialogUtils';
 import {
-    dinesykmeldingerReducerPt,
     fieldPropTypes,
     opprettOppfolgingArbeidsgiverPt,
 } from '../../../propTypes';
@@ -121,7 +120,7 @@ export const ArbeidsgiverSkjema = (
 };
 
 ArbeidsgiverSkjema.propTypes = {
-    arbeidsgivere: dinesykmeldingerReducerPt,
+    arbeidsgivere: PropTypes.arrayOf(opprettOppfolgingArbeidsgiverPt),
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
     handleSubmit: PropTypes.func,
 };

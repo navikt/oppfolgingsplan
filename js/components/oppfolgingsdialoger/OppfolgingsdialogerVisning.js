@@ -7,15 +7,12 @@ import {
     BRUKERTYPE,
     finnTidligereOppfolgingsdialoger,
     harTidligereOppfolgingsdialoger,
-    finnAktiveOppfolgingsdialoger,
     proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
-import {
-    dinesykmeldingerReducerPt,
-    ledereReducerPt,
-} from '../../propTypes';
+import { ledereReducerPt } from '../../propTypes';
 import { finnArbeidsgivereForGyldigeSykmeldinger } from '../../utils/sykmeldingUtils';
 import getContextRoot from '../../utils/getContextRoot';
+import { finnAktiveOppfolgingsdialoger } from '../../utils/oppfolgingsdialogUtils';
 import OppfolgingsdialogFilm from './OppfolgingsdialogFilm';
 import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
 import OppfolgingsdialogerIngenplanAT from './opprett/OppfolgingsdialogerIngenplanAT';
@@ -54,11 +51,10 @@ class OppfolgingsdialogerVisning extends Component {
             oppfolgingsdialoger = [],
             opprettOppfolgingsdialog,
             kopierOppfolgingsdialog,
-            dinesykmeldinger,
             naermesteLedere,
         } = this.props;
-        const aktivOppfolgingsdialoger = finnAktiveOppfolgingsdialoger(oppfolgingsdialoger, dinesykmeldinger.data);
-        const arbeidsgivereForSykmeldinger = finnArbeidsgivereForGyldigeSykmeldinger(dinesykmeldinger.data, naermesteLedere.data);
+        const aktivOppfolgingsdialoger = finnAktiveOppfolgingsdialoger(oppfolgingsdialoger);
+        const arbeidsgivereForSykmeldinger = finnArbeidsgivereForGyldigeSykmeldinger(naermesteLedere.data);
         return (<div>
             { this.state.visOppfolgingsdialogOpprett &&
             <OppfolgingsdialogerOpprett
@@ -119,7 +115,6 @@ class OppfolgingsdialogerVisning extends Component {
     }
 }
 OppfolgingsdialogerVisning.propTypes = {
-    dinesykmeldinger: dinesykmeldingerReducerPt,
     naermesteLedere: ledereReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
     ledetekster: keyValue,

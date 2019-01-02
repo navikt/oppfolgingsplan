@@ -2,6 +2,7 @@ import chai from 'chai';
 import sinon from 'sinon';
 import {
     erOppfolgingsdialogOpprettbarDirekte,
+    finnAktiveOppfolgingsdialoger,
     finnNyesteTidligereOppfolgingsdialogMedVirksomhet,
     oppgaverOppfoelgingsdialoger,
 } from '../../js/utils/oppfolgingsdialogUtils';
@@ -18,7 +19,7 @@ const expect = chai.expect;
 
 describe('OppfolgingdialogUtils', () => {
     let klokke;
-    const dagensDato = new Date('2017-01-01');
+    const dagensDato = new Date('2017-02-02');
 
     beforeEach(() => {
         klokke = sinon.useFakeTimers(dagensDato.getTime());
@@ -26,6 +27,46 @@ describe('OppfolgingdialogUtils', () => {
 
     afterEach(() => {
         klokke.restore();
+    });
+
+    describe('finnAktiveOppfolgingsdialoger', () => {
+        const gyldighetstidspunktPassert = {
+            tom: new Date('2017-01-01'),
+        };
+        const gyldighetstidspunktIkkePassert = {
+            tom: new Date('2017-03-03'),
+        };
+        it('finnAktiveOppfolgingsdialoger 1', () => {
+            const dialog = [{
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om gyldighetstidspunkt ikke er passer, om plan ikke er godkjent', () => {
+            const dialog = [{
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om gyldighetstidspunkt ikke er passert', () => {
+            const dialog = [{
+                godkjentPlan: {
+                    gyldighetstidspunkt: gyldighetstidspunktIkkePassert,
+                },
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om gyldighetstidspunkt er passert', () => {
+            const dialog = [{
+                godkjentPlan: {
+                    gyldighetstidspunkt: gyldighetstidspunktPassert,
+                },
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(0);
+        });
     });
 
     describe('oppgaverOppfoelgingsdialoger', () => {
