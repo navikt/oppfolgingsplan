@@ -121,9 +121,7 @@ describe('Container', () => {
         it('Skal returnere erOppfolgingsdialogTilgjengelig lik false, om oppfolgingdialog ikke er knyttet til gyldig sykmelding(for gammel sykmelding) og ikke er godkjent', () => {
             const res = mapStateToProps(Object.assign({}, state, {
                 dineSykmeldinger: {
-                    data: [Object.assign({}, hentSykmeldingIkkeGyldigForOppfoelging(dagensDato), {
-                        orgnummer: '12345678',
-                    })],
+                    data: [hentSykmeldingIkkeGyldigForOppfoelging(dagensDato)],
                 },
             }), ownProps);
             expect(res.erOppfolgingsdialogTilgjengelig).to.deep.equal(false);

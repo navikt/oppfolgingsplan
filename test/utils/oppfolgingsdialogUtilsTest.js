@@ -1,16 +1,18 @@
 import chai from 'chai';
 import sinon from 'sinon';
+import { leggTilDagerPaaDato } from '../testUtils';
 import {
     erOppfolgingsdialogOpprettbarDirekte,
+    finnAktiveOppfolgingsdialoger,
     finnNyesteTidligereOppfolgingsdialogMedVirksomhet,
     oppgaverOppfoelgingsdialoger,
+    STATUS,
 } from '../../js/utils/oppfolgingsdialogUtils';
 import {
     hentSykmeldingIkkeGyldigForOppfoelging,
     hentSykmeldingGyldigForOppfoelging,
 } from '../mock/mockSykmeldinger';
 import getOppfolgingsdialog, {
-
     hentOppfolgingsdialogTidligere,
 } from '../mock/mockOppfolgingsdialoger';
 
@@ -18,7 +20,7 @@ const expect = chai.expect;
 
 describe('OppfolgingdialogUtils', () => {
     let klokke;
-    const dagensDato = new Date('2017-01-01');
+    const dagensDato = new Date('2017-01-02');
 
     beforeEach(() => {
         klokke = sinon.useFakeTimers(dagensDato.getTime());
@@ -28,18 +30,97 @@ describe('OppfolgingdialogUtils', () => {
         klokke.restore();
     });
 
+    describe('finnAktiveOppfolgingsdialoger', () => {
+        const gyldighetstidspunktPassert = {
+            tom: leggTilDagerPaaDato(dagensDato, -1),
+        };
+        const gyldighetstidspunktIkkePassert = {
+            tom: leggTilDagerPaaDato(dagensDato, 1),
+        };
+        const virksomhet = {
+            virksomhetsnummer: '12345678',
+        };
+        const sykmeldingUgyldig = {
+            orgnummer: null,
+        };
+        const sykmeldingGyldigForOppfolging = {
+            orgnummer: virksomhet.virksomhetsnummer,
+        };
+
+        it('finnAktiveOppfolgingsdialoger 1', () => {
+            const dialog = [{
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om gyldighetstidspunkt ikke er passer, om plan ikke er godkjent', () => {
+            const dialog = [{
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om gyldighetstidspunkt ikke er passert', () => {
+            const dialog = [{
+                godkjentPlan: {
+                    gyldighetstidspunkt: gyldighetstidspunktIkkePassert,
+                },
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om gyldighetstidspunkt er passert', () => {
+            const dialog = [{
+                godkjentPlan: {
+                    gyldighetstidspunkt: gyldighetstidspunktPassert,
+                },
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(0);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om det eksisterer en plan knyttet til gyldig sykmelding', () => {
+            const sykmeldinger = [sykmeldingGyldigForOppfolging];
+            const dialog = [{
+                virksomhet,
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog, sykmeldinger)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 0 planer, om det ikke eksisterer en plan knyttet til gyldig sykmelding', () => {
+            const sykmeldinger = [sykmeldingUgyldig];
+            const dialog = [{
+                virksomhet,
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog, sykmeldinger)).to.have.length(0);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 0 planer, om det eksisterer en godkjent plan knyttet til gyldig sykmelding', () => {
+            const sykmeldinger = [sykmeldingGyldigForOppfolging];
+            const dialog = [{
+                virksomhet,
+                godkjentPlan: {
+                    gyldighetstidspunkt: gyldighetstidspunktPassert,
+                },
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog, sykmeldinger)).to.have.length(0);
+        });
+    });
+
     describe('oppgaverOppfoelgingsdialoger', () => {
-        let sykmeldingsykmeldingUgyldig;
-        let sykmeldingGyldig;
+        let sykmeldingUgyldigForOppfolging;
+        let sykmeldingGyldigForOppfolging;
         let oppfolgingsdialogUnderArbeid;
 
         beforeEach(() => {
-            sykmeldingsykmeldingUgyldig = hentSykmeldingIkkeGyldigForOppfoelging(dagensDato);
-            sykmeldingGyldig = hentSykmeldingGyldigForOppfoelging(dagensDato);
+            sykmeldingUgyldigForOppfolging = hentSykmeldingIkkeGyldigForOppfoelging(dagensDato);
+            sykmeldingGyldigForOppfolging = hentSykmeldingGyldigForOppfoelging(dagensDato);
             oppfolgingsdialogUnderArbeid = {
-                status: 'UNDER_ARBEID',
+                status: STATUS.UNDER_ARBEID,
                 virksomhet: {
-                    virksomhetsnummer: sykmeldingGyldig.orgnummer,
+                    virksomhetsnummer: sykmeldingGyldigForOppfolging.orgnummer,
                 },
                 godkjenninger: [],
                 sistEndretAv: {
@@ -48,9 +129,9 @@ describe('OppfolgingdialogUtils', () => {
             };
         });
 
-        describe('med aktiv sykmelding', () => {
+        describe('med gyldig sykmelding', () => {
             it('Tom state.oppfoelgingsdialoger.data gir objekt med tomme lister', () => {
-                expect(oppgaverOppfoelgingsdialoger([], [sykmeldingGyldig])).to.deep.equal({
+                expect(oppgaverOppfoelgingsdialoger([], [sykmeldingGyldigForOppfolging])).to.deep.equal({
                     nyePlaner: [],
                     avventendeGodkjenninger: [],
                 });
@@ -64,7 +145,7 @@ describe('OppfolgingdialogUtils', () => {
                         sistInnlogget: null,
                     },
                 };
-                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingGyldig])).to.deep.equal({
+                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingGyldigForOppfolging])).to.deep.equal({
                     nyePlaner: [dialog],
                     avventendeGodkjenninger: [],
                 });
@@ -84,7 +165,7 @@ describe('OppfolgingdialogUtils', () => {
                         },
                     }],
                 };
-                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingGyldig])).to.deep.equal({
+                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingGyldigForOppfolging])).to.deep.equal({
                     nyePlaner: [],
                     avventendeGodkjenninger: [dialog],
                 });
@@ -104,16 +185,16 @@ describe('OppfolgingdialogUtils', () => {
                         },
                     }],
                 };
-                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingGyldig])).to.deep.equal({
+                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingGyldigForOppfolging])).to.deep.equal({
                     nyePlaner: [],
                     avventendeGodkjenninger: [dialog],
                 });
             });
         });
 
-        describe('uten aktiv sykmelding', () => {
+        describe('uten gyldig sykmelding', () => {
             it('Tom state.oppfoelgingsdialoger.data gir objekt med tomme lister', () => {
-                expect(oppgaverOppfoelgingsdialoger([], [sykmeldingsykmeldingUgyldig])).to.deep.equal({
+                expect(oppgaverOppfoelgingsdialoger([], [sykmeldingUgyldigForOppfolging])).to.deep.equal({
                     nyePlaner: [],
                     avventendeGodkjenninger: [],
                 });
@@ -127,7 +208,7 @@ describe('OppfolgingdialogUtils', () => {
                         sistInnlogget: null,
                     },
                 };
-                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingsykmeldingUgyldig])).to.deep.equal({
+                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingUgyldigForOppfolging])).to.deep.equal({
                     nyePlaner: [],
                     avventendeGodkjenninger: [],
                 });
@@ -147,7 +228,7 @@ describe('OppfolgingdialogUtils', () => {
                         },
                     }],
                 };
-                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingsykmeldingUgyldig])).to.deep.equal({
+                expect(oppgaverOppfoelgingsdialoger([dialog], [sykmeldingUgyldigForOppfolging])).to.deep.equal({
                     nyePlaner: [],
                     avventendeGodkjenninger: [],
                 });

@@ -1,7 +1,3 @@
-import {
-    erSykmeldingGyldigForOppfolgingMedGrensedato,
-} from 'oppfolgingsdialog-npm';
-
 export const sykmeldtHarNaermestelederHosArbeidsgiver = (virksomhetsnummer, naermesteLedere) => {
     return naermesteLedere.filter((leder) => {
         return virksomhetsnummer === leder.orgnummer;
@@ -15,20 +11,14 @@ export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (virksomhetsnumm
     return naermesteLeder ? naermesteLeder.navn : undefined;
 };
 
-export const sykmeldtHarGyldigSykmelding = (sykmeldinger) => {
-    const tomGrenseDato = new Date();
+export const sykmeldtHarInnsendtSykmelding = (sykmeldinger) => {
     return sykmeldinger.filter((sykmelding) => {
         return sykmelding.orgnummer && sykmelding.orgnummer !== null;
-    }).filter((sykmelding) => {
-        return erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, tomGrenseDato);
     }).length > 0;
 };
 
 export const finnArbeidsgivereForGyldigeSykmeldinger = (sykmeldinger, naermesteLedere) => {
-    const dagensDato = new Date();
-    return sykmeldinger.filter((sykmelding) => {
-        return erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, dagensDato);
-    }).map((sykmelding) => {
+    return sykmeldinger.map((sykmelding) => {
         return {
             virksomhetsnummer: sykmelding.orgnummer,
             navn: sykmelding.arbeidsgiver,
@@ -40,10 +30,6 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (sykmeldinger, naermesteL
             return t.virksomhetsnummer === sykmelding.virksomhetsnummer && sykmelding.virksomhetsnummer !== null;
         }) === idx;
     });
-};
-
-export const skalViseOppfoelgingsdialogLenke = (sykmeldinger, oppfolgingsdialoger) => {
-    return sykmeldtHarGyldigSykmelding(sykmeldinger) || oppfolgingsdialoger.data.length > 0;
 };
 
 export const sykmeldtHarManglendeNaermesteLeder = (arbeidsgivere) => {

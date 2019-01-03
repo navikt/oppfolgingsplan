@@ -5,19 +5,19 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import {
     NyNaermestelederInfoboks,
-    OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
+import { leggTilDagerPaaDato } from '../../testUtils';
 import Sidetopp from '../../../js/components/Sidetopp';
 import Oppfolgingsdialoger from '../../../js/components/oppfolgingsdialoger/Oppfolgingsdialoger';
 import IngenledereInfoboks from '../../../js/components/oppfolgingsdialoger/IngenledereInfoboks';
+import OppfolgingsdialogUtenSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenSykmelding';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerInfoPersonvern';
 import getOppfolgingsdialog, { getOppfolgingsdialoger } from '../../mock/mockOppfolgingsdialoger';
 import {
     hentSykmeldingIkkeGyldigForOppfoelging,
     hentSykmeldingGyldigForOppfoelging,
-    leggTilDagerPaaDato,
 } from '../../mock/mockSykmeldinger';
 
 chai.use(chaiEnzyme());

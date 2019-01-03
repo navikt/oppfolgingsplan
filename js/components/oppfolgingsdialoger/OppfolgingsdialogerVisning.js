@@ -7,13 +7,13 @@ import {
     BRUKERTYPE,
     finnTidligereOppfolgingsdialoger,
     harTidligereOppfolgingsdialoger,
-    finnAktiveOppfolgingsdialoger,
     proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
 import {
     dinesykmeldingerReducerPt,
     ledereReducerPt,
 } from '../../propTypes';
+import { finnAktiveOppfolgingsdialoger } from '../../utils/oppfolgingsdialogUtils';
 import { finnArbeidsgivereForGyldigeSykmeldinger } from '../../utils/sykmeldingUtils';
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsdialogFilm from './OppfolgingsdialogFilm';

@@ -19,7 +19,6 @@ import {
     finnOgHentPersonerSomMangler,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentForrigeNaermesteLedereSomMangler,
-    OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
 import {
@@ -33,9 +32,10 @@ import {
     isEmpty,
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
 } from '../../utils/oppfolgingsdialogUtils';
-import { sykmeldtHarGyldigSykmelding } from '../../utils/sykmeldingUtils';
+import { sykmeldtHarInnsendtSykmelding } from '../../utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
 import getContextRoot from '../../utils/getContextRoot';
+import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 
@@ -96,14 +96,11 @@ class Oppfolgingsdialoger extends Component {
                 brukerType={BRUKERTYPE.ARBEIDSTAKER}
                 rootUrlImg={getContextRoot()}
             />);
-        } else if (!sykmeldtHarGyldigSykmelding(dinesykmeldinger.data)) {
+        } else if (!sykmeldtHarInnsendtSykmelding(dinesykmeldinger.data)) {
             panel = (
                 <div>
                     <div className="blokk--l">
-                        <OppfolgingsdialogUtenSykmelding
-                            ledetekster={ledetekster}
-                            rootUrl={getContextRoot()}
-                        />
+                        <OppfolgingsdialogUtenSykmelding />
                     </div>
 
                     {!isEmpty(oppfolgingsdialoger) && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) &&

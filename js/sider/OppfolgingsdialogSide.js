@@ -44,14 +44,16 @@ import {
     oppfolgingsdialogHarBlittAvbrutt,
     populerDialogFraState,
     erOppfolgingsdialogTidligere,
-    erOppfolgingsdialogKnyttetTilGyldigSykmelding,
 } from 'oppfolgingsdialog-npm';
 import getContextRoot from '../utils/getContextRoot';
 import history from '../history';
 import Side from './Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
-import { getOppfolgingsdialog } from '../utils/oppfolgingsdialogUtils';
+import {
+    getOppfolgingsdialog,
+    erOppfolgingsdialogKnyttetTilGyldigSykmelding,
+} from '../utils/oppfolgingsdialogUtils';
 import Oppfolgingsdialog from '../components/oppfolgingsdialoger/Oppfolgingsdialog';
 import { hentDineSykmeldinger } from '../actions/dineSykmeldinger_actions';
 import {
