@@ -9,6 +9,12 @@ describe('sykeforloepSagas', () => {
     const action = actions.hentSykeforloep();
     const generator = hentSykeforloep(action);
 
+    beforeEach(() => {
+        process.env = {
+            REACT_APP_SYFOREST_ROOT: '/syforest',
+        };
+    });
+
     it('Skal dispatche HENTER_SYKEFORLOEP', () => {
         const nextPut = put(actions.henterSykeforloep());
         expect(generator.next().value).to.deep.equal(nextPut);

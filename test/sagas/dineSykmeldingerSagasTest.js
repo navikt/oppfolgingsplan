@@ -7,6 +7,12 @@ import * as actiontyper from '../../js/actions/actiontyper';
 describe('dineSykmeldingerSagas', () => {
     const generator = hentDineSykmeldinger();
 
+    beforeEach(() => {
+        process.env = {
+            REACT_APP_SYFOREST_ROOT: '/syforest',
+        };
+    });
+
     it('Skal dispatche HENTER_DINE_SYKMELDINGER', () => {
         const nextPut = put({ type: actiontyper.HENTER_DINE_SYKMELDINGER });
         expect(generator.next().value).to.deep.equal(nextPut);
