@@ -10,35 +10,10 @@ import {
     hentSykeforlopsPerioder,
 } from 'digisyfo-npm';
 import {
-    hentOppfolgingsdialogerAt as hentOppfolgingsdialoger,
-    lagreArbeidsoppgave,
-    slettArbeidsoppgave,
-    lagreTiltak,
-    slettTiltak,
-    sjekkTilgangAt as sjekkTilgang,
-    lagreKommentar,
-    slettKommentar,
-    godkjennDialogAt as godkjennDialog,
-    avvisDialogAt as avvisDialog,
-    nullstillGodkjenning,
-    settAktivtSteg,
-    hentPdfurler,
-    giSamtykke,
     OppfolgingsdialogInfoboks,
-    settDialog,
-    avbrytDialog,
     dialogAvbruttOgNyOpprettet,
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
-    hentArbeidsforhold,
-    hentVirksomhet,
-    hentPerson,
-    hentKontaktinfo,
-    hentForrigeNaermesteLeder,
-    hentNaermesteLeder,
-    delMedFastlege,
-    delMedNav as delMedNavFunc,
     proptypes as oppfolgingProptypes,
-    forespoerRevidering,
     henterEllerHarHentetTilgang,
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittAvbrutt,
@@ -53,6 +28,36 @@ import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import { getOppfolgingsdialog } from '../utils/oppfolgingsdialogUtils';
 import Oppfolgingsdialog from '../components/oppfolgingsdialoger/Oppfolgingsdialog';
+import { hentArbeidsforhold } from '../actions/oppfolgingsplan/arbeidsforhold_actions';
+import {
+    lagreArbeidsoppgave,
+    slettArbeidsoppgave,
+} from '../actions/oppfolgingsplan/arbeidsoppgave_actions';
+import { avbrytDialog } from '../actions/oppfolgingsplan/avbrytdialog_actions';
+import { delMedFastlege } from '../actions/oppfolgingsplan/delMedFastlege_actions';
+import { delMedNav as delMedNavFunc } from '../actions/oppfolgingsplan/delmednav_actions';
+import { hentPdfurler } from '../actions/oppfolgingsplan/dokument_actions';
+import { forespoerRevidering } from '../actions/oppfolgingsplan/forespoerRevidering_actions';
+import { hentForrigeNaermesteLeder } from '../actions/oppfolgingsplan/forrigeNaermesteLeder_actions';
+import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
+import {
+    lagreKommentar,
+    slettKommentar,
+} from '../actions/oppfolgingsplan/kommentar_actions';
+import {
+    avvisDialog,
+    godkjennDialog,
+    hentOppfolgingsdialoger,
+} from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
+import { nullstillGodkjenning } from '../actions/oppfolgingsplan/nullstillGodkjenning_actions';
+import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
+import { giSamtykke } from '../actions/oppfolgingsplan/samtykke_actions';
+import { settDialog } from '../actions/oppfolgingsplan/sett_actions';
+import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
+import { lagreTiltak, slettTiltak } from '../actions/oppfolgingsplan/tiltak_actions';
+import { settAktivtSteg } from '../actions/oppfolgingsplan/toggle_actions';
+import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import { hentDineSykmeldinger } from '../actions/dineSykmeldinger_actions';
 import {
     henterEllerHarHentetToggles,

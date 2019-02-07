@@ -9,21 +9,23 @@ import {
 } from 'digisyfo-npm';
 import {
     OppfolgingsdialogInfoboks,
-    opprettOppfolgingsdialogAt as opprettOppfolgingsdialog,
-    hentOppfolgingsdialogerAt as hentOppfolgingsdialoger,
-    kopierOppfolgingsdialog,
-    sjekkTilgangAt as sjekkTilgang,
-    hentVirksomhet,
-    hentPerson,
-    hentNaermesteLeder,
-    hentForrigeNaermesteLeder,
     proptypes as oppfolgingProptypes,
-    bekreftNyNaermesteLeder,
     henterEllerHarHentetTilgang,
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittOpprettet,
     populerDialogFraState,
 } from 'oppfolgingsdialog-npm';
+import { kopierOppfolgingsdialog } from '../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
+import {
+    hentOppfolgingsdialoger,
+    opprettOppfolgingsdialog,
+} from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import { hentForrigeNaermesteLeder } from '../actions/oppfolgingsplan/forrigeNaermesteLeder_actions';
+import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
+import { bekreftNyNaermesteLeder } from '../actions/oppfolgingsplan/nyNaermesteleder_actions';
+import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
+import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
+import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import getContextRoot from '../utils/getContextRoot';
 import Side from './Side';
 import Feilmelding from '../components/Feilmelding';

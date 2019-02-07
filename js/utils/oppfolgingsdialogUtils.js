@@ -1,11 +1,16 @@
 import {
     finnAktiveOppfolgingsdialoger,
-    finnNyesteGodkjenning,
     finnTidligereOppfolgingsdialoger,
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
     harTidligereOppfolgingsdialoger,
 } from 'oppfolgingsdialog-npm';
 import { finnArbeidsgivereForGyldigeSykmeldinger } from './sykmeldingUtils';
+
+export const finnNyesteGodkjenning = (godkjenninger) => {
+    return godkjenninger.sort((g1, g2) => {
+        return new Date(g2.godkjenningsTidspunkt) - new Date(g1.godkjenningsTidspunkt);
+    })[0];
+};
 
 export const harForrigeNaermesteLeder = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder;
