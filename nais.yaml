@@ -33,11 +33,9 @@ fasitResources:
     resourceType: restservice
   - alias: syfoapi-syfoteksterapi
     resourceType: restservice
-  - alias: syfoapi-syfosoknadapi
+  - alias: syfoapi-syfooppfolgingsplanserviceapi
     resourceType: restservice
   - alias: sykefravaerapi
-    resourceType: restservice
-  - alias: moterestapi
     resourceType: restservice
   - alias: oppfoelgingsdialogapi
     resourceType: restservice

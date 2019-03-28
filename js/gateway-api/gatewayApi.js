@@ -3,6 +3,9 @@ import ponyfill from 'fetch-ponyfill';
 
 const ponyfills = ponyfill();
 
+export const MANGLER_OIDC_TOKEN = 'MANGLER_OIDC_TOKEN';
+export const REDIRECT_ETTER_LOGIN = 'REDIRECT_ETTER_LOGIN';
+
 const isEdge = () => {
     return window.navigator.userAgent.indexOf('Edge') > -1;
 };
@@ -16,7 +19,7 @@ const getFetch = () => {
 };
 
 
-const getHeaders = () => {
+export const getHeaders = () => {
     // Gjør dette slik fordi enhetstester vil feile dersom Headers overskrives
     if (isEdge()) {
         return ponyfills.Headers;
@@ -25,6 +28,7 @@ const getHeaders = () => {
 };
 
 export const hentLoginUrl = () => {
+    window.localStorage.setItem(REDIRECT_ETTER_LOGIN, window.location.href);
     if (window.location.href.indexOf('tjenester.nav') > -1) {
         // Prod
         return 'https://loginservice.nav.no/login';
@@ -36,16 +40,24 @@ export const hentLoginUrl = () => {
     return 'https://loginservice-q.nav.no/login';
 };
 
-export function get(url) {
+export function get(url, headers = null) {
     const customFetch = getFetch();
+    const CustomHeaders = getHeaders();
     return customFetch(url, {
         credentials: 'include',
+        headers: headers || new CustomHeaders(),
     })
         .then((res) => {
             if (res.status === 401) {
                 log(res, 'Redirect til login');
-                window.location.href = `${hentLoginUrl()}?redirect=${window.location.href}`;
-                throw new Error('MANGLER_OIDC_TOKEN');
+                window.location.href = `${hentLoginUrl()}?redirect=${window.location.origin}/sykefravaer`;
+                throw new Error(MANGLER_OIDC_TOKEN);
+            } else if (res.status === 404) {
+                log(res);
+                throw new Error('404');
+            } else if (res.status === 403) {
+                log(res);
+                throw new Error('403');
             } else if (res.status > 400) {
                 log(res);
                 throw new Error('Forespørsel feilet');
@@ -103,8 +115,29 @@ export const hentApiUrl = () => {
         return 'https://syfoapi.nav.no/syfosoknad/api';
     } else if (url.indexOf('localhost') > -1 || url.indexOf('herokuapp') > -1) {
         // Lokalt
-        return `${window.location.origin}/syfoapi/syfosoknad/api`;
+        return '/syfoapi/syfosoknad/api';
     }
     // Preprod
     return 'https://syfoapi-q.nav.no/syfosoknad/api';
+};
+
+export const hentSyfoapiUrl = (appNavn) => {
+    const url = window
+    && window.location
+    && window.location.href
+        ? window.location.href
+        : '';
+    if (url.indexOf('tjenester.nav') > -1) {
+        // Prod
+        return `https://syfoapi.nav.no/${appNavn}/api`;
+    } else if (url.indexOf('localhost') > -1 || url.indexOf('herokuapp') > -1) {
+        // Lokalt
+        return `/${appNavn}/api`;
+    }
+    // Preprod
+    return `https://syfoapi-q.nav.no/${appNavn}/api`;
+};
+
+export const API_NAVN = {
+    SYFOOPPFOLGINGSPLANSERVICE: 'syfooppfolgingsplanservice',
 };
