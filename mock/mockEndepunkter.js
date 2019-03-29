@@ -103,112 +103,6 @@ function mockOpprettetIdResultat(res) {
 }
 mockOpprettetIdResultat.rollingCounter = 100;
 
-function mockEndepunkterSomEndrerState(server) {
-    server.post('/syfoapi/syfosoknad/api/opprettSoknadUtland', (req, res) => {
-        if (!mockData.soknader.find((soknad) => {
-            return soknad.id === mockData[NY_SOKNAD_UTLAND].id;
-        })) {
-            mockData.soknader = [...mockData.soknader, mockData[NY_SOKNAD_UTLAND]];
-        }
-
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[NY_SOKNAD_UTLAND]));
-    });
-
-    server.post('/syfoapi/syfosoknad/api/avbrytSoknad', (req, res) => {
-        const soknad = req.body;
-        if (soknad.soknadstype === 'OPPHOLD_UTLAND' || soknad.status === 'UTKAST_TIL_KORRIGERING') {
-            mockData.soknader = mockData.soknader.filter((s) => {
-                return s.id !== soknad.id;
-            });
-        } else {
-            mockData.soknader = mockData.soknader.map((s) => {
-                return s.id === soknad.id
-                    ? {
-                        ...s,
-                        avbruttDato: new Date(),
-                        status: 'AVBRUTT',
-                    }
-                    : s;
-            });
-        }
-
-        res.send(JSON.stringify({}));
-    });
-
-    server.post('/syfoapi/syfosoknad/api/gjenapneSoknad', (req, res) => {
-        const soknad = req.body;
-        mockData.soknader = mockData.soknader.map((s) => {
-            return s.id === soknad.id
-                ? {
-                    ...s,
-                    avbruttDato: null,
-                    status: 'NY',
-                }
-                : s;
-        });
-
-        res.send(JSON.stringify({}));
-    });
-
-    server.post('/syfoapi/syfosoknad/api/sendSoknad', (req, res) => {
-        const { id, sporsmal } = req.body;
-
-        const soknadTilInnsending = mockData.soknader.find((soknad) => {
-            return soknad.id === id;
-        });
-
-        mockData.soknader = mockData.soknader.map((soknad) => {
-            const _soknad = Object.assign({}, soknad);
-
-            if (soknad.id === id) {
-                _soknad.status = 'SENDT';
-                _soknad.sporsmal = sporsmal;
-                _soknad.innsendtDato = new Date().toJSON()
-                    .substr(0, 10);
-            }
-
-            if (soknad.id === soknadTilInnsending.korrigerer) {
-                _soknad.korrigertAv = soknadTilInnsending.id;
-                _soknad.status = 'KORRIGERT';
-            }
-
-            return _soknad;
-        });
-
-        res.send(JSON.stringify({}));
-    });
-
-    server.post('/syfoapi/syfosoknad/api/soknader/:id/korriger', (req, res) => {
-        const { id } = req.params;
-        const soknadSomKorrigeres = mockData.soknader.find((soknad) => {
-            return soknad.id === id;
-        });
-        let utkast = mockData.soknader.find((soknad) => {
-            return soknad.korrigerer === id;
-        });
-
-        if (!utkast) {
-            utkast = Object.assign({}, soknadSomKorrigeres, {
-                id: uuid(),
-                status: 'UTKAST_TIL_KORRIGERING',
-                opprettetDato: new Date().toJSON()
-                    .substr(0, 10),
-                innsendtDato: null,
-                korrigerer: soknadSomKorrigeres.id,
-            });
-            mockData.soknader.push(utkast);
-        }
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(utkast));
-    });
-
-    server.post('/syfoapi/syfosoknad/api/soknader/:id/avbryt', (req, res) => {
-        mockData.soknader = mockData.soknader.filter(soknad => soknad.id !== req.params.id);
-        res.send(JSON.stringify({}));
-    })
-}
-
 function mockForLokaltMiljo(server) {
     server.use(express.json());
     server.use(express.urlencoded());
@@ -221,7 +115,7 @@ function mockForLokaltMiljo(server) {
         res.send();
     });
 
-    server.post('/restoppfoelgingsdialog/api/arbeidsoppgave/actions/:id/slett', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/arbeidsoppgave/actions/:id/slett', (req, res) => {
         res.send();
     });
 
@@ -264,18 +158,6 @@ function mockForOpplaeringsmiljo(server) {
     server.use(express.json());
     server.use(express.urlencoded());
 
-    server.get('/syfoapi/syfosoknad/api/soknader', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[SOKNADER]));
-    });
-
-    server.post('/syfoapi/syfosoknad/api/oppdaterSporsmal', (req, res) => {
-        const soknad = req.body;
-
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(soknad));
-    });
-
     server.get('/syforest/sykmeldinger?type=arbeidsgiver', (req, res) => {
         res.send(JSON.stringify(mockData[ARBEIDSGIVERS_SYKMELDINGER]));
     });
@@ -285,36 +167,10 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[SYKMELDINGER]));
     });
 
-    server.get('/moterest/api/v2/moter/siste', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[SISTE]));
-    });
-
     server.post('/syforest/sykmeldinger/:id/actions/erUtenforVentetid', (req, res) => {
         res.send(JSON.stringify({
             erUtenforVentetid: false,
         }));
-    });
-
-    server.get('/syforest/soknader/:uuid/berik', (req, res) => {
-        res.send(JSON.stringify({
-            forrigeSykeforloepTom: null,
-            oppfoelgingsdato: '2018-09-19',
-        }));
-    });
-
-    server.post('/syforest/soknader/:uuid/actions/beregn-arbeidsgiverperiode', (req, res) => {
-        res.send(JSON.stringify({
-            erUtenforArbeidsgiverperiode: false,
-            antallDagerISykefravaer: 9,
-            forrigeSykeforloepTom: null,
-            startdato: '2018-09-19',
-        }));
-    });
-
-    server.get('/syforest/soknader', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[SYKEPENGESOKNADER]));
     });
 
     server.get('/syforest/naermesteledere', (req, res) => {
@@ -345,7 +201,6 @@ function mockForOpplaeringsmiljo(server) {
     server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/sett', (req, res) => {
         res.send();
     });
-
 
     server.get('/restoppfoelgingsdialog/api/arbeidsforhold', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
@@ -449,7 +304,6 @@ function mockUnleashLokal(server) {
 module.exports = {
     mockForLokaltMiljo,
     mockForOpplaeringsmiljo,
-    mockEndepunkterSomEndrerState,
     mockUnleashOpplaeringsmiljo,
     mockUnleashLokal,
 };

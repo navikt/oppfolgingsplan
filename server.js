@@ -100,7 +100,6 @@ const startServer = (html) => {
     if (env === 'local') {
         require('./mock/mockEndepunkter').mockForLokaltMiljo(server);
         require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
-        require('./mock/mockEndepunkter').mockEndepunkterSomEndrerState(server);
         require('./mock/mockEndepunkter').mockUnleashLokal(server);
     }
 
