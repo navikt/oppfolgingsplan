@@ -119,7 +119,7 @@ function mockForLokaltMiljo(server) {
         res.send();
     });
 
-    server.post('/restoppfoelgingsdialog/api/tiltak/actions/:id/slett', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:id/slett', (req, res) => {
         res.send();
     });
 
