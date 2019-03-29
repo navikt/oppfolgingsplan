@@ -1,5 +1,10 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
 import { post, log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post as postGatewayApi,
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/arbeidsoppgave_actions';
 import { input2RSArbeidsoppgave } from '../../utils/arbeidsoppgaveUtils';
 
@@ -27,8 +32,8 @@ export function* slettArbeidsoppgave(action) {
 
     yield put(actions.sletterArbeidsoppgave(fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/arbeidsoppgave/actions/${action.arbeidsoppgaveId}/slett`;
-        yield call(post, url);
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidsoppgave/actions/${action.arbeidsoppgaveId}/slett`;
+        yield call(postGatewayApi, url);
         yield put(actions.arbeidsoppgaveSlettet(action.id, action.arbeidsoppgaveId, fnr));
     } catch (e) {
         if (e.message === '409') {
