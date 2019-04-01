@@ -1,5 +1,10 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
 import { post, log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post as postGatewayApi,
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/tiltak_actions';
 import { input2RSTiltak } from '../../utils/tiltakUtils';
 
@@ -26,8 +31,8 @@ export function* slettTiltak(action) {
 
     yield put(actions.sletterTiltak(fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/tiltak/actions/${action.tiltakId}/slett`;
-        yield call(post, url);
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/tiltak/actions/${action.tiltakId}/slett`;
+        yield call(postGatewayApi, url);
         yield put(actions.tiltakSlettet(action.id, action.tiltakId, fnr));
     } catch (e) {
         if (e.message === '409') {
