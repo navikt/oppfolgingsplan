@@ -107,7 +107,7 @@ function mockForLokaltMiljo(server) {
     server.use(express.json());
     server.use(express.urlencoded());
 
-    server.post('/restoppfoelgingsdialog/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
         mockOpprettetIdResultat(res);
     });
 
