@@ -1,14 +1,21 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
 import { post } from 'digisyfo-npm';
+import {
+    post as postGatewayApi,
+    hentSyfoapiUrl,
+    API_NAVN,
+} from '../../js/gateway-api/gatewayApi';
 import { lagreKommentar, slettKommentar } from '../../js/sagas/oppfolgingsplan/kommentarSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/kommentar_actions';
 
 describe('kommentarSagas', () => {
+    let apiUrlBase;
     const fnr = '12345678';
     const tiltakId = 1;
 
     beforeEach(() => {
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
         process.env = {
             REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
         };
@@ -34,8 +41,8 @@ describe('kommentarSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/tiltak/actions/1/lagreKommentar`;
-            const nextCall = call(post, url, {
+            const url = `${apiUrlBase}/tiltak/actions/1/lagreKommentar`;
+            const nextCall = call(postGatewayApi, url, {
                 tekst: 'tekst',
             });
             expect(generator.next().value).to.deep.equal(nextCall);
