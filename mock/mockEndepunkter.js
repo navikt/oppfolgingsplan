@@ -123,7 +123,7 @@ function mockForLokaltMiljo(server) {
         res.send();
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/lagreArbeidsoppgave', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/lagreArbeidsoppgave', (req, res) => {
         mockOpprettetIdResultat(res);
     });
 

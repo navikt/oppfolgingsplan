@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
 import {
-    post as postGatewayApi,
+    post,
     hentSyfoapiUrl,
     API_NAVN,
 } from '../../js/gateway-api/gatewayApi';
@@ -16,9 +15,6 @@ describe('arbeidsoppgaveSagas', () => {
 
     beforeEach(() => {
         apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
     });
 
     describe('lagreArbeidsoppgave', () => {
@@ -42,7 +38,7 @@ describe('arbeidsoppgaveSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/123/lagreArbeidsoppgave`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/123/lagreArbeidsoppgave`;
             const nextCall = call(post, url, {
                 arbeidsoppgavenavn: 'navn',
                 arbeidsoppgaveId: 1,
@@ -82,7 +78,7 @@ describe('arbeidsoppgaveSagas', () => {
 
         it('Skal dernest sende postcall', () => {
             const url = `${apiUrlBase}/arbeidsoppgave/actions/123/slett`;
-            const nextCall = call(postGatewayApi, url);
+            const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
