@@ -111,7 +111,7 @@ function mockForLokaltMiljo(server) {
         mockOpprettetIdResultat(res);
     });
 
-    server.post('/restoppfoelgingsdialog/api/kommentar/actions/:response/slett', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/kommentar/actions/:response/slett', (req, res) => {
         res.send();
     });
 
