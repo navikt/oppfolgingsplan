@@ -1,5 +1,10 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { get, post, log } from 'digisyfo-npm';
+import { post, log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    get,
+} from '../../gateway-api/gatewayApi';
 import logger from '../../logg/logging';
 import * as actions from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
 
@@ -7,7 +12,7 @@ export function* hentSykmeldtOppfolginger() {
     yield put(actions.henterOppfolgingsdialoger());
 
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/sykmeldt/oppfoelgingsdialoger`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidstaker/oppfolgingsplaner`;
         const data = yield call(get, url);
         yield put(actions.oppfolgingsdialogerHentet(data));
     } catch (e) {
