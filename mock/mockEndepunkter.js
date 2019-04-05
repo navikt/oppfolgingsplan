@@ -143,7 +143,7 @@ function mockForLokaltMiljo(server) {
         res.send();
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/nullstillGodkjenning', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/nullstillGodkjenning', (req, res) => {
         res.send();
     });
 
