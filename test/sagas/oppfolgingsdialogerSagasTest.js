@@ -3,6 +3,7 @@ import { put, call } from 'redux-saga/effects';
 import { post } from 'digisyfo-npm';
 import {
     get,
+    post as postApiGateway,
     hentSyfoapiUrl,
     API_NAVN,
 } from '../../js/gateway-api/gatewayApi';
@@ -64,8 +65,8 @@ describe('oppfolgingsdialogerSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/sykmeldt/oppfoelgingsdialoger`;
-            const nextCall = call(post, url, {
+            const url = `${apiUrlBase}/arbeidstaker/oppfolgingsplaner`;
+            const nextCall = call(postApiGateway, url, {
                 virksomhetsnummer,
             });
             expect(generator.next().value).to.deep.equal(nextCall);
