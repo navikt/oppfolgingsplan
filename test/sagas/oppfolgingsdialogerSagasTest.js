@@ -1,6 +1,11 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { get, post } from 'digisyfo-npm';
+import { post } from 'digisyfo-npm';
+import {
+    get,
+    hentSyfoapiUrl,
+    API_NAVN,
+} from '../../js/gateway-api/gatewayApi';
 import {
     avvisDialogSaga,
     hentSykmeldtOppfolginger,
@@ -10,7 +15,10 @@ import {
 import * as actions from '../../js/actions/oppfolgingsplan/oppfolgingsdialog_actions';
 
 describe('oppfolgingsdialogerSagas', () => {
+    let apiUrlBase;
+
     beforeEach(() => {
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
         process.env = {
             REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
         };
@@ -27,7 +35,7 @@ describe('oppfolgingsdialogerSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/sykmeldt/oppfoelgingsdialoger`;
+            const url = `${apiUrlBase}/arbeidstaker/oppfolgingsplaner`;
             const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
