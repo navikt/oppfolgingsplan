@@ -25,7 +25,7 @@ describe('forespoerRevideringSagas', () => {
         };
         const generator = forespoerRevidering(action);
 
-        it('Skal dispatche DELER_MED_NAV', () => {
+        it(`Skal dispatche ${FORESPOER_REVIDERING_SENDER}`, () => {
             const nextPut = put({
                 type: FORESPOER_REVIDERING_SENDER,
                 id,
@@ -39,7 +39,7 @@ describe('forespoerRevideringSagas', () => {
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette FORESPOER_REVIDERING_SUKSESS', () => {
+        it(`Skal dernest sette ${FORESPOER_REVIDERING_SUKSESS}`, () => {
             const nextPut = put({
                 type: FORESPOER_REVIDERING_SUKSESS,
                 id,
