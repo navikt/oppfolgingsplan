@@ -198,7 +198,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[FORRIGE_LEDER]));
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/sett', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/sett', (req, res) => {
         res.send();
     });
 
