@@ -147,7 +147,7 @@ function mockForLokaltMiljo(server) {
         res.send();
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/forespoerRevidering', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/foresporRevidering', (req, res) => {
         res.send();
     });
 }
