@@ -139,7 +139,7 @@ function mockForLokaltMiljo(server) {
         });
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/samtykke', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/samtykk', (req, res) => {
         res.send();
     });
 
