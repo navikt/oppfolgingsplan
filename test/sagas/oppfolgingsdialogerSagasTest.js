@@ -130,7 +130,7 @@ describe('oppfolgingsdialogerSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/avvis`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/avvis`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
