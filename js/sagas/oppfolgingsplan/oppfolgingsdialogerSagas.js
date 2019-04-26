@@ -57,8 +57,8 @@ export function* godkjennDialogSaga(action) {
 export function* avvisDialogSaga(action) {
     yield put(actions.avviserDialog());
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/avvis`;
-        yield call(post, url);
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/avvis`;
+        yield call(postApiGateway, url);
         yield put(actions.dialogAvvist(action.id));
     } catch (e) {
         log(e);
