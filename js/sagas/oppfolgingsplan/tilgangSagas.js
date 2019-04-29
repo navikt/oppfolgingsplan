@@ -1,11 +1,16 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get, log } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    get,
+} from '../../gateway-api/gatewayApi';
 import logger from '../../logg/logging';
 import * as actions from '../../actions/oppfolgingsplan/sjekkTilgang_actions';
 
 export function* sjekkerTilgang() {
     yield put(actions.sjekkerTilgang());
-    const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/tilgang`;
+    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/tilgang`;
     try {
         const data = yield call(get, url);
         yield put(actions.sjekketTilgang(data));
