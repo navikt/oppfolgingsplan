@@ -1,11 +1,16 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get, log } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    get,
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/person_actions';
 
 export function* hentPersonSaga(action) {
     yield put(actions.henterPerson(action.fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/person/${action.fnr}`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/person/${action.fnr}`;
         const person = yield call(get, url);
         yield put(actions.personHentet(person, action.fnr));
     } catch (e) {
