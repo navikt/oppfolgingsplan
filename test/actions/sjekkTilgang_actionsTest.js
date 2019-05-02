@@ -2,12 +2,6 @@ import { expect } from 'chai';
 import * as actions from '../../js/actions/oppfolgingsplan/sjekkTilgang_actions';
 
 describe('tilgang_actions', () => {
-    beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: 'http://tjenester.nav.no/oppfoelgingsdialog/api',
-        };
-    });
-
     it('Skal ha en sjekkTilgang()-funksjon som returnerer riktig action', () => {
         expect(actions.sjekkTilgang()).to.deep.equal({
             type: actions.SJEKK_TILGANG_FORESPURT,
