@@ -42,6 +42,7 @@ export function* godkjennDialogSaga(action) {
     yield put(actions.godkjennerDialog());
     try {
         const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker`;
+        console.log('postes objekt', action.gyldighetstidspunkt);
         const data = yield call(post, url, action.gyldighetstidspunkt);
         yield put(actions.dialogGodkjent(action.id, action.status, data));
     } catch (e) {

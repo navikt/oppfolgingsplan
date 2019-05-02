@@ -96,6 +96,7 @@ describe('oppfolgingsdialogerSagas', () => {
 
         it('Skal dernest sende postcall', () => {
             const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker`;
+
             const nextCall = call(post, url, action.gyldighetstidspunkt);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
