@@ -1,9 +1,8 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
 import {
     get,
-    post as postApiGateway,
+    post,
     hentSyfoapiUrl,
     API_NAVN,
 } from '../../js/gateway-api/gatewayApi';
@@ -20,9 +19,6 @@ describe('oppfolgingsdialogerSagas', () => {
 
     beforeEach(() => {
         apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
     });
 
     describe('hentArbeidsgiversOppfolginger', () => {
@@ -66,7 +62,7 @@ describe('oppfolgingsdialogerSagas', () => {
 
         it('Skal dernest sende postcall', () => {
             const url = `${apiUrlBase}/arbeidstaker/oppfolgingsplaner`;
-            const nextCall = call(postApiGateway, url, {
+            const nextCall = call(post, url, {
                 virksomhetsnummer,
             });
             expect(generator.next().value).to.deep.equal(nextCall);
@@ -99,7 +95,7 @@ describe('oppfolgingsdialogerSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker`;
             const nextCall = call(post, url, action.gyldighetstidspunkt);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
@@ -131,7 +127,7 @@ describe('oppfolgingsdialogerSagas', () => {
 
         it('Skal dernest sende postcall', () => {
             const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/avvis`;
-            const nextCall = call(postApiGateway, url);
+            const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
