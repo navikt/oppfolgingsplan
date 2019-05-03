@@ -1,10 +1,10 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { post, log } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
 import {
     API_NAVN,
     hentSyfoapiUrl,
     get,
-    post as postApiGateway,
+    post,
 } from '../../gateway-api/gatewayApi';
 import logger from '../../logg/logging';
 import * as actions from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
@@ -30,7 +30,7 @@ export function* opprettOppfolgingsdialog(action) {
     };
     try {
         const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidstaker/oppfolgingsplaner`;
-        const data = yield call(postApiGateway, url, body);
+        const data = yield call(post, url, body);
         yield put(actions.oppfolgingsdialogOpprettet(data));
     } catch (e) {
         log(e);
@@ -41,7 +41,7 @@ export function* opprettOppfolgingsdialog(action) {
 export function* godkjennDialogSaga(action) {
     yield put(actions.godkjennerDialog());
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker`;
         const data = yield call(post, url, action.gyldighetstidspunkt);
         yield put(actions.dialogGodkjent(action.id, action.status, data));
     } catch (e) {
@@ -58,7 +58,7 @@ export function* avvisDialogSaga(action) {
     yield put(actions.avviserDialog());
     try {
         const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/avvis`;
-        yield call(postApiGateway, url);
+        yield call(post, url);
         yield put(actions.dialogAvvist(action.id));
     } catch (e) {
         log(e);
