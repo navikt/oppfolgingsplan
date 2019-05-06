@@ -131,7 +131,7 @@ function mockForLokaltMiljo(server) {
         mockOpprettetIdResultat(res);
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/godkjenn', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/godkjenn', (req, res) => {
         res.send({
             fom: req.body.fom,
             tom: req.body.tom,
@@ -183,7 +183,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[OPPFOELGINGSDIALOGER]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/tilgang', (req, res) => {
+    server.get('/syfooppfolgingsplanservice/api/tilgang', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[TILGANG]));
     });
