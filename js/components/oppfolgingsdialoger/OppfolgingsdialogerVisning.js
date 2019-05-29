@@ -16,7 +16,7 @@ import {
 } from '../../propTypes';
 import { finnArbeidsgivereForGyldigeSykmeldinger } from '../../utils/sykmeldingUtils';
 import getContextRoot from '../../utils/getContextRoot';
-import OppfolgingsdialogFilm from './OppfolgingsdialogFilm';
+import OppfolgingsplanFilm from './OppfolgingsplanFilm';
 import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
 import OppfolgingsdialogerIngenplanAT from './opprett/OppfolgingsdialogerIngenplanAT';
 
@@ -114,7 +114,7 @@ class OppfolgingsdialogerVisning extends Component {
                 svgAlt="OppfølgingsdialogTidligere"
             />
             }
-            <OppfolgingsdialogFilm ledetekster={ledetekster} />
+            <OppfolgingsplanFilm ledetekster={ledetekster} />
         </div>);
     }
 }

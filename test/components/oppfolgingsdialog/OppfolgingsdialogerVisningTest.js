@@ -8,7 +8,7 @@ import {
     OppfolgingsdialogTeasere,
 } from 'oppfolgingsdialog-npm';
 import OppfolgingsdialogerVisning, { OppfolgingsdialogNyKnapp } from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerVisning';
-import OppfolgingsdialogFilm from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogFilm';
+import OppfolgingsplanFilm from '../../../js/components/oppfolgingsdialoger/OppfolgingsplanFilm';
 import OppfolgingsdialogerOpprett from '../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerOpprett';
 import OppfolgingsdialogerIngenplanAT from '../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerIngenplanAT';
 import {
@@ -56,8 +56,8 @@ describe('Oppfolgingsdialoger', () => {
         klokke.restore();
     });
 
-    it('Skal vise OppfolgingsdialogFilm', () => {
-        expect(komponent.find(OppfolgingsdialogFilm)).to.have.length(1);
+    it('Skal vise OppfolgingsplanFilm', () => {
+        expect(komponent.find(OppfolgingsplanFilm)).to.have.length(1);
     });
 
     it('Skal vise OppfolgingsdialogerOpprett, om visOppfolgingsdialogOpprett=false', () => {
