@@ -33,6 +33,10 @@ export function* opprettOppfolgingsdialog(action) {
         const data = yield call(post, url, body);
         yield put(actions.oppfolgingsdialogOpprettet(data));
     } catch (e) {
+        if (e.message === '409') {
+            window.location.reload();
+            return;
+        }
         log(e);
         yield put(actions.opprettOppfolgingsdialogFeilet());
     }
