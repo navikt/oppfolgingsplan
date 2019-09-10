@@ -71,6 +71,43 @@ lastFilTilMinne(VIRKSOMHET);
 lastFilTilMinne(FORRIGE_LEDER);
 lastFilTilMinne(SISTE);
 
+const MILLISEKUNDER_PER_DAG = 86400000;
+const leggTilDagerPaDato = (dato, dager) => {
+    const nyDato = new Date(dato);
+    nyDato.setTime(nyDato.getTime() + (dager * MILLISEKUNDER_PER_DAG));
+    return new Date(nyDato);
+};
+
+const SYKMELDING_TYPE = {
+    SYKMELDING_INAKTIV: {
+        fomUke: -20,
+        tomUke: -18,
+    },
+    SYKMELDING_AKTIV: {
+        fomUke: -16,
+        tomUke: 2,
+    },
+};
+
+const getSykmeldinger = (type) => {
+    const today = new Date();
+    const sykmeldinger = mockData[SYKMELDINGER];
+    const sykmelding = sykmeldinger[0];
+    return [
+        {
+            ...sykmelding,
+            mulighetForArbeid: {
+                ...sykmelding.mulighetForArbeid,
+                perioder: [{
+                    ...sykmelding.mulighetForArbeid.perioder[0],
+                    fom: leggTilDagerPaDato(today, (type.fomUke * 7)).toJSON(),
+                    tom: leggTilDagerPaDato(today, (type.tomUke * 7)).toJSON(),
+                }],
+            },
+        },
+    ];
+};
+
 let teksterFraProd;
 
 function hentTeksterFraProd() {
@@ -164,7 +201,7 @@ function mockForOpplaeringsmiljo(server) {
 
     server.get('/syforest/sykmeldinger', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[SYKMELDINGER]));
+        res.send(JSON.stringify(getSykmeldinger(SYKMELDING_TYPE.SYKMELDING_AKTIV)));
     });
 
     server.post('/syforest/sykmeldinger/:id/actions/erUtenforVentetid', (req, res) => {
