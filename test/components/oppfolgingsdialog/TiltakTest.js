@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
 import {
-    OppfolgingsdialogInfoboks,
     TiltakSkjema,
     LeggTilElementKnapper,
     TiltakTabell,
@@ -13,6 +12,7 @@ import { setLedetekster } from 'digisyfo-npm';
 import ledetekster from '../../mock/mockLedetekster';
 import Tiltak from '../../../js/components/oppfolgingsdialoger/utfylling/Tiltak';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
+import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -108,8 +108,8 @@ describe('Tiltak', () => {
                 slettTiltak={slettTiltak}
             />);
         });
-        it('Skal vise OppfolgingsdialogInfoboks, om det ikke er tiltak', () => {
-            expect(componentUtenTiltak.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+        it('Skal vise OppfolgingsplanInfoboks, om det ikke er tiltak', () => {
+            expect(componentUtenTiltak.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
         it('Skal vise LeggTilElementKnapper, om det ikke er tiltak', () => {

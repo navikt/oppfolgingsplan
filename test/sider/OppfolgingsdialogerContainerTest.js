@@ -3,13 +3,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import {
-    OppfolgingsdialogInfoboks,
-} from 'oppfolgingsdialog-npm';
 import { Container } from '../../js/sider/OppfolgingsdialogerSide';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
 import Oppfolgingsdialoger from '../../js/components/oppfolgingsdialoger/Oppfolgingsdialoger';
+import OppfolgingsplanInfoboks from '../../js/components/app/OppfolgingsplanInfoboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -123,7 +121,7 @@ describe('Container', () => {
             expect(component.contains(<Feilmelding />)).to.equal(true);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks dersom sykmeldt ikke har tilgang', () => {
+        it('Skal vise OppfolgingsplanInfoboks dersom sykmeldt ikke har tilgang', () => {
             const component = shallow(<Container
                 dinesykmeldinger={dinesykmeldinger}
                 naermesteLedere={naermesteLedere}
@@ -137,7 +135,7 @@ describe('Container', () => {
                 hentLedere={hentLedere}
                 sjekkTilgang={sjekkTilgang}
             />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+            expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
         it('Skal vise Oppfolgingsdialoger dersom henting er OK', () => {

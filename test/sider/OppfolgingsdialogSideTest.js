@@ -4,9 +4,6 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import {
-    OppfolgingsdialogInfoboks,
-} from 'oppfolgingsdialog-npm';
-import {
     hentSykmeldingGyldigForOppfoelging,
     hentSykmeldingIkkeGyldigForOppfoelging,
 } from '../mock/mockSykmeldinger';
@@ -17,6 +14,7 @@ import {
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
 import Oppfolgingsdialog from '../../js/components/oppfolgingsdialoger/Oppfolgingsdialog';
+import OppfolgingsplanInfoboks from '../../js/components/app/OppfolgingsplanInfoboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -287,7 +285,7 @@ describe('Container', () => {
             expect(component.contains(<Feilmelding />)).to.equal(true);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks dersom sykmeldt ikke har tilgang', () => {
+        it('Skal vise OppfolgingsplanInfoboks dersom sykmeldt ikke har tilgang', () => {
             const component = shallow(<Container
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
                 dineSykmeldinger={dineSykmeldinger}
@@ -301,10 +299,10 @@ describe('Container', () => {
                 hentDineSykmeldinger={hentDineSykmeldinger}
                 hentToggles={hentToggles}
             />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+            expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks dersom henting er OK, og erOppfolgingsdialogTilgjengelig er false', () => {
+        it('Skal vise OppfolgingsplanInfoboks dersom henting er OK, og erOppfolgingsdialogTilgjengelig er false', () => {
             const component = shallow(<Container
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
                 dineSykmeldinger={dineSykmeldinger}
@@ -320,7 +318,7 @@ describe('Container', () => {
                 navigasjontoggles={navigasjontoggles}
                 erOppfolgingsdialogTilgjengelig={false}
             />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+            expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
         it('Skal vise Oppfolgingsdialog dersom henting er OK, og erOppfolgingsdialogTilgjengelig er true', () => {

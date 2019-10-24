@@ -7,7 +7,6 @@ import {
     hentToggles,
     togglesPt,
 } from 'digisyfo-npm';
-import { OppfolgingsdialogInfoboks } from 'oppfolgingsdialog-npm';
 import * as oppfolgingsplanProptypes from '../propTypes/opproptypes';
 import { populerPlanFraState } from '../utils/stateUtils';
 import { kopierOppfolgingsdialog } from '../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
@@ -42,6 +41,7 @@ import {
 import { hentDineSykmeldinger } from '../actions/dineSykmeldinger_actions';
 import { avkreftLeder, hentLedere } from '../actions/ledere_actions';
 import Oppfolgingsdialoger from '../components/oppfolgingsdialoger/Oppfolgingsdialoger';
+import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
 
 export class Container extends Component {
     componentWillMount() {
@@ -114,7 +114,7 @@ export class Container extends Component {
                     } else if (hentingFeilet || sendingFeilet) {
                         return (<Feilmelding />);
                     } else if (!tilgang.data.harTilgang) {
-                        return (<OppfolgingsdialogInfoboks
+                        return (<OppfolgingsplanInfoboks
                             svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
                             svgAlt="ikkeTilgang"
                             tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}

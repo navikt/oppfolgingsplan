@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { getLedetekst } from 'digisyfo-npm';
-import {
-    OppfolgingsdialogInfoboks,
-} from 'oppfolgingsdialog-npm';
 import getContextRoot from '../../utils/getContextRoot';
+import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 
 class IngenledereInfoboks extends Component {
     componentWillMount() {
@@ -13,7 +11,7 @@ class IngenledereInfoboks extends Component {
 
     render() {
         return (<div>
-            <OppfolgingsdialogInfoboks
+            <OppfolgingsplanInfoboks
                 svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-ingenleder.svg`}
                 svgAlt="Ingen Leder"
                 tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.ingenlederInfoboks.tittel')}

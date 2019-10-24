@@ -1,12 +1,10 @@
 import React from 'react';
 import { getLedetekst } from 'digisyfo-npm';
-import {
-    OppfolgingsdialogInfoboks,
-} from 'oppfolgingsdialog-npm';
 import getContextRoot from '../../utils/getContextRoot';
+import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 
 const IngenledereInfoboks = () => {
-    return (<OppfolgingsdialogInfoboks
+    return (<OppfolgingsplanInfoboks
         svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-ingenleder.svg`}
         svgAlt="Ingen Leder"
         tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.ingenledereInfoboks.tittel')}

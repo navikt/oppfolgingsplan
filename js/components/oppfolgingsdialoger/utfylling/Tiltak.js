@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import {
-    OppfolgingsdialogInfoboks,
     LeggTilElementKnapper,
     TiltakTabell,
     BRUKERTYPE,
@@ -23,6 +22,7 @@ import {
 } from '../../../propTypes/opproptypes';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
 import { capitalizeFirstLetter } from '../../../utils/textUtils';
+import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 
 class Tiltak extends Component {
     constructor(props) {
@@ -132,7 +132,7 @@ class Tiltak extends Component {
                     <div>
                         {
                             !this.state.visTiltakSkjema ?
-                                <OppfolgingsdialogInfoboks
+                                <OppfolgingsplanInfoboks
                                     svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
                                     svgAlt="nyttTiltak"
                                     tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.onboarding.tiltak.tittel')}
@@ -145,7 +145,7 @@ class Tiltak extends Component {
                                         visSkjema={this.state.visTiltakSkjema}
                                         toggleSkjema={this.toggleTiltakSkjema}
                                     />
-                                </OppfolgingsdialogInfoboks>
+                                </OppfolgingsplanInfoboks>
                                 :
                                 <div>
                                     <TiltakInfoboks

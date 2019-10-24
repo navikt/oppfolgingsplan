@@ -5,7 +5,6 @@ import {
     BRUKERTYPE,
     LagreArbeidsoppgaveSkjema,
     LeggTilElementKnapper,
-    OppfolgingsdialogInfoboks,
     ArbeidsoppgaverListe,
     sorterArbeidsoppgaverEtterOpprettet,
     NotifikasjonBoksVurderingOppgave,
@@ -23,6 +22,7 @@ import {
 import getContextRoot from '../../../utils/getContextRoot';
 import { capitalizeFirstLetter } from '../../../utils/textUtils';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
+import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 
 export const RenderOpprettArbeidsoppgave = ({ ledetekster, sendLagreArbeidsoppgave, toggleArbeidsoppgaveSkjema, oppdateringFeilet, varselTekst }) => {
     return (<div>
@@ -176,7 +176,7 @@ class Arbeidsoppgaver extends Component {
                         }
                         {
                             !this.state.visArbeidsoppgaveSkjema ?
-                                <OppfolgingsdialogInfoboks
+                                <OppfolgingsplanInfoboks
                                     svgUrl={`${getContextRoot()}/img/svg/arbeidsoppgave-onboarding.svg`}
                                     svgAlt="nyArbeidsoppgave"
                                     tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.onboarding.arbeidsoppgave.tittel')}
@@ -187,7 +187,7 @@ class Arbeidsoppgaver extends Component {
                                         visSkjema={this.state.visArbeidsoppgaveSkjema}
                                         toggleSkjema={this.toggleArbeidsoppgaveSkjema}
                                     />
-                                </OppfolgingsdialogInfoboks> :
+                                </OppfolgingsplanInfoboks> :
                                 <LagreArbeidsoppgaveSkjema
                                     ledetekster={ledetekster}
                                     varselTekst={this.state.varselTekst}

@@ -10,7 +10,6 @@ import {
     hentSykeforlopsPerioder,
 } from 'digisyfo-npm';
 import {
-    OppfolgingsdialogInfoboks,
     dialogAvbruttOgNyOpprettet,
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
     erOppfolgingsdialogTidligere,
@@ -66,6 +65,7 @@ import {
     dinesykmeldingerReducerPt,
 } from '../propTypes';
 import * as oppfolgingsplanProptypes from '../propTypes/opproptypes';
+import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
 
 export class Container extends Component {
     componentWillMount() {
@@ -134,13 +134,13 @@ export class Container extends Component {
                 } else if (hentingFeilet || sendingFeilet) {
                     return (<Feilmelding />);
                 } else if (!erOppfolgingsdialogTilgjengelig) {
-                    return (<OppfolgingsdialogInfoboks
+                    return (<OppfolgingsplanInfoboks
                         svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
                         svgAlt="ikkeTilgang"
                         tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}
                     />);
                 } else if (!tilgang.data.harTilgang) {
-                    return (<OppfolgingsdialogInfoboks
+                    return (<OppfolgingsplanInfoboks
                         svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
                         svgAlt="ikkeTilgang"
                         tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}

@@ -5,7 +5,6 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { setLedetekster } from 'digisyfo-npm';
 import {
-    OppfolgingsdialogInfoboks,
     LagreArbeidsoppgaveSkjema,
     LeggTilElementKnapper,
     NotifikasjonBoksVurderingOppgave,
@@ -17,6 +16,7 @@ import Arbeidsoppgaver, {
     RenderOpprettArbeidsoppgave,
 } from '../../../js/components/oppfolgingsdialoger/utfylling/Arbeidsoppgaver';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
+import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -104,8 +104,8 @@ describe('Arbeidsoppgaver', () => {
             expect(componentUtenArbeidsoppgaver.find(ArbeidsoppgaverInfoboks)).to.have.length(1);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks, om det ikke er arbeidsoppgaver', () => {
-            expect(componentUtenArbeidsoppgaver.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+        it('Skal vise OppfolgingsplanInfoboks, om det ikke er arbeidsoppgaver', () => {
+            expect(componentUtenArbeidsoppgaver.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
         it('Skal vise LeggTilElementKnapper, om det ikke er arbeidsoppgaver', () => {
