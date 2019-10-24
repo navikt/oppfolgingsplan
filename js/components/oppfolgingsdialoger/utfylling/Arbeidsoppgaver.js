@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import {
     BRUKERTYPE,
-    captitalizeFirstLetter,
     LagreArbeidsoppgaveSkjema,
     LeggTilElementKnapper,
     OppfolgingsdialogInfoboks,
@@ -22,6 +21,7 @@ import {
     oppfolgingsplanPt,
 } from '../../../propTypes/opproptypes';
 import getContextRoot from '../../../utils/getContextRoot';
+import { capitalizeFirstLetter } from '../../../utils/textUtils';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
 
 export const RenderOpprettArbeidsoppgave = ({ ledetekster, sendLagreArbeidsoppgave, toggleArbeidsoppgaveSkjema, oppdateringFeilet, varselTekst }) => {
@@ -109,7 +109,7 @@ class Arbeidsoppgaver extends Component {
         }
         const nyeValues = {
             ...values,
-            arbeidsoppgavenavn: captitalizeFirstLetter(values.arbeidsoppgavenavn),
+            arbeidsoppgavenavn: capitalizeFirstLetter(values.arbeidsoppgavenavn),
         };
         this.props.lagreArbeidsoppgave(this.props.oppfolgingsdialog.id, nyeValues, this.props.oppfolgingsdialog.arbeidstaker.fnr);
         this.setState({

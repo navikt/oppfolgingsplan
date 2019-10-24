@@ -6,7 +6,6 @@ import {
     LeggTilElementKnapper,
     TiltakTabell,
     BRUKERTYPE,
-    captitalizeFirstLetter,
     TiltakSkjema,
     TiltakInfoboks,
     sorterTiltakEtterNyeste,
@@ -23,6 +22,7 @@ import {
     tiltakReducerPt,
 } from '../../../propTypes/opproptypes';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
+import { capitalizeFirstLetter } from '../../../utils/textUtils';
 
 class Tiltak extends Component {
     constructor(props) {
@@ -84,7 +84,7 @@ class Tiltak extends Component {
         const nyeValues = {
             ...values,
             status: STATUS_TILTAK.FORSLAG,
-            tiltaknavn: captitalizeFirstLetter(values.tiltaknavn),
+            tiltaknavn: capitalizeFirstLetter(values.tiltaknavn),
         };
         this.props.lagreTiltak(this.props.oppfolgingsdialog.id, nyeValues);
         this.setState({
