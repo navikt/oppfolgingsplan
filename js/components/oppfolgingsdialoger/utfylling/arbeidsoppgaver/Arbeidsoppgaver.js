@@ -7,7 +7,6 @@ import {
     LeggTilElementKnapper,
     ArbeidsoppgaverListe,
     sorterArbeidsoppgaverEtterOpprettet,
-    NotifikasjonBoksVurderingOppgave,
 } from 'oppfolgingsdialog-npm';
 import {
     getLedetekst,
@@ -23,6 +22,7 @@ import { capitalizeFirstLetter } from '../../../../utils/textUtils';
 import { isEmpty } from '../../../../utils/oppfolgingsdialogUtils';
 import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
 import ArbeidsoppgaverInfoboks from '../../../oppfolgingsdialoger/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
+import NotifikasjonBoksVurderingOppgave from './NotifikasjonBoksVurderingOppgave';
 
 export const RenderOpprettArbeidsoppgave = ({ ledetekster, sendLagreArbeidsoppgave, toggleArbeidsoppgaveSkjema, oppdateringFeilet, varselTekst }) => {
     return (<div>
