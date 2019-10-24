@@ -163,7 +163,7 @@ Container.propTypes = {
     hentet: PropTypes.bool,
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
-    avbrytdialogReducer: oppfolgingsplanProptypes.avbrytdialogReducerPt,
+    avbrytdialogReducer: oppfolgingsplanProptypes.avbrytplanReducerPt,
     arbeidsforhold: oppfolgingsplanProptypes.arbeidsforholdReducerPt,
     arbeidsoppgaver: oppfolgingsplanProptypes.arbeidsoppgaverReducerPt,
     dineSykmeldinger: dinesykmeldingerReducerPt,
