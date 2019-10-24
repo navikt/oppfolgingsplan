@@ -106,8 +106,8 @@ export const oppgaverOppfoelgingsdialoger = (oppfolgingsdialoger, sykmeldinger) 
     };
 };
 
-export const erOppfolgingsdialogOpprettbarDirekte = (arbeidsgivere, oppfolgingsdialoger) => {
-    return arbeidsgivere.length === 1 && !harTidligereOppfolgingsdialoger(oppfolgingsdialoger);
+export const erOppfolgingsplanOpprettbarDirekte = (arbeidsgivere, oppfolgingsplaner) => {
+    return arbeidsgivere.length === 1 && !harTidligereOppfolgingsdialoger(oppfolgingsplaner);
 };
 
 export const finnNyesteTidligereOppfolgingsdialogMedVirksomhet = (oppfolgingsdialoger, virksomhetsnummer) => {

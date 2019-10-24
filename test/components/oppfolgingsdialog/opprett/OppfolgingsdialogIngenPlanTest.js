@@ -3,8 +3,9 @@ import chai from 'chai';
 import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import { OppfolgingsdialogerIngenplan } from 'oppfolgingsdialog-npm';
-import OppfolgingsdialogerIngenplanAT, { OppfolgingsdialogerIngenplanKnapper } from '../../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerIngenplanAT';
+import OppfolgingsdialogerIngenplan, {
+    OppfolgingsdialogerIngenplanKnapper,
+} from '../../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerIngenplan';
 import getOppfolgingsdialog, {
     hentOppfolgingsdialogTidligere,
 } from '../../../mock/mockOppfolgingsdialoger';
@@ -12,12 +13,11 @@ import getOppfolgingsdialog, {
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
-describe('OppfolgingsdialogerIngenplanAT', () => {
+describe('OppfolgingsdialogerIngenplan', () => {
     let klokke;
     const dagensDato = new Date('2017-01-01');
 
     let komponent;
-    let ledetekster;
     let opprett;
     let visOppfolgingsdialogOpprett;
     let arbeidsgivere;
@@ -25,17 +25,15 @@ describe('OppfolgingsdialogerIngenplanAT', () => {
 
     beforeEach(() => {
         klokke = sinon.useFakeTimers(dagensDato.getTime());
-        ledetekster = {};
         opprett = sinon.spy();
         visOppfolgingsdialogOpprett = sinon.spy();
         arbeidsgivere = [];
         arbeidsgiver = {
             virksomhetsnummer: '12345678',
         };
-        komponent = mount(<OppfolgingsdialogerIngenplanAT
-            ledetekster={ledetekster}
+        komponent = mount(<OppfolgingsdialogerIngenplan
             opprett={opprett}
-            oppfolgingsdialoger={[]}
+            oppfolgingsplaner={[]}
             visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
             arbeidsgivere={arbeidsgivere}
             rootUrl=""
@@ -77,12 +75,11 @@ describe('OppfolgingsdialogerIngenplanAT', () => {
         });
 
         it('Skal vise knapp som kaller opprett, om oppfolgingsdialog er opprettbar direkte uten ekstra utfylling', () => {
-            komponent = mount(<OppfolgingsdialogerIngenplanAT
-                ledetekster={ledetekster}
+            komponent = mount(<OppfolgingsdialogerIngenplan
                 opprett={opprett}
                 visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
                 arbeidsgivere={[arbeidsgiver]}
-                oppfolgingsdialoger={[oppfolgingsdialogIkkeTidligere]}
+                oppfolgingsplaner={[oppfolgingsdialogIkkeTidligere]}
                 rootUrl=""
             />);
             komponent.find('button').simulate('click');
@@ -90,12 +87,11 @@ describe('OppfolgingsdialogerIngenplanAT', () => {
         });
 
         it('Skal vise knapp som kaller visOppfolgingsdialogOpprett, om AT har flere arbeidsgivere', () => {
-            komponent = mount(<OppfolgingsdialogerIngenplanAT
-                ledetekster={ledetekster}
+            komponent = mount(<OppfolgingsdialogerIngenplan
                 opprett={opprett}
                 visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
                 arbeidsgivere={[arbeidsgiver, arbeidsgiver]}
-                oppfolgingsdialoger={[oppfolgingsdialogIkkeTidligere]}
+                oppfolgingsplaner={[oppfolgingsdialogIkkeTidligere]}
                 rootUrl=""
             />);
             komponent.find('button').simulate('click');
@@ -103,12 +99,11 @@ describe('OppfolgingsdialogerIngenplanAT', () => {
         });
 
         it('Skal vise knapp som kaller visOppfolgingsdialogOpprett, om AT har tidligere godkjent oppfolgingsdialog med virksomhet', () => {
-            komponent = mount(<OppfolgingsdialogerIngenplanAT
-                ledetekster={ledetekster}
+            komponent = mount(<OppfolgingsdialogerIngenplan
                 opprett={opprett}
                 visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
                 arbeidsgivere={[arbeidsgiver]}
-                oppfolgingsdialoger={[oppfolgingsdialogTidligere]}
+                oppfolgingsplaner={[oppfolgingsdialogTidligere]}
                 rootUrl=""
             />);
             komponent.find('button').simulate('click');

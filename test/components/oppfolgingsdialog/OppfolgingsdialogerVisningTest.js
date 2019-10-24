@@ -10,7 +10,7 @@ import {
 import OppfolgingsdialogerVisning, { OppfolgingsdialogNyKnapp } from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerVisning';
 import OppfolgingsplanFilm from '../../../js/components/oppfolgingsdialoger/OppfolgingsplanFilm';
 import OppfolgingsdialogerOpprett from '../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerOpprett';
-import OppfolgingsdialogerIngenplanAT from '../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerIngenplanAT';
+import OppfolgingsdialogerIngenplan from '../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerIngenplan';
 import {
     hentOppfolgingsdialogAktiv,
     hentOppfolgingsdialogTidligere,
@@ -79,8 +79,8 @@ describe('Oppfolgingsdialoger', () => {
     });
 
     describe('Uten Oppfolgingsdialog(er)', () => {
-        it('Skal vise OppfolgingsdialogerIngenplanAT', () => {
-            expect(komponent.find(OppfolgingsdialogerIngenplanAT)).to.have.length(1);
+        it('Skal vise OppfolgingsdialogerIngenplan', () => {
+            expect(komponent.find(OppfolgingsdialogerIngenplan)).to.have.length(1);
         });
 
         it('Skal ikke vise OppfolgingsdialogerTeasere dersom man ikke har oppfolgingsdialoger', () => {
@@ -89,7 +89,7 @@ describe('Oppfolgingsdialoger', () => {
     });
 
     describe('Uten Aktiv(e) Oppfolgingsdialog(er)', () => {
-        it('Skal vise OppfolgingsdialogerIngenplanAT, dersom det ikke er aktive oppfolgingsdialoger', () => {
+        it('Skal vise OppfolgingsdialogerIngenplan, dersom det ikke er aktive oppfolgingsdialoger', () => {
             komponent = shallow(<OppfolgingsdialogerVisning
                 oppfolgingsdialoger={[oppfolgingsdialogTidligere]}
                 kopierOppfolgingsdialog={kopierOppfolgingsdialog}
@@ -97,7 +97,7 @@ describe('Oppfolgingsdialoger', () => {
                 dinesykmeldinger={dinesykmeldinger}
                 naermesteLedere={naermesteLedere}
             />);
-            expect(komponent.find(OppfolgingsdialogerIngenplanAT)).to.have.length(1);
+            expect(komponent.find(OppfolgingsdialogerIngenplan)).to.have.length(1);
         });
     });
 

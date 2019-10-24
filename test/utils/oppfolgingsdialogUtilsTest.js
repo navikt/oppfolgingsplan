@@ -1,7 +1,7 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import {
-    erOppfolgingsdialogOpprettbarDirekte,
+    erOppfolgingsplanOpprettbarDirekte,
     finnNyesteTidligereOppfolgingsdialogMedVirksomhet,
     oppgaverOppfoelgingsdialoger,
 } from '../../js/utils/oppfolgingsdialogUtils';
@@ -155,7 +155,7 @@ describe('OppfolgingdialogUtils', () => {
         });
     });
 
-    describe('erOppfolgingsdialogOpprettbarDirekte', () => {
+    describe('erOppfolgingsplanOpprettbarDirekte', () => {
         let arbeidsgiver;
         let oppfolgingsdialogTidligere;
         let oppfolgingsdialogIkkeTidligere;
@@ -169,15 +169,15 @@ describe('OppfolgingdialogUtils', () => {
         });
 
         it('Skal returneren false, om det er flere enn 1 AG og det er tidligere godkjent plan', () => {
-            expect(erOppfolgingsdialogOpprettbarDirekte([arbeidsgiver, arbeidsgiver], [oppfolgingsdialogTidligere])).to.equal(false);
+            expect(erOppfolgingsplanOpprettbarDirekte([arbeidsgiver, arbeidsgiver], [oppfolgingsdialogTidligere])).to.equal(false);
         });
 
         it('Skal returneren false, om det kun er 1 AG og det er tidligere godkjent plan', () => {
-            expect(erOppfolgingsdialogOpprettbarDirekte([arbeidsgiver], [oppfolgingsdialogTidligere])).to.equal(false);
+            expect(erOppfolgingsplanOpprettbarDirekte([arbeidsgiver], [oppfolgingsdialogTidligere])).to.equal(false);
         });
 
         it('Skal returneren true, om det kun er 1 AG og det ikke er tidligere godkjent plan', () => {
-            expect(erOppfolgingsdialogOpprettbarDirekte([arbeidsgiver], [oppfolgingsdialogIkkeTidligere])).to.equal(true);
+            expect(erOppfolgingsplanOpprettbarDirekte([arbeidsgiver], [oppfolgingsdialogIkkeTidligere])).to.equal(true);
         });
     });
 

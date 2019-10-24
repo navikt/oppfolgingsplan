@@ -18,7 +18,7 @@ import { finnArbeidsgivereForGyldigeSykmeldinger } from '../../utils/sykmeldingU
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsplanFilm from './OppfolgingsplanFilm';
 import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
-import OppfolgingsdialogerIngenplanAT from './opprett/OppfolgingsdialogerIngenplanAT';
+import OppfolgingsdialogerIngenplan from './opprett/OppfolgingsdialogerIngenplan';
 
 export const OppfolgingsdialogNyKnapp = ({ visOppfolgingsdialogOpprett }) => {
     return (<div className="oppfolgingsdialogNyDialog">
@@ -72,13 +72,11 @@ class OppfolgingsdialogerVisning extends Component {
             }
             { (oppfolgingsdialoger.length === 0 || !aktivOppfolgingsdialoger.length > 0) &&
             <div className="blokk--l">
-                <OppfolgingsdialogerIngenplanAT
-                    ledetekster={ledetekster}
+                <OppfolgingsdialogerIngenplan
                     arbeidsgivere={arbeidsgivereForSykmeldinger}
-                    oppfolgingsdialoger={oppfolgingsdialoger}
+                    oppfolgingsplaner={oppfolgingsdialoger}
                     visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
                     opprett={opprettOppfolgingsdialog}
-                    rootUrl={getContextRoot()}
                 />
             </div>
             }
