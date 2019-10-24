@@ -13,7 +13,6 @@ import {
     OppfolgingsdialogInfoboks,
     dialogAvbruttOgNyOpprettet,
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
-    populerDialogFraState,
     erOppfolgingsdialogTidligere,
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
 } from 'oppfolgingsdialog-npm';
@@ -22,6 +21,7 @@ import history from '../history';
 import Side from './Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
+import { populerPlanFraState } from '../utils/stateUtils';
 import { getOppfolgingsdialog } from '../utils/oppfolgingsdialogUtils';
 import Oppfolgingsdialog from '../components/oppfolgingsdialoger/Oppfolgingsdialog';
 import { hentArbeidsforhold } from '../actions/oppfolgingsplan/arbeidsforhold_actions';
@@ -217,7 +217,7 @@ Container.propTypes = {
 export function mapStateToProps(state, ownProps) {
     const id = ownProps.params.oppfolgingsdialogId;
     let oppfolgingsdialog = getOppfolgingsdialog(state.oppfolgingsdialoger.data, id);
-    oppfolgingsdialog = oppfolgingsdialog && populerDialogFraState(oppfolgingsdialog, state);
+    oppfolgingsdialog = oppfolgingsdialog && populerPlanFraState(oppfolgingsdialog, state);
     const erOppfolgingsdialogTilgjengelig = oppfolgingsdialog
         && (erOppfolgingsdialogTidligere(oppfolgingsdialog)
         || erOppfolgingsdialogKnyttetTilGyldigSykmelding(oppfolgingsdialog, state.dineSykmeldinger.data));

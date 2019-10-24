@@ -7,11 +7,9 @@ import {
     hentToggles,
     togglesPt,
 } from 'digisyfo-npm';
-import {
-    OppfolgingsdialogInfoboks,
-    populerDialogFraState,
-} from 'oppfolgingsdialog-npm';
+import { OppfolgingsdialogInfoboks } from 'oppfolgingsdialog-npm';
 import * as oppfolgingsplanProptypes from '../propTypes/opproptypes';
+import { populerPlanFraState } from '../utils/stateUtils';
 import { kopierOppfolgingsdialog } from '../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
 import {
     hentOppfolgingsdialoger,
@@ -168,7 +166,7 @@ Container.propTypes = {
 export const mapStateToProps = (state) => {
     const oppfolgingsdialoger = state.oppfolgingsdialoger.data
         .map((oppfolgingsdialog) => {
-            return populerDialogFraState(oppfolgingsdialog, state);
+            return populerPlanFraState(oppfolgingsdialog, state);
         });
     return {
         henter: state.ledetekster.henter
