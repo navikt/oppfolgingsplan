@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Feilmelding from './Feilmelding';
-import { fieldPropTypes } from '../../proptypes/fieldproptypes';
+import { fieldPropTypes } from '../../propTypes/fieldproptypes';
 
 const Tekstomrade = (props) => {
     const { meta, className, input, id } = props;
