@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import {
     BRUKERTYPE,
-    LagreArbeidsoppgaveSkjema,
     ArbeidsoppgaverListe,
 } from 'oppfolgingsdialog-npm';
 import {
@@ -23,6 +22,7 @@ import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
 import ArbeidsoppgaverInfoboks from '../../../oppfolgingsdialoger/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
 import NotifikasjonBoksVurderingOppgave from './NotifikasjonBoksVurderingOppgave';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
+import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 
 export const RenderOpprettArbeidsoppgave = ({ ledetekster, sendLagreArbeidsoppgave, toggleArbeidsoppgaveSkjema, oppdateringFeilet, varselTekst }) => {
     return (<div>
@@ -188,7 +188,6 @@ class Arbeidsoppgaver extends Component {
                                     />
                                 </OppfolgingsplanInfoboks> :
                                 <LagreArbeidsoppgaveSkjema
-                                    ledetekster={ledetekster}
                                     varselTekst={this.state.varselTekst}
                                     oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
                                     sendLagre={this.sendLagreArbeidsoppgave}

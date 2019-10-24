@@ -1,13 +1,8 @@
-export const OPPRETT_SKJEMANAVN = 'OPPRETT_SKJEMANAVN';
-export const tekstfeltRegex = new RegExp('.*<[^ ][^>]+[^ ]>.*');
-
 export const KANGJENNOMFOERES = {
     KAN: 'KAN',
     KAN_IKKE: 'KAN_IKKE',
     TILRETTELEGGING: 'TILRETTELEGGING',
-    IKKE_VURDERT: 'IKKE_VURDERT',
 };
-
 export const TILRETTELEGGING = {
     PAA_ANNET_STED: 'PAA_ANNET_STED',
     MED_MER_TID: 'MED_MER_TID',

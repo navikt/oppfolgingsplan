@@ -4,10 +4,7 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { setLedetekster } from 'digisyfo-npm';
-import {
-    LagreArbeidsoppgaveSkjema,
-    ArbeidsoppgaverListe,
-} from 'oppfolgingsdialog-npm';
+import { ArbeidsoppgaverListe } from 'oppfolgingsdialog-npm';
 import ledetekster from '../../mock/mockLedetekster';
 import Arbeidsoppgaver, {
     RenderOpprettArbeidsoppgave,
@@ -17,6 +14,7 @@ import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanI
 import ArbeidsoppgaverInfoboks from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
 import NotifikasjonBoksVurderingOppgave from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/NotifikasjonBoksVurderingOppgave';
 import LeggTilElementKnapper from '../../../js/components/oppfolgingsdialoger/utfylling/LeggTilElementKnapper';
+import LagreArbeidsoppgaveSkjema from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
