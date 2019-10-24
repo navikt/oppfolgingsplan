@@ -13,9 +13,6 @@ import {
     OppfolgingsdialogInfoboks,
     dialogAvbruttOgNyOpprettet,
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
-    henterEllerHarHentetTilgang,
-    henterEllerHarHentetOppfolgingsdialoger,
-    oppfolgingsdialogHarBlittAvbrutt,
     populerDialogFraState,
     erOppfolgingsdialogTidligere,
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
@@ -59,7 +56,10 @@ import { settAktivtSteg } from '../actions/oppfolgingsplan/toggle_actions';
 import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import { hentDineSykmeldinger } from '../actions/dineSykmeldinger_actions';
 import {
+    henterEllerHarHentetOppfolgingsplaner,
+    henterEllerHarHentetTilgang,
     henterEllerHarHentetToggles,
+    oppfolgingsplanHarBlittAvbrutt,
 } from '../utils/reducerUtils';
 import {
     brodsmule as brodsmulePt,
@@ -76,7 +76,7 @@ export class Container extends Component {
         if (!henterEllerHarHentetTilgang(tilgang)) {
             this.props.sjekkTilgang();
         }
-        if (!henterEllerHarHentetOppfolgingsdialoger(oppfolgingsdialogerReducer)) {
+        if (!henterEllerHarHentetOppfolgingsplaner(oppfolgingsdialogerReducer)) {
             this.props.hentOppfolgingsdialoger();
         }
         this.props.hentDineSykmeldinger();
@@ -84,7 +84,7 @@ export class Container extends Component {
 
     componentWillReceiveProps(nextProps) {
         const { oppfolgingsdialogerReducer, avbrytdialogReducer, dialogAvbruttOgNyOpprettetConnected } = this.props;
-        if (oppfolgingsdialogHarBlittAvbrutt(avbrytdialogReducer, nextProps.avbrytdialogReducer)) {
+        if (oppfolgingsplanHarBlittAvbrutt(avbrytdialogReducer, nextProps.avbrytdialogReducer)) {
             this.props.hentOppfolgingsdialoger();
         }
         if (avbrytdialogReducer.sendt && oppfolgingsdialogerReducer.henter && nextProps.oppfolgingsdialogerReducer.hentet) {

@@ -9,9 +9,6 @@ import {
 } from 'digisyfo-npm';
 import {
     OppfolgingsdialogInfoboks,
-    henterEllerHarHentetTilgang,
-    henterEllerHarHentetOppfolgingsdialoger,
-    oppfolgingsdialogHarBlittOpprettet,
     populerDialogFraState,
 } from 'oppfolgingsdialog-npm';
 import * as oppfolgingsplanProptypes from '../propTypes/opproptypes';
@@ -38,8 +35,11 @@ import {
 } from '../propTypes';
 import {
     henterEllerHarHentetLedere,
+    henterEllerHarHentetOppfolgingsplaner,
+    henterEllerHarHentetTilgang,
     henterEllerHarHentetToggles,
     lederHarBlittAvkreftet,
+    oppfolgingsplanHarBlittOpprettet,
 } from '../utils/reducerUtils';
 import { hentDineSykmeldinger } from '../actions/dineSykmeldinger_actions';
 import { avkreftLeder, hentLedere } from '../actions/ledere_actions';
@@ -60,7 +60,7 @@ export class Container extends Component {
         if (!henterEllerHarHentetLedere(naermesteLedere)) {
             this.props.hentLedere();
         }
-        if (!henterEllerHarHentetOppfolgingsdialoger(oppfolgingsdialogerReducer)) {
+        if (!henterEllerHarHentetOppfolgingsplaner(oppfolgingsdialogerReducer)) {
             this.props.hentOppfolgingsdialoger();
         }
         if (!henterEllerHarHentetToggles(toggles)) {
@@ -82,7 +82,7 @@ export class Container extends Component {
             this.props.hentLedere();
             this.props.hentOppfolgingsdialoger();
         }
-        if (oppfolgingsdialogHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
+        if (oppfolgingsplanHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
             this.props.hentOppfolgingsdialoger();
         }
         if (kopierDialogReducer.sender && nextProps.kopierDialogReducer.sendt) {
