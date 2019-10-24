@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getLedetekst } from 'digisyfo-npm';
 import { Field, reduxForm } from 'redux-form';
-import { tekstfeltRegex } from '../../../../konstanter';
+import { tekstfeltRegex } from '../../../konstanter';
 import InfoVarsel from './InfoVarsel';
-import Checkbox from '../../../skjema/Checkbox';
-import Tekstfelt from '../../../skjema/Tekstfelt';
-import Tekstomraade from '../../../skjema/TekstOmrade';
-import Radioknapper from '../../../skjema/Radioknapper';
+import Checkbox from '../../skjema/Checkbox';
+import Tekstfelt from '../../skjema/TekstFelt';
+import Tekstomraade from '../../skjema/TekstOmrade';
+import Radioknapper from '../../skjema/Radioknapper';
 import {
     KANGJENNOMFOERES,
     TILRETTELEGGING,
@@ -15,7 +15,7 @@ import {
 import {
     arbeidsoppgaverReducerPt,
     arbeidsoppgavePt,
-} from '../../../../propTypes/opproptypes';
+} from '../../../propTypes/opproptypes';
 import ArbeidsoppgaveKnapper from './ArbeidsoppgaveKnapper';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 

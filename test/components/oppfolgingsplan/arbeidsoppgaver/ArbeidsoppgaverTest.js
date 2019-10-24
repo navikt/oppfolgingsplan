@@ -5,16 +5,16 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { setLedetekster } from 'digisyfo-npm';
 import { ArbeidsoppgaverListe } from 'oppfolgingsdialog-npm';
-import ledetekster from '../../mock/mockLedetekster';
+import ledetekster from '../../../mock/mockLedetekster';
 import Arbeidsoppgaver, {
     RenderOpprettArbeidsoppgave,
-} from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
-import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
-import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
-import ArbeidsoppgaverInfoboks from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
-import NotifikasjonBoksVurderingOppgave from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/NotifikasjonBoksVurderingOppgave';
-import LeggTilElementKnapper from '../../../js/components/oppfolgingsdialoger/utfylling/LeggTilElementKnapper';
-import LagreArbeidsoppgaveSkjema from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
+} from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
+import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialoger';
+import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
+import ArbeidsoppgaverInfoboks from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
+import NotifikasjonBoksVurderingOppgave from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/NotifikasjonBoksVurderingOppgave';
+import LeggTilElementKnapper from '../../../../js/components/oppfolgingsplan/LeggTilElementKnapper';
+import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

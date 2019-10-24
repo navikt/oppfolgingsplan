@@ -6,9 +6,9 @@ import sinon from 'sinon';
 import {
     ReleasetPlan,
 } from 'oppfolgingsdialog-npm';
-import ReleasetPlanAT from '../../../js/components/oppfolgingsdialoger/releasetplan/ReleasetPlanAT';
-import ArbeidsgiverHarTvangsgodkjent from '../../../js/components/oppfolgingsdialoger/releasetplan/ArbeidsgiverHarTvangsgodkjent';
-import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
+import ReleasetPlanAT from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ReleasetPlanAT';
+import ArbeidsgiverHarTvangsgodkjent from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ArbeidsgiverHarTvangsgodkjent';
+import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialoger';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

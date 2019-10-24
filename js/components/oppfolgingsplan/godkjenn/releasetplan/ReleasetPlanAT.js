@@ -5,13 +5,13 @@ import {
     BRUKERTYPE,
     ReleasetPlan,
 } from 'oppfolgingsdialog-npm';
-import getContextRoot from '../../../utils/getContextRoot';
+import getContextRoot from '../../../../utils/getContextRoot';
 import {
     delMedFastlegePt,
     delmednavPt,
     dokumentReducerPt,
     oppfolgingsplanPt,
-} from '../../../propTypes/opproptypes';
+} from '../../../../propTypes/opproptypes';
 import ArbeidsgiverHarTvangsgodkjent from './ArbeidsgiverHarTvangsgodkjent';
 
 const foersteInnloggingSidenGodkjenning = (oppfolgingsdialog) => {

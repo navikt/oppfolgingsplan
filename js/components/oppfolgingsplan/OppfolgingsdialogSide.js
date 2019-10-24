@@ -15,57 +15,57 @@ import {
     erOppfolgingsdialogTidligere,
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
 } from 'oppfolgingsdialog-npm';
-import getContextRoot from '../utils/getContextRoot';
-import history from '../history';
-import Side from './Side';
-import AppSpinner from '../components/AppSpinner';
-import Feilmelding from '../components/Feilmelding';
-import { populerPlanFraState } from '../utils/stateUtils';
-import { getOppfolgingsdialog } from '../utils/oppfolgingsdialogUtils';
-import Oppfolgingsdialog from '../components/oppfolgingsdialoger/Oppfolgingsdialog';
-import { hentArbeidsforhold } from '../actions/oppfolgingsplan/arbeidsforhold_actions';
+import getContextRoot from '../../utils/getContextRoot';
+import history from '../../history';
+import Side from '../../sider/Side';
+import AppSpinner from '../AppSpinner';
+import Feilmelding from '../Feilmelding';
+import { populerPlanFraState } from '../../utils/stateUtils';
+import { getOppfolgingsdialog } from '../../utils/oppfolgingsdialogUtils';
+import Oppfolgingsdialog from './Oppfolgingsdialog';
+import { hentArbeidsforhold } from '../../actions/oppfolgingsplan/arbeidsforhold_actions';
 import {
     lagreArbeidsoppgave,
     slettArbeidsoppgave,
-} from '../actions/oppfolgingsplan/arbeidsoppgave_actions';
-import { avbrytDialog } from '../actions/oppfolgingsplan/avbrytdialog_actions';
-import { delMedFastlege } from '../actions/oppfolgingsplan/delMedFastlege_actions';
-import { delMedNav as delMedNavFunc } from '../actions/oppfolgingsplan/delmednav_actions';
-import { hentPdfurler } from '../actions/oppfolgingsplan/dokument_actions';
-import { forespoerRevidering } from '../actions/oppfolgingsplan/forespoerRevidering_actions';
-import { hentForrigeNaermesteLeder } from '../actions/oppfolgingsplan/forrigeNaermesteLeder_actions';
-import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
+} from '../../actions/oppfolgingsplan/arbeidsoppgave_actions';
+import { avbrytDialog } from '../../actions/oppfolgingsplan/avbrytdialog_actions';
+import { delMedFastlege } from '../../actions/oppfolgingsplan/delMedFastlege_actions';
+import { delMedNav as delMedNavFunc } from '../../actions/oppfolgingsplan/delmednav_actions';
+import { hentPdfurler } from '../../actions/oppfolgingsplan/dokument_actions';
+import { forespoerRevidering } from '../../actions/oppfolgingsplan/forespoerRevidering_actions';
+import { hentForrigeNaermesteLeder } from '../../actions/oppfolgingsplan/forrigeNaermesteLeder_actions';
+import { hentKontaktinfo } from '../../actions/oppfolgingsplan/kontaktinfo_actions';
 import {
     lagreKommentar,
     slettKommentar,
-} from '../actions/oppfolgingsplan/kommentar_actions';
+} from '../../actions/oppfolgingsplan/kommentar_actions';
 import {
     avvisDialog,
     godkjennDialog,
     hentOppfolgingsdialoger,
-} from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
-import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
-import { nullstillGodkjenning } from '../actions/oppfolgingsplan/nullstillGodkjenning_actions';
-import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
-import { giSamtykke } from '../actions/oppfolgingsplan/samtykke_actions';
-import { settDialog } from '../actions/oppfolgingsplan/sett_actions';
-import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
-import { lagreTiltak, slettTiltak } from '../actions/oppfolgingsplan/tiltak_actions';
-import { settAktivtSteg } from '../actions/oppfolgingsplan/toggle_actions';
-import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
-import { hentDineSykmeldinger } from '../actions/dineSykmeldinger_actions';
+} from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import { hentNaermesteLeder } from '../../actions/oppfolgingsplan/naermesteLeder_actions';
+import { nullstillGodkjenning } from '../../actions/oppfolgingsplan/nullstillGodkjenning_actions';
+import { hentPerson } from '../../actions/oppfolgingsplan/person_actions';
+import { giSamtykke } from '../../actions/oppfolgingsplan/samtykke_actions';
+import { settDialog } from '../../actions/oppfolgingsplan/sett_actions';
+import { sjekkTilgang } from '../../actions/oppfolgingsplan/sjekkTilgang_actions';
+import { lagreTiltak, slettTiltak } from '../../actions/oppfolgingsplan/tiltak_actions';
+import { settAktivtSteg } from '../../actions/oppfolgingsplan/toggle_actions';
+import { hentVirksomhet } from '../../actions/oppfolgingsplan/virksomhet_actions';
+import { hentDineSykmeldinger } from '../../actions/dineSykmeldinger_actions';
 import {
     henterEllerHarHentetOppfolgingsplaner,
     henterEllerHarHentetTilgang,
     henterEllerHarHentetToggles,
     oppfolgingsplanHarBlittAvbrutt,
-} from '../utils/reducerUtils';
+} from '../../utils/reducerUtils';
 import {
     brodsmule as brodsmulePt,
     dinesykmeldingerReducerPt,
-} from '../propTypes';
-import * as oppfolgingsplanProptypes from '../propTypes/opproptypes';
-import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
+} from '../../propTypes';
+import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
+import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 
 export class Container extends Component {
     componentWillMount() {

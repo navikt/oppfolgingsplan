@@ -27,10 +27,10 @@ import {
     utenSamtykke,
 } from '../../utils/oppfolgingsdialogUtils';
 import getContextRoot from '../../utils/getContextRoot';
-import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
-import ReleasetPlanAT from './releasetplan/ReleasetPlanAT';
-import IngenlederInfoboks from './IngenlederInfoboks';
-import Tiltak from './utfylling/Tiltak';
+import Arbeidsoppgaver from './arbeidsoppgaver/Arbeidsoppgaver';
+import ReleasetPlanAT from './godkjenn/releasetplan/ReleasetPlanAT';
+import IngenlederInfoboks from '../oppfolgingsdialoger/IngenlederInfoboks';
+import Tiltak from './tiltak/Tiltak';
 
 
 const skalViseSamtykke = (oppfolgingsdialog) => {

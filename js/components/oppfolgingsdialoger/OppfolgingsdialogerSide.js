@@ -7,29 +7,29 @@ import {
     hentToggles,
     togglesPt,
 } from 'digisyfo-npm';
-import * as oppfolgingsplanProptypes from '../propTypes/opproptypes';
-import { populerPlanFraState } from '../utils/stateUtils';
-import { kopierOppfolgingsdialog } from '../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
+import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
+import { populerPlanFraState } from '../../utils/stateUtils';
+import { kopierOppfolgingsdialog } from '../../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
 import {
     hentOppfolgingsdialoger,
     opprettOppfolgingsdialog,
-} from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
-import { hentForrigeNaermesteLeder } from '../actions/oppfolgingsplan/forrigeNaermesteLeder_actions';
-import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
-import { bekreftNyNaermesteLeder } from '../actions/oppfolgingsplan/nyNaermesteleder_actions';
-import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
-import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
-import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
-import getContextRoot from '../utils/getContextRoot';
-import Side from './Side';
-import Feilmelding from '../components/Feilmelding';
-import AppSpinner from '../components/AppSpinner';
-import history from '../history';
+} from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import { hentForrigeNaermesteLeder } from '../../actions/oppfolgingsplan/forrigeNaermesteLeder_actions';
+import { hentNaermesteLeder } from '../../actions/oppfolgingsplan/naermesteLeder_actions';
+import { bekreftNyNaermesteLeder } from '../../actions/oppfolgingsplan/nyNaermesteleder_actions';
+import { hentPerson } from '../../actions/oppfolgingsplan/person_actions';
+import { sjekkTilgang } from '../../actions/oppfolgingsplan/sjekkTilgang_actions';
+import { hentVirksomhet } from '../../actions/oppfolgingsplan/virksomhet_actions';
+import getContextRoot from '../../utils/getContextRoot';
+import Side from '../../sider/Side';
+import Feilmelding from '../Feilmelding';
+import AppSpinner from '../AppSpinner';
+import history from '../../history';
 import {
     brodsmule as brodsmulePt,
     dinesykmeldingerReducerPt,
     ledereReducerPt,
-} from '../propTypes';
+} from '../../propTypes';
 import {
     henterEllerHarHentetLedere,
     henterEllerHarHentetOppfolgingsplaner,
@@ -37,11 +37,11 @@ import {
     henterEllerHarHentetToggles,
     lederHarBlittAvkreftet,
     oppfolgingsplanHarBlittOpprettet,
-} from '../utils/reducerUtils';
-import { hentDineSykmeldinger } from '../actions/dineSykmeldinger_actions';
-import { avkreftLeder, hentLedere } from '../actions/ledere_actions';
-import Oppfolgingsdialoger from '../components/oppfolgingsdialoger/Oppfolgingsdialoger';
-import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
+} from '../../utils/reducerUtils';
+import { hentDineSykmeldinger } from '../../actions/dineSykmeldinger_actions';
+import { avkreftLeder, hentLedere } from '../../actions/ledere_actions';
+import Oppfolgingsdialoger from './Oppfolgingsdialoger';
+import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 
 export class Container extends Component {
     componentWillMount() {

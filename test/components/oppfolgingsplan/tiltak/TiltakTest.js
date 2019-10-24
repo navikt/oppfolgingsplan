@@ -9,10 +9,10 @@ import {
     TiltakTabell,
 } from 'oppfolgingsdialog-npm';
 import { setLedetekster } from 'digisyfo-npm';
-import ledetekster from '../../mock/mockLedetekster';
-import Tiltak from '../../../js/components/oppfolgingsdialoger/utfylling/Tiltak';
-import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
-import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
+import ledetekster from '../../../mock/mockLedetekster';
+import Tiltak from '../../../../js/components/oppfolgingsplan/tiltak/Tiltak';
+import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialoger';
+import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { erHerokuApp } from '../../../../utils/urlUtils';
+import { erHerokuApp } from '../../../utils/urlUtils';
 
 const ArbeidsoppgaveVarselFeil = ({ tekst }) => {
     return (<div className="arbeidsoppgave__opprettet--feilmelding">

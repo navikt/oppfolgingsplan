@@ -10,10 +10,10 @@ import {
 import {
     mapStateToProps,
     Container,
-} from '../../js/sider/OppfolgingsdialogSide';
+} from '../../js/components/oppfolgingsplan/OppfolgingsdialogSide';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
-import Oppfolgingsdialog from '../../js/components/oppfolgingsdialoger/Oppfolgingsdialog';
+import Oppfolgingsdialog from '../../js/components/oppfolgingsplan/Oppfolgingsdialog';
 import OppfolgingsplanInfoboks from '../../js/components/app/OppfolgingsplanInfoboks';
 
 chai.use(chaiEnzyme());

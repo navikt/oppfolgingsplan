@@ -13,13 +13,13 @@ import {
 import {
     arbeidsoppgaverReducerPt,
     oppfolgingsplanPt,
-} from '../../../../propTypes/opproptypes';
-import getContextRoot from '../../../../utils/getContextRoot';
-import { capitalizeFirstLetter } from '../../../../utils/textUtils';
-import { isEmpty } from '../../../../utils/oppfolgingsdialogUtils';
-import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
-import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
-import ArbeidsoppgaverInfoboks from '../../../oppfolgingsdialoger/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
+} from '../../../propTypes/opproptypes';
+import getContextRoot from '../../../utils/getContextRoot';
+import { capitalizeFirstLetter } from '../../../utils/textUtils';
+import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
+import { sorterArbeidsoppgaverEtterOpprettet } from '../../../utils/arbeidsoppgaveUtils';
+import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
+import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import NotifikasjonBoksVurderingOppgave from './NotifikasjonBoksVurderingOppgave';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';

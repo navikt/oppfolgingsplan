@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { getLedetekst } from 'digisyfo-npm';
-import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../../propTypes/opproptypes';
+import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
 
 const handleKeyPress = (avbryt, e) => {
     e.preventDefault();

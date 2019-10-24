@@ -8,10 +8,10 @@ import {
     ArbeidsoppgaveGjennomfoeringSvar,
     ArbeidsoppgaveTilrettelegging,
     ArbeidsoppgaveBeskrivelse,
-} from '../../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
-import ArbeidsoppgaveKnapper from '../../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/ArbeidsoppgaveKnapper';
-import { KANGJENNOMFOERES } from '../../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/arbeidsoppgavesvar';
-import InfoVarsel from '../../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/InfoVarsel';
+} from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
+import ArbeidsoppgaveKnapper from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/ArbeidsoppgaveKnapper';
+import { KANGJENNOMFOERES } from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/arbeidsoppgavesvar';
+import InfoVarsel from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/InfoVarsel';
 import getArbeidsoppgave from '../../../mock/mockArbeidsoppgave';
 
 chai.use(chaiEnzyme());

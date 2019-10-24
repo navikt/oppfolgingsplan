@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { getLedetekst, Utvidbar, keyValue } from 'digisyfo-npm';
 import { OppfolgingsdialogInnholdboks } from 'oppfolgingsdialog-npm';
-import getContextRoot from '../../../utils/getContextRoot';
+import getContextRoot from '../../../../utils/getContextRoot';
 import {
     dokumentReducerPt,
     oppfolgingsplanPt,
-} from '../../../propTypes/opproptypes';
+} from '../../../../propTypes/opproptypes';
 
 class ArbeidsgiverHarTvangsgodkjent extends Component {
     componentWillMount() {

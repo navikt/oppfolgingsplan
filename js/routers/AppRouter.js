@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Router } from 'react-router';
-import OppfolgingsdialogerSide from '../sider/OppfolgingsdialogerSide';
-import OppfolgingsdialogSide from '../sider/OppfolgingsdialogSide';
+import OppfolgingsdialogerSide from '../components/oppfolgingsdialoger/OppfolgingsdialogerSide';
+import OppfolgingsdialogSide from '../components/oppfolgingsplan/OppfolgingsdialogSide';
 
 const AppRouter = ({ history }) => {
     return (<Router history={history}>

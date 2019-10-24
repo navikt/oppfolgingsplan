@@ -6,7 +6,7 @@ import sinon from 'sinon';
 import {
     OppfolgingsdialogInnholdboks,
 } from 'oppfolgingsdialog-npm';
-import ArbeidsgiverHarTvangsgodkjent from '../../../js/components/oppfolgingsdialoger/releasetplan/ArbeidsgiverHarTvangsgodkjent';
+import ArbeidsgiverHarTvangsgodkjent from '../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ArbeidsgiverHarTvangsgodkjent';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
 
 chai.use(chaiEnzyme());
