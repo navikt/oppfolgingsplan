@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import {
-    BRUKERTYPE,
-    ArbeidsoppgaverListe,
-} from 'oppfolgingsdialog-npm';
-import {
     getLedetekst,
-    keyValue,
     scrollTo,
 } from 'digisyfo-npm';
 import {
@@ -23,27 +18,7 @@ import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import NotifikasjonBoksVurderingOppgave from './NotifikasjonBoksVurderingOppgave';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
-
-export const RenderOpprettArbeidsoppgave = ({ ledetekster, sendLagreArbeidsoppgave, toggleArbeidsoppgaveSkjema, oppdateringFeilet, varselTekst }) => {
-    return (<div>
-        <LagreArbeidsoppgaveSkjema
-            ledetekster={ledetekster}
-            sendLagre={sendLagreArbeidsoppgave}
-            avbryt={toggleArbeidsoppgaveSkjema}
-            oppdateringFeilet={oppdateringFeilet}
-            varselTekst={varselTekst}
-            rootUrlImg={getContextRoot()}
-        />
-    </div>);
-};
-
-RenderOpprettArbeidsoppgave.propTypes = {
-    ledetekster: keyValue,
-    sendLagreArbeidsoppgave: PropTypes.func,
-    toggleArbeidsoppgaveSkjema: PropTypes.func,
-    oppdateringFeilet: PropTypes.bool,
-    varselTekst: PropTypes.string,
-};
+import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
 
 class Arbeidsoppgaver extends Component {
     constructor(props) {
@@ -81,7 +56,7 @@ class Arbeidsoppgaver extends Component {
             this.setState({
                 lagreNyOppgaveFeilet: true,
                 visArbeidsoppgaveSkjema: true,
-                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding', this.props.ledetekster),
+                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'),
             });
         }
     }
@@ -141,7 +116,6 @@ class Arbeidsoppgaver extends Component {
 
     render() {
         const {
-            ledetekster,
             oppfolgingsdialog,
             arbeidsoppgaver,
         } = this.props;
@@ -182,7 +156,6 @@ class Arbeidsoppgaver extends Component {
                                     tekst={getLedetekst('oppfolgingsdialog.arbeidstaker.onboarding.arbeidsoppgave.tekst')}
                                 >
                                     <LeggTilElementKnapper
-                                        ledetekster={ledetekster}
                                         visSkjema={this.state.visArbeidsoppgaveSkjema}
                                         toggleSkjema={this.toggleArbeidsoppgaveSkjema}
                                     />
@@ -201,7 +174,6 @@ class Arbeidsoppgaver extends Component {
                     <div>
                         {
                             antallIkkeVurdererteArbOppgaver > 0 && <NotifikasjonBoksVurderingOppgave
-                                ledetekster={ledetekster}
                                 antallIkkeVurderte={antallIkkeVurdererteArbOppgaver}
                                 rootUrl={getContextRoot()}
                                 tekst="oppfolgingsdialog.notifikasjonBoksVurderingOppgave.arbeidstaker.tekst"
@@ -228,7 +200,6 @@ class Arbeidsoppgaver extends Component {
                         </ArbeidsoppgaverInfoboks>
                         {
                             this.state.visArbeidsoppgaveSkjema && <LagreArbeidsoppgaveSkjema
-                                ledetekster={ledetekster}
                                 sendLagre={this.sendLagreArbeidsoppgave}
                                 avbryt={this.skjulSkjema}
                                 ref={(lagreSkjema) => {
@@ -241,12 +212,10 @@ class Arbeidsoppgaver extends Component {
                             />
                         }
                         <ArbeidsoppgaverListe
-                            ledetekster={ledetekster}
                             liste={sorterArbeidsoppgaverEtterOpprettet(oppfolgingsdialog.arbeidsoppgaveListe)}
                             sendLagre={this.sendLagreArbeidsoppgave}
                             sendSlett={this.sendSlettArbeidsoppgave}
                             fnr={oppfolgingsdialog.arbeidstaker.fnr}
-                            brukerType={BRUKERTYPE.ARBEIDSTAKER}
                             rootUrlImg={getContextRoot()}
                             visFeilMelding={this.visFeilMelding}
                             feilMelding={this.state.oppdaterOppgaveFeilet}
@@ -258,7 +227,6 @@ class Arbeidsoppgaver extends Component {
 }
 
 Arbeidsoppgaver.propTypes = {
-    ledetekster: keyValue,
     arbeidsoppgaver: arbeidsoppgaverReducerPt,
     oppfolgingsdialog: oppfolgingsplanPt,
     lagreArbeidsoppgave: PropTypes.func,

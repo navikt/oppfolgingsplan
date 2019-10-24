@@ -4,17 +4,15 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { setLedetekster } from 'digisyfo-npm';
-import { ArbeidsoppgaverListe } from 'oppfolgingsdialog-npm';
 import ledetekster from '../../../mock/mockLedetekster';
-import Arbeidsoppgaver, {
-    RenderOpprettArbeidsoppgave,
-} from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
+import Arbeidsoppgaver from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
 import ArbeidsoppgaverInfoboks from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
 import NotifikasjonBoksVurderingOppgave from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/NotifikasjonBoksVurderingOppgave';
 import LeggTilElementKnapper from '../../../../js/components/oppfolgingsplan/LeggTilElementKnapper';
 import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
+import ArbeidsoppgaverListe from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/ArbeidsoppgaverListe';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -198,13 +196,6 @@ describe('Arbeidsoppgaver', () => {
                 visArbeidsoppgaveSkjema: true,
             });
             expect(componentMedArbeidsoppgaver.find(LagreArbeidsoppgaveSkjema)).to.have.length(1);
-        });
-    });
-
-    describe('RenderOpprettArbeidsoppgave', () => {
-        it('Skal vise et LagreArbeidsoppgaveSkjema', () => {
-            component = shallow(<RenderOpprettArbeidsoppgave />);
-            expect(component.find(LagreArbeidsoppgaveSkjema)).to.have.length(1);
         });
     });
 });

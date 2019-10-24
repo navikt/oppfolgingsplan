@@ -135,7 +135,6 @@ class Oppfolgingsdialog extends Component {
                 if (navigasjontoggles.steg === 1) {
                     panel = (<Arbeidsoppgaver
                         arbeidsoppgaver={arbeidsoppgaver}
-                        ledetekster={ledetekster}
                         oppfolgingsdialog={oppfolgingsdialog}
                         lagreArbeidsoppgave={lagreArbeidsoppgave}
                         slettArbeidsoppgave={slettArbeidsoppgave}
