@@ -13,7 +13,6 @@ import {
     AvbruttPlanNotifikasjonBoksAdvarsel,
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
     finnBrukersSisteInnlogging,
-    proptypes as oppfolgingProptypes,
     NyNaermestelederInfoboks,
     finnOgHentVirksomheterSomMangler,
     finnOgHentPersonerSomMangler,
@@ -38,6 +37,7 @@ import IngenledereInfoboks from './IngenledereInfoboks';
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
+import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
     const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger, BRUKERTYPE.ARBEIDSTAKER);
@@ -157,12 +157,12 @@ class Oppfolgingsdialoger extends Component {
 }
 Oppfolgingsdialoger.propTypes = {
     dinesykmeldinger: dinesykmeldingerReducerPt,
-    naermesteleder: oppfolgingProptypes.naermestelederReducerPt,
-    forrigenaermesteleder: oppfolgingProptypes.forrigenaermestelederReducerPt,
+    naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
+    forrigenaermesteleder: oppfolgingsplanProptypes.forrigenaermestelederReducerPt,
     naermesteLedere: ledereReducerPt,
-    person: oppfolgingProptypes.personReducerPt,
-    virksomhet: oppfolgingProptypes.virksomhetReducerPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    person: oppfolgingsplanProptypes.personReducerPt,
+    virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
     ledetekster: keyValue,
     toggles: togglesPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,

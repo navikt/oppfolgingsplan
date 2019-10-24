@@ -184,25 +184,6 @@ export const oppfolgingsplanPt = PropTypes.shape({
     arbeidstaker: personPt,
 });
 
-export const alleOppfolgingsplanerAgPt = PropTypes.shape({
-    henter: PropTypes.bool,
-    hentet: PropTypes.bool,
-    hentingFeilet: PropTypes.bool,
-});
-
-export const oppfolgingsplanerAgPt = PropTypes.shape({
-    oppretter: PropTypes.bool,
-    opprettet: PropTypes.bool,
-    opprettingFeilet: PropTypes.bool,
-    godkjenner: PropTypes.bool,
-    godkjent: PropTypes.bool,
-    godkjenningFeilet: PropTypes.bool,
-    avviser: PropTypes.bool,
-    avvist: PropTypes.bool,
-    avvisFeilet: PropTypes.bool,
-    data: PropTypes.arrayOf(oppfolgingsplanPt),
-});
-
 export const personReducerPt = PropTypes.shape({
     henter: PropTypes.arrayOf(PropTypes.string),
     hentet: PropTypes.arrayOf(PropTypes.string),

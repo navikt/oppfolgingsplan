@@ -7,14 +7,21 @@ import {
     TiltakTabell,
     BRUKERTYPE,
     captitalizeFirstLetter,
-    proptypes as oppfolgingProptypes,
     TiltakSkjema,
     TiltakInfoboks,
     sorterTiltakEtterNyeste,
     STATUS_TILTAK,
 } from 'oppfolgingsdialog-npm';
-import { getLedetekst, keyValue, scrollTo } from 'digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+    scrollTo,
+} from 'digisyfo-npm';
 import getContextRoot from '../../../utils/getContextRoot';
+import {
+    oppfolgingsplanPt,
+    tiltakReducerPt,
+} from '../../../propTypes/opproptypes';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
 
 class Tiltak extends Component {
@@ -212,8 +219,8 @@ class Tiltak extends Component {
 
 Tiltak.propTypes = {
     ledetekster: keyValue,
-    tiltak: oppfolgingProptypes.tiltakReducerPt,
-    oppfolgingsdialog: oppfolgingProptypes.oppfolgingsdialogPt,
+    tiltak: tiltakReducerPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     lagreTiltak: PropTypes.func,
     slettTiltak: PropTypes.func,
     lagreKommentar: PropTypes.func,

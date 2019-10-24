@@ -4,9 +4,7 @@ import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { getLedetekst } from 'digisyfo-npm';
-import {
-    proptypes as oppfolgingProptypes,
-} from 'oppfolgingsdialog-npm';
+import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import getContextRoot from '../../../utils/getContextRoot';
 import {
     erAktivOppfolgingsdialogOpprettetMedArbeidsgiver,
@@ -53,7 +51,7 @@ export const VelgArbeidsgiverUndertekst = ({ oppfolgingsdialoger, arbeidsgiver }
     return (null);
 };
 VelgArbeidsgiverUndertekst.propTypes = {
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     arbeidsgiver: opprettOppfolgingArbeidsgiverPt,
 };
 export const VelgArbeidsgiverRadioKnapper = ({ input, meta, oppfolgingsdialoger, arbeidsgivere }) => {
@@ -85,7 +83,7 @@ export const VelgArbeidsgiverRadioKnapper = ({ input, meta, oppfolgingsdialoger,
 VelgArbeidsgiverRadioKnapper.propTypes = {
     input: fieldPropTypes.input,
     meta: fieldPropTypes.meta,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     arbeidsgivere: PropTypes.arrayOf(opprettOppfolgingArbeidsgiverPt),
 };
 
@@ -122,7 +120,7 @@ export const ArbeidsgiverSkjema = (
 
 ArbeidsgiverSkjema.propTypes = {
     arbeidsgivere: dinesykmeldingerReducerPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     handleSubmit: PropTypes.func,
 };
 

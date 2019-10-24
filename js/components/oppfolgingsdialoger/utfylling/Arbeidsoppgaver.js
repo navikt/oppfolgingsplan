@@ -9,11 +9,18 @@ import {
     OppfolgingsdialogInfoboks,
     ArbeidsoppgaverListe,
     sorterArbeidsoppgaverEtterOpprettet,
-    proptypes as oppfolgingProptypes,
     NotifikasjonBoksVurderingOppgave,
     ArbeidsoppgaverInfoboks,
 } from 'oppfolgingsdialog-npm';
-import { getLedetekst, keyValue, scrollTo } from 'digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+    scrollTo,
+} from 'digisyfo-npm';
+import {
+    arbeidsoppgaverReducerPt,
+    oppfolgingsplanPt,
+} from '../../../propTypes/opproptypes';
 import getContextRoot from '../../../utils/getContextRoot';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
 
@@ -255,8 +262,8 @@ class Arbeidsoppgaver extends Component {
 
 Arbeidsoppgaver.propTypes = {
     ledetekster: keyValue,
-    arbeidsoppgaver: oppfolgingProptypes.arbeidsoppgaverReducerPt,
-    oppfolgingsdialog: oppfolgingProptypes.oppfolgingsdialogPt,
+    arbeidsoppgaver: arbeidsoppgaverReducerPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     lagreArbeidsoppgave: PropTypes.func,
     slettArbeidsoppgave: PropTypes.func,
 };

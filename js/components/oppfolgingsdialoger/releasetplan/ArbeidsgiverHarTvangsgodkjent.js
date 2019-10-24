@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { getLedetekst, Utvidbar, keyValue } from 'digisyfo-npm';
-import {
-    OppfolgingsdialogInnholdboks,
-    proptypes as oppfolgingProptypes,
-} from 'oppfolgingsdialog-npm';
+import { OppfolgingsdialogInnholdboks } from 'oppfolgingsdialog-npm';
 import getContextRoot from '../../../utils/getContextRoot';
+import {
+    dokumentReducerPt,
+    oppfolgingsplanPt,
+} from '../../../propTypes/opproptypes';
 
 class ArbeidsgiverHarTvangsgodkjent extends Component {
     componentWillMount() {
@@ -62,9 +63,9 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
 }
 
 ArbeidsgiverHarTvangsgodkjent.propTypes = {
-    oppfolgingsdialog: oppfolgingProptypes.oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     markerMottattTvungenGodkjenning: PropTypes.func,
-    dokument: oppfolgingProptypes.dokumentReducerPt,
+    dokument: dokumentReducerPt,
     ledetekster: keyValue,
     hentPdfurler: PropTypes.func,
 };

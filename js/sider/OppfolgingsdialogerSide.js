@@ -9,12 +9,12 @@ import {
 } from 'digisyfo-npm';
 import {
     OppfolgingsdialogInfoboks,
-    proptypes as oppfolgingProptypes,
     henterEllerHarHentetTilgang,
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittOpprettet,
     populerDialogFraState,
 } from 'oppfolgingsdialog-npm';
+import * as oppfolgingsplanProptypes from '../propTypes/opproptypes';
 import { kopierOppfolgingsdialog } from '../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
 import {
     hentOppfolgingsdialoger,
@@ -138,16 +138,16 @@ Container.propTypes = {
     sendingFeilet: PropTypes.bool,
     dinesykmeldinger: dinesykmeldingerReducerPt,
     naermesteLedere: ledereReducerPt,
-    kopierDialogReducer: oppfolgingProptypes.kopierDialogReducerPt,
-    oppfolgingsdialogerReducer: oppfolgingProptypes.oppfolgingsdialogerAtPt,
-    person: oppfolgingProptypes.personReducerPt,
-    naermesteleder: oppfolgingProptypes.naermestelederReducerPt,
-    forrigenaermesteleder: oppfolgingProptypes.forrigenaermestelederReducerPt,
-    tilgang: oppfolgingProptypes.tilgangReducerPt,
-    virksomhet: oppfolgingProptypes.virksomhetReducerPt,
+    kopierDialogReducer: oppfolgingsplanProptypes.kopierPlanReducerPt,
+    oppfolgingsdialogerReducer: oppfolgingsplanProptypes.oppfolgingsplanerAtPt,
+    person: oppfolgingsplanProptypes.personReducerPt,
+    naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
+    forrigenaermesteleder: oppfolgingsplanProptypes.forrigenaermestelederReducerPt,
+    tilgang: oppfolgingsplanProptypes.tilgangReducerPt,
+    virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
     ledetekster: keyValue,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
     toggles: togglesPt,
     brodsmuler: PropTypes.arrayOf(brodsmulePt),
     avkreftLeder: PropTypes.func,

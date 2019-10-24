@@ -8,12 +8,12 @@ import {
     finnTidligereOppfolgingsdialoger,
     harTidligereOppfolgingsdialoger,
     finnAktiveOppfolgingsdialoger,
-    proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
 import {
     dinesykmeldingerReducerPt,
     ledereReducerPt,
 } from '../../propTypes';
+import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
 import { finnArbeidsgivereForGyldigeSykmeldinger } from '../../utils/sykmeldingUtils';
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsplanFilm from './OppfolgingsplanFilm';
@@ -119,7 +119,7 @@ class OppfolgingsdialogerVisning extends Component {
 OppfolgingsdialogerVisning.propTypes = {
     dinesykmeldinger: dinesykmeldingerReducerPt,
     naermesteLedere: ledereReducerPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     ledetekster: keyValue,
     opprettOppfolgingsdialog: PropTypes.func,
     kopierOppfolgingsdialog: PropTypes.func,

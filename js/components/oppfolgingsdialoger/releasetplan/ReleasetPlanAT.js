@@ -4,9 +4,14 @@ import { keyValue, togglesPt } from 'digisyfo-npm';
 import {
     BRUKERTYPE,
     ReleasetPlan,
-    proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
 import getContextRoot from '../../../utils/getContextRoot';
+import {
+    delMedFastlegePt,
+    delmednavPt,
+    dokumentReducerPt,
+    oppfolgingsplanPt,
+} from '../../../propTypes/opproptypes';
 import ArbeidsgiverHarTvangsgodkjent from './ArbeidsgiverHarTvangsgodkjent';
 
 const foersteInnloggingSidenGodkjenning = (oppfolgingsdialog) => {
@@ -80,13 +85,13 @@ ReleasetPlanAT.propTypes = {
     avbrytDialog: PropTypes.func,
     delMedFastlege: PropTypes.func,
     delMedNavFunc: PropTypes.func,
-    dokument: oppfolgingProptypes.dokumentReducerPt,
-    oppfolgingsdialog: oppfolgingProptypes.oppfolgingsdialogPt,
+    dokument: dokumentReducerPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     ledetekster: keyValue,
     toggles: togglesPt,
-    delmednav: oppfolgingProptypes.delmednavPt,
-    fastlegeDeling: oppfolgingProptypes.delMedFastlegePt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    delmednav: delmednavPt,
+    fastlegeDeling: delMedFastlegePt,
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
 };
 
 export default ReleasetPlanAT;

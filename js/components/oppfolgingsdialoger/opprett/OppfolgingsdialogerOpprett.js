@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { keyValue, getLedetekst } from 'digisyfo-npm';
-import {
-    BaserTidligereSkjema,
-    proptypes as oppfolgingProptypes,
-} from 'oppfolgingsdialog-npm';
+import { BaserTidligereSkjema } from 'oppfolgingsdialog-npm';
 import { opprettOppfolgingArbeidsgiverPt } from '../../../propTypes';
+import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import { finnNyesteTidligereOppfolgingsdialogMedVirksomhet } from '../../../utils/oppfolgingsdialogUtils';
 import Lightbox from '../../Lightbox';
 import ArbeidsgiverSkjemaForm from './ArbeidsgiverSkjema';
@@ -97,7 +95,7 @@ class OppfolgingsdialogerOpprett extends Component {
 OppfolgingsdialogerOpprett.propTypes = {
     ledetekster: keyValue,
     arbeidsgivere: PropTypes.arrayOf(opprettOppfolgingArbeidsgiverPt),
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     visOppfolgingsdialogOpprett: PropTypes.func,
     opprett: PropTypes.func,
     kopier: PropTypes.func,
