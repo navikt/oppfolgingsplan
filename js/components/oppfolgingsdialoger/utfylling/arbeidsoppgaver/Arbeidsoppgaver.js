@@ -4,9 +4,7 @@ import { findDOMNode } from 'react-dom';
 import {
     BRUKERTYPE,
     LagreArbeidsoppgaveSkjema,
-    LeggTilElementKnapper,
     ArbeidsoppgaverListe,
-    sorterArbeidsoppgaverEtterOpprettet,
 } from 'oppfolgingsdialog-npm';
 import {
     getLedetekst,
@@ -20,9 +18,11 @@ import {
 import getContextRoot from '../../../../utils/getContextRoot';
 import { capitalizeFirstLetter } from '../../../../utils/textUtils';
 import { isEmpty } from '../../../../utils/oppfolgingsdialogUtils';
+import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
 import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
 import ArbeidsoppgaverInfoboks from '../../../oppfolgingsdialoger/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
 import NotifikasjonBoksVurderingOppgave from './NotifikasjonBoksVurderingOppgave';
+import LeggTilElementKnapper from '../LeggTilElementKnapper';
 
 export const RenderOpprettArbeidsoppgave = ({ ledetekster, sendLagreArbeidsoppgave, toggleArbeidsoppgaveSkjema, oppdateringFeilet, varselTekst }) => {
     return (<div>

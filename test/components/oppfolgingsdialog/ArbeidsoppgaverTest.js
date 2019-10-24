@@ -6,7 +6,6 @@ import sinon from 'sinon';
 import { setLedetekster } from 'digisyfo-npm';
 import {
     LagreArbeidsoppgaveSkjema,
-    LeggTilElementKnapper,
     ArbeidsoppgaverListe,
 } from 'oppfolgingsdialog-npm';
 import ledetekster from '../../mock/mockLedetekster';
@@ -17,6 +16,7 @@ import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
 import ArbeidsoppgaverInfoboks from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
 import NotifikasjonBoksVurderingOppgave from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/NotifikasjonBoksVurderingOppgave';
+import LeggTilElementKnapper from '../../../js/components/oppfolgingsdialoger/utfylling/LeggTilElementKnapper';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
