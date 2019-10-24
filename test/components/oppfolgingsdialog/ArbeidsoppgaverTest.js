@@ -8,15 +8,15 @@ import {
     LagreArbeidsoppgaveSkjema,
     LeggTilElementKnapper,
     NotifikasjonBoksVurderingOppgave,
-    ArbeidsoppgaverInfoboks,
     ArbeidsoppgaverListe,
 } from 'oppfolgingsdialog-npm';
 import ledetekster from '../../mock/mockLedetekster';
 import Arbeidsoppgaver, {
     RenderOpprettArbeidsoppgave,
-} from '../../../js/components/oppfolgingsdialoger/utfylling/Arbeidsoppgaver';
+} from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
+import ArbeidsoppgaverInfoboks from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

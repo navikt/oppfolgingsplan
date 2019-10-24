@@ -27,7 +27,7 @@ import {
     utenSamtykke,
 } from '../../utils/oppfolgingsdialogUtils';
 import getContextRoot from '../../utils/getContextRoot';
-import Arbeidsoppgaver from './utfylling/Arbeidsoppgaver';
+import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import ReleasetPlanAT from './releasetplan/ReleasetPlanAT';
 import IngenlederInfoboks from './IngenlederInfoboks';
 import Tiltak from './utfylling/Tiltak';

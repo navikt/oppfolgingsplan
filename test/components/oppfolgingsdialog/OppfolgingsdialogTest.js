@@ -14,7 +14,7 @@ import {
 } from 'oppfolgingsdialog-npm';
 import Oppfolgingsdialog, { erAvvistAvArbeidstaker } from '../../../js/components/oppfolgingsdialoger/Oppfolgingsdialog';
 import IngenlederInfoboks from '../../../js/components/oppfolgingsdialoger/IngenlederInfoboks';
-import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialoger/utfylling/Arbeidsoppgaver';
+import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialoger/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Tiltak from '../../../js/components/oppfolgingsdialoger/utfylling/Tiltak';
 import ReleasetPlanAT from '../../../js/components/oppfolgingsdialoger/releasetplan/ReleasetPlanAT';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
