@@ -4,7 +4,6 @@ import { getLedetekst, keyValue, togglesPt, sykeforlopsPerioderReducerPt } from 
 import {
     SideOverskrift,
     NavigasjonsTopp,
-    NavigasjonsBunn,
     BRUKERTYPE,
     Godkjenn,
     Godkjenninger,
@@ -28,10 +27,10 @@ import {
 } from '../../utils/oppfolgingsdialogUtils';
 import getContextRoot from '../../utils/getContextRoot';
 import Arbeidsoppgaver from './arbeidsoppgaver/Arbeidsoppgaver';
+import NavigasjonsBunn from './NavigasjonsBunn';
 import ReleasetPlanAT from './godkjenn/releasetplan/ReleasetPlanAT';
 import IngenlederInfoboks from '../oppfolgingsdialoger/IngenlederInfoboks';
 import Tiltak from './tiltak/Tiltak';
-
 
 const skalViseSamtykke = (oppfolgingsdialog) => {
     return harNaermesteLeder(oppfolgingsdialog)

@@ -6,7 +6,6 @@ import sinon from 'sinon';
 import {
     SideOverskrift,
     NavigasjonsTopp,
-    NavigasjonsBunn,
     Godkjenn,
     Godkjenninger,
     Samtykke,
@@ -15,6 +14,7 @@ import {
 import Oppfolgingsdialog, { erAvvistAvArbeidstaker } from '../../../js/components/oppfolgingsplan/Oppfolgingsdialog';
 import IngenlederInfoboks from '../../../js/components/oppfolgingsdialoger/IngenlederInfoboks';
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
+import NavigasjonsBunn from '../../../js/components/oppfolgingsplan/NavigasjonsBunn';
 import Tiltak from '../../../js/components/oppfolgingsplan/tiltak/Tiltak';
 import ReleasetPlanAT from '../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ReleasetPlanAT';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
