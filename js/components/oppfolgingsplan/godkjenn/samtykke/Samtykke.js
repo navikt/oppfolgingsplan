@@ -5,7 +5,7 @@ import {
     getLedetekst,
     getHtmlLedetekst,
 } from 'digisyfo-npm';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsdialogPt } from '../../../../propTypes/opproptypes';
 import getContextRoot from '../../../../utils/getContextRoot';
 
 class Samtykke extends Component {
