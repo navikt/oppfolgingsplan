@@ -7,9 +7,7 @@ import {
     togglesPt,
 } from 'digisyfo-npm';
 import {
-    BRUKERTYPE,
     AvbruttPlanNotifikasjonBoksAdvarsel,
-    NyNaermestelederInfoboks,
     OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
@@ -40,6 +38,7 @@ import {
     finnOgHentPersonerSomMangler,
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
+import NyNaermestelederInfoboks from './NyNaermestelederInfoboks';
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
     const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger);
@@ -91,12 +90,9 @@ class Oppfolgingsdialoger extends Component {
             panel = (<IngenledereInfoboks />);
         } else if (!bekreftetNyNaermesteLeder && oppfolgingsdialogMedNyNaermesteLeder) {
             panel = (<NyNaermestelederInfoboks
-                ledetekster={ledetekster}
                 oppfolgingsdialog={oppfolgingsdialogMedNyNaermesteLeder}
                 avkreftNyNaermesteleder={avkreftLeder}
                 bekreftNyNaermesteLeder={bekreftNyNaermesteLeder}
-                brukerType={BRUKERTYPE.ARBEIDSTAKER}
-                rootUrlImg={getContextRoot()}
             />);
         } else if (!sykmeldtHarGyldigSykmelding(dinesykmeldinger.data)) {
             panel = (

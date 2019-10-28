@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import {
-    NyNaermestelederInfoboks,
     OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
@@ -19,6 +18,7 @@ import {
     hentSykmeldingGyldigForOppfoelging,
     leggTilDagerPaaDato,
 } from '../../mock/mockSykmeldinger';
+import NyNaermestelederInfoboks from '../../../js/components/oppfolgingsdialoger/NyNaermestelederInfoboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
