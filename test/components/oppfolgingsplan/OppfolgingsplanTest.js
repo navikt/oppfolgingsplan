@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import {
-    SideOverskrift,
     Godkjenn,
     Godkjenninger,
     Samtykke,
@@ -15,6 +14,7 @@ import IngenlederInfoboks from '../../../js/components/oppfolgingsdialoger/Ingen
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
 import NavigasjonsBunn from '../../../js/components/oppfolgingsplan/NavigasjonsBunn';
 import NavigasjonsTopp from '../../../js/components/oppfolgingsplan/NavigasjonsTopp';
+import SideOverskrift from '../../../js/components/oppfolgingsplan/SideOverskrift';
 import Tiltak from '../../../js/components/oppfolgingsplan/tiltak/Tiltak';
 import ReleasetPlanAT from '../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ReleasetPlanAT';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';

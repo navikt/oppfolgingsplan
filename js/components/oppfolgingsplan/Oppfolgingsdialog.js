@@ -7,7 +7,6 @@ import {
     togglesPt,
 } from 'digisyfo-npm';
 import {
-    SideOverskrift,
     BRUKERTYPE,
     Godkjenn,
     Godkjenninger,
@@ -35,6 +34,7 @@ import NavigasjonsBunn from './NavigasjonsBunn';
 import NavigasjonsTopp from './NavigasjonsTopp';
 import ReleasetPlanAT from './godkjenn/releasetplan/ReleasetPlanAT';
 import IngenlederInfoboks from '../oppfolgingsdialoger/IngenlederInfoboks';
+import SideOverskrift from './SideOverskrift';
 import Tiltak from './tiltak/Tiltak';
 
 const skalViseSamtykke = (oppfolgingsdialog) => {
