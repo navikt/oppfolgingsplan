@@ -188,11 +188,11 @@ export const finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging = (oppfolg
         return [];
     }
     const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsplaner);
-    return oppfolgingsplaner.filter((oppfolgingsdialog) => {
-        const avbruttplan = oppfolgingsdialog.godkjentPlan && oppfolgingsdialog.godkjentPlan.avbruttPlan;
-        return oppfolgingsdialog.status === STATUS.AVBRUTT
-            && oppfolgingsdialog.arbeidsgiver.naermesteLeder
-            && (avbruttplan.av.fnr === oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr)
+    return oppfolgingsplaner.filter((oppfolgingsplan) => {
+        const avbruttplan = oppfolgingsplan.godkjentPlan && oppfolgingsplan.godkjentPlan.avbruttPlan;
+        return oppfolgingsplan.status === STATUS.AVBRUTT
+            && oppfolgingsplan.arbeidsgiver.naermesteLeder
+            && (avbruttplan.av.fnr === oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr)
             && (new Date(sisteInnlogging) < new Date(avbruttplan.tidspunkt));
     }).sort((o1, o2) => {
         return new Date(o2.godkjentPlan.avbruttPlan.tidspunkt) - new Date(o2.godkjentPlan.avbruttPlan.tidspunkt);
