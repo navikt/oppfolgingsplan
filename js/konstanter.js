@@ -1,5 +1,7 @@
 export const OPPRETT_SKJEMANAVN = 'OPPRETT_SKJEMANAVN';
 export const tekstfeltRegex = new RegExp('.*<[^ ][^>]+[^ ]>.*');
+export const maanedListe = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember'];
+export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING = 4;
 
 export const KANGJENNOMFOERES = {
     KAN: 'KAN',
@@ -12,4 +14,11 @@ export const TILRETTELEGGING = {
     PAA_ANNET_STED: 'PAA_ANNET_STED',
     MED_MER_TID: 'MED_MER_TID',
     MED_HJELP: 'MED_HJELP',
+};
+
+export const STATUS = {
+    AKTIV: 'AKTIV',
+    AVBRUTT: 'AVBRUTT',
+    UNDER_ARBEID: 'UNDER_ARBEID',
+    UTDATERT: 'UTDATERT',
 };

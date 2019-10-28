@@ -2,6 +2,7 @@ import chai from 'chai';
 import sinon from 'sinon';
 import {
     erOppfolgingsplanOpprettbarDirekte,
+    finnAktiveOppfolgingsdialoger,
     finnNyesteTidligereOppfolgingsdialogMedVirksomhet,
     oppgaverOppfoelgingsdialoger,
 } from '../../js/utils/oppfolgingsdialogUtils';
@@ -13,12 +14,18 @@ import getOppfolgingsdialog, {
 
     hentOppfolgingsdialogTidligere,
 } from '../mock/mockOppfolgingsdialoger';
+import {
+    leggTilDagerPaaDato,
+    leggTilMnderOgDagerPaaDato,
+    leggTilMnderPaaDato,
+} from '../testUtils';
+import { MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING } from '../../js/konstanter';
 
 const expect = chai.expect;
 
 describe('OppfolgingdialogUtils', () => {
     let klokke;
-    const dagensDato = new Date('2017-01-01');
+    let dagensDato = new Date('2017-01-01');
 
     beforeEach(() => {
         klokke = sinon.useFakeTimers(dagensDato.getTime());
@@ -209,6 +216,120 @@ describe('OppfolgingdialogUtils', () => {
 
         it('Skal returnere tidligere dialog med virksomhet, om det det er tidligere godkjente plan med virksomhet', () => {
             expect(finnNyesteTidligereOppfolgingsdialogMedVirksomhet([oppfolgingsdialogTidligere], virksomhet.virksomhetsnummer)).to.deep.equal(oppfolgingsdialogTidligere);
+        });
+    });
+
+    describe('finnAktiveOppfolgingsdialoger', () => {
+        let gyldighetstidspunktPassert;
+        let gyldighetstidspunktIkkePassert;
+        let sykmeldingUtgaatt;
+        let sykmeldingAktiv;
+
+        const virksomhet = {
+            virksomhetsnummer: '12345678',
+        };
+
+        beforeEach(() => {
+            dagensDato = new Date('2017-09-28');
+            klokke = sinon.useFakeTimers(dagensDato.getTime());
+
+            gyldighetstidspunktPassert = {
+                tom: new Date('2017.09.26'),
+            };
+            gyldighetstidspunktIkkePassert = {
+                tom: new Date('2017.12.15'),
+            };
+            sykmeldingUtgaatt = {
+                orgnummer: virksomhet.virksomhetsnummer,
+                mulighetForArbeid: {
+                    perioder: [
+                        {
+                            fom: leggTilMnderPaaDato(dagensDato, -(MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 2)).toISOString(),
+                            tom: leggTilMnderPaaDato(dagensDato, -(MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 1)).toISOString(),
+                        },
+                        {
+                            fom: leggTilMnderPaaDato(dagensDato, -4).toISOString(),
+                            tom: leggTilMnderOgDagerPaaDato(dagensDato, -MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING, -1).toISOString(),
+                        },
+                    ],
+                },
+            };
+            sykmeldingAktiv = {
+                orgnummer: virksomhet.virksomhetsnummer,
+                mulighetForArbeid: {
+                    perioder: [
+                        {
+                            fom: leggTilMnderPaaDato(dagensDato, -4).toISOString(),
+                            tom: leggTilMnderOgDagerPaaDato(dagensDato, -2, -28).toISOString(),
+                        },
+                        {
+                            fom: leggTilDagerPaaDato(dagensDato, -5).toISOString(),
+                            tom: leggTilDagerPaaDato(dagensDato, 35).toISOString(),
+                        },
+                    ],
+                },
+            };
+        });
+
+        it('finnAktiveOppfolgingsdialoger 1', () => {
+            const dialog = [{
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om gyldighetstidspunkt ikke er passer, om plan ikke er godkjent', () => {
+            const dialog = [{
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om gyldighetstidspunkt ikke er passert', () => {
+            const dialog = [{
+                godkjentPlan: {
+                    gyldighetstidspunkt: gyldighetstidspunktIkkePassert,
+                },
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om gyldighetstidspunkt er passert', () => {
+            const dialog = [{
+                godkjentPlan: {
+                    gyldighetstidspunkt: gyldighetstidspunktPassert,
+                },
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(0);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 1 plan, om det eksisterer en plan knyttet til gyldig sykmelding', () => {
+            const sykmeldinger = [sykmeldingAktiv];
+            const dialog = [{
+                virksomhet,
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog, sykmeldinger)).to.have.length(1);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 0 planer, om det ikke eksisterer en plan knyttet til gyldig sykmelding', () => {
+            const sykmeldinger = [sykmeldingUtgaatt];
+            const dialog = [{
+                virksomhet,
+                godkjentPlan: null,
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog, sykmeldinger)).to.have.length(0);
+        });
+
+        it('finnAktiveOppfolgingsdialoger skal returnere 0 planer, om det eksisterer en godkjent plan knyttet til gyldig sykmelding', () => {
+            const sykmeldinger = [sykmeldingAktiv];
+            const dialog = [{
+                virksomhet,
+                godkjentPlan: {
+                    gyldighetstidspunkt: gyldighetstidspunktPassert,
+                },
+            }];
+            expect(finnAktiveOppfolgingsdialoger(dialog, sykmeldinger)).to.have.length(0);
         });
     });
 });
