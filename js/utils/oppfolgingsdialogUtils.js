@@ -69,6 +69,12 @@ export const erOppfolgingsdialogAktiv = (oppfolgingsdialog) => {
         (oppfolgingsdialog.status !== STATUS.AVBRUTT && !erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom));
 };
 
+export const erOppfolgingsdialogTidligere = (oppfolgingsdialog) => {
+    return oppfolgingsdialog.godkjentPlan
+        && erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom)
+        && oppfolgingsdialog.status !== STATUS.AVBRUTT;
+};
+
 export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger, sykmeldinger) => {
     if (!sykmeldinger) {
         return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
