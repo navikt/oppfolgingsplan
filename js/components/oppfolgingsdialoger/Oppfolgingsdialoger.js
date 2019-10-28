@@ -11,7 +11,6 @@ import {
     harTidligereOppfolgingsdialoger,
     AvbruttPlanNotifikasjonBoksAdvarsel,
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
-    finnBrukersSisteInnlogging,
     NyNaermestelederInfoboks,
     OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
@@ -27,6 +26,7 @@ import {
     isEmpty,
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
     finnTidligereOppfolgingsdialoger,
+    finnBrukersSisteInnlogging,
 } from '../../utils/oppfolgingsdialogUtils';
 import { sykmeldtHarGyldigSykmelding } from '../../utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
@@ -42,7 +42,7 @@ import {
 } from '../../utils/reducerUtils';
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
-    const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger, BRUKERTYPE.ARBEIDSTAKER);
+    const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger);
     return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
         return harForrigeNaermesteLeder(oppfolgingsdialog) &&
             harNaermesteLeder(oppfolgingsdialog) &&

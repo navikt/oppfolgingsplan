@@ -98,6 +98,13 @@ export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger, sykmeldinger)
     });
 };
 
+export const finnBrukersSisteInnlogging = (oppfolgingsplaner) => {
+    const innlogginger = oppfolgingsplaner.map((oppfolgingsplan) => {
+        return new Date(oppfolgingsplan.arbeidstaker.sistInnlogget);
+    });
+    return new Date(Math.max.apply(null, innlogginger));
+};
+
 export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (oppfolgingsdialoger, virksomhetsnummer) => {
     return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger).filter((oppfolgingsdialog) => {
         return oppfolgingsdialog.virksomhet.virksomhetsnummer === virksomhetsnummer;
