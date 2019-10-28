@@ -1,7 +1,4 @@
 import {
-    harTidligereOppfolgingsdialoger,
-} from 'oppfolgingsdialog-npm';
-import {
     MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING,
     STATUS,
 } from '../konstanter';
@@ -84,6 +81,10 @@ export const finnTidligereOppfolgingsdialoger = (oppfolgingsdialoger) => {
     return sorterOppfolgingsdialogerEtterSluttdato(oppfolgingsdialoger.filter((oppfolgingsdialog) => {
         return erOppfolgingsdialogTidligere(oppfolgingsdialog);
     }));
+};
+
+export const harTidligereOppfolgingsdialoger = (oppfolgingsplaner) => {
+    return finnTidligereOppfolgingsdialoger(oppfolgingsplaner).length > 0;
 };
 
 export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger, sykmeldinger) => {

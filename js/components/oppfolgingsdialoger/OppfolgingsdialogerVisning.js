@@ -5,7 +5,6 @@ import { getLedetekst, keyValue } from 'digisyfo-npm';
 import {
     OppfolgingsdialogTeasere,
     BRUKERTYPE,
-    harTidligereOppfolgingsdialoger,
 } from 'oppfolgingsdialog-npm';
 import {
     dinesykmeldingerReducerPt,
@@ -15,6 +14,7 @@ import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
 import {
     finnAktiveOppfolgingsdialoger,
     finnTidligereOppfolgingsdialoger,
+    harTidligereOppfolgingsdialoger,
 } from '../../utils/oppfolgingsdialogUtils';
 import { finnArbeidsgivereForGyldigeSykmeldinger } from '../../utils/sykmeldingUtils';
 import getContextRoot from '../../utils/getContextRoot';
