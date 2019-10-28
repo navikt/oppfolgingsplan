@@ -1,5 +1,4 @@
 import {
-    finnTidligereOppfolgingsdialoger,
     harTidligereOppfolgingsdialoger,
 } from 'oppfolgingsdialog-npm';
 import {
@@ -73,6 +72,18 @@ export const erOppfolgingsdialogTidligere = (oppfolgingsdialog) => {
     return oppfolgingsdialog.godkjentPlan
         && erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom)
         && oppfolgingsdialog.status !== STATUS.AVBRUTT;
+};
+
+export const sorterOppfolgingsdialogerEtterSluttdato = (oppfolgingsdialoger) => {
+    return oppfolgingsdialoger.sort((o1, o2) => {
+        return new Date(o2.godkjentPlan.gyldighetstidspunkt.tom) - new Date(o1.godkjentPlan.gyldighetstidspunkt.tom);
+    });
+};
+
+export const finnTidligereOppfolgingsdialoger = (oppfolgingsdialoger) => {
+    return sorterOppfolgingsdialogerEtterSluttdato(oppfolgingsdialoger.filter((oppfolgingsdialog) => {
+        return erOppfolgingsdialogTidligere(oppfolgingsdialog);
+    }));
 };
 
 export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger, sykmeldinger) => {

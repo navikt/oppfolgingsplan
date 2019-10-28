@@ -5,7 +5,6 @@ import { getLedetekst, keyValue } from 'digisyfo-npm';
 import {
     OppfolgingsdialogTeasere,
     BRUKERTYPE,
-    finnTidligereOppfolgingsdialoger,
     harTidligereOppfolgingsdialoger,
 } from 'oppfolgingsdialog-npm';
 import {
@@ -13,7 +12,10 @@ import {
     ledereReducerPt,
 } from '../../propTypes';
 import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
-import { finnAktiveOppfolgingsdialoger } from '../../utils/oppfolgingsdialogUtils';
+import {
+    finnAktiveOppfolgingsdialoger,
+    finnTidligereOppfolgingsdialoger,
+} from '../../utils/oppfolgingsdialogUtils';
 import { finnArbeidsgivereForGyldigeSykmeldinger } from '../../utils/sykmeldingUtils';
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsplanFilm from './OppfolgingsplanFilm';

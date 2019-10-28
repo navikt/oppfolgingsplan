@@ -8,7 +8,6 @@ import {
 } from 'digisyfo-npm';
 import {
     BRUKERTYPE,
-    finnTidligereOppfolgingsdialoger,
     harTidligereOppfolgingsdialoger,
     AvbruttPlanNotifikasjonBoksAdvarsel,
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
@@ -31,6 +30,7 @@ import {
     harNaermesteLeder,
     isEmpty,
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
+    finnTidligereOppfolgingsdialoger,
 } from '../../utils/oppfolgingsdialogUtils';
 import { sykmeldtHarGyldigSykmelding } from '../../utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
