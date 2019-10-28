@@ -10,7 +10,6 @@ import {
     hentSykeforlopsPerioder,
 } from 'digisyfo-npm';
 import {
-    dialogAvbruttOgNyOpprettet,
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
     erOppfolgingsdialogTidligere,
 } from 'oppfolgingsdialog-npm';
@@ -30,7 +29,10 @@ import {
     lagreArbeidsoppgave,
     slettArbeidsoppgave,
 } from '../../actions/oppfolgingsplan/arbeidsoppgave_actions';
-import { avbrytDialog } from '../../actions/oppfolgingsplan/avbrytdialog_actions';
+import {
+    avbrytDialog,
+    dialogAvbruttOgNyOpprettet,
+} from '../../actions/oppfolgingsplan/avbrytdialog_actions';
 import { delMedFastlege } from '../../actions/oppfolgingsplan/delMedFastlege_actions';
 import { delMedNav as delMedNavFunc } from '../../actions/oppfolgingsplan/delmednav_actions';
 import { hentPdfurler } from '../../actions/oppfolgingsplan/dokument_actions';
