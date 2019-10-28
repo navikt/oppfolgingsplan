@@ -10,7 +10,6 @@ import {
     BRUKERTYPE,
     harTidligereOppfolgingsdialoger,
     AvbruttPlanNotifikasjonBoksAdvarsel,
-    finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
     NyNaermestelederInfoboks,
     OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
@@ -27,6 +26,7 @@ import {
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
     finnTidligereOppfolgingsdialoger,
     finnBrukersSisteInnlogging,
+    finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
 } from '../../utils/oppfolgingsdialogUtils';
 import { sykmeldtHarGyldigSykmelding } from '../../utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
@@ -85,7 +85,7 @@ class Oppfolgingsdialoger extends Component {
             toggles,
         } = this.props;
         let panel;
-        const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger, BRUKERTYPE.ARBEIDSTAKER);
+        const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger);
         const oppfolgingsdialogMedNyNaermesteLeder = finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder(oppfolgingsdialoger);
         if (erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere(oppfolgingsdialoger, dinesykmeldinger.data, naermesteLedere.data)) {
             panel = (<IngenledereInfoboks />);
