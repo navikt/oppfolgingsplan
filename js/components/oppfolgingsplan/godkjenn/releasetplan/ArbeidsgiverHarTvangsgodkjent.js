@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { getLedetekst, Utvidbar, keyValue } from 'digisyfo-npm';
-import { OppfolgingsdialogInnholdboks } from 'oppfolgingsdialog-npm';
 import getContextRoot from '../../../../utils/getContextRoot';
 import {
     dokumentReducerPt,
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
+import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 
 class ArbeidsgiverHarTvangsgodkjent extends Component {
     componentWillMount() {
@@ -36,7 +36,7 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
             });
         }
         return (
-            <OppfolgingsdialogInnholdboks
+            <OppfolgingsplanInnholdboks
                 liteikon
                 svgUrl={`${getContextRoot()}/img/svg/varseltrekant.svg`}
                 svgAlt="godkjent"
@@ -58,7 +58,7 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
                         </div>
                     </div>
                 </div>
-            </OppfolgingsdialogInnholdboks>);
+            </OppfolgingsplanInnholdboks>);
     }
 }
 

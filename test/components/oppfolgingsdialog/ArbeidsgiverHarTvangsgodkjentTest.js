@@ -3,11 +3,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import {
-    OppfolgingsdialogInnholdboks,
-} from 'oppfolgingsdialog-npm';
-import ArbeidsgiverHarTvangsgodkjent from '../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ArbeidsgiverHarTvangsgodkjent';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
+import ArbeidsgiverHarTvangsgodkjent from '../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ArbeidsgiverHarTvangsgodkjent';
+import OppfolgingsplanInnholdboks from '../../../js/components/app/OppfolgingsplanInnholdboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -22,14 +20,14 @@ describe('ArbeidsgiverHarTvangsgodkjent', () => {
         hentPdfurler = sinon.spy();
     });
 
-    it('Skal alltid vise OppfolgingsdialogInnholdboks', () => {
+    it('Skal alltid vise OppfolgingsplanInnholdboks', () => {
         dokument = { hentet: false };
         component = shallow(<ArbeidsgiverHarTvangsgodkjent
             hentPdfurler={hentPdfurler}
             dokument={dokument}
             oppfolgingsdialog={oppfolgingsdialog}
         />);
-        expect(component.find(OppfolgingsdialogInnholdboks)).to.have.length(1);
+        expect(component.find(OppfolgingsplanInnholdboks)).to.have.length(1);
     });
 
     it('Skal vise en spinner om dokument henter', () => {
