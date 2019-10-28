@@ -13,10 +13,6 @@ import {
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
     finnBrukersSisteInnlogging,
     NyNaermestelederInfoboks,
-    finnOgHentVirksomheterSomMangler,
-    finnOgHentPersonerSomMangler,
-    finnOgHentNaermesteLedereSomMangler,
-    finnOgHentForrigeNaermesteLedereSomMangler,
     OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
@@ -38,6 +34,12 @@ import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
+import {
+    finnOgHentForrigeNaermesteLedereSomMangler,
+    finnOgHentNaermesteLedereSomMangler,
+    finnOgHentPersonerSomMangler,
+    finnOgHentVirksomheterSomMangler,
+} from '../../utils/reducerUtils';
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
     const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger, BRUKERTYPE.ARBEIDSTAKER);
