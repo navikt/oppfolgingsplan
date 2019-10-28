@@ -12,15 +12,17 @@ import {
     Godkjenninger,
     Samtykke,
     AvbruttGodkjentPlanVarsel,
-    finnOgHentVirksomheterSomMangler,
-    finnOgHentPersonerSomMangler,
-    finnOgHentKontaktinfoSomMangler,
-    finnOgHentNaermesteLedereSomMangler,
-    finnOgHentForrigeNaermesteLedereSomMangler,
-    finnOgHentArbeidsforholdSomMangler,
-    finnOgHentSykeforlopsPerioderSomMangler,
 } from 'oppfolgingsdialog-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
+import {
+    finnOgHentArbeidsforholdSomMangler,
+    finnOgHentForrigeNaermesteLedereSomMangler,
+    finnOgHentKontaktinfoSomMangler,
+    finnOgHentNaermesteLedereSomMangler,
+    finnOgHentPersonerSomMangler,
+    finnOgHentSykeforlopsPerioderSomMangler,
+    finnOgHentVirksomheterSomMangler,
+} from '../../utils/reducerUtils';
 import {
     harNaermesteLeder,
     inneholderGodkjenninger,
