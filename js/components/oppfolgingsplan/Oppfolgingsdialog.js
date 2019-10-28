@@ -10,7 +10,6 @@ import {
     BRUKERTYPE,
     Godkjenn,
     Godkjenninger,
-    AvbruttGodkjentPlanVarsel,
 } from 'oppfolgingsdialog-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
@@ -31,6 +30,7 @@ import {
 } from '../../utils/oppfolgingsdialogUtils';
 import getContextRoot from '../../utils/getContextRoot';
 import Arbeidsoppgaver from './arbeidsoppgaver/Arbeidsoppgaver';
+import AvbruttGodkjentPlanVarsel from './AvbruttGodkjentPlanVarsel';
 import NavigasjonsBunn from './NavigasjonsBunn';
 import NavigasjonsTopp from './NavigasjonsTopp';
 import ReleasetPlanAT from './godkjenn/releasetplan/ReleasetPlanAT';

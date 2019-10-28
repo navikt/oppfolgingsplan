@@ -6,11 +6,11 @@ import sinon from 'sinon';
 import {
     Godkjenn,
     Godkjenninger,
-    AvbruttGodkjentPlanVarsel,
 } from 'oppfolgingsdialog-npm';
 import Oppfolgingsdialog, { erAvvistAvArbeidstaker } from '../../../js/components/oppfolgingsplan/Oppfolgingsdialog';
 import IngenlederInfoboks from '../../../js/components/oppfolgingsdialoger/IngenlederInfoboks';
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
+import AvbruttGodkjentPlanVarsel from '../../../js/components/oppfolgingsplan/AvbruttGodkjentPlanVarsel';
 import NavigasjonsBunn from '../../../js/components/oppfolgingsplan/NavigasjonsBunn';
 import NavigasjonsTopp from '../../../js/components/oppfolgingsplan/NavigasjonsTopp';
 import Samtykke from '../../../js/components/oppfolgingsplan/godkjenn/samtykke/Samtykke';
