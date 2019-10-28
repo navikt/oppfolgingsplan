@@ -5,7 +5,7 @@ import {
     getLedetekst,
     getHtmlLedetekst,
 } from 'digisyfo-npm';
-import { oppfolgingsdialogPt } from '../../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import getContextRoot from '../../../../utils/getContextRoot';
 
 class Samtykke extends Component {
@@ -89,7 +89,7 @@ class Samtykke extends Component {
 }
 Samtykke.propTypes = {
     sendSamtykke: PropTypes.func,
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
 };
 
 export default Samtykke;
