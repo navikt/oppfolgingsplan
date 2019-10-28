@@ -8,7 +8,7 @@ import {
     Fareknapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
-import { oppfolgingsdialogPt } from '../../propTypes/proptypes';
+import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
 import getContextRoot from '../../utils/getContextRoot';
 import Lightbox from '../app/Lightbox';
 import OppfolgingsplanInnholdboks from '../app/OppfolgingsplanInnholdboks';
@@ -32,7 +32,7 @@ export const AvkreftNyNaermestelederBekreftelse = ({ oppfolgingsdialog, fjernNae
     </Lightbox>);
 };
 AvkreftNyNaermestelederBekreftelse.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     fjernNaermesteLederKobling: PropTypes.func,
     lukk: PropTypes.func,
 };
@@ -106,7 +106,7 @@ class NyNaermestelederInfoboks extends Component {
 }
 
 NyNaermestelederInfoboks.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     avkreftNyNaermesteleder: PropTypes.func,
     bekreftNyNaermesteLeder: PropTypes.func,
 };
