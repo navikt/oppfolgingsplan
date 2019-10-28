@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { getLedetekst, keyValue, togglesPt, sykeforlopsPerioderReducerPt } from 'digisyfo-npm';
 import {
     SideOverskrift,
-    NavigasjonsTopp,
     BRUKERTYPE,
     Godkjenn,
     Godkjenninger,
@@ -28,6 +27,7 @@ import {
 import getContextRoot from '../../utils/getContextRoot';
 import Arbeidsoppgaver from './arbeidsoppgaver/Arbeidsoppgaver';
 import NavigasjonsBunn from './NavigasjonsBunn';
+import NavigasjonsTopp from './NavigasjonsTopp';
 import ReleasetPlanAT from './godkjenn/releasetplan/ReleasetPlanAT';
 import IngenlederInfoboks from '../oppfolgingsdialoger/IngenlederInfoboks';
 import Tiltak from './tiltak/Tiltak';
