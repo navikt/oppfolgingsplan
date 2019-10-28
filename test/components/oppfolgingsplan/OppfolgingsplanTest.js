@@ -6,7 +6,6 @@ import sinon from 'sinon';
 import {
     Godkjenn,
     Godkjenninger,
-    Samtykke,
     AvbruttGodkjentPlanVarsel,
 } from 'oppfolgingsdialog-npm';
 import Oppfolgingsdialog, { erAvvistAvArbeidstaker } from '../../../js/components/oppfolgingsplan/Oppfolgingsdialog';
@@ -14,6 +13,7 @@ import IngenlederInfoboks from '../../../js/components/oppfolgingsdialoger/Ingen
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
 import NavigasjonsBunn from '../../../js/components/oppfolgingsplan/NavigasjonsBunn';
 import NavigasjonsTopp from '../../../js/components/oppfolgingsplan/NavigasjonsTopp';
+import Samtykke from '../../../js/components/oppfolgingsplan/godkjenn/samtykke/Samtykke';
 import SideOverskrift from '../../../js/components/oppfolgingsplan/SideOverskrift';
 import Tiltak from '../../../js/components/oppfolgingsplan/tiltak/Tiltak';
 import ReleasetPlanAT from '../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ReleasetPlanAT';

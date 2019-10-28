@@ -10,7 +10,6 @@ import {
     BRUKERTYPE,
     Godkjenn,
     Godkjenninger,
-    Samtykke,
     AvbruttGodkjentPlanVarsel,
 } from 'oppfolgingsdialog-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
@@ -36,6 +35,7 @@ import NavigasjonsBunn from './NavigasjonsBunn';
 import NavigasjonsTopp from './NavigasjonsTopp';
 import ReleasetPlanAT from './godkjenn/releasetplan/ReleasetPlanAT';
 import IngenlederInfoboks from '../oppfolgingsdialoger/IngenlederInfoboks';
+import Samtykke from './godkjenn/samtykke/Samtykke';
 import SideOverskrift from './SideOverskrift';
 import Tiltak from './tiltak/Tiltak';
 
