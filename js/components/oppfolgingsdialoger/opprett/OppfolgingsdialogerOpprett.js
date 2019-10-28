@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { keyValue, getLedetekst } from 'digisyfo-npm';
-import { BaserTidligereSkjema } from 'oppfolgingsdialog-npm';
+import { getLedetekst } from 'digisyfo-npm';
 import { opprettOppfolgingArbeidsgiverPt } from '../../../propTypes';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import { finnNyesteTidligereOppfolgingsdialogMedVirksomhet } from '../../../utils/oppfolgingsdialogUtils';
 import Lightbox from '../../Lightbox';
 import ArbeidsgiverSkjemaForm from './ArbeidsgiverSkjema';
 import Feilmelding from '../../Feilmelding';
+import BaserTidligereSkjema from './BaserTidligereSkjema';
 
 class OppfolgingsdialogerOpprett extends Component {
     constructor(props) {
@@ -49,7 +49,6 @@ class OppfolgingsdialogerOpprett extends Component {
 
     render() {
         const {
-            ledetekster,
             arbeidsgivere,
             oppfolgingsdialoger,
             visOppfolgingsdialogOpprett,
@@ -81,7 +80,6 @@ class OppfolgingsdialogerOpprett extends Component {
                             }
                             { this.state.side === 2 &&
                             <BaserTidligereSkjema
-                                ledetekster={ledetekster}
                                 onSubmit={this.opprett}
                             />
                             }
@@ -93,7 +91,6 @@ class OppfolgingsdialogerOpprett extends Component {
     }
 }
 OppfolgingsdialogerOpprett.propTypes = {
-    ledetekster: keyValue,
     arbeidsgivere: PropTypes.arrayOf(opprettOppfolgingArbeidsgiverPt),
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     visOppfolgingsdialogOpprett: PropTypes.func,

@@ -64,7 +64,6 @@ class OppfolgingsdialogerVisning extends Component {
         return (<div>
             { this.state.visOppfolgingsdialogOpprett &&
             <OppfolgingsdialogerOpprett
-                ledetekster={ledetekster}
                 oppfolgingsdialoger={oppfolgingsdialoger}
                 arbeidsgivere={arbeidsgivereForSykmeldinger}
                 opprett={opprettOppfolgingsdialog}

@@ -3,9 +3,6 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import {
-    BaserTidligereSkjema,
-} from 'oppfolgingsdialog-npm';
 import Lightbox from '../../../../js/components/Lightbox';
 import OppfolgingsdialogerOpprett from '../../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerOpprett';
 import ArbeidsgiverSkjemaForm from '../../../../js/components/oppfolgingsdialoger/opprett/ArbeidsgiverSkjema';
@@ -13,6 +10,7 @@ import Feilmelding from '../../../../js/components/Feilmelding';
 import getOppfolgingsdialog, {
     hentOppfolgingsdialogTidligere,
 } from '../../../mock/mockOppfolgingsdialoger';
+import BaserTidligereSkjema from '../../../../js/components/oppfolgingsdialoger/opprett/BaserTidligereSkjema';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
