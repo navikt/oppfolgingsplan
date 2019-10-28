@@ -9,10 +9,7 @@ import {
     sykeforlopsPerioderReducerPt,
     hentSykeforlopsPerioder,
 } from 'digisyfo-npm';
-import {
-    finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
-    erOppfolgingsdialogTidligere,
-} from 'oppfolgingsdialog-npm';
+import { erOppfolgingsdialogTidligere } from 'oppfolgingsdialog-npm';
 import getContextRoot from '../../utils/getContextRoot';
 import history from '../../history';
 import Side from '../../sider/Side';
@@ -21,6 +18,7 @@ import Feilmelding from '../Feilmelding';
 import { populerPlanFraState } from '../../utils/stateUtils';
 import {
     erOppfolgingsdialogKnyttetTilGyldigSykmelding,
+    finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
     getOppfolgingsdialog,
 } from '../../utils/oppfolgingsdialogUtils';
 import Oppfolgingsdialog from './Oppfolgingsdialog';

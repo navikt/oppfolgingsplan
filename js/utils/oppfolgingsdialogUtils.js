@@ -81,6 +81,12 @@ export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger, sykmeldinger)
     });
 };
 
+export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (oppfolgingsdialoger, virksomhetsnummer) => {
+    return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger).filter((oppfolgingsdialog) => {
+        return oppfolgingsdialog.virksomhet.virksomhetsnummer === virksomhetsnummer;
+    })[0];
+};
+
 export const erAktivOppfolgingsdialogOpprettetMedArbeidsgiver = (oppfolgingsdialoger, virksomhetsnummer) => {
     return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger).filter((dialog) => {
         return dialog.virksomhet.virksomhetsnummer === virksomhetsnummer;
