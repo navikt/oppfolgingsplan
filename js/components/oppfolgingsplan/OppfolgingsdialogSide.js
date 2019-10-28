@@ -13,7 +13,6 @@ import {
     dialogAvbruttOgNyOpprettet,
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
     erOppfolgingsdialogTidligere,
-    erOppfolgingsdialogKnyttetTilGyldigSykmelding,
 } from 'oppfolgingsdialog-npm';
 import getContextRoot from '../../utils/getContextRoot';
 import history from '../../history';
@@ -21,7 +20,10 @@ import Side from '../../sider/Side';
 import AppSpinner from '../AppSpinner';
 import Feilmelding from '../Feilmelding';
 import { populerPlanFraState } from '../../utils/stateUtils';
-import { getOppfolgingsdialog } from '../../utils/oppfolgingsdialogUtils';
+import {
+    erOppfolgingsdialogKnyttetTilGyldigSykmelding,
+    getOppfolgingsdialog,
+} from '../../utils/oppfolgingsdialogUtils';
 import Oppfolgingsdialog from './Oppfolgingsdialog';
 import { hentArbeidsforhold } from '../../actions/oppfolgingsplan/arbeidsforhold_actions';
 import {
