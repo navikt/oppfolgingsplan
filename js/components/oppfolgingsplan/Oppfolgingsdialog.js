@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, keyValue, togglesPt, sykeforlopsPerioderReducerPt } from 'digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+    sykeforlopsPerioderReducerPt,
+    togglesPt,
+} from 'digisyfo-npm';
 import {
     SideOverskrift,
     BRUKERTYPE,
