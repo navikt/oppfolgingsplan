@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { keyValue, togglesPt } from 'digisyfo-npm';
-import {
-    BRUKERTYPE,
-    ReleasetPlan,
-} from 'oppfolgingsdialog-npm';
 import getContextRoot from '../../../../utils/getContextRoot';
 import {
     delMedFastlegePt,
@@ -13,6 +9,7 @@ import {
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
 import ArbeidsgiverHarTvangsgodkjent from './ArbeidsgiverHarTvangsgodkjent';
+import ReleasetPlan from './ReleasetPlan';
 
 const foersteInnloggingSidenGodkjenning = (oppfolgingsdialog) => {
     return new Date(oppfolgingsdialog.arbeidstaker.sistInnlogget) < new Date(oppfolgingsdialog.godkjentPlan.opprettetTidspunkt);
@@ -60,14 +57,12 @@ class ReleasetPlanAT extends Component {
             />);
         }
         return (<ReleasetPlan
-            ledetekster={ledetekster}
             toggles={toggles}
             oppfolgingsdialog={oppfolgingsdialog}
             hentPdfurler={hentPdfurler}
             dokument={dokument}
             giSamtykke={giSamtykke}
             avbrytDialog={avbrytDialog}
-            brukerType={BRUKERTYPE.ARBEIDSTAKER}
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
             delMedNavFunc={delMedNavFunc}

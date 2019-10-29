@@ -199,3 +199,7 @@ export const finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging = (oppfolg
         return new Date(o2.godkjentPlan.avbruttPlan.tidspunkt) - new Date(o2.godkjentPlan.avbruttPlan.tidspunkt);
     });
 };
+
+export const finnSistEndretAvNavn = (oppfolgingsplan) => {
+    return oppfolgingsplan.sistEndretAv.navn;
+};

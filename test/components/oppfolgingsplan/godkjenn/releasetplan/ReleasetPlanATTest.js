@@ -1,13 +1,11 @@
-import chai from 'chai';
 import React from 'react';
+import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import {
-    ReleasetPlan,
-} from 'oppfolgingsdialog-npm';
 import ReleasetPlanAT from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ReleasetPlanAT';
 import ArbeidsgiverHarTvangsgodkjent from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ArbeidsgiverHarTvangsgodkjent';
+import ReleasetPlan from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ReleasetPlan';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialoger';
 
 chai.use(chaiEnzyme());
