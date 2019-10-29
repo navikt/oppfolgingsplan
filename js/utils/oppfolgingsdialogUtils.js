@@ -200,6 +200,10 @@ export const finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging = (oppfolg
     });
 };
 
+export const finnOppfolgingsdialogMotpartNavn = (oppfolgingsdialog) => {
+    return oppfolgingsdialog.virksomhet.navn;
+};
+
 export const finnSistEndretAvNavn = (oppfolgingsplan) => {
     return oppfolgingsplan.sistEndretAv.navn;
 };

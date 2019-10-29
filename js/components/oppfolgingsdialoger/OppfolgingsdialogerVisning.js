@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
 import { getLedetekst, keyValue } from 'digisyfo-npm';
 import {
-    OppfolgingsdialogTeasere,
-    BRUKERTYPE,
-} from 'oppfolgingsdialog-npm';
-import {
     dinesykmeldingerReducerPt,
     ledereReducerPt,
 } from '../../propTypes';
@@ -21,6 +17,7 @@ import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsplanFilm from './OppfolgingsplanFilm';
 import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
 import OppfolgingsdialogerIngenplan from './opprett/OppfolgingsdialogerIngenplan';
+import OppfolgingsdialogTeasere from './OppfolgingsdialogTeasere';
 
 export const OppfolgingsdialogNyKnapp = ({ visOppfolgingsdialogOpprett }) => {
     return (<div className="oppfolgingsdialogNyDialog">
@@ -89,11 +86,9 @@ class OppfolgingsdialogerVisning extends Component {
                     />
                 }
                 <OppfolgingsdialogTeasere
-                    ledetekster={ledetekster}
                     oppfolgingsdialoger={aktivOppfolgingsdialoger}
                     tittel={aktivOppfolgingsdialoger.length > 1 ? getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.fler.header.tittel') :
                         getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.header.tittel')}
-                    brukerType={BRUKERTYPE.ARBEIDSTAKER}
                     rootUrl={getContextRoot()}
                     rootUrlPlaner={getContextRoot()}
                 />
@@ -101,12 +96,10 @@ class OppfolgingsdialogerVisning extends Component {
             }
             { harTidligereOppfolgingsdialoger(oppfolgingsdialoger) &&
             <OppfolgingsdialogTeasere
-                ledetekster={ledetekster}
                 oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
                 harTidligerOppfolgingsdialoger
                 tittel={getLedetekst('oppfolgingsdialoger.tidligereplaner.tittel')}
                 id="OppfolgingsdialogTeasereAT"
-                brukerType={BRUKERTYPE.ARBEIDSTAKER}
                 rootUrl={getContextRoot()}
                 rootUrlPlaner={getContextRoot()}
                 svgUrl={`${getContextRoot()}/img/svg/plan-godkjent.svg`}

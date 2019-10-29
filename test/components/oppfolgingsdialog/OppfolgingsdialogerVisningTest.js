@@ -4,13 +4,11 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { Knapp } from 'nav-frontend-knapper';
-import {
-    OppfolgingsdialogTeasere,
-} from 'oppfolgingsdialog-npm';
 import OppfolgingsdialogerVisning, { OppfolgingsdialogNyKnapp } from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerVisning';
 import OppfolgingsplanFilm from '../../../js/components/oppfolgingsdialoger/OppfolgingsplanFilm';
 import OppfolgingsdialogerOpprett from '../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerOpprett';
 import OppfolgingsdialogerIngenplan from '../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerIngenplan';
+import OppfolgingsdialogTeasere from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogTeasere';
 import {
     hentOppfolgingsdialogAktiv,
     hentOppfolgingsdialogTidligere,
