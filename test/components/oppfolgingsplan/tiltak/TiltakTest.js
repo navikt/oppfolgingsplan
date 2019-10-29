@@ -5,7 +5,6 @@ import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
 import {
     TiltakSkjema,
-    LeggTilElementKnapper,
     TiltakTabell,
 } from 'oppfolgingsdialog-npm';
 import { setLedetekster } from 'digisyfo-npm';
@@ -13,6 +12,7 @@ import ledetekster from '../../../mock/mockLedetekster';
 import Tiltak from '../../../../js/components/oppfolgingsplan/tiltak/Tiltak';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
+import LeggTilElementKnapper from '../../../../js/components/oppfolgingsplan/LeggTilElementKnapper';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

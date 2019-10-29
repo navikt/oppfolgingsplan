@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import {
-    LeggTilElementKnapper,
     TiltakTabell,
     BRUKERTYPE,
     TiltakSkjema,
@@ -23,6 +22,7 @@ import {
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
 import { capitalizeFirstLetter } from '../../../utils/textUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
+import LeggTilElementKnapper from '../LeggTilElementKnapper';
 
 class Tiltak extends Component {
     constructor(props) {
