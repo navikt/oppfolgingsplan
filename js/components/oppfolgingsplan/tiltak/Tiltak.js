@@ -4,7 +4,6 @@ import { findDOMNode } from 'react-dom';
 import {
     TiltakTabell,
     BRUKERTYPE,
-    TiltakSkjema,
 } from 'oppfolgingsdialog-npm';
 import {
     getLedetekst,
@@ -23,6 +22,7 @@ import { capitalizeFirstLetter } from '../../../utils/textUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import TiltakInfoboks from './TiltakInfoboks';
+import TiltakSkjema from './TiltakSkjema';
 
 class Tiltak extends Component {
     constructor(props) {
