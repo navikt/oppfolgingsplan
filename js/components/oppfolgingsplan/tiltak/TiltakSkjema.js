@@ -20,7 +20,6 @@ import {
 } from '../../../propTypes/opproptypes';
 import TekstFelt from '../../skjema/TekstFelt';
 import TekstOmrade from '../../skjema/TekstOmrade';
-import TiltakRadioKnapper from './TiltakRadioKnapper';
 import TiltakDatovelger from './TiltakDatovelger';
 import TiltakKnapper from './TiltakKnapper';
 import TiltakForeslaattAv from './TiltakForeslaattAv';
@@ -214,11 +213,6 @@ export class TiltakSkjemaKomponent extends Component {
 
                     <TiltakForeslaattAv
                         tiltak={tiltak}
-                    />
-
-                    <TiltakRadioKnapper
-                        tiltak={tiltak}
-                        setStatus={this.setStatus}
                     />
 
                     { this.state.status !== STATUS_TILTAK.IKKE_AKTUELT &&
