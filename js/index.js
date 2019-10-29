@@ -2,11 +2,20 @@ import 'whatwg-fetch';
 import 'babel-polyfill';
 import { render } from 'react-dom';
 import React from 'react';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import {
+    applyMiddleware,
+    combineReducers,
+    compose,
+    createStore,
+} from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { forlengInnloggetSesjon, hentLedetekster, setPerformOnHttpCalls, sjekkInnloggingssesjon } from 'digisyfo-npm';
-import { setPerformOnOppDialogHttpCalls } from 'oppfolgingsdialog-npm';
+import {
+    forlengInnloggetSesjon,
+    hentLedetekster,
+    setPerformOnHttpCalls,
+    sjekkInnloggingssesjon,
+} from 'digisyfo-npm';
 import AppRouter from './routers/AppRouter';
 import { hentVedlikehold } from './actions/vedlikehold_actions';
 import history from './history';
@@ -33,9 +42,6 @@ store.dispatch(forlengInnloggetSesjon());
 // </OBS>
 
 setPerformOnHttpCalls(() => {
-    store.dispatch(forlengInnloggetSesjon());
-});
-setPerformOnOppDialogHttpCalls(() => {
     store.dispatch(forlengInnloggetSesjon());
 });
 
