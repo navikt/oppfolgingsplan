@@ -5,7 +5,6 @@ import {
     TiltakTabell,
     BRUKERTYPE,
     TiltakSkjema,
-    TiltakInfoboks,
 } from 'oppfolgingsdialog-npm';
 import {
     getLedetekst,
@@ -23,6 +22,7 @@ import { sorterTiltakEtterNyeste } from '../../../utils/tiltakUtils';
 import { capitalizeFirstLetter } from '../../../utils/textUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
+import TiltakInfoboks from './TiltakInfoboks';
 
 class Tiltak extends Component {
     constructor(props) {
@@ -149,11 +149,8 @@ class Tiltak extends Component {
                                 :
                                 <div>
                                     <TiltakInfoboks
-                                        ledetekster={ledetekster}
                                         visTiltakSkjema={this.state.visTiltakSkjema}
                                         toggleSkjema={this.toggleTiltakSkjema}
-                                        tittel={getLedetekst('oppfolgingsdialog.tiltak.arbeidstaker.tittel')}
-                                        feilTekst={this.state.feilTekst}
                                     />
                                     <TiltakSkjema
                                         ledetekster={ledetekster}
@@ -173,12 +170,8 @@ class Tiltak extends Component {
                     :
                     <div>
                         <TiltakInfoboks
-                            ledetekster={ledetekster}
                             visTiltakSkjema={this.state.visTiltakSkjema}
                             toggleSkjema={this.toggleTiltakSkjema}
-                            tittel={getLedetekst('oppfolgingsdialog.tiltak.arbeidstaker.tittel')}
-                            feilTekst={this.state.feilTekst}
-                            feilType={this.state.feilType}
                         />
                         {
                             this.state.visTiltakSkjema &&
