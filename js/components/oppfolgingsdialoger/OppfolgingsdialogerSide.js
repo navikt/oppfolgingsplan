@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
     getLedetekst,
-    keyValue,
     hentToggles,
     togglesPt,
 } from 'digisyfo-npm';
@@ -144,7 +143,6 @@ Container.propTypes = {
     tilgang: oppfolgingsplanProptypes.tilgangReducerPt,
     virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
-    ledetekster: keyValue,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
     toggles: togglesPt,
     brodsmuler: PropTypes.arrayOf(brodsmulePt),
@@ -203,7 +201,6 @@ export const mapStateToProps = (state) => {
         toggles: state.toggles,
         virksomhet: state.virksomhet,
         bekreftetNyNaermesteLeder: state.nyNaermesteLeder.bekreftet,
-        ledetekster: state.ledetekster.data,
         oppfolgingsdialoger,
         brodsmuler: [{
             tittel: getLedetekst('landingsside.sidetittel'),

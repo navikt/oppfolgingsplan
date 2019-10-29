@@ -3,13 +3,9 @@ import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
 import {
     getLedetekst,
-    keyValue,
     togglesPt,
 } from 'digisyfo-npm';
-import {
-    OppfolgingsdialogUtenSykmelding,
-    OppfolgingsdialogerUtenAktivSykmelding,
-} from 'oppfolgingsdialog-npm';
+import { OppfolgingsdialogerUtenAktivSykmelding } from 'oppfolgingsdialog-npm';
 import {
     dinesykmeldingerReducerPt,
     ledereReducerPt,
@@ -39,6 +35,7 @@ import {
 } from '../../utils/reducerUtils';
 import NyNaermestelederInfoboks from './NyNaermestelederInfoboks';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
+import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
     const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger);
@@ -73,7 +70,6 @@ class Oppfolgingsdialoger extends Component {
     render() {
         const {
             oppfolgingsdialoger = [],
-            ledetekster,
             avkreftLeder,
             bekreftetNyNaermesteLeder,
             bekreftNyNaermesteLeder,
@@ -98,10 +94,7 @@ class Oppfolgingsdialoger extends Component {
             panel = (
                 <div>
                     <div className="blokk--l">
-                        <OppfolgingsdialogUtenSykmelding
-                            ledetekster={ledetekster}
-                            rootUrl={getContextRoot()}
-                        />
+                        <OppfolgingsdialogUtenSykmelding />
                     </div>
 
                     {!isEmpty(oppfolgingsdialoger) && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) &&
@@ -157,7 +150,6 @@ Oppfolgingsdialoger.propTypes = {
     person: oppfolgingsplanProptypes.personReducerPt,
     virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
-    ledetekster: keyValue,
     toggles: togglesPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
     bekreftNyNaermesteLeder: PropTypes.func,
