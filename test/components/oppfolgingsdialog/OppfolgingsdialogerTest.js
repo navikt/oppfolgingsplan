@@ -3,13 +3,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import { OppfolgingsdialogerUtenAktivSykmelding } from 'oppfolgingsdialog-npm';
 import Sidetopp from '../../../js/components/Sidetopp';
 import Oppfolgingsdialoger from '../../../js/components/oppfolgingsdialoger/Oppfolgingsdialoger';
 import IngenledereInfoboks from '../../../js/components/oppfolgingsdialoger/IngenledereInfoboks';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerInfoPersonvern';
 import OppfolgingsdialogUtenSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenSykmelding';
+import OppfolgingsdialogerUtenAktivSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerUtenAktivSykmelding';
 import getOppfolgingsdialog, { getOppfolgingsdialoger } from '../../mock/mockOppfolgingsdialoger';
 import {
     hentSykmeldingIkkeGyldigForOppfoelging,

@@ -5,7 +5,6 @@ import {
     getLedetekst,
     togglesPt,
 } from 'digisyfo-npm';
-import { OppfolgingsdialogerUtenAktivSykmelding } from 'oppfolgingsdialog-npm';
 import {
     dinesykmeldingerReducerPt,
     ledereReducerPt,
@@ -36,6 +35,7 @@ import {
 import NyNaermestelederInfoboks from './NyNaermestelederInfoboks';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
+import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
     const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger);
@@ -101,7 +101,6 @@ class Oppfolgingsdialoger extends Component {
                     <OppfolgingsdialogerUtenAktivSykmelding
                         oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
                         tittel={getLedetekst('oppfolgingsdialoger.tidligereplaner.tittel')}
-                        rootUrl={getContextRoot()}
                     />
                     }
                 </div>);
