@@ -7,7 +7,6 @@ import {
     togglesPt,
 } from 'digisyfo-npm';
 import {
-    AvbruttPlanNotifikasjonBoksAdvarsel,
     OppfolgingsdialogUtenSykmelding,
     OppfolgingsdialogerUtenAktivSykmelding,
 } from 'oppfolgingsdialog-npm';
@@ -39,6 +38,7 @@ import {
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
 import NyNaermestelederInfoboks from './NyNaermestelederInfoboks';
+import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
     const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger);
@@ -137,7 +137,6 @@ class Oppfolgingsdialoger extends Component {
 
             { dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 &&
             <AvbruttPlanNotifikasjonBoksAdvarsel
-                ledetekster={ledetekster}
                 motpartnavn={dialogerAvbruttAvMotpartSidenSistInnlogging[0].sistEndretAv.navn}
                 rootUrl={getContextRoot()}
             />
