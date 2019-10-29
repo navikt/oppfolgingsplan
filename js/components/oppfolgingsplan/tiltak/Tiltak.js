@@ -6,8 +6,6 @@ import {
     BRUKERTYPE,
     TiltakSkjema,
     TiltakInfoboks,
-    sorterTiltakEtterNyeste,
-    STATUS_TILTAK,
 } from 'oppfolgingsdialog-npm';
 import {
     getLedetekst,
@@ -19,7 +17,9 @@ import {
     oppfolgingsplanPt,
     tiltakReducerPt,
 } from '../../../propTypes/opproptypes';
+import { STATUS_TILTAK } from '../../../konstanter';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
+import { sorterTiltakEtterNyeste } from '../../../utils/tiltakUtils';
 import { capitalizeFirstLetter } from '../../../utils/textUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';

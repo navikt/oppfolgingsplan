@@ -22,3 +22,9 @@ export const STATUS = {
     UNDER_ARBEID: 'UNDER_ARBEID',
     UTDATERT: 'UTDATERT',
 };
+
+export const STATUS_TILTAK = {
+    FORSLAG: 'FORSLAG',
+    AVTALT: 'AVTALT',
+    IKKE_AKTUELT: 'IKKE_AKTUELT',
+};
