@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
-import { getLedetekst, keyValue } from 'digisyfo-npm';
+import { getLedetekst } from 'digisyfo-npm';
 import {
     dinesykmeldingerReducerPt,
     ledereReducerPt,
@@ -49,7 +49,6 @@ class OppfolgingsdialogerVisning extends Component {
     }
     render() {
         const {
-            ledetekster,
             oppfolgingsdialoger = [],
             opprettOppfolgingsdialog,
             kopierOppfolgingsdialog,
@@ -106,7 +105,7 @@ class OppfolgingsdialogerVisning extends Component {
                 svgAlt="OppfølgingsdialogTidligere"
             />
             }
-            <OppfolgingsplanFilm ledetekster={ledetekster} />
+            <OppfolgingsplanFilm />
         </div>);
     }
 }
@@ -114,7 +113,6 @@ OppfolgingsdialogerVisning.propTypes = {
     dinesykmeldinger: dinesykmeldingerReducerPt,
     naermesteLedere: ledereReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
-    ledetekster: keyValue,
     opprettOppfolgingsdialog: PropTypes.func,
     kopierOppfolgingsdialog: PropTypes.func,
 };

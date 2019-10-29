@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { getLedetekst, Utvidbar, keyValue } from 'digisyfo-npm';
+import {
+    getLedetekst,
+    Utvidbar,
+} from 'digisyfo-npm';
 import getContextRoot from '../../../../utils/getContextRoot';
 import {
     dokumentReducerPt,
@@ -17,7 +20,10 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
     }
 
     render() {
-        const { ledetekster, dokument, markerMottattTvungenGodkjenning } = this.props;
+        const {
+            dokument,
+            markerMottattTvungenGodkjenning,
+        } = this.props;
 
         let panel;
         if (dokument.henter) {
@@ -44,7 +50,7 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
             >
                 <div className="arbeidsgiverHarTvangsgodkjent">
                     <p>{getLedetekst('oppfolgingsdialog.arbeidsgiverhartvangsgodkjent.tekst')}</p>
-                    <Utvidbar className="utvidbar--oppfolgingsplan" tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.godkjent.utvidbar.tittel', ledetekster)}>
+                    <Utvidbar className="utvidbar--oppfolgingsplan" tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.godkjent.utvidbar.tittel')}>
                         <div className="godkjentPlanPdf">
                             { panel }
                         </div>
@@ -66,7 +72,6 @@ ArbeidsgiverHarTvangsgodkjent.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
     markerMottattTvungenGodkjenning: PropTypes.func,
     dokument: dokumentReducerPt,
-    ledetekster: keyValue,
     hentPdfurler: PropTypes.func,
 };
 

@@ -105,8 +105,6 @@ class Oppfolgingsdialog extends Component {
             panel = (<Samtykke
                 sendSamtykke={giSamtykke}
                 oppfolgingsdialog={oppfolgingsdialog}
-                ledetekster={ledetekster}
-                rootUrl={`${getContextRoot()}`}
             />);
         } else if (harNaermesteLeder(oppfolgingsdialog) && inneholderGodkjenninger(oppfolgingsdialog) && !erAvvistAvArbeidstaker(oppfolgingsdialog)) {
             disableNavigation = true;
@@ -123,7 +121,6 @@ class Oppfolgingsdialog extends Component {
         } else if (harNaermesteLeder(oppfolgingsdialog) && inneholderGodkjentPlan(oppfolgingsdialog)) {
             disableNavigation = true;
             panel = (<ReleasetPlanAT
-                ledetekster={ledetekster}
                 toggles={toggles}
                 oppfolgingsdialog={oppfolgingsdialog}
                 hentPdfurler={hentPdfurler}
@@ -182,7 +179,6 @@ class Oppfolgingsdialog extends Component {
                 tittel={oppfolgingsdialog.virksomhet.navn}
             />
             { !disableNavigation && <NavigasjonsTopp
-                ledetekster={ledetekster}
                 disabled={disableNavigation}
                 navn={oppfolgingsdialog.virksomhet.navn}
                 settAktivtSteg={settAktivtSteg}
@@ -193,7 +189,6 @@ class Oppfolgingsdialog extends Component {
                 { panel }
             </div>
             <NavigasjonsBunn
-                ledetekster={ledetekster}
                 disabled={disableNavigation}
                 settAktivtSteg={settAktivtSteg}
                 steg={navigasjontoggles.steg}

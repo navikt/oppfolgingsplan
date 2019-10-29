@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { keyValue, togglesPt } from 'digisyfo-npm';
+import { togglesPt } from 'digisyfo-npm';
 import getContextRoot from '../../../../utils/getContextRoot';
 import {
     delMedFastlegePt,
@@ -34,7 +34,6 @@ class ReleasetPlanAT extends Component {
 
     render() {
         const {
-            ledetekster,
             oppfolgingsdialog,
             hentPdfurler,
             dokument,
@@ -49,7 +48,6 @@ class ReleasetPlanAT extends Component {
         } = this.props;
         if (!this.state.settTvungenGodkjenning && foersteInnloggingSidenGodkjenning(oppfolgingsdialog) && planBleTvangsgodkjent(oppfolgingsdialog)) {
             return (<ArbeidsgiverHarTvangsgodkjent
-                ledetekster={ledetekster}
                 oppfolgingsdialog={oppfolgingsdialog}
                 hentPdfurler={hentPdfurler}
                 dokument={dokument}
@@ -82,7 +80,6 @@ ReleasetPlanAT.propTypes = {
     delMedNavFunc: PropTypes.func,
     dokument: dokumentReducerPt,
     oppfolgingsdialog: oppfolgingsplanPt,
-    ledetekster: keyValue,
     toggles: togglesPt,
     delmednav: delmednavPt,
     fastlegeDeling: delMedFastlegePt,

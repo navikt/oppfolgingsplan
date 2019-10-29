@@ -115,7 +115,6 @@ class Oppfolgingsdialoger extends Component {
         } else {
             panel = (
                 <OppfolgingsdialogerVisning
-                    ledetekster={ledetekster}
                     oppfolgingsdialoger={oppfolgingsdialoger}
                     dinesykmeldinger={dinesykmeldinger}
                     naermesteLedere={naermesteLedere}
@@ -144,9 +143,7 @@ class Oppfolgingsdialoger extends Component {
             <Sidetopp
                 tittel={getLedetekst('oppfolgingsdialoger.sidetittel')}
             />
-            <OppfolgingsdialogerInfoPersonvern
-                ledetekster={ledetekster}
-            />
+            <OppfolgingsdialogerInfoPersonvern />
 
             {panel}
         </div>);
