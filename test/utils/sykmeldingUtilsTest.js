@@ -1,6 +1,5 @@
 import sinon from 'sinon';
 import chai from 'chai';
-import { MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING } from 'oppfolgingsdialog-npm';
 import {
     finnArbeidsgivereForGyldigeSykmeldinger,
     sykmeldtHarManglendeNaermesteLeder,
@@ -12,6 +11,7 @@ import {
 } from '../../js/utils/sykmeldingUtils';
 import getSykmelding, { getSykmeldinger, getArbeidsgivere, getArbeidsgiver } from '../mock/mockSykmeldinger';
 import { getLedere } from '../mock/mockLedere';
+import { MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING } from '../../js/konstanter';
 
 const expect = chai.expect;
 
