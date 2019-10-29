@@ -64,6 +64,7 @@
 @import "_oppfolgingsdialogerInfoPersonvern";
 @import "_oppfolgingsdialogtabell";
 @import "_oppfolgingsplaner";
+@import "_oppfolgingsplanInnhold";
 @import "_opplysninger";
 @import "_overstyringer-dekorator";
 @import "_periodevelger";
@@ -101,4 +102,38 @@
 
 p {
 	margin-top: 0;
+}
+
+.mixin-panel-padding() {
+	padding-left: 1em;
+	padding-right: 1em;
+
+	@media(min-width: @screen-sm-min) {
+		padding-left: 2em;
+		padding-right: 2em;
+	}
+}
+
+.typo-sitat-mixin {
+	.typo-normal-mixin();
+	font-style: italic;.knapp--tekst
+q {
+	quotes: "\201C" "\201D";
+}
+}
+
+.z-index-1 {
+	* {
+		z-index: 1 !important;
+	}
+}
+
+.lenke--avbryt {
+	text-transform: uppercase;
+}
+
+.tekst--dynamisk {
+	white-space: pre-line;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
 }
