@@ -1,12 +1,12 @@
-import chai from 'chai';
 import React from 'react';
+import chai from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
-import { TiltakTabell } from 'oppfolgingsdialog-npm';
 import { setLedetekster } from 'digisyfo-npm';
 import ledetekster from '../../../mock/mockLedetekster';
 import Tiltak from '../../../../js/components/oppfolgingsplan/tiltak/Tiltak';
+import TiltakListe from '../../../../js/components/oppfolgingsplan/tiltak/liste/TiltakListe';
 import TiltakSkjema from '../../../../js/components/oppfolgingsplan/tiltak/TiltakSkjema';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
@@ -134,19 +134,19 @@ describe('Tiltak', () => {
             />);
         });
 
-        it('Skal vise TiltakTabell, om det er tiltak', () => {
-            expect(componentMedTiltak.find(TiltakTabell)).to.have.length(1);
+        it('Skal vise TiltakListe, om det er tiltak', () => {
+            expect(componentMedTiltak.find(TiltakListe)).to.have.length(1);
         });
 
-        it('Skal vise TiltakTabell, om det er tiltak og visTiltakSkjema er true', () => {
+        it('Skal vise TiltakListe, om det er tiltak og visTiltakSkjema er true', () => {
             componentMedTiltak.setState({
                 visTiltakSkjema: true,
             });
-            expect(componentMedTiltak.find(TiltakTabell)).to.have.length(1);
+            expect(componentMedTiltak.find(TiltakListe)).to.have.length(1);
         });
 
-        it('Skal vise TiltakTabell, om det er tiltak og visTiltakSkjema er false', () => {
-            expect(componentMedTiltak.find(TiltakTabell)).to.have.length(1);
+        it('Skal vise TiltakListe, om det er tiltak og visTiltakSkjema er false', () => {
+            expect(componentMedTiltak.find(TiltakListe)).to.have.length(1);
         });
     });
 });

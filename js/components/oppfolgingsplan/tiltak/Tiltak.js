@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import {
-    TiltakTabell,
-    BRUKERTYPE,
-} from 'oppfolgingsdialog-npm';
-import {
     getLedetekst,
-    keyValue,
     scrollTo,
 } from 'digisyfo-npm';
 import getContextRoot from '../../../utils/getContextRoot';
@@ -17,12 +12,13 @@ import {
 } from '../../../propTypes/opproptypes';
 import { STATUS_TILTAK } from '../../../konstanter';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
-import { sorterTiltakEtterNyeste } from '../../../utils/tiltakUtils';   
+import { sorterTiltakEtterNyeste } from '../../../utils/tiltakUtils';
 import { capitalizeFirstLetter } from '../../../utils/textUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import TiltakInfoboks from './TiltakInfoboks';
 import TiltakSkjema from './TiltakSkjema';
+import TiltakListe from './liste/TiltakListe';
 
 class Tiltak extends Component {
     constructor(props) {
@@ -54,7 +50,7 @@ class Tiltak extends Component {
             this.setState({
                 lagreNyTiltakFeilet: true,
                 visTiltakSkjema: true,
-                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding', this.props.ledetekster),
+                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'),
             });
         }
     }
@@ -122,7 +118,6 @@ class Tiltak extends Component {
 
     render() {
         const {
-            ledetekster,
             oppfolgingsdialog,
             tiltak,
         } = this.props;
@@ -141,7 +136,6 @@ class Tiltak extends Component {
                                     feilTekst={this.state.feilTekst}
                                 >
                                     <LeggTilElementKnapper
-                                        ledetekster={ledetekster}
                                         visSkjema={this.state.visTiltakSkjema}
                                         toggleSkjema={this.toggleTiltakSkjema}
                                     />
@@ -153,11 +147,9 @@ class Tiltak extends Component {
                                         toggleSkjema={this.toggleTiltakSkjema}
                                     />
                                     <TiltakSkjema
-                                        ledetekster={ledetekster}
                                         sendLagre={this.sendLagreTiltak}
                                         avbryt={this.skjulSkjema}
                                         fnr={oppfolgingsdialog.arbeidstaker.fnr}
-                                        brukerType={BRUKERTYPE.ARBEIDSTAKER}
                                         varselTekst={this.state.varselTekst}
                                         oppdateringFeilet={this.state.lagreNyTiltakFeilet}
                                         tiltakReducer={tiltak}
@@ -176,11 +168,9 @@ class Tiltak extends Component {
                         {
                             this.state.visTiltakSkjema &&
                             <TiltakSkjema
-                                ledetekster={ledetekster}
                                 sendLagre={this.sendLagreTiltak}
                                 avbryt={this.skjulSkjema}
                                 fnr={oppfolgingsdialog.arbeidstaker.fnr}
-                                brukerType={BRUKERTYPE.ARBEIDSTAKER}
                                 ref={(lagreSkjema) => {
                                     this.lagreSkjema = lagreSkjema;
                                 }}
@@ -190,8 +180,7 @@ class Tiltak extends Component {
                                 rootUrlImg={getContextRoot()}
                             />
                         }
-                        <TiltakTabell
-                            ledetekster={ledetekster}
+                        <TiltakListe
                             liste={sorterTiltakEtterNyeste(oppfolgingsdialog.tiltakListe)}
                             urlImgVarsel={`${getContextRoot()}/img/svg/varseltrekant.svg`}
                             sendLagre={this.sendLagreTiltak}
@@ -199,7 +188,6 @@ class Tiltak extends Component {
                             sendLagreKommentar={this.sendLagreKommentar}
                             sendSlettKommentar={this.sendSlettKommentar}
                             fnr={oppfolgingsdialog.arbeidstaker.fnr}
-                            brukerType={BRUKERTYPE.ARBEIDSTAKER}
                             visFeilMelding={this.visOppdateringFeilet}
                             feilMelding={this.state.oppdaterTiltakFeilet}
                             rootUrlImg={getContextRoot()}
@@ -211,7 +199,6 @@ class Tiltak extends Component {
 }
 
 Tiltak.propTypes = {
-    ledetekster: keyValue,
     tiltak: tiltakReducerPt,
     oppfolgingsdialog: oppfolgingsplanPt,
     lagreTiltak: PropTypes.func,
