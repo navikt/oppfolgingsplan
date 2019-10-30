@@ -3,14 +3,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import {
-    Godkjenn,
-    Godkjenninger,
-} from 'oppfolgingsdialog-npm';
+import { Godkjenninger } from 'oppfolgingsdialog-npm';
 import Oppfolgingsdialog, { erAvvistAvArbeidstaker } from '../../../js/components/oppfolgingsplan/Oppfolgingsdialog';
 import IngenlederInfoboks from '../../../js/components/oppfolgingsdialoger/IngenlederInfoboks';
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
 import AvbruttGodkjentPlanVarsel from '../../../js/components/oppfolgingsplan/AvbruttGodkjentPlanVarsel';
+import Godkjenn from '../../../js/components/oppfolgingsplan/godkjenn/godkjenn/Godkjenn';
 import NavigasjonsBunn from '../../../js/components/oppfolgingsplan/NavigasjonsBunn';
 import NavigasjonsTopp from '../../../js/components/oppfolgingsplan/NavigasjonsTopp';
 import Samtykke from '../../../js/components/oppfolgingsplan/godkjenn/samtykke/Samtykke';

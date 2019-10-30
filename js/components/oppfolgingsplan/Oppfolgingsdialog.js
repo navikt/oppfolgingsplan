@@ -8,7 +8,6 @@ import {
 } from 'digisyfo-npm';
 import {
     BRUKERTYPE,
-    Godkjenn,
     Godkjenninger,
 } from 'oppfolgingsdialog-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
@@ -38,6 +37,7 @@ import IngenlederInfoboks from '../oppfolgingsdialoger/IngenlederInfoboks';
 import Samtykke from './godkjenn/samtykke/Samtykke';
 import SideOverskrift from './SideOverskrift';
 import Tiltak from './tiltak/Tiltak';
+import Godkjenn from './godkjenn/godkjenn/Godkjenn';
 
 const skalViseSamtykke = (oppfolgingsdialog) => {
     return harNaermesteLeder(oppfolgingsdialog)
@@ -155,13 +155,11 @@ class Oppfolgingsdialog extends Component {
                     panel = (<IngenlederInfoboks />);
                 } else {
                     panel = (<Godkjenn
-                        ledetekster={ledetekster}
                         oppfolgingsdialog={oppfolgingsdialog}
                         forespoerselRevidering={forespoerselRevidering}
                         forespoerRevidering={forespoerRevidering}
                         settAktivtSteg={settAktivtSteg}
                         godkjennPlan={godkjennDialog}
-                        brukerType={BRUKERTYPE.ARBEIDSTAKER}
                         rootUrl={`${getContextRoot()}`}
                     />);
                 }

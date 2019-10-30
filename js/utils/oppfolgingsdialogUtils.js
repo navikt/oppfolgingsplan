@@ -19,6 +19,10 @@ export const harNaermesteLeder = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
 };
 
+export const erIkkeOppfolgingsdialogUtfylt = (oppfolgingsplan) => {
+    return oppfolgingsplan.arbeidsoppgaveListe.length === 0 || oppfolgingsplan.tiltakListe.length === 0;
+};
+
 export const inneholderGodkjenninger = (oppfolgingsdialog) => {
     return oppfolgingsdialog.godkjenninger.length > 0;
 };
