@@ -4,7 +4,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import {
     getLedetekst,
     getHtmlLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import getContextRoot from '../../../../utils/getContextRoot';
 

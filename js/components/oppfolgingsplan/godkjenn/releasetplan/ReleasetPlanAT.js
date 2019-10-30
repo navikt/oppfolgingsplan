@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { togglesPt } from 'digisyfo-npm';
+import { togglesPt } from '@navikt/digisyfo-npm';
 import getContextRoot from '../../../../utils/getContextRoot';
 import {
     delMedFastlegePt,

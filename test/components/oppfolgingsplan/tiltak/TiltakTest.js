@@ -3,7 +3,7 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
-import { setLedetekster } from 'digisyfo-npm';
+import { setLedetekster } from '@navikt/digisyfo-npm';
 import ledetekster from '../../../mock/mockLedetekster';
 import Tiltak from '../../../../js/components/oppfolgingsplan/tiltak/Tiltak';
 import TiltakListe from '../../../../js/components/oppfolgingsplan/tiltak/liste/TiltakListe';

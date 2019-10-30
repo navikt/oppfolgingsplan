@@ -3,7 +3,7 @@ import {
     ledeteksterSagas,
     togglesSagas,
     sykeforlopsPerioderSagas,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import arbeidsforholdSagas from './oppfolgingsplan/arbeidsforholdSagas';
 import arbeidsoppgaveSagas from './oppfolgingsplan/arbeidsoppgaveSagas';
 import avbrytdialogSagas from './oppfolgingsplan/avbrytdialogSagas';

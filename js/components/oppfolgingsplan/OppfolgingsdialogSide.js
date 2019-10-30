@@ -7,7 +7,7 @@ import {
     togglesPt,
     sykeforlopsPerioderReducerPt,
     hentSykeforlopsPerioder,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import getContextRoot from '../../utils/getContextRoot';
 import history from '../../history';
 import Side from '../../sider/Side';

@@ -1,4 +1,4 @@
-import { getCookie } from 'digisyfo-npm';
+import { getCookie } from '@navikt/digisyfo-npm';
 import { Logger } from '../logging';
 
 export default new Logger({

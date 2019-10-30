@@ -5,7 +5,7 @@ import {
     takeEvery,
     all,
 } from 'redux-saga/effects';
-import { get, post, log } from 'digisyfo-npm';
+import { get, post, log } from '@navikt/digisyfo-npm';
 import * as actions from '../actions/ledere_actions';
 import * as actiontyper from '../actions/actiontyper';
 

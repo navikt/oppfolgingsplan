@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 

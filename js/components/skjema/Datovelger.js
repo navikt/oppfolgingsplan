@@ -6,7 +6,7 @@ import {
     formValueSelector,
 } from 'redux-form';
 import MaskedInput from 'react-maskedinput';
-import { toDatePrettyPrint } from 'digisyfo-npm';
+import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import Feilmelding from './Feilmelding';
 import DayPickerComponent from './DayPicker';
 import { erGyldigDato, erGyldigDatoformat } from '../../utils/datoUtils';

@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import { setLedetekster } from 'digisyfo-npm';
+import { setLedetekster } from '@navikt/digisyfo-npm';
 import ledetekster from '../../../mock/mockLedetekster';
 import Arbeidsoppgaver from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialoger';

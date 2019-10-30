@@ -5,7 +5,7 @@ import {
     getLedetekst,
     hentToggles,
     togglesPt,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import { populerPlanFraState } from '../../utils/stateUtils';
 import { kopierOppfolgingsdialog } from '../../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';

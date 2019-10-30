@@ -15,7 +15,7 @@ import {
     hentLedetekster,
     setPerformOnHttpCalls,
     sjekkInnloggingssesjon,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import AppRouter from './routers/AppRouter';
 import { hentVedlikehold } from './actions/vedlikehold_actions';
 import history from './history';

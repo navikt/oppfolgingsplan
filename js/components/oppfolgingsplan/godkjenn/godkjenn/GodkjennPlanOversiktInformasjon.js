@@ -4,7 +4,7 @@ import { HjelpetekstUnderVenstre } from 'nav-frontend-hjelpetekst';
 import {
     getLedetekst,
     toDatePrettyPrint,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import {
     KANGJENNOMFOERES,
     STATUS_TILTAK,

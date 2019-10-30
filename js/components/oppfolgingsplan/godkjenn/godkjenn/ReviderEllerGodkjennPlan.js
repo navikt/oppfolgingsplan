@@ -8,7 +8,7 @@ import {
 import {
     getLedetekst,
     Bjorn,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import {
     forespoerselRevideringPt,
     oppfolgingsplanPt,

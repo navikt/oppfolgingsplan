@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom';
 import {
     getLedetekst,
     scrollTo,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import getContextRoot from '../../../utils/getContextRoot';
 import {
     oppfolgingsplanPt,

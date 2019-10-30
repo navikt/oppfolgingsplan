@@ -1,4 +1,4 @@
-import { getCookie } from 'digisyfo-npm';
+import { getCookie } from '@navikt/digisyfo-npm';
 
 export const Logger = function () {
     this.error = (...args) => {

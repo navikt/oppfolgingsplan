@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import getContextRoot from '../../../utils/getContextRoot';
 import {

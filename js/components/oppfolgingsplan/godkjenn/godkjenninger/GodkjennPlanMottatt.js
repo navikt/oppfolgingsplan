@@ -8,7 +8,7 @@ import {
     getHtmlLedetekst,
     getLedetekst,
     Utvidbar,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';

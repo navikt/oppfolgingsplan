@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     getLedetekst,
     Utvidbar,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import {
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,

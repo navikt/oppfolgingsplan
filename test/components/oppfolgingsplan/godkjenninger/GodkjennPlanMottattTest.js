@@ -6,7 +6,7 @@ import {
     Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
-import { Utvidbar } from 'digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import OppfolgingsplanInnholdboks from '../../../../js/components/app/OppfolgingsplanInnholdboks';
 import GodkjennPlanMottatt, {
     GodkjennPlanMottattUtvidbar,

@@ -4,7 +4,7 @@ import {
     getLedetekst,
     sykeforlopsPerioderReducerPt,
     togglesPt,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
     finnOgHentArbeidsforholdSomMangler,

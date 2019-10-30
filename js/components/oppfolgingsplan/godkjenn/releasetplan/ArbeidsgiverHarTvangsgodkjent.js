@@ -4,7 +4,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import {
     getLedetekst,
     Utvidbar,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import getContextRoot from '../../../../utils/getContextRoot';
 import {
     dokumentReducerPt,

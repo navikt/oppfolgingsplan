@@ -4,7 +4,7 @@ import {
     getHtmlLedetekst,
     getLedetekst,
     Utvidbar,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsdialogUtils';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';

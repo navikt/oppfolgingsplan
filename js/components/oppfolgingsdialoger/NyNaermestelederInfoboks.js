@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     getLedetekst,
     getHtmlLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import {
     Fareknapp,
     Hovedknapp,

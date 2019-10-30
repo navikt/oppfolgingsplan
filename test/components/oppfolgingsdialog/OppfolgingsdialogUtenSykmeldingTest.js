@@ -2,7 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { setLedetekster } from 'digisyfo-npm';
+import { setLedetekster } from '@navikt/digisyfo-npm';
 import OppfolgingsdialogUtenSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenSykmelding';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 

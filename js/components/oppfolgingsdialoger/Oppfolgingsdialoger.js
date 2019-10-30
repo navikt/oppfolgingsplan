@@ -4,7 +4,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import {
     getLedetekst,
     togglesPt,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import {
     dinesykmeldingerReducerPt,
     ledereReducerPt,
