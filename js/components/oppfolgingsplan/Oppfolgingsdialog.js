@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
     getLedetekst,
-    keyValue,
     sykeforlopsPerioderReducerPt,
     togglesPt,
 } from 'digisyfo-npm';
-import {
-    BRUKERTYPE,
-    Godkjenninger,
-} from 'oppfolgingsdialog-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
     finnOgHentArbeidsforholdSomMangler,
@@ -38,6 +33,7 @@ import Samtykke from './godkjenn/samtykke/Samtykke';
 import SideOverskrift from './SideOverskrift';
 import Tiltak from './tiltak/Tiltak';
 import Godkjenn from './godkjenn/godkjenn/Godkjenn';
+import Godkjenninger from './godkjenn/godkjenninger/Godkjenninger';
 
 const skalViseSamtykke = (oppfolgingsdialog) => {
     return harNaermesteLeder(oppfolgingsdialog)
@@ -72,7 +68,6 @@ class Oppfolgingsdialog extends Component {
             lagreKommentar,
             slettKommentar,
             oppfolgingsdialog,
-            ledetekster,
             settAktivtSteg,
             avvisDialog,
             dokument,
@@ -112,10 +107,7 @@ class Oppfolgingsdialog extends Component {
                 avvisDialog={avvisDialog}
                 oppfolgingsdialog={oppfolgingsdialog}
                 godkjennPlan={godkjennDialog}
-                ledetekster={ledetekster}
                 nullstillGodkjenning={nullstillGodkjenning}
-                brukerType={BRUKERTYPE.ARBEIDSTAKER}
-                rootUrl={`${getContextRoot()}`}
                 rootUrlPlaner={`${getContextRoot()}`}
             />);
         } else if (harNaermesteLeder(oppfolgingsdialog) && inneholderGodkjentPlan(oppfolgingsdialog)) {
@@ -197,7 +189,6 @@ class Oppfolgingsdialog extends Component {
 }
 
 Oppfolgingsdialog.propTypes = {
-    ledetekster: keyValue,
     avbrytdialogReducer: oppfolgingsplanProptypes.avbrytplanReducerPt,
     arbeidsoppgaver: oppfolgingsplanProptypes.arbeidsoppgaverReducerPt,
     tiltak: oppfolgingsplanProptypes.tiltakReducerPt,

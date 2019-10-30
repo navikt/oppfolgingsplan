@@ -5,6 +5,12 @@ import {
 import { finnArbeidsgivereForGyldigeSykmeldinger } from './sykmeldingUtils';
 import { erGyldigDatoIFortiden } from './datoUtils';
 
+export const hentGodkjenningsTidspunkt = (oppfolgingsplan) => {
+    return oppfolgingsplan.godkjenninger.filter((godkjenning) => {
+        return godkjenning.godkjent === true;
+    })[0].gyldighetstidspunkt;
+};
+
 export const finnNyesteGodkjenning = (godkjenninger) => {
     return godkjenninger.sort((g1, g2) => {
         return new Date(g2.godkjenningsTidspunkt) - new Date(g1.godkjenningsTidspunkt);

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
     getLedetekst,
-    keyValue,
     hentToggles,
     togglesPt,
     sykeforlopsPerioderReducerPt,
@@ -180,7 +179,6 @@ Container.propTypes = {
     tiltak: oppfolgingsplanProptypes.tiltakReducerPt,
     virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
-    ledetekster: keyValue,
     oppfolgingsdialog: oppfolgingsplanProptypes.oppfolgingsplanPt,
     sykeforlopsPerioder: sykeforlopsPerioderReducerPt,
     toggles: togglesPt,
@@ -251,7 +249,6 @@ export function mapStateToProps(state, ownProps) {
             || state.avbrytdialogReducer.sendingFeilet
             || state.nullstill.sendingFeilet
             || state.samtykke.sendingFeilet,
-        ledetekster: state.ledetekster.data,
         arbeidsforhold: state.arbeidsforhold,
         arbeidsoppgaver: state.arbeidsoppgaver,
         avbrytdialogReducer: state.avbrytdialogReducer,
