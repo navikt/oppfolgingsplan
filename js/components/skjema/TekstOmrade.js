@@ -4,13 +4,22 @@ import { Textarea } from 'nav-frontend-skjema';
 import { fieldPropTypes } from '../../propTypes/fieldproptypes';
 
 const Tekstomrade = (props) => {
-    const { meta, input, id, maxLength } = props;
+    const {
+        meta,
+        input,
+        id,
+        maxLength,
+    } = props;
 
-    const feilmelding = meta.error ? { feilmelding: meta.error } : undefined;
+    const feilmelding = meta.error
+        ? { feilmelding: meta.error }
+        : undefined;
 
-    return (
-        <Textarea maxLength={maxLength} id={id} {...input} feil={feilmelding} />
-    );
+    return (<Textarea
+        maxLength={maxLength}
+        id={id}
+        feil={feilmelding}
+        {...input} />);
 };
 
 Tekstomrade.propTypes = {

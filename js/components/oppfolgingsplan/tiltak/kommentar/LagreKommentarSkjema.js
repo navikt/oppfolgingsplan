@@ -139,9 +139,9 @@ const validate = (values) => {
         feilmeldinger.tekst = 'Ugyldig spesialtegn er oppgitt';
     }
     const tekstLengde = values.tekst ? values.tekst.length : 0;
-    const tekstMaksLengde = MAX_LENGTH;
-    if (tekstLengde > tekstMaksLengde) {
-        feilmeldinger.tekst = `Maks ${tekstMaksLengde} tegn tillatt`;
+
+    if (tekstLengde > MAX_LENGTH) {
+        feilmeldinger.tekst = `Maks ${MAX_LENGTH} tegn tillatt`;
     }
     return feilmeldinger;
 };

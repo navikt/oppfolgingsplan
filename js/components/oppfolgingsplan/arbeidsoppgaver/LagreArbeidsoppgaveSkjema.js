@@ -403,9 +403,9 @@ const validate = (values) => {
         feilmeldinger.beskrivelse = 'Ugyldig spesialtegn er oppgitt';
     }
     const beskrivelseLengde = values.beskrivelse ? values.beskrivelse.length : 0;
-    const beskrivelseMaksLengde = MAX_LENGTH;
-    if (beskrivelseLengde > beskrivelseMaksLengde) {
-        feilmeldinger.beskrivelse = `Maks ${beskrivelseMaksLengde} tegn tillatt`;
+
+    if (beskrivelseLengde > MAX_LENGTH) {
+        feilmeldinger.beskrivelse = `Maks ${MAX_LENGTH} tegn tillatt`;
     }
     return feilmeldinger;
 };
