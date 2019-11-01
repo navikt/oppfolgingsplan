@@ -32,6 +32,7 @@ export const skjemaFeltBeskrivelsePt = PropTypes.shape({
     }),
 });
 
+const MAX_LENGTH = 1000;
 
 const LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN = 'lagreArbeidsgiver';
 export const FELTER = {
@@ -121,6 +122,7 @@ export const ArbeidsoppgaveBeskrivelse = ({ felt, gjennomfoeringSvarValgt }) => 
                 name={felt.navn}
                 id={`${felt.navn}-input`}
                 aria-labelledby={felt.navn}
+                maxLength={MAX_LENGTH}
                 component={Tekstomraade}
                 placeholder="Skriv inn tekst"
                 rows="5"
@@ -401,7 +403,7 @@ const validate = (values) => {
         feilmeldinger.beskrivelse = 'Ugyldig spesialtegn er oppgitt';
     }
     const beskrivelseLengde = values.beskrivelse ? values.beskrivelse.length : 0;
-    const beskrivelseMaksLengde = 1000;
+    const beskrivelseMaksLengde = MAX_LENGTH;
     if (beskrivelseLengde > beskrivelseMaksLengde) {
         feilmeldinger.beskrivelse = `Maks ${beskrivelseMaksLengde} tegn tillatt`;
     }

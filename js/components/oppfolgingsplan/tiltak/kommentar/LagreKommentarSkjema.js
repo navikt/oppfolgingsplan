@@ -11,6 +11,9 @@ import { kommentarReducerPt } from '../../../../propTypes/opproptypes';
 import TekstOmrade from '../../../skjema/TekstOmrade';
 import TiltakVarselFeil from '../TiltakVarselFeil';
 
+
+const MAX_LENGTH = 1000;
+
 export const KommentarBeskrivelse = ({ felt, elementId }) => {
     return (
         <div className="skjemaelement lagreKommentarSkjema__inputgruppe">
@@ -25,6 +28,7 @@ export const KommentarBeskrivelse = ({ felt, elementId }) => {
                 name={felt}
                 id={`${elementId}`}
                 aria-labelledby={felt}
+                maxLength={MAX_LENGTH}
                 component={TekstOmrade}
                 placeholder="Skriv inn tekst"
                 rows="6"
@@ -135,7 +139,7 @@ const validate = (values) => {
         feilmeldinger.tekst = 'Ugyldig spesialtegn er oppgitt';
     }
     const tekstLengde = values.tekst ? values.tekst.length : 0;
-    const tekstMaksLengde = 1000;
+    const tekstMaksLengde = MAX_LENGTH;
     if (tekstLengde > tekstMaksLengde) {
         feilmeldinger.tekst = `Maks ${tekstMaksLengde} tegn tillatt`;
     }
