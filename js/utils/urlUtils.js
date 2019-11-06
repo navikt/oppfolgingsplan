@@ -13,3 +13,24 @@ export const getSykefravaerUrl = () => {
         ? 'https://sykefravaer.herokuapp.com'
         : '/sykefravaer';
 };
+
+export const isLocal = () => {
+    return window.location.host.indexOf('localhost') > -1;
+};
+
+export const isPreProd = () => {
+    return window.location.href.indexOf('-q') > -1;
+};
+
+export const getNaisInfix = () => {
+    return isPreProd()
+        ? '-q'
+        : '';
+};
+
+export const fullNaisUrl = (host, path) => {
+    if (isLocal()) {
+        return path;
+    }
+    return `https://${host}${getNaisInfix()}.nav.no${path}`;
+};
