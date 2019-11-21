@@ -237,7 +237,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send();
     });
 
-    server.get('/restoppfoelgingsdialog/api/arbeidsforhold', (req, res) => {
+    server.get('/syfooprest/api/arbeidsforhold', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[ARBEIDSFORHOLD]));
     });
