@@ -34,7 +34,6 @@ const KONTAKTINFO = 'kontaktinfo';
 const NAERMESTELEDER = 'naermesteleder';
 const PERIODER = 'perioder';
 const PERSON = 'person';
-const PERSONVIRKSOMHETSNUMMER = 'personVirksomhetsnummer';
 const VIRKSOMHET = 'virksomhet';
 const SISTE = 'siste';
 
@@ -66,7 +65,6 @@ lastFilTilMinne(KONTAKTINFO);
 lastFilTilMinne(NAERMESTELEDER);
 lastFilTilMinne(PERIODER);
 lastFilTilMinne(PERSON);
-lastFilTilMinne(PERSONVIRKSOMHETSNUMMER);
 lastFilTilMinne(VIRKSOMHET);
 lastFilTilMinne(FORRIGE_LEDER);
 lastFilTilMinne(SISTE);
@@ -258,11 +256,6 @@ function mockForOpplaeringsmiljo(server) {
     server.get('/restoppfoelgingsdialog/api/naermesteleder/:fnr', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[NAERMESTELEDER]));
-    });
-
-    server.get('/restoppfoelgingsdialog/api/person/:fnr?virksomhetsnummer=:vnr', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[PERSONVIRKSOMHETSNUMMER]));
     });
 
     server.get('/syforest/sykeforloep/siste/perioder', (req, res) => {
