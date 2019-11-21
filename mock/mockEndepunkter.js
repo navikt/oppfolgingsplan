@@ -250,7 +250,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[PERSON]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/kontaktinfo/:fnr', (req, res) => {
+    server.get('/syfooprest/api/kontaktinfo/:fnr', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[KONTAKTINFO]));
     });
