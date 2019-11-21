@@ -245,7 +245,7 @@ function mockForOpplaeringsmiljo(server) {
     });
 
 
-    server.get('/restoppfoelgingsdialog/api/person/:fnr', (req, res) => {
+    server.get('/syfooprest/api/person/:fnr', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[PERSON]));
     });

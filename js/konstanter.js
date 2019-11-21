@@ -3,6 +3,10 @@ export const tekstfeltRegex = new RegExp('.*<[^ ][^>]+[^ ]>.*');
 export const maanedListe = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember'];
 export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING = 4;
 
+export const HOST_NAMES = {
+    SYFOOPREST: 'syfooprest',
+};
+
 export const KANGJENNOMFOERES = {
     KAN: 'KAN',
     KAN_IKKE: 'KAN_IKKE',
