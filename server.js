@@ -35,7 +35,6 @@ const renderApp = (decoratorFragments) => {
                 {
                     SYFOTEKSTER_URL: '/syfotekster/api',
                     SYFOREST_URL: '/syforest',
-                    OPPFOLGINGSDIALOGREST_URL: '/restoppfoelgingsdialog/api',
                 },
                 decoratorFragments,
                 settings,

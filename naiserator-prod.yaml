@@ -45,5 +45,5 @@ spec:
       value: https://syfoapi.nais.oera.no/syfotekster/api/tekster
     - name: SYKEFRAVAERAPI_URL
       value: https://itjenester.oera.no/syforest
-    - name: OPPFOELGINGSDIALOGAPI_URL
-      value: https://restoppfoelgingsdialog.nais.oera.no/restoppfoelgingsdialog/api
+    - name: SYFOOPRESTAPI_URL
+      value: https://syfooprest.nais.oera.no/syfooprest/api

@@ -228,7 +228,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[VIRKSOMHET]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/naermesteleder/:fnr/forrige', (req, res) => {
+    server.get('/syfooprest/api/naermesteleder/:fnr/forrige', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[FORRIGE_LEDER]));
     });
@@ -253,7 +253,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[KONTAKTINFO]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/naermesteleder/:fnr', (req, res) => {
+    server.get('/syfooprest/api/naermesteleder/:fnr', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[NAERMESTELEDER]));
     });
