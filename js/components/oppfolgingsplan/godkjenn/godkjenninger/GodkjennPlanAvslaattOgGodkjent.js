@@ -14,23 +14,23 @@ import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInf
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 
-export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
+export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsplan, rootUrl }) => {
     const tittelNokkel = 'oppfolgingsdialog.arbeidstaker.godkjennplan.mottatt.utvidbar.tittel';
     return (
         <Utvidbar className="utvidbar--oppfolgingsplan" tittel={getLedetekst(tittelNokkel)}>
             <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsdialog}
+                oppfolgingsdialog={oppfolgingsplan}
                 rootUrl={rootUrl}
             />
         </Utvidbar>
     );
 };
 GodkjennPlanMottattUtvidbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     rootUrl: PropTypes.string,
 };
 
-export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, avvisDialog }) => {
+export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsplan, avvisDialog }) => {
     return (
         <div className="knapperad knapperad--justervenstre">
             <div className="knapperad__element">
@@ -38,14 +38,14 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, av
                     name="godkjentKnapp"
                     id="godkjentKnapp"
                     autoFocus
-                    onClick={() => { godkjennPlan(oppfolgingsdialog.id, null, true, oppfolgingsdialog.arbeidstaker.fnr); }}>
+                    onClick={() => { godkjennPlan(oppfolgingsplan.id, null, true, oppfolgingsplan.arbeidstaker.fnr); }}>
                     {getLedetekst('oppfolgingsdialog.godkjennPlanMottatt.knapp.godkjenn')}
                 </Hovedknapp>
             </div>
             <div className="knapperad__element">
                 <Knapp
                     onClick={() => {
-                        avvisDialog(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
+                        avvisDialog(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
                     }}>
                     {getLedetekst('oppfolgingsdialog.godkjennPlanMottatt.knapp.avslaa')}
                 </Knapp>
@@ -54,14 +54,14 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, av
     );
 };
 GodkjennPlanMottattKnapper.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     godkjennPlan: PropTypes.func,
     avvisDialog: PropTypes.func,
 };
 
 const GodkjennPlanAvslaattOgGodkjent = (
     {
-        oppfolgingsdialog,
+        oppfolgingsplan,
         rootUrl,
         godkjennPlan,
         avvisDialog,
@@ -70,10 +70,10 @@ const GodkjennPlanAvslaattOgGodkjent = (
     const infoboksTekstNaar = getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.mottatt.igjen.infoboks.naar.tekst');
 
     const infoboksTekstHvem = getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.mottatt.igjen.infoboks.hvem.tekst', {
-        '%ARBEIDSGIVER%': oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn,
+        '%ARBEIDSGIVER%': oppfolgingsplan.arbeidsgiver.naermesteLeder.navn,
     });
 
-    const sistOppfolgingsdialog = oppfolgingsdialog && hentGodkjenningsTidspunkt(oppfolgingsdialog);
+    const sistOppfolgingsplan = oppfolgingsplan && hentGodkjenningsTidspunkt(oppfolgingsplan);
     return (<div className="godkjennPlanAvslaattOgGodkjent">
         <OppfolgingsplanInnholdboks
             svgUrl={`${rootUrl}/img/svg/plan-mottatt-igjen.svg`}
@@ -88,15 +88,15 @@ const GodkjennPlanAvslaattOgGodkjent = (
 
                 <GodkjennPlanTidspunkt
                     rootUrl={rootUrl}
-                    gyldighetstidspunkt={sistOppfolgingsdialog}
+                    gyldighetstidspunkt={sistOppfolgingsplan}
                 />
 
                 <GodkjennPlanMottattUtvidbar
-                    oppfolgingsdialog={oppfolgingsdialog}
+                    oppfolgingsplan={oppfolgingsplan}
                     rootUrl={rootUrl}
                 />
                 <GodkjennPlanMottattKnapper
-                    oppfolgingsdialog={oppfolgingsdialog}
+                    oppfolgingsplan={oppfolgingsplan}
                     godkjennPlan={godkjennPlan}
                     avvisDialog={avvisDialog}
                 />
@@ -106,7 +106,7 @@ const GodkjennPlanAvslaattOgGodkjent = (
 };
 
 GodkjennPlanAvslaattOgGodkjent.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     rootUrl: PropTypes.string,
     godkjennPlan: PropTypes.func,
     avvisDialog: PropTypes.func,

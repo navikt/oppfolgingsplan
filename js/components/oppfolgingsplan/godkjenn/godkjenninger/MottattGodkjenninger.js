@@ -14,7 +14,7 @@ const MottattGodkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkje
         return (<GodkjennPlanAvslaattOgGodkjent
             avvisDialog={avvisDialog}
             godkjennPlan={godkjennPlan}
-            oppfolgingsdialog={oppfolgingsdialog}
+            oppfolgingsplan={oppfolgingsdialog}
             rootUrl={rootUrl}
         />);
     }
