@@ -4,20 +4,31 @@ import {
     Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
-import {
-    getLedetekst,
-    Utvidbar,
-} from '@navikt/digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsdialogUtils';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
-import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
+import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+
+const texts = {
+    godkjennPlanMottattUtvidbar: {
+        title: 'Se planen',
+    },
+    godkjennPlanMottattKnapper: {
+        buttonApprove: 'Godkjenn',
+        buttonDecline: 'Gjør endringer',
+    },
+    godkjennPlanAvslaattOgGodkjent: {
+        title: 'Mottatt endring',
+        paragraphInfoWhen: 'Du sendte arbeidsgiveren din en versjon av oppfølgingsplanen.',
+        paragraphInfoWho: ' har foretatt noen endringer og sendt den tilbake til deg.',
+    },
+};
 
 export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsplan, rootUrl }) => {
-    const tittelNokkel = 'oppfolgingsdialog.arbeidstaker.godkjennplan.mottatt.utvidbar.tittel';
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={getLedetekst(tittelNokkel)}>
+        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjennPlanMottattUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsplan}
                 rootUrl={rootUrl}
@@ -39,7 +50,7 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsplan, avvi
                     id="godkjentKnapp"
                     autoFocus
                     onClick={() => { godkjennPlan(oppfolgingsplan.id, null, true, oppfolgingsplan.arbeidstaker.fnr); }}>
-                    {getLedetekst('oppfolgingsdialog.godkjennPlanMottatt.knapp.godkjenn')}
+                    {texts.godkjennPlanMottattKnapper.buttonApprove}
                 </Hovedknapp>
             </div>
             <div className="knapperad__element">
@@ -47,7 +58,7 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsplan, avvi
                     onClick={() => {
                         avvisDialog(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
                     }}>
-                    {getLedetekst('oppfolgingsdialog.godkjennPlanMottatt.knapp.avslaa')}
+                    {texts.godkjennPlanMottattKnapper.buttonDecline}
                 </Knapp>
             </div>
         </div>
@@ -66,24 +77,17 @@ const GodkjennPlanAvslaattOgGodkjent = (
         godkjennPlan,
         avvisDialog,
     }) => {
-    const infoboksTittelNokkel = 'oppfolgingsdialog.arbeidstaker.godkjennplan.mottatt.igjen.infoboks.tittel';
-    const infoboksTekstNaar = getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.mottatt.igjen.infoboks.naar.tekst');
-
-    const infoboksTekstHvem = getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.mottatt.igjen.infoboks.hvem.tekst', {
-        '%ARBEIDSGIVER%': oppfolgingsplan.arbeidsgiver.naermesteLeder.navn,
-    });
-
     const sistOppfolgingsplan = oppfolgingsplan && hentGodkjenningsTidspunkt(oppfolgingsplan);
     return (<div className="godkjennPlanAvslaattOgGodkjent">
         <OppfolgingsplanInnholdboks
             svgUrl={`${rootUrl}/img/svg/plan-mottatt-igjen.svg`}
             svgAlt="mottatt"
-            tittel={getLedetekst(infoboksTittelNokkel)}
+            tittel={texts.godkjennPlanAvslaattOgGodkjent.title}
         >
             <div>
                 <p>
-                    {infoboksTekstNaar}<br />
-                    {infoboksTekstHvem}
+                    {texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWhen}<br />
+                    {`${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}${texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWho}`}
                 </p>
 
                 <GodkjennPlanTidspunkt
