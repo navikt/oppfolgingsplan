@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
-import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
+import {
+    Hovedknapp,
+    Knapp,
+} from 'nav-frontend-knapper';
+import {
+    arbeidsoppgavePt,
+    arbeidsoppgaverReducerPt,
+} from '../../../propTypes/opproptypes';
+
+const texts = {
+    buttonAbort: 'Avbryt',
+    buttonCreate: 'Lagre og legg til ny',
+    buttonUpdate: 'Lagre',
+};
 
 const handleKeyPress = (avbryt, e) => {
     e.preventDefault();
@@ -45,7 +56,7 @@ class ArbeidsoppgaveKnapper extends Component {
                             disabled={this.state.spinner}
                             spinner={this.state.spinner}
                             htmlType="submit">
-                            {getLedetekst('oppfolgingsdialog.arbeidstaker.knapp.lagre-arbeidsoppgave')}
+                            {texts.buttonUpdate}
                         </Knapp>
                     </div>
                     <div className="knapperad__element">
@@ -55,7 +66,7 @@ class ArbeidsoppgaveKnapper extends Component {
                                 handleKeyPress(avbryt, e);
                             }}
                             onMouseDown={avbryt}>
-                            {getLedetekst('oppfolgingsdialog.knapp.avbryt')}
+                            {texts.buttonAbort}
                         </Knapp>
                     </div>
                 </div>
@@ -68,7 +79,7 @@ class ArbeidsoppgaveKnapper extends Component {
                         disabled={this.state.spinner}
                         spinner={this.state.spinner}
                         htmlType="submit">
-                        {getLedetekst('oppfolgingsdialog.arbeidstaker.knapp.ny-arbeidsoppgave')}
+                        {texts.buttonCreate}
                     </Hovedknapp>
                 </div>
                 <div className="knapperad__element">
@@ -78,7 +89,7 @@ class ArbeidsoppgaveKnapper extends Component {
                             handleKeyPress(avbryt, e);
                         }}
                         onMouseDown={avbryt}>
-                        {getLedetekst('oppfolgingsdialog.knapp.avbryt')}
+                        {texts.buttonAbort}
                     </Knapp>
                 </div>
             </div>
