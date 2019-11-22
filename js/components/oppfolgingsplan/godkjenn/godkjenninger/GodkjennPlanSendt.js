@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    getHtmlLedetekst,
-    getLedetekst,
-    Utvidbar,
-} from '@navikt/digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsdialogUtils';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
@@ -12,18 +8,43 @@ import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks'
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 
+const texts = {
+    godkjennPlanSendtInfoTekst: {
+        title: 'Hva skjer nå?',
+        paragraph: 'Når arbeidsgiveren din har godkjent den nye planen, vil du få muligheten til å laste den ned.',
+    },
+    godkjennPlanSendtUtvidbar: {
+        title: 'Se planen',
+    },
+    godkjennPlanSendt: {
+        title: 'Sendt til godkjenning',
+        buttonUndo: 'Avbryt planen',
+    },
+};
+
+const GodkjenPlanSentBlokk = (narmestelederName) => {
+    const text = 'Du har sendt en ny versjon av oppfølgingsplanen til din arbeidsgiver ';
+    return (
+        <div className="blokk">
+            <p>
+                {text}<b>{narmestelederName}</b>
+            </p>
+        </div>
+    );
+};
+
 export const GodkjennPlanSendtInfoTekst = () => {
     return (
         <div className="godkjennPlanSendt_infoTekst">
-            <h3 className="typo-element">{getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.sendt.infotekst.tittel')}</h3>
-            <p dangerouslySetInnerHTML={getHtmlLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.sendt.infotekst.tekst')} />
+            <h3 className="typo-element">{texts.godkjennPlanSendtInfoTekst.title}</h3>
+            <p>{texts.godkjennPlanSendtInfoTekst.paragraph}</p>
         </div>
     );
 };
 
 export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
     return (
-        <Utvidbar tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.sendt.utvidbar.tittel')}>
+        <Utvidbar tittel={texts.godkjennPlanSendtUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsdialog}
                 rootUrl={rootUrl}
@@ -37,21 +58,15 @@ GodkjennPlanSendtUtvidbar.propTypes = {
 };
 
 const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, rootUrlPlaner }) => {
-    const infoboksTittelNokkel = 'oppfolgingsdialog.arbeidstaker.godkjennplan.sendt.infoboks.tittel';
-    const infoboksTekst = getHtmlLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.sendt.infoboks.tekst.html', {
-        '%ARBEIDSGIVER%': oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn,
-    });
     return (
         <OppfolgingsplanInnholdboks
             svgUrl={`${rootUrl}/img/svg/hake-groenn--lys.svg`}
             liteikon
             svgAlt="sendt"
-            tittel={getLedetekst(infoboksTittelNokkel)}
+            tittel={texts.godkjennPlanSendt.title}
         >
             <div className="godkjennPlanSendt">
-                <div className="blokk">
-                    <p dangerouslySetInnerHTML={infoboksTekst} />
-                </div>
+                {GodkjenPlanSentBlokk(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}
 
                 <GodkjennPlanTidspunkt
                     rootUrl={rootUrl}
@@ -74,7 +89,7 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                     onClick={() => {
                         nullstillGodkjenning(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
                     }}>
-                    {getLedetekst('oppfolgingsdialog.knapp.avbryt-planen')}
+                    {texts.godkjennPlanSendt.buttonUndo}
                 </button>
             </div>
         </OppfolgingsplanInnholdboks>
