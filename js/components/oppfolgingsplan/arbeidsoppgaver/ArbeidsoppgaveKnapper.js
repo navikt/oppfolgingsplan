@@ -51,39 +51,26 @@ class ArbeidsoppgaveKnapper extends Component {
             arbeidsoppgave,
             avbryt,
         } = this.props;
-        if (arbeidsoppgave) {
-            return (
-                <div className="knapperad knapperad--justervenstre">
-                    <div className="knapperad__element">
-                        <Knapp
-                            disabled={this.state.spinner}
-                            spinner={this.state.spinner}
-                            htmlType="submit">
-                            {texts.buttonUpdate}
-                        </Knapp>
-                    </div>
-                    <div className="knapperad__element">
-                        <Knapp
-                            htmlType="button"
-                            onKeyPress={(e) => {
-                                handleKeyPress(avbryt, e);
-                            }}
-                            onMouseDown={avbryt}>
-                            {texts.buttonAbort}
-                        </Knapp>
-                    </div>
-                </div>
+        const submitButton = arbeidsoppgave
+            ? (
+                <Knapp
+                    disabled={this.state.spinner}
+                    spinner={this.state.spinner}
+                    htmlType="submit">
+                    {texts.buttonUpdate}
+                </Knapp>
+            ) : (
+                <Hovedknapp
+                    disabled={this.state.spinner}
+                    spinner={this.state.spinner}
+                    htmlType="submit">
+                    {texts.buttonCreate}
+                </Hovedknapp>
             );
-        }
         return (
             <div className="knapperad knapperad--justervenstre">
                 <div className="knapperad__element">
-                    <Hovedknapp
-                        disabled={this.state.spinner}
-                        spinner={this.state.spinner}
-                        htmlType="submit">
-                        {texts.buttonCreate}
-                    </Hovedknapp>
+                    {submitButton}
                 </div>
                 <div className="knapperad__element">
                     <Knapp
@@ -99,6 +86,7 @@ class ArbeidsoppgaveKnapper extends Component {
         );
     }
 }
+
 ArbeidsoppgaveKnapper.propTypes = {
     arbeidsoppgave: arbeidsoppgavePt,
     avbryt: PropTypes.func,
