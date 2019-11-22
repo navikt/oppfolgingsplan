@@ -1,43 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import GodkjennPlanMottatt from './GodkjennPlanMottatt';
 import GodkjennPlanAvslaatt from './GodkjennPlanAvslaatt';
 import GodkjennPlanAvslaattOgGodkjent from './GodkjennPlanAvslaattOgGodkjent';
+import GodkjennPlanMottatt from './GodkjennPlanMottatt';
 
 const harMangeGodkjenninger = (godkjenninger) => {
     return godkjenninger.length > 1;
 };
 
-const MottattGodkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, avvisDialog, rootUrl, rootUrlPlaner }) => {
-    if (harMangeGodkjenninger(oppfolgingsdialog.godkjenninger)) {
+const MottattGodkjenninger = (
+    {
+        oppfolgingsplan,
+        godkjennPlan,
+        nullstillGodkjenning,
+        avvisDialog,
+        rootUrl,
+        rootUrlPlaner,
+    }) => {
+    if (harMangeGodkjenninger(oppfolgingsplan.godkjenninger)) {
         return (<GodkjennPlanAvslaattOgGodkjent
             avvisDialog={avvisDialog}
             godkjennPlan={godkjennPlan}
-            oppfolgingsplan={oppfolgingsdialog}
+            oppfolgingsplan={oppfolgingsplan}
             rootUrl={rootUrl}
         />);
     }
 
-    const godkjenning = oppfolgingsdialog.godkjenninger[0];
+    const godkjenning = oppfolgingsplan.godkjenninger[0];
     if (godkjenning.godkjent) {
         return (<GodkjennPlanMottatt
             avvisDialog={avvisDialog}
             godkjennPlan={godkjennPlan}
-            oppfolgingsdialog={oppfolgingsdialog}
+            oppfolgingsdialog={oppfolgingsplan}
             rootUrl={rootUrl}
             rootUrlPlaner={rootUrlPlaner}
         />);
     }
     return (<GodkjennPlanAvslaatt
         nullstillGodkjenning={nullstillGodkjenning}
-        oppfolgingsdialog={oppfolgingsdialog}
+        oppfolgingsdialog={oppfolgingsplan}
         rootUrl={rootUrl}
     />);
 };
 
 MottattGodkjenninger.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     godkjennPlan: PropTypes.func,
     nullstillGodkjenning: PropTypes.func,
     avvisDialog: PropTypes.func,

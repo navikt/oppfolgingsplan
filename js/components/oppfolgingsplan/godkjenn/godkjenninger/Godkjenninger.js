@@ -14,7 +14,7 @@ const harMottattGodkjenninger = (oppfolgingsdialog) => {
 const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, avvisDialog, rootUrlPlaner }) => {
     if (harMottattGodkjenninger(oppfolgingsdialog)) {
         return (<MottattGodkjenninger
-            oppfolgingsdialog={oppfolgingsdialog}
+            oppfolgingsplan={oppfolgingsdialog}
             godkjennPlan={godkjennPlan}
             nullstillGodkjenning={nullstillGodkjenning}
             avvisDialog={avvisDialog}
