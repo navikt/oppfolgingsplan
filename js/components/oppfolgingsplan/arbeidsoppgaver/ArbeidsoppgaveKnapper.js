@@ -47,7 +47,10 @@ class ArbeidsoppgaveKnapper extends Component {
     }
 
     render() {
-        const { arbeidsoppgave, avbryt } = this.props;
+        const {
+            arbeidsoppgave,
+            avbryt,
+        } = this.props;
         if (arbeidsoppgave) {
             return (
                 <div className="knapperad knapperad--justervenstre">
