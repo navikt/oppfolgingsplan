@@ -1,18 +1,22 @@
 import React from 'react';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import getContextRoot from '../../utils/getContextRoot';
+
+const texts = {
+    title: 'Aktiv oppfølgingsplan',
+    info: 'Du kan ikke lage en ny oppfølgingsplan fordi du ikke har en aktiv sykmelding på dette tidspunktet.',
+};
 
 const OppfolgingsdialogUtenSykmelding = () => {
     return (<div className="oppfolgingsdialogUtenAktivSykmelding">
         <header className="oppfolgingsdialogUtenAktivSykmelding__header">
-            <h2>{getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.header.tittel')}</h2>
+            <h2>{texts.title}</h2>
         </header>
         <div className="oppfolgingsdialogUtenAktivSykmelding__blokk">
             <img alt="ikke-aktiv-sykmeldt" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg`} />
             <div className="inngangspanel__innhold">
                 <div>
                     <p className="oppfolgingsdialoger__start_tekst">
-                        {getLedetekst('oppfolgingsdialog.ikke.aktiv.sykmelding.tekst')}
+                        {texts.info}
                     </p>
                 </div>
             </div>
