@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    getLedetekst,
     hentToggles,
     togglesPt,
     sykeforlopsPerioderReducerPt,
@@ -68,6 +67,22 @@ import {
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 
+const texts = {
+    pageTitle: 'Oppfølgingsplaner',
+    brodsmuler: {
+        dittSykefravaer: 'Ditt sykefravær',
+        dineOppfolgingsplaner: 'Dine oppfølgingsplaner',
+        dinOppfolgingsplan: 'Oppfølgingsplan',
+    },
+    infoboksNotAvailable: {
+        title: 'Du har ikke tilgang til oppfølgingsplanen',
+    },
+    infoboksNoAccess: {
+        title: 'Du har ikke tilgang til oppfølgingsplanen',
+        text: 'Du er registrert med en adressesperre og har av sikkerhetsgrunner derfor ikke tilgang til oppfølgingsplanen digitalt.',
+    },
+};
+
 export class Container extends Component {
     componentWillMount() {
         const { toggles, tilgang, oppfolgingsdialogerReducer } = this.props;
@@ -128,7 +143,10 @@ export class Container extends Component {
             navigasjontoggles,
             erOppfolgingsdialogTilgjengelig,
         } = this.props;
-        return (<Side tittel={getLedetekst('oppfolgingsdialog.sidetittel')} brodsmuler={brodsmuler} laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}>
+        return (<Side
+            tittel={texts.pageTitle}
+            brodsmuler={brodsmuler}
+            laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}>
             { (() => {
                 if (henter || sender) {
                     return <AppSpinner />;
@@ -138,14 +156,14 @@ export class Container extends Component {
                     return (<OppfolgingsplanInfoboks
                         svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
                         svgAlt="ikkeTilgang"
-                        tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}
+                        tittel={texts.infoboksNotAvailable.title}
                     />);
                 } else if (!tilgang.data.harTilgang) {
                     return (<OppfolgingsplanInfoboks
                         svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
                         svgAlt="ikkeTilgang"
-                        tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}
-                        tekst={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.kodebegrensning.tekst')}
+                        tittel={texts.infoboksNoAccess.title}
+                        tekst={texts.infoboksNoAccess.text}
                     />);
                 }
                 return (<Oppfolgingsdialog
@@ -272,15 +290,15 @@ export function mapStateToProps(state, ownProps) {
         virksomhet: state.virksomhet,
         erOppfolgingsdialogTilgjengelig,
         brodsmuler: [{
-            tittel: getLedetekst('landingsside.sidetittel'),
+            tittel: texts.brodsmuler.dittSykefravaer,
             sti: '/sykefravaer',
             erKlikkbar: true,
         }, {
-            tittel: getLedetekst('oppfolgingsdialoger.sidetittel.arbeidstaker'),
+            tittel: texts.brodsmuler.dineOppfolgingsplaner,
             sti: '/oppfolgingsplaner',
             erKlikkbar: true,
         }, {
-            tittel: getLedetekst('oppfolgingsdialog.sidetittel.arbeidstaker'),
+            tittel: texts.brodsmuler.dinOppfolgingsplan,
         }],
     };
 }
