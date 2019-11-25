@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import {
     STATUS_TILTAK,
     tekstfeltRegex,
@@ -29,22 +28,35 @@ import { tiltakSkjemaFeltPt } from '../../../propTypes/tiltakproptypes';
 
 export const OPPRETT_TILTAK_NY = 'OPPRETT_TILTAK_NY';
 
+const texts = {
+    felter: {
+        tiltaknavn: 'Lag en overskrift',
+        beskrivelseLabel: 'BESKRIVELSE',
+        beskrivelse: 'Beskriv hva som skal skje',
+        beskrivelsePersonvern: `Husk at arbeidsgiveren din kan se det du skriver her.
+                                Derfor må du ikke gi sensitive opplysninger, som for eksempel sykdomsdiagnose.
+                                Du må ikke si mer enn det som er helt nødvendig for at arbeidsgiveren din og NAV kan følge deg opp`,
+        startdato: 'Startdato',
+        sluttdato: 'Sluttdato',
+    },
+};
+
 export const FELTER = {
     tiltaknavn: {
         navn: 'tiltaknavn',
-        tekst: 'oppfolgingsdialog.tiltak.opprett.navn',
+        tekst: texts.felter.tiltaknavn,
     },
     beskrivelse: {
         navn: 'beskrivelse',
-        tekst: 'oppfolgingsdialog.tiltak.opprett.beskrivelse',
+        tekst: texts.felter.beskrivelse,
     },
     startdato: {
         navn: 'fom',
-        tekst: 'oppfolgingsdialog.godkjennplanskjema.datovelger.startdato',
+        tekst: texts.felter.startdato,
     },
     sluttdato: {
         navn: 'tom',
-        tekst: 'oppfolgingsdialog.godkjennplanskjema.datovelger.sluttdato',
+        tekst: texts.felter.sluttdato,
     },
 };
 
@@ -58,7 +70,7 @@ export const TiltakNavn = ({ felt }) => {
             className="skjemaelement__label"
             id={felt.navn}
             htmlFor={`${felt.navn}-input`}>
-            {getLedetekst(felt.tekst)}
+            {felt.tekst}
         </label>
         <Field
             className="input--fullbredde"
@@ -80,14 +92,13 @@ export const TiltakBeskrivelse = (
         felt,
         tiltak,
         fnr,
-        tekst,
     }) => {
     return (tiltak && tiltak.opprettetAv && !aktoerHarOpprettetElement(fnr, tiltak) ?
         <div className="lagretiltakskjema__inputgruppe">
             { tiltak && tiltak.beskrivelse &&
             [
                 <label key={`tiltak-besk-label-${tiltak.tiltakId}`} className="tiltaktabell--beskrivelse">
-                    {getLedetekst('oppfolgingsdialog.tiltak.beskrivelse')}
+                    {texts.felter.beskrivelseLabel}
                 </label>,
                 <p key={`tiltak-besk-p-${tiltak.tiltakId}`} >{tiltak.beskrivelse}</p>,
             ]
@@ -96,7 +107,7 @@ export const TiltakBeskrivelse = (
         :
         <div className="lagretiltakskjema__inputgruppe">
             <label className="skjemaelement__label" id={felt.navn} htmlFor={`${felt.navn}-input`}>
-                {getLedetekst(felt.tekst)}
+                {felt.tekst}
             </label>
             <Field
                 className="input__tiltak--beskrivelse"
@@ -106,7 +117,9 @@ export const TiltakBeskrivelse = (
                 component={TekstOmrade}
                 placeholder="Skriv her"
             />
-            <TiltakInfoVarsel tekst={tekst} />
+            <TiltakInfoVarsel
+                tekst={texts.felter.beskrivelsePersonvern}
+            />
         </div>);
 };
 
@@ -114,7 +127,6 @@ TiltakBeskrivelse.propTypes = {
     felt: tiltakSkjemaFeltPt,
     tiltak: tiltakPt,
     fnr: PropTypes.string,
-    tekst: PropTypes.string,
 };
 
 export class TiltakSkjemaKomponent extends Component {
@@ -194,7 +206,6 @@ export class TiltakSkjemaKomponent extends Component {
             visFeilMelding,
             tiltakReducer,
         } = this.props;
-        const personvernTekst = getLedetekst('oppfolgingsdialog.personvern.sykmeldt');
         return (
             <div className="utvidbar__innholdContainer">
                 <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()} >
@@ -208,7 +219,6 @@ export class TiltakSkjemaKomponent extends Component {
                         felt={FELTER.beskrivelse}
                         tiltak={tiltak}
                         fnr={fnr}
-                        tekst={personvernTekst}
                     />
 
                     <TiltakForeslaattAv
