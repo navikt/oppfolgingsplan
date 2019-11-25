@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-    getLedetekst,
     sykeforlopsPerioderReducerPt,
     togglesPt,
 } from '@navikt/digisyfo-npm';
@@ -160,10 +159,7 @@ class Oppfolgingsdialog extends Component {
 
         return (<div className="oppfolgingsdialog">
             { oppfolgingsdialogAvbruttOgNyOpprettet &&
-            <AvbruttGodkjentPlanVarsel
-                tekst={getLedetekst('oppfolgingdialog.avbruttGodkjentPlanVarsel.opprettet-plan')}
-                rootUrl={`${getContextRoot()}`}
-            />
+            <AvbruttGodkjentPlanVarsel />
             }
             <SideOverskrift
                 tittel={oppfolgingsdialog.virksomhet.navn}
