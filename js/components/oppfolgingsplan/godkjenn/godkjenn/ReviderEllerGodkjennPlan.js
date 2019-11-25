@@ -5,10 +5,7 @@ import {
     Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
-import {
-    getLedetekst,
-    Bjorn,
-} from '@navikt/digisyfo-npm';
+import { Bjorn } from '@navikt/digisyfo-npm';
 import {
     forespoerselRevideringPt,
     oppfolgingsplanPt,
@@ -18,14 +15,19 @@ import { erIkkeOppfolgingsdialogUtfylt } from '../../../../utils/oppfolgingsdial
 import AppSpinner from '../../../AppSpinner';
 import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
 
+const texts = {
+    bjorn: 'Er du ferdig med denne planen og ønsker å sende den til godkjenning? Du kan når som helst be arbeidsgiveren din ta en titt på planen slik den ser ut her inne.',
+    forespoerselRevideringSendt: 'Lederen din har fått melding om å se på planen etter ønske fra deg.',
+    buttonRevider: 'Be lederen min se på den',
+    buttonGodkjenn: 'Jeg er ferdig',
+};
+
 export const ReviderEllerGodkjennPlanKnapperad = (
     {
         oppfolgingsdialog,
         forespoerRevidering,
         godkjennPlan,
     }) => {
-    const knappReviderPlanTekst = getLedetekst('oppfolgingsdialog.reviderEllerGodkjennPlanKnapperad.forespoerRevidering.arbeidstaker');
-    const godkjennPlanTekst = getLedetekst('oppfolgingsdialog.reviderEllerGodkjennPlanKnapperad.ferdig.arbeidstaker');
     return (<div className="knapperad">
         <div className="knapperad__element">
             <Knapp
@@ -35,7 +37,7 @@ export const ReviderEllerGodkjennPlanKnapperad = (
                     : () => {
                         forespoerRevidering(oppfolgingsdialog.id);
                     }}>
-                { knappReviderPlanTekst }
+                {texts.buttonRevider}
             </Knapp>
         </div>
         <div className="knapperad__element">
@@ -44,7 +46,7 @@ export const ReviderEllerGodkjennPlanKnapperad = (
                 onClick={erHerokuApp()
                     ? undefined
                     : godkjennPlan}>
-                {godkjennPlanTekst}
+                {texts.buttonGodkjenn}
             </Hovedknapp>
         </div>
     </div>);
@@ -91,7 +93,7 @@ class ReviderEllerGodkjennPlan extends Component {
                         return (<Alertstripe
                             type="suksess"
                             solid>
-                            {getLedetekst('oppfolgingsdialog.reviderEllerGodkjennPlan.forespoerselRevidering.sendt.arbeidstaker')}
+                            {texts.forespoerselRevideringSendt}
                         </Alertstripe>);
                     }
                     return (
@@ -99,7 +101,7 @@ class ReviderEllerGodkjennPlan extends Component {
                             <Bjorn
                                 className="z-index-1"
                                 rootUrl={rootUrl}>
-                                <p>{getLedetekst('oppfolgingsdialog.reviderEllerGodkjennPlan.bjoern.arbeidstaker')}</p>
+                                <p>{texts.bjorn}</p>
                             </Bjorn>
                             { this.state.visIkkeUtfyltFeilmelding &&
                             <IkkeUtfyltPlanFeilmelding
