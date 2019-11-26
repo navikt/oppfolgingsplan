@@ -1,10 +1,11 @@
 .bildeTekstLinje {
+    display: flex;
     margin-bottom: 1em;
+    flex-direction: row;
+    @media all and (max-width: @screen-xs-max) {
+        flex-direction: column;
+    }
     img, p {
-        display: inline-block;
-        @media all and (max-width: @screen-xs-max) {
-            display: block;
-        }
     }
     img {
         width: 1.5em;
