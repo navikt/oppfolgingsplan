@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { opprettOppfolgingArbeidsgiverPt } from '../../../propTypes';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import { finnNyesteTidligereOppfolgingsdialogMedVirksomhet } from '../../../utils/oppfolgingsdialogUtils';
@@ -8,6 +7,17 @@ import Lightbox from '../../Lightbox';
 import ArbeidsgiverSkjemaForm from './ArbeidsgiverSkjema';
 import Feilmelding from '../../Feilmelding';
 import BaserTidligereSkjema from './BaserTidligereSkjema';
+
+const texts = {
+    errorNoLeader: {
+        title: 'Kan ikke opprette ny plan',
+        message: 'Vi har ikke navnet på lederen din. Be arbeidsgiveren registrere det i Altinn',
+    },
+    errorNoGodkjentPlan: {
+        title: 'Kan ikke opprette ny plan',
+        message: 'Fant ingen tidligere godkjent plan med virksomhet',
+    },
+};
 
 class OppfolgingsdialogerOpprett extends Component {
     constructor(props) {
@@ -61,13 +71,13 @@ class OppfolgingsdialogerOpprett extends Component {
                     (() => {
                         if (arbeidsgivere.length === 1 && !arbeidsgivere[0].harNaermesteLeder) {
                             return (<Feilmelding
-                                tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.oppfolgingsdialogerOpprett.feilmelding.ingenNL.tittel')}
-                                melding={getLedetekst('oppfolgingsdialog.arbeidstaker.oppfolgingsdialogerOpprett.feilmelding.ingenNL.melding')}
+                                tittel={texts.errorNoLeader.title}
+                                melding={texts.errorNoLeader.message}
                             />);
                         } else if (this.state.side === 0) {
                             return (<Feilmelding
-                                tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.oppfolgingsdialogerOpprett.feilmelding.ingenTidligerePlan.tittel')}
-                                melding={getLedetekst('oppfolgingsdialog.arbeidstaker.oppfolgingsdialogerOpprett.feilmelding.ingenTidligerePlan.melding')}
+                                tittel={texts.errorNoGodkjentPlan.title}
+                                melding={texts.errorNoGodkjentPlan.message}
                             />);
                         }
                         return (<div>
