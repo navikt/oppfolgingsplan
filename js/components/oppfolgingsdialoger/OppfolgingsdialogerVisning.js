@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import {
     dinesykmeldingerReducerPt,
     ledereReducerPt,
@@ -19,13 +18,28 @@ import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
 import OppfolgingsdialogerIngenplan from './opprett/OppfolgingsdialogerIngenplan';
 import OppfolgingsdialogTeasere from './OppfolgingsdialogTeasere';
 
+const texts = {
+    oppfolgingsdialogNyKnapp: {
+        button: 'Lag en ny oppfølgingsplan',
+    },
+    oppfolgingsdialogerVisning: {
+        teaserOutdatedPlaner: {
+            title: 'Tidligere oppfølgingsplaner',
+        },
+        teaserAktive: {
+            titleMultiplePlaner: 'Aktiv oppfølgingsplaner',
+            titleSinglePlan: 'Aktiv oppfølgingsplan',
+        },
+    },
+};
+
 export const OppfolgingsdialogNyKnapp = ({ visOppfolgingsdialogOpprett }) => {
     return (<div className="oppfolgingsdialogNyDialog">
         <Knapp
             onClick={() => {
                 visOppfolgingsdialogOpprett(true);
             }}>
-            {getLedetekst('oppfolgingsdialog.oppfolgingsdialogNyDialog.knapp')}
+            {texts.oppfolgingsdialogNyKnapp.button}
         </Knapp>
     </div>);
 };
@@ -86,8 +100,9 @@ class OppfolgingsdialogerVisning extends Component {
                 }
                 <OppfolgingsdialogTeasere
                     oppfolgingsdialoger={aktivOppfolgingsdialoger}
-                    tittel={aktivOppfolgingsdialoger.length > 1 ? getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.fler.header.tittel') :
-                        getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.header.tittel')}
+                    tittel={aktivOppfolgingsdialoger.length > 1
+                        ? texts.oppfolgingsdialogerVisning.teaserAktive.titleMultiplePlaner
+                        : texts.oppfolgingsdialogerVisning.teaserAktive.titleSinglePlan}
                     rootUrl={getContextRoot()}
                     rootUrlPlaner={getContextRoot()}
                 />
@@ -97,7 +112,7 @@ class OppfolgingsdialogerVisning extends Component {
             <OppfolgingsdialogTeasere
                 oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
                 harTidligerOppfolgingsdialoger
-                tittel={getLedetekst('oppfolgingsdialoger.tidligereplaner.tittel')}
+                tittel={texts.oppfolgingsdialogerVisning.teaserOutdatedPlaner.title}
                 id="OppfolgingsdialogTeasereAT"
                 rootUrl={getContextRoot()}
                 rootUrlPlaner={getContextRoot()}
