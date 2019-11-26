@@ -86,7 +86,7 @@ class Oppfolgingsdialoger extends Component {
             panel = (<IngenledereInfoboks />);
         } else if (!bekreftetNyNaermesteLeder && oppfolgingsdialogMedNyNaermesteLeder) {
             panel = (<NyNaermestelederInfoboks
-                oppfolgingsdialog={oppfolgingsdialogMedNyNaermesteLeder}
+                oppfolgingsplan={oppfolgingsdialogMedNyNaermesteLeder}
                 avkreftNyNaermesteleder={avkreftLeder}
                 bekreftNyNaermesteLeder={bekreftNyNaermesteLeder}
             />);

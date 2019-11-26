@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-    getLedetekst,
-    getHtmlLedetekst,
-} from '@navikt/digisyfo-npm';
-import {
     Fareknapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
@@ -13,26 +9,70 @@ import getContextRoot from '../../utils/getContextRoot';
 import Lightbox from '../app/Lightbox';
 import OppfolgingsplanInnholdboks from '../app/OppfolgingsplanInnholdboks';
 
-export const AvkreftNyNaermestelederBekreftelse = ({ oppfolgingsdialog, fjernNaermesteLederKobling, lukk }) => {
-    const tittel = getLedetekst('oppfolgingsdialog.nyNaermestelederInfoboks.arbeidstaker.bekreftelse.tittel');
-    const tekst = getHtmlLedetekst('oppfolgingsdialog.nyNaermestelederInfoboks.arbeidstaker.bekreftelse.tekst', {
-        '%NAERMESTELEDER%': oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn,
-        '%VIRKSOMHET%': oppfolgingsdialog.virksomhet.navn,
-    });
+const texts = {
+    avkreftNyNaermestelederBekreftelse: {
+        title: 'Endre nærmeste leder',
+        buttonConfirm: 'Ja, jeg er sikker',
+    },
+    nyNaermestelederInfoboks: {
+        title: 'Du har fått ny leder',
+        buttonConfirm: 'Dette stemmer',
+        buttonWrongLeader: 'Meld feil',
+    },
+};
+
+const TextWrongLeader = ({ oppfolgingsplan }) => {
+    return (
+        <React.Fragment>
+            Er du sikker på at du vil fjerne <b>{oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}</b> som din nærmeste leder i <b>{oppfolgingsplan.virksomhet.navn}</b>?
+        </React.Fragment>
+    );
+};
+
+TextWrongLeader.propTypes = {
+    oppfolgingsplan: oppfolgingsplanPt,
+};
+
+const TextConfimation = ({ oppfolgingsplan }) => {
+    return (
+        <React.Fragment>
+            {
+                `Din nye leder vil få tilgang til de planene du har laget tidligere.
+                Lederen har mulighet til å skrive i planer som fortsatt gjelder. Det som skrives vil da bli merket med lederens navn.`
+            }
+            <br />
+            <br />
+            <b>Din forrige leder var: {oppfolgingsplan.arbeidsgiver.forrigeNaermesteLeder.navn}</b>
+            <br />
+            <b>Din nye leder er: {oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}</b>
+        </React.Fragment>
+    );
+};
+TextConfimation.propTypes = {
+    oppfolgingsplan: oppfolgingsplanPt,
+};
+
+
+export const AvkreftNyNaermestelederBekreftelse = ({ oppfolgingsplan, fjernNaermesteLederKobling, lukk }) => {
+    const tittel = texts.avkreftNyNaermestelederBekreftelse.title;
     return (<Lightbox lukkLightbox={lukk}>
         <div>
             <h3>{tittel}</h3>
-            <p dangerouslySetInnerHTML={tekst} />
+            <p>
+                <TextWrongLeader
+                    oppfolgingsplan={oppfolgingsplan}
+                />
+            </p>
             <div className="knapperad" onClick={fjernNaermesteLederKobling} role="button" tabIndex={0}>
                 <Fareknapp>
-                    {getLedetekst('oppfolgingsdialog.knapp.sikker')}
+                    {texts.avkreftNyNaermestelederBekreftelse.buttonConfirm}
                 </Fareknapp>
             </div>
         </div>
     </Lightbox>);
 };
 AvkreftNyNaermestelederBekreftelse.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     fjernNaermesteLederKobling: PropTypes.func,
     lukk: PropTypes.func,
 };
@@ -57,46 +97,42 @@ class NyNaermestelederInfoboks extends Component {
     }
 
     fjernNaermesteLederKobling() {
-        const oppfolgingsdialog = this.props.oppfolgingsdialog;
-        this.props.avkreftNyNaermesteleder(oppfolgingsdialog.virksomhet.virksomhetsnummer);
+        const oppfolgingsplan = this.props.oppfolgingsplan;
+        this.props.avkreftNyNaermesteleder(oppfolgingsplan.virksomhet.virksomhetsnummer);
     }
 
     render() {
         const {
-            oppfolgingsdialog,
+            oppfolgingsplan,
             bekreftNyNaermesteLeder,
         } = this.props;
-        const tittel = getLedetekst('oppfolgingsdialog.nyNaermestelederInfoboks.arbeidstaker.tittel');
-        const tekst = getHtmlLedetekst('oppfolgingsdialog.nyNaermestelederInfoboks.arbeidstaker.tekst', {
-            '%FORRIGENAERMESTELEDER%': oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder.navn,
-            '%NYNAERMESTELEDER%': oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn,
-        });
-        const bekreftKnappTekst = getLedetekst('oppfolgingsdialog.knapp.stemmer');
         return (<div className="nyNaermestelederInfoboks">
             { this.state.visBekreftelse &&
             <AvkreftNyNaermestelederBekreftelse
-                oppfolgingsdialog={oppfolgingsdialog}
+                oppfolgingsplan={oppfolgingsplan}
                 fjernNaermesteLederKobling={this.fjernNaermesteLederKobling}
                 lukk={this.lukkBekreftelse}
             />
             }
             <OppfolgingsplanInnholdboks
-                tittel={tittel}
+                tittel={texts.nyNaermestelederInfoboks.title}
                 svgUrl={`${getContextRoot()}/img/svg/ny-naermesteleder.svg`}
                 svgAlt="Ny nærmeste leder"
             >
-                <p dangerouslySetInnerHTML={tekst} />
+                <p>
+                    <TextConfimation oppfolgingsplan={oppfolgingsplan} />
+                </p>
                 <div className="knapperad">
                     <div className="knapperad__element">
                         <Hovedknapp onClick={() => { bekreftNyNaermesteLeder(); }}>
-                            {bekreftKnappTekst}
+                            {texts.nyNaermestelederInfoboks.buttonConfirm}
                         </Hovedknapp>
                     </div>
                     <div className="knapperad__element">
                         <button
                             className="lenke"
                             onClick={() => { this.apneBekreftelse(); }}>
-                            {getLedetekst('oppfolgingsdialog.knapp.meld-feil')}
+                            {texts.nyNaermestelederInfoboks.buttonWrongLeader}
                         </button>
                     </div>
                 </div>
@@ -106,7 +142,7 @@ class NyNaermestelederInfoboks extends Component {
 }
 
 NyNaermestelederInfoboks.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     avkreftNyNaermesteleder: PropTypes.func,
     bekreftNyNaermesteLeder: PropTypes.func,
 };
