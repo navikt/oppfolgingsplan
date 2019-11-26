@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import getContextRoot from '../../../utils/getContextRoot';
 import {
@@ -19,6 +18,18 @@ import {
 } from '../../../propTypes';
 import Radioknapper from '../../skjema/Radioknapper';
 
+const texts = {
+    arbeidsgiverSkjema: {
+        question: 'Hvilken arbeidsgiver skal du lage en plan med?',
+        buttonSubmit: 'Send',
+    },
+    velgArbeidsgiverUndertekst: {
+        alreadyCreatedPlan: 'Du har allerede en oppfølgingsplan med denne arbeidsgiveren',
+        noLeader: 'Vi har ikke navnet på lederen din. Be arbeidsgiveren registrere det i Altinn.',
+        leader: 'Nærmeste leder er ',
+    },
+};
+
 const OPPFOLGINGSKJEMANAVN = 'OPPRETT_DIALOG';
 
 export const VelgArbeidsgiverUndertekst = ({ oppfolgingsdialoger, arbeidsgiver }) => {
@@ -26,7 +37,7 @@ export const VelgArbeidsgiverUndertekst = ({ oppfolgingsdialoger, arbeidsgiver }
         const oppfolgingsdialog = hentAktivOppfolgingsdialogOpprettetMedArbeidsgiver(oppfolgingsdialoger, arbeidsgiver.virksomhetsnummer);
         return (<div className="velgArbeidsgiverUndertekst">
             <span className="velgArbeidsgiverUndertekst__tekst">
-                {getLedetekst('oppfolgingsdialog.arbeidstaker.opprett.varsel.allerede-oppretettet.tekst')}
+                {texts.velgArbeidsgiverUndertekst.alreadyCreatedPlan}
             </span>
             <div className="velgArbeidsgiverUndertekst__lenke">
                 <Link className="lenke" to={`${getContextRoot()}/oppfolgingsplaner/${oppfolgingsdialog.id}`}>Gå til planen</Link>
@@ -36,15 +47,13 @@ export const VelgArbeidsgiverUndertekst = ({ oppfolgingsdialoger, arbeidsgiver }
         return (<div className="velgArbeidsgiverUndertekst">
             <img className="velgArbeidsgiverUndertekst__ikon" src={`${getContextRoot()}/img/svg/varseltrekant.svg`} alt="varsel" />
             <span className="velgArbeidsgiverUndertekst__tekst">
-                {getLedetekst('oppfolgingsdialog.arbeidstaker.opprett.varsel.ingen-naermesteleder.tekst')}
+                {texts.velgArbeidsgiverUndertekst.noLeader}
             </span>
         </div>);
     } else if (arbeidsgiver.naermesteLeder) {
         return (<div className="velgArbeidsgiverUndertekst">
             <span className="velgArbeidsgiverUndertekst__tekst">
-                {getLedetekst('oppfolgingsdialog.arbeidstaker.opprett.varsel.naermeste-leder-navn', {
-                    '%NAVN%': arbeidsgiver.naermesteLeder,
-                })}
+                {`${texts.velgArbeidsgiverUndertekst.leader}${arbeidsgiver.naermesteLeder}`}
             </span>
         </div>);
     }
@@ -96,7 +105,7 @@ export const ArbeidsgiverSkjema = (
     return (
         <form onSubmit={handleSubmit} className="arbeidsgiverSkjema">
             <label className="skjemaelement__label">
-                {getLedetekst('oppfolgingsdialog.arbeidsgiverSkjema.spoersmaal')}
+                {texts.arbeidsgiverSkjema.question}
             </label>
             <div className="inputgruppe velgarbeidsgiver__inputgruppe">
                 <Field
@@ -111,7 +120,7 @@ export const ArbeidsgiverSkjema = (
                     <Hovedknapp
                         htmlType="submit"
                         disabled={!erOppfolgingsdialogOpprettbarMedMinstEnArbeidsgiver(oppfolgingsdialoger, arbeidsgivere)}>
-                        {getLedetekst('oppfolgingsdialog.knapp.send')}
+                        {texts.arbeidsgiverSkjema.buttonSubmit}
                     </Hovedknapp>
                 </div>
             </div>
