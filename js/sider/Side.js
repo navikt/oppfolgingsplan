@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TimeoutBox } from '@navikt/digisyfo-npm';
 import cn from 'classnames';
 import AppSpinner from '../components/AppSpinner';
 import Brodsmuler from '../components/Brodsmuler';
@@ -9,6 +8,7 @@ import Feilmelding from '../components/Feilmelding';
 import * as actions from '../actions/brukerinfo_actions';
 import { brodsmule as brodsmulePt } from '../propTypes';
 import { toggleHeleAppen } from '../toggles';
+import TimeoutBox from '../components/app/timeout/TimeoutBox';
 
 const DocumentTitle = require('react-document-title');
 

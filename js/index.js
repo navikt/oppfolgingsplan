@@ -12,7 +12,6 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import {
     forlengInnloggetSesjon,
-    hentLedetekster,
     setPerformOnHttpCalls,
     sjekkInnloggingssesjon,
 } from '@navikt/digisyfo-npm';
@@ -36,7 +35,6 @@ const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
 sagaMiddleware.run(rootSaga);
 
 // <OBS>: Minimer antall kall som gjøres her!
-store.dispatch(hentLedetekster());
 store.dispatch(hentVedlikehold());
 store.dispatch(forlengInnloggetSesjon());
 // </OBS>
@@ -48,12 +46,6 @@ setPerformOnHttpCalls(() => {
 setInterval(() => {
     store.dispatch(sjekkInnloggingssesjon());
 }, 5000);
-
-if (window.location.href.indexOf('visLedetekster=true') > -1) {
-    window.VIS_LEDETEKSTNOKLER = true;
-} else if (window.location.href.indexOf('visLedetekster=false') > -1) {
-    window.VIS_LEDETEKSTNOKLER = false;
-}
 
 render(<Provider store={store}>
     <AppRouter history={history} />

@@ -170,13 +170,11 @@ export const mapStateToProps = (state) => {
             return populerPlanFraState(oppfolgingsdialog, state);
         });
     return {
-        henter: state.ledetekster.henter
-            || state.oppfolgingsdialoger.henter
+        henter: state.oppfolgingsdialoger.henter
             || state.tilgang.henter
             || state.dineSykmeldinger.henter
             || state.ledere.henter,
-        hentingFeilet: state.ledetekster.hentingFeilet
-            || state.oppfolgingsdialoger.hentingFeilet
+        hentingFeilet: state.oppfolgingsdialoger.hentingFeilet
             || state.tilgang.hentingFeilet
             || state.dineSykmeldinger.hentingFeilet
             || state.ledere.hentingFeilet,

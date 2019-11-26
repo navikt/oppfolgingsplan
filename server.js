@@ -33,7 +33,6 @@ const renderApp = (decoratorFragments) => {
             'index.html',
             Object.assign(
                 {
-                    SYFOTEKSTER_URL: '/syfotekster/api',
                     SYFOREST_URL: '/syforest',
                 },
                 decoratorFragments,

@@ -5,7 +5,9 @@ import {
     SJEKK_TILGANG_403,
 } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
 
-const initiellState = {};
+const initiellState = {
+    data: {},
+};
 
 const tilgang = (state = initiellState, action = {}) => {
     switch (action.type) {

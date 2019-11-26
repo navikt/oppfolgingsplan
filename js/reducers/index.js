@@ -1,4 +1,8 @@
-import { ledetekster, sykeforlopsPerioder, timeout, toggles } from '@navikt/digisyfo-npm';
+import {
+    sykeforlopsPerioder,
+    timeout,
+    toggles,
+} from '@navikt/digisyfo-npm';
 import { reducer as formReducer } from 'redux-form';
 import arbeidsoppgaver from './arbeidsoppgaver';
 import arbeidsforhold from './arbeidsforhold';
@@ -38,7 +42,6 @@ const reducers = {
     forespoerselRevidering,
     kommentar,
     kopierDialogReducer,
-    ledetekster,
     navigasjontoggles,
     nullstill,
     nyNaermesteLeder,

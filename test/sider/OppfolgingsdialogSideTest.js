@@ -37,11 +37,6 @@ describe('Container', () => {
             },
         };
         const state = {
-            ledetekster: {
-                data: {
-                    'min.tekst': 'Dette er en test',
-                },
-            },
             dineSykmeldinger: {
                 data: [],
             },

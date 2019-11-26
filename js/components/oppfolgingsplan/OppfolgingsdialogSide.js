@@ -242,15 +242,12 @@ export function mapStateToProps(state, ownProps) {
 
     return {
         henter: state.oppfolgingsdialoger.henter
-            || state.ledetekster.henter
             || state.dineSykmeldinger.henter
             || state.tilgang.henter,
         hentingFeilet: state.oppfolgingsdialoger.hentingFeilet
-            || state.ledetekster.hentingFeilet
             || state.dineSykmeldinger.hentingFeilet
             || state.tilgang.hentingFeilet,
         hentet: state.oppfolgingsdialoger.hentet
-            || state.ledetekster.hentet
             || state.dineSykmeldinger.hentet
             || state.tilgang.hentet
             || state.oppfolgingsdialoger.avviser

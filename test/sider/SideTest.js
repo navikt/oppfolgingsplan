@@ -1,12 +1,12 @@
 import chai from 'chai';
 import React from 'react';
 import { shallow } from 'enzyme';
-import { TimeoutBox } from '@navikt/digisyfo-npm';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import Feilmelding from '../../js/components/Feilmelding';
 import { SideComponent, Utlogget } from '../../js/sider/Side';
 import Brodsmuler from '../../js/components/Brodsmuler';
+import TimeoutBox from '../../js/components/app/timeout/TimeoutBox';
 
 const DocumentTitle = require('react-document-title');
 

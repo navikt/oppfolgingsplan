@@ -24,7 +24,6 @@ const SYFOUNLEASH = 'syfounleash';
 const SYKEFORLOEAP = 'sykeforloep';
 const SYKEPENGESOKNADER = 'sykepengesoknader';
 const SYKMELDINGER = 'sykmeldinger';
-const TEKSTER = 'tekster';
 const VARSLER = 'varsler';
 const VEDLIKEHOLD = 'vedlikehold';
 const TILGANG = 'tilgang';
@@ -55,7 +54,6 @@ lastFilTilMinne(SYFOUNLEASH);
 lastFilTilMinne(SYKEFORLOEAP);
 lastFilTilMinne(SYKEPENGESOKNADER);
 lastFilTilMinne(SYKMELDINGER);
-lastFilTilMinne(TEKSTER);
 lastFilTilMinne(VARSLER);
 lastFilTilMinne(VEDLIKEHOLD);
 lastFilTilMinne(TILGANG);
@@ -105,31 +103,6 @@ const getSykmeldinger = (type) => {
         },
     ];
 };
-
-let teksterFraProd;
-
-function hentTeksterFraProd() {
-    const TEKSTER_URL = 'https://syfoapi.nav.no/syfotekster/api/tekster';
-    request(TEKSTER_URL, function (error, response, body) {
-        if (error) {
-            console.log('Kunne ikke hente tekster fra prod', error);
-        } else {
-            teksterFraProd = JSON.parse(body);
-            console.log('Tekster hentet fra prod');
-        }
-    });
-}
-
-function mockTekster(server) {
-    const HVERT_FEMTE_MINUTT = 1000 * 60 * 5;
-    hentTeksterFraProd();
-    setInterval(hentTeksterFraProd, HVERT_FEMTE_MINUTT);
-
-    server.get('/syfotekster/api/tekster', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(teksterFraProd || mockData[TEKSTER]));
-    });
-}
 
 function mockOpprettetIdResultat(res) {
     mockOpprettetIdResultat.rollingCounter += 1;
@@ -188,8 +161,6 @@ function mockForLokaltMiljo(server) {
 }
 
 function mockForOpplaeringsmiljo(server) {
-    mockTekster(server);
-
     server.use(express.json());
     server.use(express.urlencoded());
 
