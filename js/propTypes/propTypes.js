@@ -1,21 +1,16 @@
 import PropTypes from 'prop-types';
 import { naermesteLeder } from '@navikt/digisyfo-npm';
 
-export { arbeidssituasjon,
-    soknadperiode,
-    annenInntektskilde,
+export {
+    arbeidssituasjon,
     naermesteLeder,
     arbeidsgiver,
-    soknadsaktivitet,
-    soknadaktiviteter,
-    sykepengesoknadstatus,
-    sykepengesoknad,
     sykmeldingdiagnose,
     sykmeldingperiode,
     sykmeldingstatus,
     sykmelding,
     tidslinjehendelse,
-    oppsummeringsoknad } from '@navikt/digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 
 export const brodsmule = PropTypes.shape({
     sti: PropTypes.string,
