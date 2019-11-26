@@ -1,14 +1,11 @@
-import chai from 'chai';
 import React from 'react';
+import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import { setLedetekster } from '@navikt/digisyfo-npm';
-import ledetekster from '../../../mock/mockLedetekster';
-import Arbeidsoppgaver from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
+import Arbeidsoppgaver, { ArbeidsoppgaverInfoboksStilling } from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
-import ArbeidsoppgaverInfoboks from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
 import NotifikasjonBoksVurderingOppgave from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/NotifikasjonBoksVurderingOppgave';
 import LeggTilElementKnapper from '../../../../js/components/oppfolgingsplan/LeggTilElementKnapper';
 import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
@@ -51,7 +48,6 @@ describe('Arbeidsoppgaver', () => {
     beforeEach(() => {
         lagreArbeidsoppgave = sinon.spy();
         slettArbeidsoppgave = sinon.spy();
-        setLedetekster(ledetekster);
         arbeidsoppgaver = {};
         window.sessionStorage = storageMock();
         arbeidsforhold = {
@@ -93,11 +89,11 @@ describe('Arbeidsoppgaver', () => {
             />);
         });
 
-        it('Skal vise ArbeidsoppgaverInfoboks', () => {
+        it('Skal vise ArbeidsoppgaverInfoboksStilling', () => {
             componentUtenArbeidsoppgaver.setState({
                 visArbeidsoppgaveSkjema: true,
             });
-            expect(componentUtenArbeidsoppgaver.find(ArbeidsoppgaverInfoboks)).to.have.length(1);
+            expect(componentUtenArbeidsoppgaver.find(ArbeidsoppgaverInfoboksStilling)).to.have.length(1);
         });
 
         it('Skal vise OppfolgingsplanInfoboks, om det ikke er arbeidsoppgaver', () => {
@@ -126,7 +122,7 @@ describe('Arbeidsoppgaver', () => {
                 }}
             />);
             component.setProps({ arbeidsoppgaver: { lagringFeilet: true } });
-            expect(component.state().varselTekst).to.equal('Det oppsto en feil, og du fikk ikke lagret. Prøv igjen.');
+            expect(component.state().varselTekst).to.equal('En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.');
         });
 
         it('Skal ikke vise feilmelding dersom lagring av ny arbeidsoppgave ikke feilet', () => {
@@ -162,8 +158,8 @@ describe('Arbeidsoppgaver', () => {
             />);
         });
 
-        it('Skal vise ArbeidsoppgaverInfoboks', () => {
-            expect(componentMedArbeidsoppgaver.find(ArbeidsoppgaverInfoboks)).to.have.length(1);
+        it('Skal vise ArbeidsoppgaverInfoboksStilling', () => {
+            expect(componentMedArbeidsoppgaver.find(ArbeidsoppgaverInfoboksStilling)).to.have.length(1);
         });
 
         it('Skal vise NotifikasjonBoksVurderingOppgave, om nye Arbeidsoppgaver er lagt til av motpart', () => {
