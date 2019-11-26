@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-    getLedetekst,
-} from '@navikt/digisyfo-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import { populerPlanFraState } from '../../utils/stateUtils';
 import { kopierOppfolgingsdialog } from '../../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
@@ -38,6 +35,18 @@ import { hentDineSykmeldinger } from '../../actions/dineSykmeldinger_actions';
 import { avkreftLeder, hentLedere } from '../../actions/ledere_actions';
 import Oppfolgingsdialoger from './Oppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
+
+const texts = {
+    pageTitle: 'Oppfølgingsplaner',
+    brodsmuler: {
+        dittSykefravaer: 'Ditt sykefravær',
+        dineOppfolgingsplaner: 'Dine oppfølgingsplaner',
+    },
+    infoboksNoAccess: {
+        title: 'Du har ikke tilgang til oppfølgingsplanen',
+        info: 'Du er registrert med en adressesperre og har av sikkerhetsgrunner derfor ikke tilgang til oppfølgingsplanen digitalt.',
+    },
+};
 
 export class Container extends Component {
     componentWillMount() {
@@ -98,7 +107,10 @@ export class Container extends Component {
             sender,
             sendingFeilet,
         } = this.props;
-        return (<Side tittel={getLedetekst('oppfolgingsdialoger.sidetittel')} brodsmuler={brodsmuler} laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}>
+        return (<Side
+            tittel={texts.pageTitle}
+            brodsmuler={brodsmuler}
+            laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}>
             {
                 (() => {
                     if (henter || sender) {
@@ -109,8 +121,8 @@ export class Container extends Component {
                         return (<OppfolgingsplanInfoboks
                             svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
                             svgAlt="ikkeTilgang"
-                            tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}
-                            tekst={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.kodebegrensning.tekst')}
+                            tittel={texts.infoboksNoAccess.title}
+                            tekst={texts.infoboksNoAccess.info}
                         />);
                     }
                     return (<Oppfolgingsdialoger {...this.props} />);
@@ -193,11 +205,11 @@ export const mapStateToProps = (state) => {
         bekreftetNyNaermesteLeder: state.nyNaermesteLeder.bekreftet,
         oppfolgingsdialoger,
         brodsmuler: [{
-            tittel: getLedetekst('landingsside.sidetittel'),
+            tittel: texts.brodsmuler.dittSykefravaer,
             sti: '/sykefravaer',
             erKlikkbar: true,
         }, {
-            tittel: getLedetekst('oppfolgingsdialoger.sidetittel.arbeidstaker'),
+            tittel: texts.brodsmuler.dineOppfolgingsplaner,
             sti: '/oppfolgingsplaner',
         }],
     };
