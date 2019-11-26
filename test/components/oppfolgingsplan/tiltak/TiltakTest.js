@@ -3,8 +3,6 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
-import { setLedetekster } from '@navikt/digisyfo-npm';
-import ledetekster from '../../../mock/mockLedetekster';
 import Tiltak from '../../../../js/components/oppfolgingsplan/tiltak/Tiltak';
 import TiltakListe from '../../../../js/components/oppfolgingsplan/tiltak/liste/TiltakListe';
 import TiltakSkjema from '../../../../js/components/oppfolgingsplan/tiltak/TiltakSkjema';
@@ -48,7 +46,6 @@ describe('Tiltak', () => {
     beforeEach(() => {
         lagreTiltak = sinon.spy();
         slettTiltak = sinon.spy();
-        setLedetekster(ledetekster);
         tiltak = {};
         window.sessionStorage = storageMock();
         arbeidsgiver = {
@@ -72,7 +69,7 @@ describe('Tiltak', () => {
             }}
         />);
         component.setProps({ tiltak: { lagringFeilet: true } });
-        expect(component.state().varselTekst).to.equal('Det oppsto en feil, og du fikk ikke lagret. Prøv igjen.');
+        expect(component.state().varselTekst).to.equal('En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.');
     });
 
     it('Skal ikke vise feilmelding dersom lagring av ny tiltak ikke feilet', () => {

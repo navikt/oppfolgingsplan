@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import {
-    getLedetekst,
-    scrollTo,
-} from '@navikt/digisyfo-npm';
+import { scrollTo } from '@navikt/digisyfo-npm';
 import getContextRoot from '../../../utils/getContextRoot';
 import {
     oppfolgingsplanPt,
@@ -19,6 +16,17 @@ import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import TiltakInfoboks from './TiltakInfoboks';
 import TiltakSkjema from './TiltakSkjema';
 import TiltakListe from './liste/TiltakListe';
+
+const texts = {
+    updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+    infoboks: {
+        title: 'Hva kan hjelpe deg tilbake i arbeid?',
+        info: `
+            Når du og arbeidsgiveren din har fått et overblikk over oppgavene, kan dere fortsette med å se på hva slags tilrettelegging arbeidsplassen kan tilby.
+            Dere legger inn tiltakene sammen.
+        `,
+    },
+};
 
 class Tiltak extends Component {
     constructor(props) {
@@ -50,7 +58,7 @@ class Tiltak extends Component {
             this.setState({
                 lagreNyTiltakFeilet: true,
                 visTiltakSkjema: true,
-                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'),
+                varselTekst: texts.updateError,
             });
         }
     }
@@ -130,8 +138,8 @@ class Tiltak extends Component {
                                 <OppfolgingsplanInfoboks
                                     svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
                                     svgAlt="nyttTiltak"
-                                    tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.onboarding.tiltak.tittel')}
-                                    tekst={getLedetekst('oppfolgingsdialog.arbeidstaker.onboarding.tiltak.tekst')}
+                                    tittel={texts.infoboks.title}
+                                    tekst={texts.infoboks.info}
                                     feilType={this.state.feilType}
                                     feilTekst={this.state.feilTekst}
                                 >
