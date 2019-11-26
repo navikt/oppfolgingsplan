@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
@@ -14,26 +14,22 @@ const texts = {
     buttonBack: 'Tilbake til oversikten',
 };
 
-class IngenledereInfoboks extends Component {
-    componentWillMount() {
-        window.location.hash = 'godkjenn';
-    }
+const IngenledereInfoboks = () => {
+    window.location.hash = 'godkjenn';
 
-    render() {
-        return (<div>
-            <OppfolgingsplanInfoboks
-                svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-ingenleder.svg`}
-                svgAlt="Ingen Leder"
-                tittel={texts.infoboks.title}
-                tekst={texts.infoboks.info}
-            />
-            <div className="knapperad">
-                <Link className="knapp" to={`${getContextRoot()}/oppfolgingsplaner`}>
-                    {texts.buttonBack}
-                </Link>
-            </div>
-        </div>);
-    }
-}
+    return (<div>
+        <OppfolgingsplanInfoboks
+            svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-ingenleder.svg`}
+            svgAlt="Ingen Leder"
+            tittel={texts.infoboks.title}
+            tekst={texts.infoboks.info}
+        />
+        <div className="knapperad">
+            <Link className="knapp" to={`${getContextRoot()}/oppfolgingsplaner`}>
+                {texts.buttonBack}
+            </Link>
+        </div>
+    </div>);
+};
 
 export default IngenledereInfoboks;
