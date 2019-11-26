@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { Field, reduxForm } from 'redux-form';
 import { tekstfeltRegex } from '../../../konstanter';
 import InfoVarsel from './InfoVarsel';
@@ -19,6 +18,41 @@ import {
 import ArbeidsoppgaveKnapper from './ArbeidsoppgaveKnapper';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
+const texts = {
+    infoVarsel: `
+        Husk at arbeidsgiveren din kan se det du skriver her.
+        Derfor må du ikke gi sensitive opplysninger, som for eksempel sykdomsdiagnose.
+        Du må ikke si mer enn det som er helt nødvendig for at arbeidsgiveren din og NAV kan følge deg opp
+    `,
+    felter: {
+        arbeidsoppgavenavn: {
+            question: 'Navn på arbeidsoppgave',
+        },
+        kanGjennomfoeres: {
+            question: 'Kan denne arbeidsoppgaven gjennomføres i sykeperioden?',
+            answer: {
+                kan: 'Ja, den kan gjennomføres som normalt',
+                medTilrettelegging: 'Ja, den kan gjennomføres med tilrettelegging',
+                kanIkke: 'Nei, den kan ikke gjennomføres',
+            },
+        },
+        tilrettelegging: {
+            question: 'Hva skal til for å gjennomføre denne arbeidsoppgaven?',
+            answer: {
+                annetSted: 'Arbeide fra annet sted',
+                merTid: 'Mer gitt tid',
+                medHjelp: 'Med hjelp/hjelpemidler',
+            },
+        },
+        beskrivelse: {
+            question: {
+                tilrettelegging: 'Beskrivelse:',
+                kanIkke: 'Hva står i veien for å kunne gjennomføre denne arbeidsoppgaven?',
+            },
+        },
+    },
+};
+
 export const skjemaFeltPt = PropTypes.shape({
     navn: PropTypes.string,
     spoersmaal: PropTypes.string,
@@ -35,43 +69,44 @@ export const skjemaFeltBeskrivelsePt = PropTypes.shape({
 const MAX_LENGTH = 1000;
 
 const LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN = 'lagreArbeidsgiver';
+
 export const FELTER = {
     arbeidsoppgavenavn: {
         navn: 'arbeidsoppgavenavn',
-        spoersmaal: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.navn',
+        spoersmaal: texts.felter.arbeidsoppgavenavn.question,
     },
     kanGjennomfoeres: {
         navn: 'gjennomfoeringSvar',
-        spoersmaal: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.gjennomfoering.sporsmal',
+        spoersmaal: texts.felter.kanGjennomfoeres.question,
         svar: [
             {
-                tekst: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.gjennomfoering.kan',
+                tekst: texts.felter.kanGjennomfoeres.answer.kan,
                 verdi: KANGJENNOMFOERES.KAN,
             },
             {
-                tekst: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.gjennomfoering.tilrettelegging',
+                tekst: texts.felter.kanGjennomfoeres.answer.medTilrettelegging,
                 verdi: KANGJENNOMFOERES.TILRETTELEGGING,
             },
             {
-                tekst: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.gjennomfoering.kanikke',
+                tekst: texts.felter.kanGjennomfoeres.answer.kanIkke,
                 verdi: KANGJENNOMFOERES.KAN_IKKE,
             },
         ],
     },
     tilrettelegging: {
         navn: 'tilrettelegging',
-        spoersmaal: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.tilrettelegging.sporsmal',
+        spoersmaal: texts.felter.tilrettelegging.question,
         svar: [
             {
-                tekst: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.tilrettelegging.paaAnnetSted',
+                tekst: texts.felter.tilrettelegging.answer.annetSted,
                 navn: TILRETTELEGGING.PAA_ANNET_STED,
             },
             {
-                tekst: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.tilrettelegging.medMerTid',
+                tekst: texts.felter.tilrettelegging.answer.merTid,
                 navn: TILRETTELEGGING.MED_MER_TID,
             },
             {
-                tekst: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.tilrettelegging.medHjelp',
+                tekst: texts.felter.tilrettelegging.answer.medHjelp,
                 navn: TILRETTELEGGING.MED_HJELP,
             },
         ],
@@ -79,8 +114,8 @@ export const FELTER = {
     beskrivelse: {
         navn: 'beskrivelse',
         spoersmaal: {
-            tilrettelegging: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.beskrivelse.tilrettelegging',
-            kanikke: 'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.beskrivelse.kanikke',
+            tilrettelegging: texts.felter.beskrivelse.question.tilrettelegging,
+            kanikke: texts.felter.beskrivelse.question.kanIkke,
         },
     },
 };
@@ -89,7 +124,7 @@ export const ArbeidsoppgaveNavn = ({ felt }) => {
     return (
         <div className="skjemaelement lagrearbeidsoppgaveskjema__inputgruppe">
             <label className="skjemaelement__label" id={felt.navn} htmlFor={`${felt.navn}-input`}>
-                {getLedetekst(felt.spoersmaal)}
+                {felt.spoersmaal}
             </label>
             <Field
                 className="input--fullbredde"
@@ -108,10 +143,9 @@ ArbeidsoppgaveNavn.propTypes = {
 };
 
 export const ArbeidsoppgaveBeskrivelse = ({ felt, gjennomfoeringSvarValgt }) => {
-    const spoersmaal = gjennomfoeringSvarValgt === KANGJENNOMFOERES.KAN_IKKE ?
-        getLedetekst(felt.spoersmaal.kanikke)
-        :
-        getLedetekst(felt.spoersmaal.tilrettelegging);
+    const spoersmaal = gjennomfoeringSvarValgt === KANGJENNOMFOERES.KAN_IKKE
+        ? felt.spoersmaal.kanikke
+        : felt.spoersmaal.tilrettelegging;
     return (
         <div className="skjemaelement lagrearbeidsoppgaveskjema__inputgruppe">
             <label className="skjemaelement__label" id={felt.navn} htmlFor={`${felt.navn}-input`}>
@@ -141,7 +175,7 @@ export const ArbeidsoppgaveGjennomfoeringSvar = ({ handleOptionChange, arbeidsop
     return (
         <div className="skjemaelement lagrearbeidsoppgaveskjema__inputgruppe">
             <label className="skjemaelement__label" id={FELTER.kanGjennomfoeres.navn}>
-                {getLedetekst(FELTER.kanGjennomfoeres.spoersmaal)}
+                {FELTER.kanGjennomfoeres.spoersmaal}
             </label>
             <Field
                 autoFocus
@@ -155,7 +189,7 @@ export const ArbeidsoppgaveGjennomfoeringSvar = ({ handleOptionChange, arbeidsop
                             <input
                                 key={`kanGjennomfoeres-${index}`}
                                 value={svar.verdi}
-                                label={getLedetekst(svar.tekst)}
+                                label={svar.tekst}
                                 id={`${feltId}-${index}`}
                                 aria-labelledby={FELTER.kanGjennomfoeres.navn}
                             />
@@ -177,7 +211,7 @@ export const ArbeidsoppgaveTilrettelegging = ({ toggleCheckbox, arbeidsoppgave }
     return (
         <div className="skjemaelement lagrearbeidsoppgaveskjema__inputgruppe">
             <label className="skjemaelement__label" id={FELTER.tilrettelegging.navn}>
-                {getLedetekst(FELTER.tilrettelegging.spoersmaal)}
+                {FELTER.tilrettelegging.spoersmaal}
             </label>
             {
                 FELTER.tilrettelegging.svar.map((svar, index) => {
@@ -186,7 +220,7 @@ export const ArbeidsoppgaveTilrettelegging = ({ toggleCheckbox, arbeidsoppgave }
                             key={`tilrettelegging-${index}`}
                             name={svar.navn}
                             component={Checkbox}
-                            label={getLedetekst(svar.tekst)}
+                            label={svar.tekst}
                             id={`${feltId}-${index}`}
                             aria-labelledby={FELTER.tilrettelegging.navn}
                             value={svar.tekst}
@@ -352,7 +386,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
                 {this.state.gjennomfoeringSvarValgt !== KANGJENNOMFOERES.KAN &&
                 <InfoVarsel
                     rootUrlImg={rootUrlImg}
-                    tekst={getLedetekst('oppfolgingsdialog.personvern.sykmeldt')} />
+                    tekst={texts.infoVarsel} />
                 }
 
                 { oppdateringFeilet &&
