@@ -44,9 +44,9 @@ class OppfolgingsdialogerOpprett extends Component {
 
     opprett(values) {
         if (values.baserPaaTidligerePlan === 'true') {
-            const oppfolgingsdialog = finnNyesteTidligereOppfolgingsdialogMedVirksomhet(this.props.oppfolgingsdialoger, this.state.virksomhetsnummer);
-            if (oppfolgingsdialog) {
-                this.props.kopier(oppfolgingsdialog.id);
+            const oppfolgingsplan = finnNyesteTidligereOppfolgingsdialogMedVirksomhet(this.props.oppfolgingsdialoger, this.state.virksomhetsnummer);
+            if (oppfolgingsplan) {
+                this.props.kopier(oppfolgingsplan.id);
             } else {
                 this.setState({
                     side: 0,
