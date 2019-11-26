@@ -1,7 +1,6 @@
 import {
     sykeforlopsPerioder,
     timeout,
-    toggles,
 } from '@navikt/digisyfo-npm';
 import { reducer as formReducer } from 'redux-form';
 import arbeidsoppgaver from './arbeidsoppgaver';
@@ -47,7 +46,6 @@ const reducers = {
     nyNaermesteLeder,
     oppfolgingsdialoger,
     samtykke,
-    toggles,
     fastlegeDeling,
     delmednav,
     tilgang,

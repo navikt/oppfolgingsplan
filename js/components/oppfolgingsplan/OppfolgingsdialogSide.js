@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    hentToggles,
-    togglesPt,
     sykeforlopsPerioderReducerPt,
     hentSykeforlopsPerioder,
 } from '@navikt/digisyfo-npm';
@@ -57,7 +55,6 @@ import { hentDineSykmeldinger } from '../../actions/dineSykmeldinger_actions';
 import {
     henterEllerHarHentetOppfolgingsplaner,
     henterEllerHarHentetTilgang,
-    henterEllerHarHentetToggles,
     oppfolgingsplanHarBlittAvbrutt,
 } from '../../utils/reducerUtils';
 import {
@@ -85,10 +82,7 @@ const texts = {
 
 export class Container extends Component {
     componentWillMount() {
-        const { toggles, tilgang, oppfolgingsdialogerReducer } = this.props;
-        if (!henterEllerHarHentetToggles(toggles)) {
-            this.props.hentToggles();
-        }
+        const { tilgang, oppfolgingsdialogerReducer } = this.props;
         if (!henterEllerHarHentetTilgang(tilgang)) {
             this.props.sjekkTilgang();
         }
@@ -199,7 +193,6 @@ Container.propTypes = {
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
     oppfolgingsdialog: oppfolgingsplanProptypes.oppfolgingsplanPt,
     sykeforlopsPerioder: sykeforlopsPerioderReducerPt,
-    toggles: togglesPt,
     brodsmuler: PropTypes.arrayOf(brodsmulePt),
     erOppfolgingsdialogTilgjengelig: PropTypes.bool,
     lagreArbeidsoppgave: PropTypes.func,
@@ -223,7 +216,6 @@ Container.propTypes = {
     dialogAvbruttOgNyOpprettetConnected: PropTypes.func,
     settDialog: PropTypes.func,
     hentDineSykmeldinger: PropTypes.func,
-    hentToggles: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     hentPerson: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
@@ -281,7 +273,6 @@ export function mapStateToProps(state, ownProps) {
         person: state.person,
         dineSykmeldinger: state.dineSykmeldinger,
         tilgang: state.tilgang,
-        toggles: state.toggles,
         oppfolgingsdialog,
         oppfolgingsdialoger: state.oppfolgingsdialoger.data,
         virksomhet: state.virksomhet,
@@ -320,7 +311,6 @@ export default connect(mapStateToProps, {
     avbrytDialog,
     dialogAvbruttOgNyOpprettetConnected: dialogAvbruttOgNyOpprettet,
     hentDineSykmeldinger,
-    hentToggles,
     hentVirksomhet,
     hentPerson,
     hentKontaktinfo,

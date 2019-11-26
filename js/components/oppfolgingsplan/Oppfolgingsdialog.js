@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-    sykeforlopsPerioderReducerPt,
-    togglesPt,
-} from '@navikt/digisyfo-npm';
+import { sykeforlopsPerioderReducerPt } from '@navikt/digisyfo-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
     finnOgHentArbeidsforholdSomMangler,
@@ -80,7 +77,6 @@ class Oppfolgingsdialog extends Component {
             slettTiltak,
             lagreArbeidsoppgave,
             slettArbeidsoppgave,
-            toggles,
             delMedNavFunc,
             delmednav,
             fastlegeDeling,
@@ -112,7 +108,6 @@ class Oppfolgingsdialog extends Component {
         } else if (harNaermesteLeder(oppfolgingsdialog) && inneholderGodkjentPlan(oppfolgingsdialog)) {
             disableNavigation = true;
             panel = (<ReleasetPlanAT
-                toggles={toggles}
                 oppfolgingsdialog={oppfolgingsdialog}
                 hentPdfurler={hentPdfurler}
                 dokument={dokument}
@@ -202,7 +197,6 @@ Oppfolgingsdialog.propTypes = {
     fastlegeDeling: oppfolgingsplanProptypes.delMedFastlegePt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
     delmednav: oppfolgingsplanProptypes.delmednavPt,
-    toggles: togglesPt,
     lagreKommentar: PropTypes.func,
     slettKommentar: PropTypes.func,
     delMedFastlege: PropTypes.func,

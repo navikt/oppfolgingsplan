@@ -27,7 +27,6 @@ const SYKMELDINGER = 'sykmeldinger';
 const VARSLER = 'varsler';
 const VEDLIKEHOLD = 'vedlikehold';
 const TILGANG = 'tilgang';
-const TOGGLES = 'toggles';
 const ARBEIDSFORHOLD = 'arbeidsforhold';
 const KONTAKTINFO = 'kontaktinfo';
 const NAERMESTELEDER = 'naermesteleder';
@@ -57,7 +56,6 @@ lastFilTilMinne(SYKMELDINGER);
 lastFilTilMinne(VARSLER);
 lastFilTilMinne(VEDLIKEHOLD);
 lastFilTilMinne(TILGANG);
-lastFilTilMinne(TOGGLES);
 lastFilTilMinne(ARBEIDSFORHOLD);
 lastFilTilMinne(KONTAKTINFO);
 lastFilTilMinne(NAERMESTELEDER);
@@ -267,11 +265,6 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify({
             strengtFortroligAdresse: false,
         }));
-    });
-
-    server.get('/syforest/informasjon/toggles', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[TOGGLES]));
     });
 
     server.get('/esso/logout', (req, res) => {

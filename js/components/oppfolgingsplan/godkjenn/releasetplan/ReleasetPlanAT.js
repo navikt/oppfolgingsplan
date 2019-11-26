@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { togglesPt } from '@navikt/digisyfo-npm';
 import getContextRoot from '../../../../utils/getContextRoot';
 import {
     delMedFastlegePt,
@@ -39,7 +38,6 @@ class ReleasetPlanAT extends Component {
             dokument,
             giSamtykke,
             avbrytDialog,
-            toggles,
             fastlegeDeling,
             delMedFastlege,
             delMedNavFunc,
@@ -55,7 +53,6 @@ class ReleasetPlanAT extends Component {
             />);
         }
         return (<ReleasetPlan
-            toggles={toggles}
             oppfolgingsdialog={oppfolgingsdialog}
             hentPdfurler={hentPdfurler}
             dokument={dokument}
@@ -80,7 +77,6 @@ ReleasetPlanAT.propTypes = {
     delMedNavFunc: PropTypes.func,
     dokument: dokumentReducerPt,
     oppfolgingsdialog: oppfolgingsplanPt,
-    toggles: togglesPt,
     delmednav: delmednavPt,
     fastlegeDeling: delMedFastlegePt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
