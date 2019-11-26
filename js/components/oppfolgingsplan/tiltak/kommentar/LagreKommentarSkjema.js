@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import {
     Field,
@@ -11,6 +10,15 @@ import { kommentarReducerPt } from '../../../../propTypes/opproptypes';
 import TekstOmrade from '../../../skjema/TekstOmrade';
 import TiltakVarselFeil from '../TiltakVarselFeil';
 
+const texts = {
+    kommentarBeskrivelse: {
+        title: 'Kommenter',
+    },
+    lagreKommentarKnapper: {
+        buttonSave: 'Lagre',
+        buttonCancel: 'Avbryt',
+    },
+};
 
 const MAX_LENGTH = 1000;
 
@@ -21,7 +29,7 @@ export const KommentarBeskrivelse = ({ felt, elementId }) => {
                 className="skjemaelement__label"
                 id={`${elementId}`}
                 htmlFor={`${elementId}`}>
-                {getLedetekst('oppfolgingsdialog.kommentarBeskrivelse.tittel')}
+                {texts.kommentarBeskrivelse.title}
             </label>
             <Field
                 className="tiltak_input--kommenter input--fullbredde"
@@ -57,7 +65,7 @@ export const LagreKommentarKnapper = ({ avbryt, spinner }) => {
                     disabled={spinner}
                     spinner={spinner}
                     htmlType="submit">
-                    {getLedetekst('oppfolgingsdialog.knapp.lagre')}
+                    {texts.lagreKommentarKnapper.buttonSave}
                 </Hovedknapp>
             </div>
             <div className="knapperad__element">
@@ -66,7 +74,7 @@ export const LagreKommentarKnapper = ({ avbryt, spinner }) => {
                     type="button"
                     onKeyPress={(e) => { handleKeyPress(avbryt, e); }}
                     onMouseDown={avbryt}>
-                    {getLedetekst('oppfolgingsdialog.knapp.avbryt')}
+                    {texts.lagreKommentarKnapper.buttonCancel}
                 </button>
             </div>
         </div>);
