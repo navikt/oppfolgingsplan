@@ -85,9 +85,7 @@ class GodkjentPlanAvbrutt extends Component {
                 >
                     <div className="godkjentPlanAvbrutt">
                         <GodkjentPlanAvbruttTidspunkt
-                            rootUrl={rootUrl}
-                            oppfolgingsdialog={oppfolgingsdialog}
-                            gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt}
+                            oppfolgingsplan={oppfolgingsdialog}
                         />
                         <p>{getLedetekst('oppfolgingsdialog.releasetPlan.avbrutt.endret-av', {
                             '%AKTOERNAVN%': finnSistEndretAvNavn(oppfolgingsdialog),

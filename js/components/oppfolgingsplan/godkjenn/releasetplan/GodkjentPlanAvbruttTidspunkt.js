@@ -1,28 +1,33 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
+import getContextRoot from '../../../../utils/getContextRoot';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
 
-const GodkjentPlanAvbruttTidspunkt = ({ oppfolgingsdialog, rootUrl }) => {
+const textOppfolgingsplanDuration = (dateFrom, dateTo) => {
+    return `Planens varighet: ${dateFrom} – ${dateTo}`;
+};
+
+const GodkjentPlanAvbruttTidspunkt = (
+    {
+        oppfolgingsplan,
+    }) => {
     return (
         <div className="blokk godkjentPlanAvbruttTidspunkt">
             <BildeTekstLinje
-                imgUrl={`${rootUrl}/img/svg/calendar.svg`}
+                imgUrl={`${getContextRoot()}/img/svg/calendar.svg`}
                 alt="bubble"
-                tekst={getLedetekst('oppfolgingsdialog.godkjentPlanAvbruttTidspunkt.varighet', {
-                    '%FOM%': toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom),
-                    '%AVBRUTT%': toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt),
-                })}
+                tekst={textOppfolgingsplanDuration(
+                    toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.fom),
+                    toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.avbruttPlan.tidspunkt),
+                )}
             />
         </div>
     );
 };
 
 GodkjentPlanAvbruttTidspunkt.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-    rootUrl: PropTypes.string,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
 
 export default GodkjentPlanAvbruttTidspunkt;
