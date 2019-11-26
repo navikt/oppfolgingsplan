@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
     getLedetekst,
-    hentToggles,
-    togglesPt,
 } from '@navikt/digisyfo-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import { populerPlanFraState } from '../../utils/stateUtils';
@@ -33,7 +31,6 @@ import {
     henterEllerHarHentetLedere,
     henterEllerHarHentetOppfolgingsplaner,
     henterEllerHarHentetTilgang,
-    henterEllerHarHentetToggles,
     lederHarBlittAvkreftet,
     oppfolgingsplanHarBlittOpprettet,
 } from '../../utils/reducerUtils';
@@ -48,7 +45,6 @@ export class Container extends Component {
             tilgang,
             naermesteLedere,
             oppfolgingsdialogerReducer,
-            toggles,
         } = this.props;
         if (!henterEllerHarHentetTilgang(tilgang)) {
             this.props.sjekkTilgang();
@@ -59,9 +55,6 @@ export class Container extends Component {
         }
         if (!henterEllerHarHentetOppfolgingsplaner(oppfolgingsdialogerReducer)) {
             this.props.hentOppfolgingsdialoger();
-        }
-        if (!henterEllerHarHentetToggles(toggles)) {
-            this.props.hentToggles();
         }
         window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
         window.sessionStorage.removeItem('startdato');
@@ -144,7 +137,6 @@ Container.propTypes = {
     virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
-    toggles: togglesPt,
     brodsmuler: PropTypes.arrayOf(brodsmulePt),
     avkreftLeder: PropTypes.func,
     bekreftNyNaermesteLeder: PropTypes.func,
@@ -154,7 +146,6 @@ Container.propTypes = {
     hentNaermesteLeder: PropTypes.func,
     hentOppfolgingsdialoger: PropTypes.func,
     hentPerson: PropTypes.func,
-    hentToggles: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     kopierOppfolgingsdialog: PropTypes.func,
     opprettOppfolgingsdialog: PropTypes.func,
@@ -198,7 +189,6 @@ export const mapStateToProps = (state) => {
         oppfolgingsdialogerReducer: state.oppfolgingsdialoger,
         person: state.person,
         tilgang: state.tilgang,
-        toggles: state.toggles,
         virksomhet: state.virksomhet,
         bekreftetNyNaermesteLeder: state.nyNaermesteLeder.bekreftet,
         oppfolgingsdialoger,
@@ -224,7 +214,6 @@ export default connect(mapStateToProps, {
     hentPerson,
     hentForrigeNaermesteLeder,
     hentNaermesteLeder,
-    hentToggles,
     kopierOppfolgingsdialog,
     opprettOppfolgingsdialog,
 })(Container);

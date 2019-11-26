@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Alertstripe from 'nav-frontend-alertstriper';
-import {
-    getLedetekst,
-    togglesPt,
-} from '@navikt/digisyfo-npm';
 import {
     dinesykmeldingerReducerPt,
     ledereReducerPt,
@@ -36,6 +31,13 @@ import NyNaermestelederInfoboks from './NyNaermestelederInfoboks';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
+
+const texts = {
+    pageTitle: 'Oppfølgingsplaner',
+    noActiveSykmelding: {
+        titleTidligerePlaner: 'Tidligere oppfølgingsplaner',
+    },
+};
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
     const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger);
@@ -77,7 +79,6 @@ class Oppfolgingsdialoger extends Component {
             opprettOppfolgingsdialog,
             dinesykmeldinger,
             naermesteLedere,
-            toggles,
         } = this.props;
         let panel;
         const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger);
@@ -100,7 +101,7 @@ class Oppfolgingsdialoger extends Component {
                     {!isEmpty(oppfolgingsdialoger) && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) &&
                     <OppfolgingsdialogerUtenAktivSykmelding
                         oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
-                        tittel={getLedetekst('oppfolgingsdialoger.tidligereplaner.tittel')}
+                        tittel={texts.noActiveSykmelding.titleTidligerePlaner}
                     />
                     }
                 </div>);
@@ -116,16 +117,6 @@ class Oppfolgingsdialoger extends Component {
             );
         }
         return (<div>
-            { toggles.data['syfotoggles.send.oppfoelgingsdialog.fastlege'] === 'false' &&
-            <Alertstripe
-                className="alertstripe--notifikasjonboks"
-                type="info"
-                solid
-            >
-                {getLedetekst('oppfolgingsdialog.oppfolgingsdialoger.notifikasjonboks.generell-info')}
-            </Alertstripe>
-            }
-
             { dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 &&
             <AvbruttPlanNotifikasjonBoksAdvarsel
                 motpartnavn={dialogerAvbruttAvMotpartSidenSistInnlogging[0].sistEndretAv.navn}
@@ -133,7 +124,7 @@ class Oppfolgingsdialoger extends Component {
             />
             }
             <Sidetopp
-                tittel={getLedetekst('oppfolgingsdialoger.sidetittel')}
+                tittel={texts.pageTitle}
             />
             <OppfolgingsdialogerInfoPersonvern />
 
@@ -149,7 +140,6 @@ Oppfolgingsdialoger.propTypes = {
     person: oppfolgingsplanProptypes.personReducerPt,
     virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
-    toggles: togglesPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
     bekreftNyNaermesteLeder: PropTypes.func,
     avkreftLeder: PropTypes.func,
