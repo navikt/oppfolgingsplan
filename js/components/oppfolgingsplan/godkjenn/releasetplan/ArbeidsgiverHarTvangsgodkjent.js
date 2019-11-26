@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import {
-    getLedetekst,
-    Utvidbar,
-} from '@navikt/digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import getContextRoot from '../../../../utils/getContextRoot';
 import {
     dokumentReducerPt,
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+
+const texts = {
+    getDocumentFailet: 'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
+    title: 'Lederen din har opprettet en versjon av oppfølgingsplanen',
+    paragraphInfo: 'Om du er uenig i innholdet i planen så må du snakke med arbeidsgiveren din.',
+    utvidbarTitle: 'Se planen',
+    buttonConfirm: 'Videre',
+};
 
 class ArbeidsgiverHarTvangsgodkjent extends Component {
     componentWillMount() {
@@ -30,7 +35,7 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
             panel = <div className="app-spinner" aria-label="Vent litt mens siden laster" />;
         } else if (dokument.hentingFeilet) {
             panel = (<div className="godkjentPlanPdf__feilmelding">
-                {getLedetekst('oppfolgingsdialog.arbeidsgiverhartvangsgodkjent.feilmelding.hentdokument')}
+                {texts.getDocumentFailet}
             </div>);
         } else {
             panel = dokument.data && dokument.data.map((url, idx) => {
@@ -46,11 +51,11 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
                 liteikon
                 svgUrl={`${getContextRoot()}/img/svg/varseltrekant.svg`}
                 svgAlt="godkjent"
-                tittel={getLedetekst('oppfolgingsdialog.arbeidsgiverhartvangsgodkjent.tittel')}
+                tittel={texts.title}
             >
                 <div className="arbeidsgiverHarTvangsgodkjent">
-                    <p>{getLedetekst('oppfolgingsdialog.arbeidsgiverhartvangsgodkjent.tekst')}</p>
-                    <Utvidbar className="utvidbar--oppfolgingsplan" tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.godkjent.utvidbar.tittel')}>
+                    <p>{texts.paragraphInfo}</p>
+                    <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.utvidbarTitle}>
                         <div className="godkjentPlanPdf">
                             { panel }
                         </div>
@@ -59,7 +64,7 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
                     <div className="knapperad">
                         <div className="knapperad__element">
                             <Hovedknapp onClick={markerMottattTvungenGodkjenning}>
-                                {getLedetekst('oppfolgingsdialog.knapp.videre')}
+                                {texts.buttonConfirm}
                             </Hovedknapp>
                         </div>
                     </div>
