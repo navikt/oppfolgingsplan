@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { STATUS_TILTAK } from '../../../../konstanter';
 import {
     kommentarReducerPt,
@@ -17,6 +16,27 @@ import {
 } from '../../../../utils/tiltakUtils';
 import TiltakVarselVurdering from './TiltakVarselVurdering';
 
+const texts = {
+    tiltakInformasjonKnapper: {
+        buttonComment: 'Kommenter',
+        buttonDelete: 'Slett',
+        buttonEdit: 'Endre',
+    },
+    tiltakInformasjonBeskrivelse: {
+        label: 'BESKRIVELSE',
+    },
+    tiltakInformasjonGjennomfoering: {
+        label: 'OPPFØLGING OG GJENNOMFØRING',
+    },
+    tabellTiltakBeskrivelseIkkeAktuelt: {
+        label: 'ARBEIDSGIVERS VURDERING',
+    },
+    tiltakInformasjon: {
+        updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+        tiltakVarselVurdering: 'Dette tiltaket mangler en vurdering fra lederen din',
+    },
+};
+
 export const TiltakInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSlett, lagreKommentarSkjema, visLagreKommentarSkjema }) => {
     const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
     return (
@@ -26,7 +46,7 @@ export const TiltakInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSle
                 <Knapp
                     autoFocus={!skalVurdereTiltak(element, fnr)}
                     onClick={visLagreKommentarSkjema}>
-                    {getLedetekst('oppfolgingsdialog.knapp.kommenter')}
+                    {texts.tiltakInformasjonKnapper.buttonComment}
                 </Knapp>
             </div>
             }
@@ -39,7 +59,7 @@ export const TiltakInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSle
                         sendSlett(element.tiltakId);
                     }}
                     aria-pressed={visLagreSkjema}>
-                    {getLedetekst('oppfolgingsdialog.knapp.slett-element')}
+                    {texts.tiltakInformasjonKnapper.buttonDelete}
                 </button>
             </div>
             }
@@ -49,7 +69,7 @@ export const TiltakInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSle
                     className="knapp--endre knapp--tiltak--endre"
                     type="button"
                     onClick={visLagreSkjema}>
-                    {getLedetekst('oppfolgingsdialog.knapp.endre-element')}
+                    {texts.tiltakInformasjonKnapper.buttonEdit}
                 </button>
             </div>
             }
@@ -69,7 +89,7 @@ export const TiltakInformasjonBeskrivelse = ({ tiltak }) => {
     return (
         <div className="tiltaktabell__rad__utvidbar--rad">
             { tiltak && tiltak.beskrivelse &&
-            <label className="tiltaktabell--beskrivelse">{getLedetekst('oppfolgingsdialog.tiltak.beskrivelse')}</label>
+            <label className="tiltaktabell--beskrivelse">{texts.tiltakInformasjonBeskrivelse.label}</label>
             }
             { tiltak && tiltak.beskrivelse &&
             <p>{tiltak.beskrivelse}</p>
@@ -85,7 +105,7 @@ export const TiltakInformasjonGjennomfoering = ({ tiltak }) => {
     return (
         <div className="tiltaktabell__rad__utvidbar--rad">
             { tiltak && tiltak.gjennomfoering &&
-            <label className="tiltaktabell--oppfoelging">{getLedetekst('oppfolgingsdialog.tiltak.oppfoelging')}</label>
+            <label className="tiltaktabell--oppfoelging">{texts.tiltakInformasjonGjennomfoering.label}</label>
             }
             { tiltak && tiltak.gjennomfoering &&
             <p>{tiltak.gjennomfoering}</p>
@@ -98,11 +118,10 @@ TiltakInformasjonGjennomfoering.propTypes = {
 };
 
 export const TabellTiltakBeskrivelseIkkeAktuelt = ({ tiltak }) => {
-    const tittel = 'oppfolgingsdialog.arbeidstaker.tiltak.vurdering.tittel';
     return (
         <div className="tiltaktabell__rad__utvidbar--rad">
             { tiltak && tiltak.beskrivelseIkkeAktuelt &&
-            <label className="tiltaktabell--oppfoelging">{getLedetekst(tittel)}</label>
+            <label className="tiltaktabell--oppfoelging">{texts.tabellTiltakBeskrivelseIkkeAktuelt.label}</label>
             }
             { tiltak && tiltak.beskrivelseIkkeAktuelt &&
             <p>{tiltak.beskrivelseIkkeAktuelt}</p>
@@ -140,7 +159,7 @@ class TiltakInformasjon extends Component {
             this.props.visFeilMelding(true);
             this.setState({
                 visLagringKommentarFeilet: true,
-                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'),
+                varselTekst: texts.tiltakInformasjon.updateError,
             });
         } else if (!nextProps.kommentarReducer.lagringFeilet && !nextProps.kommentarReducer.slettingFeilet) {
             this.setState({
@@ -186,7 +205,7 @@ class TiltakInformasjon extends Component {
 
                 { visVarsel(fnr, element) &&
                 <TiltakVarselVurdering
-                    tekst={getLedetekst('oppfolgingsdialog.tiltak.vurdering.varsel')}
+                    tekst={texts.tiltakInformasjon.tiltakVarselVurdering}
                 />
                 }
 
