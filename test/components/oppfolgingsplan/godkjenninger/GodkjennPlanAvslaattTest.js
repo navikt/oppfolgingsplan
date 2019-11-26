@@ -11,8 +11,8 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('GodkjennPlanAvslaatt', () => {
-    const oppfolgingsdialog = getOppfolgingsdialog();
-    const komponent = shallow(<GodkjennPlanAvslaatt oppfolgingsdialog={oppfolgingsdialog} />);
+    const oppfolgingsplan = getOppfolgingsdialog();
+    const komponent = shallow(<GodkjennPlanAvslaatt oppfolgingsplan={oppfolgingsplan} />);
 
     it('Skal vise en GodkjennPlanMottatt', () => {
         expect(komponent.find(OppfolgingsplanInnholdboks)).to.have.length(1);

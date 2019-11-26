@@ -1,25 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+import getContextRoot from '../../../../utils/getContextRoot';
 
-const GodkjennPlanAvslaatt = ({ oppfolgingsdialog, rootUrl, nullstillGodkjenning }) => {
-    const infoboksTekst = getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.avslaatt.infoboks.tekst');
+const texts = {
+    title: 'Lederen din er visst ikke helt enig',
+    paragraphInfo: 'Du kan gjøre endringer slik at dere får en god plan.',
+    buttonMakeChanges: 'Rediger planen',
+};
+
+const GodkjennPlanAvslaatt = (
+    {
+        oppfolgingsplan,
+        nullstillGodkjenning,
+    }) => {
     return (
         <OppfolgingsplanInnholdboks
-            svgUrl={`${rootUrl}/img/svg/oppfolgingsplan-avslaatt.svg`}
+            svgUrl={`${getContextRoot()}/img/svg/oppfolgingsplan-avslaatt.svg`}
             svgAlt="avslaatt"
-            tittel={getLedetekst('oppfolgingsdialog.arbeidstaker.godkjennplan.avslaatt.infoboks.tittel')}
+            tittel={texts.title}
         >
             <div className="godkjennPlanAvslaatt">
                 <div className="godkjennPlanAvslaatt__infoboks">
-                    <p>{infoboksTekst}</p>
+                    <p>{texts.paragraphInfo}</p>
                 </div>
                 <div className="knapperad">
-                    <Hovedknapp onClick={() => { nullstillGodkjenning(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr); }}>
-                        {getLedetekst('oppfolgingsdialog.knapp.rediger-plan')}
+                    <Hovedknapp onClick={() => { nullstillGodkjenning(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr); }}>
+                        {texts.buttonMakeChanges}
                     </Hovedknapp>
                 </div>
             </div>
@@ -27,8 +36,7 @@ const GodkjennPlanAvslaatt = ({ oppfolgingsdialog, rootUrl, nullstillGodkjenning
     );
 };
 GodkjennPlanAvslaatt.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-    rootUrl: PropTypes.string,
+    oppfolgingsplan: oppfolgingsplanPt,
     nullstillGodkjenning: PropTypes.func,
 };
 

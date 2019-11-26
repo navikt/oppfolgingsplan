@@ -39,8 +39,7 @@ const MottattGodkjenninger = (
     }
     return (<GodkjennPlanAvslaatt
         nullstillGodkjenning={nullstillGodkjenning}
-        oppfolgingsdialog={oppfolgingsplan}
-        rootUrl={rootUrl}
+        oppfolgingsplan={oppfolgingsplan}
     />);
 };
 
