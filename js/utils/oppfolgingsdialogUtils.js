@@ -217,3 +217,7 @@ export const finnOppfolgingsdialogMotpartNavn = (oppfolgingsdialog) => {
 export const finnSistEndretAvNavn = (oppfolgingsplan) => {
     return oppfolgingsplan.sistEndretAv.navn;
 };
+
+export const skalDeleMedNav = (delMedNav, oppfolgingsdialog) => {
+    return delMedNav || oppfolgingsdialog.godkjenninger.find((godkjennning) => { return godkjennning.deltMedNAV; });
+};

@@ -76,7 +76,7 @@ describe('oppfolgingsdialoger_actions', () => {
             fom: new Date(),
             tom: new Date(),
             evalueres: new Date(),
-        }, 'true')).to.deep.equal({
+        }, 'true', true)).to.deep.equal({
             type: actions.GODKJENN_DIALOG_FORESPURT,
             id: 'id',
             status: 'true',
@@ -85,6 +85,7 @@ describe('oppfolgingsdialoger_actions', () => {
                 tom: new Date(),
                 evalueres: new Date(),
             },
+            delMedNav: true,
         });
     });
 
@@ -102,11 +103,14 @@ describe('oppfolgingsdialoger_actions', () => {
             tom: new Date(),
             evalueres: new Date(),
         };
-        expect(actions.dialogGodkjent(id, status, gyldighetstidspunkt)).to.deep.equal({
+        const delMedNav = true;
+
+        expect(actions.dialogGodkjent(id, status, gyldighetstidspunkt, delMedNav)).to.deep.equal({
             id,
             status,
             gyldighetstidspunkt,
             type: actions.DIALOG_GODKJENT,
+            delMedNav: true,
         });
     });
 
