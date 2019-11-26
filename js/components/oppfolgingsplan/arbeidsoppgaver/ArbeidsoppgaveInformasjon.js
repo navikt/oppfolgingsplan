@@ -1,9 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { KANGJENNOMFOERES } from '../../../konstanter';
-import { ArbeidsoppgaveVarselFeil } from './ArbeidsoppgaveVarselFeil';
+import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 import { arbeidsoppgavePt } from '../../../propTypes/opproptypes';
+
+const texts = {
+    arbeidsoppgaveInformasjonKnapper: {
+        buttonDelete: 'Slett',
+        buttonEdit: 'Endre',
+        buttonVurdering: 'Gi din vurdering',
+    },
+    arbeidsoppgaveInformasjonInnhold: {
+        ikkeVurdert: 'Gi arbeidsgiveren din en vurdering på om du kan gjennomføre denne arbeidsoppgaven og hva som kan hjelpe deg.',
+        tilrettelegging: {
+            title: 'Hjelp/Hjelpemidler',
+            sted: 'På annet sted',
+            tid: 'Med mer tid',
+            hjelp: 'Med hjelp',
+        },
+        beskrivelseLabel: 'Beskrivelse',
+        createdByLabel: 'Lagt til av',
+    },
+};
 
 export const ArbeidsoppgaveInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSlett }) => {
     const elementId = element.arbeidsoppgaveId;
@@ -15,10 +33,9 @@ export const ArbeidsoppgaveInformasjonKnapper = ({ element, fnr, visLagreSkjema,
                 className={`${element.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard'} knapperad__element`}
                 aria-pressed={visLagreSkjema}
                 onClick={visLagreSkjema}>
-                {element.gjennomfoering ?
-                    getLedetekst('oppfolgingsdialog.knapp.endre-element')
-                    :
-                    getLedetekst('oppfolgingsdialog.knapp.givurdering')
+                {element.gjennomfoering
+                    ? texts.arbeidsoppgaveInformasjonKnapper.buttonEdit
+                    : texts.arbeidsoppgaveInformasjonKnapper.buttonVurdering
                 }
             </button>
             { aktoerHarOpprettetElement &&
@@ -26,7 +43,7 @@ export const ArbeidsoppgaveInformasjonKnapper = ({ element, fnr, visLagreSkjema,
                 type="button"
                 onClick={() => { sendSlett(elementId); }}
                 className="knapperad__element knapp--slett">
-                {getLedetekst('oppfolgingsdialog.knapp.slett-element')}
+                {texts.arbeidsoppgaveInformasjonKnapper.buttonDelete}
             </button>
             }
         </div>);
@@ -64,34 +81,34 @@ export const ArbeidsoppgaveInformasjonInnhold = ({ arbeidsoppgave }) => {
     return (
         <div className={`arbeidsoppgaveInformasjonInnhold ${hentPanelType}`}>
             {!arbeidsoppgave.gjennomfoering &&
-            <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.ikke-vurdert.arbeidstaker')}</p>
+            <p>{texts.arbeidsoppgaveInformasjonInnhold.ikkeVurdert}</p>
             }
             { arbeidsoppgave.gjennomfoering &&
             <dl>
                 { arbeidsoppgave.gjennomfoering && arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING &&
-                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging')}</dt>
+                <dt>{texts.arbeidsoppgaveInformasjonInnhold.tilrettelegging.title}</dt>
                 }
                 { arbeidsoppgave.gjennomfoering && arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING &&
                 <dd>
                     { arbeidsoppgave.gjennomfoering.paaAnnetSted &&
-                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.paaAnnetSted')}</p>
+                    <p>{texts.arbeidsoppgaveInformasjonInnhold.tilrettelegging.sted}</p>
                     }
                     { arbeidsoppgave.gjennomfoering.medMerTid &&
-                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.medMerTid')}</p>
+                    <p>{texts.arbeidsoppgaveInformasjonInnhold.tilrettelegging.tid}</p>
                     }
                     { arbeidsoppgave.gjennomfoering.medHjelp &&
-                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.medHjelp')}</p>
+                    <p>{texts.arbeidsoppgaveInformasjonInnhold.tilrettelegging.hjelp}</p>
                     }
                 </dd>
                 }
 
                 { beskrivelseTekst.length > 0 && arbeidsoppgave.gjennomfoering.kanGjennomfoeres !== KANGJENNOMFOERES.KAN &&
-                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.beskrivelse')}</dt>
+                <dt>{texts.arbeidsoppgaveInformasjonInnhold.beskrivelseLabel}</dt>
                 }
                 { beskrivelseTekst.length > 0 && arbeidsoppgave.gjennomfoering.kanGjennomfoeres !== KANGJENNOMFOERES.KAN &&
                 <dd className="arbeidsoppgaveInformasjonInnhold__beskrivelse">{beskrivelseTekst}</dd>
                 }
-                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.opprettetAv')}</dt>
+                <dt>{texts.arbeidsoppgaveInformasjonInnhold.createdByLabel}</dt>
                 <dd>{arbeidsoppgave.opprettetAv.navn}</dd>
             </dl>
             }
