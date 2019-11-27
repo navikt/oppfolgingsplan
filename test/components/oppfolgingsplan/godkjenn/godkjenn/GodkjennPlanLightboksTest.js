@@ -45,7 +45,7 @@ describe('GodkjennPlanLightboks', () => {
         expect(komponent.find(GodkjennPlanSkjemaDatovelger)).to.have.length(1);
     });
 
-    it('Skal vise et Field for godkjenning and delMedNav', () => {
+    it('Skal vise et Field for godkjenning og delMedNav', () => {
         expect(komponent.find(Field)).to.have.length(2);
     });
 
