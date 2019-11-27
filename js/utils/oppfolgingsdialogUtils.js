@@ -219,5 +219,5 @@ export const finnSistEndretAvNavn = (oppfolgingsplan) => {
 };
 
 export const skalDeleMedNav = (delMedNav, oppfolgingsdialog) => {
-    return delMedNav || oppfolgingsdialog.godkjenninger.find((godkjennning) => { return godkjennning.deltMedNAV; });
+    return delMedNav || oppfolgingsdialog.godkjenninger.find((godkjenning) => { return godkjenning.delMedNav; });
 };
