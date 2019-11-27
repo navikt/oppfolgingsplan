@@ -83,6 +83,7 @@ describe('oppfolgingsdialogerSagas', () => {
             id: '12345678',
             gyldighetstidspunkt: {},
             status: 'TRUE',
+            delMedNav: true,
         };
 
         const generator = godkjennDialogSaga(action);
@@ -95,7 +96,7 @@ describe('oppfolgingsdialogerSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker&delmednav=true`;
             const nextCall = call(post, url, action.gyldighetstidspunkt);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
@@ -106,6 +107,7 @@ describe('oppfolgingsdialogerSagas', () => {
                 id: action.id,
                 status: action.status,
                 gyldighetstidspunkt: {},
+                delMedNav: action.delMedNav,
             });
             expect(generator.next({}).value).to.deep.equal(nextPut);
         });

@@ -69,12 +69,13 @@ export const opprettOppfolgingsdialog = (virksomhetsnummer) => {
     };
 };
 
-export const godkjennDialog = (id, gyldighetstidspunkt, status) => {
+export const godkjennDialog = (id, gyldighetstidspunkt, status, delMedNav) => {
     return {
         type: GODKJENN_DIALOG_FORESPURT,
         id,
         gyldighetstidspunkt,
         status,
+        delMedNav,
     };
 };
 
@@ -84,12 +85,13 @@ export const godkjennerDialog = () => {
     };
 };
 
-export const dialogGodkjent = (id, status, gyldighetstidspunkt) => {
+export const dialogGodkjent = (id, status, gyldighetstidspunkt, delMedNav) => {
     return {
         type: DIALOG_GODKJENT,
         id,
         gyldighetstidspunkt,
         status,
+        delMedNav,
     };
 };
 

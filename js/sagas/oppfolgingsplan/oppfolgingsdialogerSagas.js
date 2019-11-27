@@ -45,9 +45,10 @@ export function* opprettOppfolgingsdialog(action) {
 export function* godkjennDialogSaga(action) {
     yield put(actions.godkjennerDialog());
     try {
-        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker`;
+        const delMedNav = `&delmednav=${action.delMedNav}`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker${delMedNav}`;
         const data = yield call(post, url, action.gyldighetstidspunkt);
-        yield put(actions.dialogGodkjent(action.id, action.status, data));
+        yield put(actions.dialogGodkjent(action.id, action.status, data, action.delMedNav));
     } catch (e) {
         if (e.message === '409') {
             window.location.reload();

@@ -15,7 +15,10 @@ import { NULLSTILT_GODKJENNING } from '../actions/oppfolgingsplan/nullstillGodkj
 import { DELT_MED_NAV } from '../actions/oppfolgingsplan/delmednav_actions';
 import { DELT_MED_FASTLEGE } from '../actions/oppfolgingsplan/delMedFastlege_actions';
 import { SAMTYKKE_GITT } from '../actions/oppfolgingsplan/samtykke_actions';
-import { finnNyesteGodkjenning } from '../utils/oppfolgingsdialogUtils';
+import {
+    finnNyesteGodkjenning,
+    skalDeleMedNav,
+} from '../utils/oppfolgingsdialogUtils';
 import { toGjennomfoering } from '../utils/arbeidsoppgaveUtils';
 
 const initiellState = {
@@ -152,6 +155,8 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
                                     tom: action.gyldighetstidspunkt.tom,
                                     evalueres: action.gyldighetstidspunkt.evalueres,
                                 },
+                                deltMedNAV: skalDeleMedNav(action.delMedNav, oppfolgingsdialog),
+                                deltMedNAVTidspunkt: skalDeleMedNav(action.delMedNav, oppfolgingsdialog) ? new Date() : null,
                             },
                         });
                     }
@@ -166,6 +171,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
                                 tom: action.gyldighetstidspunkt.tom,
                                 evalueres: action.gyldighetstidspunkt.evalueres,
                             },
+                            delMedNav: action.delMedNav,
                         }],
                         sistEndretAv: oppfolgingsdialog.arbeidstaker,
                         sistEndretDato: new Date(),
