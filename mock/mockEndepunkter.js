@@ -13,7 +13,6 @@ const uuid = () => {
 
 const mockData = {};
 const ARBEIDSGIVERS_SYKMELDINGER = 'arbeidsgiversSykmeldinger';
-const NY_SOKNAD_UTLAND = 'nySoknadUtland';
 const ARBEIDSGIVERE = 'arbeidsgivere';
 const METADATA = 'metadata';
 const NAERMESTELEDERE = 'naermesteledere';
@@ -42,7 +41,6 @@ const lastFilTilMinne = (filnavn) => {
 };
 
 lastFilTilMinne(ARBEIDSGIVERS_SYKMELDINGER);
-lastFilTilMinne(NY_SOKNAD_UTLAND);
 lastFilTilMinne(ARBEIDSGIVERE);
 lastFilTilMinne(METADATA);
 lastFilTilMinne(NAERMESTELEDERE);
