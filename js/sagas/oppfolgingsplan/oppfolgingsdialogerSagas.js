@@ -45,7 +45,7 @@ export function* opprettOppfolgingsdialog(action) {
 export function* godkjennDialogSaga(action) {
     yield put(actions.godkjennerDialog());
     try {
-        const delMedNav = `&delmednav=${action.delMedNav}`;
+        const delMedNav = action.delMedNav ? `&delmednav=${action.delMedNav}` : '';
         const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker${delMedNav}`;
         const data = yield call(post, url, action.gyldighetstidspunkt);
         yield put(actions.dialogGodkjent(action.id, action.status, data, action.delMedNav));
