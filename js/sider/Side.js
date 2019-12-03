@@ -8,7 +8,7 @@ import Feilmelding from '../components/Feilmelding';
 import * as actions from '../actions/brukerinfo_actions';
 import { brodsmule as brodsmulePt } from '../propTypes';
 import { toggleHeleAppen } from '../toggles';
-import TimeoutBox from '../components/app/timeout/TimeoutBox';
+import TimeoutBox from '../timeout/TimeoutBox';
 
 const DocumentTitle = require('react-document-title');
 
