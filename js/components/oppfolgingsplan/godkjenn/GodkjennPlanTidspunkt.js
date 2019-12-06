@@ -12,12 +12,12 @@ const GodkjennPlanTidspunkt = ({ rootUrl, gyldighetstidspunkt }) => {
         <React.Fragment>
             <BildeTekstLinje
                 imgUrl={`${rootUrl}/img/svg/calendar.svg`}
-                alt="bubble"
+                alt="calendar"
                 tekst={`Planens varighet: ${toDateMedMaanedNavn(gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(gyldighetstidspunkt.tom)}`}
             />
             <BildeTekstLinje
                 imgUrl={`${rootUrl}/img/svg/bubble.svg`}
-                alt="calendar"
+                alt="bubble"
                 tekst={`Planen evalueres: ${toDateMedMaanedNavn(gyldighetstidspunkt.evalueres)}`}
             />
         </React.Fragment>

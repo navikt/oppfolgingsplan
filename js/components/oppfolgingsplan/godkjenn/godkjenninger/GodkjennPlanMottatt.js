@@ -86,7 +86,6 @@ GodkjennPlanMottattKnapper.propTypes = {
     godkjennPlan: PropTypes.func,
 };
 
-
 const GodkjennPlanMottatt = (
     {
         oppfolgingsdialog,
