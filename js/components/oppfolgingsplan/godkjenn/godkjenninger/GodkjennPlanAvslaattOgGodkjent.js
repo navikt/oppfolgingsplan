@@ -10,7 +10,6 @@ import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsdialogUt
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
-import { AvbrytPlanBekreftelse } from '../releasetplan/GodkjentPlan';
 import { EditButton } from './EditButton';
 
 const texts = {
