@@ -107,11 +107,6 @@ const GodkjennPlanAvslaattOgGodkjent = (
                     avvisDialog={avvisDialog}
                 />
 
-                <AvbrytPlanBekreftelse
-                    oppfolgingsdialog={oppfolgingsplan}
-                    avbrytDialog={avvisDialog}
-                />
-
                 <GodkjennPlanMottattUtvidbar
                     oppfolgingsplan={oppfolgingsplan}
                     rootUrl={rootUrl}
