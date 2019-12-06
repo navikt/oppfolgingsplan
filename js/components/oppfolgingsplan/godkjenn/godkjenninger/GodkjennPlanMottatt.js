@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-    Knapp,
-    Hovedknapp,
-} from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
 import { Checkbox } from 'nav-frontend-skjema';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
@@ -12,6 +9,7 @@ import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInf
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
+import { EditButton } from './EditButton';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
@@ -53,7 +51,7 @@ GodkjennPlanMottattUtvidbar.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
     rootUrl: PropTypes.string,
 };
-export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, avvisDialog }) => {
+export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) => {
     const [delMedNav, setDelMedNav] = useState(false);
 
     const handleChange = () => {
@@ -74,17 +72,11 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, av
                     name="godkjentKnapp"
                     id="godkjentKnapp"
                     autoFocus
-                    onClick={() => { godkjennPlan(oppfolgingsdialog.id, null, true, delMedNav); }}>
+                    onClick={() => {
+                        godkjennPlan(oppfolgingsdialog.id, null, true, delMedNav);
+                    }}>
                     {texts.godkjennPlanMottattKnapper.buttonApprove}
                 </Hovedknapp>
-            </div>
-            <div className="knapperad__element">
-                <Knapp
-                    onClick={() => {
-                        avvisDialog(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
-                    }}>
-                    {texts.godkjennPlanMottattKnapper.buttonDecline}
-                </Knapp>
             </div>
         </div>
     );
@@ -92,7 +84,6 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, av
 GodkjennPlanMottattKnapper.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
     godkjennPlan: PropTypes.func,
-    avvisDialog: PropTypes.func,
 };
 
 const GodkjennPlanMottatt = (
@@ -116,10 +107,17 @@ const GodkjennPlanMottatt = (
                     </p>
                 </div>
 
-                <GodkjennPlanTidspunkt
-                    rootUrl={rootUrl}
-                    gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt}
-                />
+                <div className="blokk--xxs">
+                    <GodkjennPlanTidspunkt
+                        rootUrl={rootUrl}
+                        gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt}
+                    />
+
+                    <EditButton
+                        oppfolgingsdialog={oppfolgingsdialog}
+                        avvisDialog={avvisDialog}
+                    />
+                </div>
 
                 <GodkjennPlanMottattUtvidbar
                     oppfolgingsdialog={oppfolgingsdialog}
