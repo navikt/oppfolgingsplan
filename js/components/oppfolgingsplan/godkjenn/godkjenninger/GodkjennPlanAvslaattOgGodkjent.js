@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-    Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
@@ -11,6 +10,8 @@ import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsdialogUt
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+import { AvbrytPlanBekreftelse } from '../releasetplan/GodkjentPlan';
+import { EditButton } from './EditButton';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
@@ -43,7 +44,7 @@ GodkjennPlanMottattUtvidbar.propTypes = {
     rootUrl: PropTypes.string,
 };
 
-export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsplan, avvisDialog }) => {
+export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsplan }) => {
     const [delMedNav, setDelMedNav] = useState(false);
 
     const handleChange = () => {
@@ -68,21 +69,12 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsplan, avvi
                     {texts.godkjennPlanMottattKnapper.buttonApprove}
                 </Hovedknapp>
             </div>
-            <div className="knapperad__element">
-                <Knapp
-                    onClick={() => {
-                        avvisDialog(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
-                    }}>
-                    {texts.godkjennPlanMottattKnapper.buttonDecline}
-                </Knapp>
-            </div>
         </div>
     );
 };
 GodkjennPlanMottattKnapper.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
     godkjennPlan: PropTypes.func,
-    avvisDialog: PropTypes.func,
 };
 
 const GodkjennPlanAvslaattOgGodkjent = (
@@ -108,6 +100,16 @@ const GodkjennPlanAvslaattOgGodkjent = (
                 <GodkjennPlanTidspunkt
                     rootUrl={rootUrl}
                     gyldighetstidspunkt={sistOppfolgingsplan}
+                />
+
+                <EditButton
+                    oppfolgingsdialog={oppfolgingsplan}
+                    avvisDialog={avvisDialog}
+                />
+
+                <AvbrytPlanBekreftelse
+                    oppfolgingsdialog={oppfolgingsplan}
+                    avbrytDialog={avvisDialog}
                 />
 
                 <GodkjennPlanMottattUtvidbar
