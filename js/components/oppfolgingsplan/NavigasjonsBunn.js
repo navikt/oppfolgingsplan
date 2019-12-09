@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import styled from 'styled-components';
 import {
     Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
+import { VenstreChevron } from 'nav-frontend-chevron';
 import getContextRoot from '../../utils/getContextRoot';
 
 const tekster = {
@@ -22,6 +24,28 @@ const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
     }
 };
 
+const StyledLink = styled(Link)`
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+`;
+
+const StyledNav = styled.nav`
+    display: flex;
+    justify-content: flex-start;
+`;
+
+const BackToOversikt = () => {
+    return (
+        <StyledNav>
+            <StyledLink to={`${getContextRoot()}/oppfolgingsplaner`}>
+                <VenstreChevron />
+                {tekster.knapp.oversikt}
+            </StyledLink>
+        </StyledNav>
+    );
+};
+
 const NavigasjonsBunn = (
     {
         steg,
@@ -29,11 +53,7 @@ const NavigasjonsBunn = (
         disabled,
     }) => {
     if (disabled) {
-        return (<nav className="navigasjonsBunn">
-            <Link className="knapp knapp--standard" to={`${getContextRoot()}/oppfolgingsplaner`}>
-                {tekster.knapp.oversikt}
-            </Link>
-        </nav>);
+        return <BackToOversikt />;
     }
     return (
         <nav className="navigasjonsBunn">
