@@ -24,7 +24,6 @@ const texts = {
     checkboxLabel: 'Jeg er enig i denne oppfølgingsplanen',
     buttonSend: 'Send til godkjenning',
     buttonCancel: 'Avbryt',
-    delMedNav: 'Del planen med NAV',
 };
 
 export const textDelMedNav = (leaderName) => {
