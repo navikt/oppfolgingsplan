@@ -27,6 +27,9 @@ const texts = {
     delMedNav: 'Del planen med NAV',
 };
 
+export const textDelMedNav = (leaderName) => {
+    return <span>Jeg ønsker å dele planen med NAV når <b>{leaderName}</b> har godkjent planen</span>;
+};
 export const GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN = 'GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN';
 
 export class GodkjennPlanLightboksComponent extends Component {
@@ -84,6 +87,7 @@ export class GodkjennPlanLightboksComponent extends Component {
         const {
             avbryt,
             handleSubmit,
+            oppfolgingsdialog,
         } = this.props;
         return (<div className="panel godkjennPlanLightboks">
             <form onSubmit={handleSubmit(this.godkjennPlan)} className="godkjennPlanSkjema">
@@ -113,7 +117,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                             id="delMedNav"
                             name="delMedNav"
                             component={CheckboxSelvstendig}
-                            label={texts.delMedNav}
+                            label={textDelMedNav(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}
                         />
                     </div>
                 </div>
