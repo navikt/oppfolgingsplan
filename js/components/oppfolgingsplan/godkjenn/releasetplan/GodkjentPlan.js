@@ -11,6 +11,7 @@ import {
 } from '../../../../propTypes/opproptypes';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import GodkjentPlanKnapper from './GodkjentPlanKnapper';
+import Lightbox from '../../../Lightbox';
 
 const texts = {
     godkjentPlan: {
@@ -120,6 +121,15 @@ class GodkjentPlan extends Component {
                 tittel={texts.godkjentPlan.title}
             >
                 <div className="godkjentPlan">
+                    {
+                        this.state.visBekreftelse && <Lightbox lukkLightbox={this.lukkBekreftelse}>
+                            <AvbrytPlanBekreftelse
+                                oppfolgingsdialog={oppfolgingsdialog}
+                                avbrytDialog={avbrytDialog}
+                            />
+                        </Lightbox>
+                    }
+
                     { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}</p> }
 
                     <GodkjennPlanTidspunkt
