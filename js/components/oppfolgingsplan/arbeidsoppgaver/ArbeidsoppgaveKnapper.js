@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-    Hovedknapp,
-    Knapp,
-} from 'nav-frontend-knapper';
+import { Knapp } from 'nav-frontend-knapper';
 import {
     arbeidsoppgavePt,
     arbeidsoppgaverReducerPt,
@@ -11,8 +8,8 @@ import {
 
 const texts = {
     buttonAbort: 'Avbryt',
-    buttonCreate: 'Lagre og legg til ny',
-    buttonUpdate: 'Lagre',
+    buttonCreate: 'Legg til arbeidsoppgave',
+    buttonUpdate: 'Lagre arbeidsoppgave',
 };
 
 const handleKeyPress = (avbryt, e) => {
@@ -51,36 +48,30 @@ class ArbeidsoppgaveKnapper extends Component {
             arbeidsoppgave,
             avbryt,
         } = this.props;
-        const submitButton = arbeidsoppgave
-            ? (
-                <Knapp
-                    disabled={this.state.spinner}
-                    spinner={this.state.spinner}
-                    htmlType="submit">
-                    {texts.buttonUpdate}
-                </Knapp>
-            ) : (
-                <Hovedknapp
-                    disabled={this.state.spinner}
-                    spinner={this.state.spinner}
-                    htmlType="submit">
-                    {texts.buttonCreate}
-                </Hovedknapp>
-            );
+        const submitButtonText = arbeidsoppgave
+            ? texts.buttonUpdate
+            : texts.buttonCreate;
         return (
             <div className="knapperad knapperad--justervenstre">
                 <div className="knapperad__element">
-                    {submitButton}
+                    <Knapp
+                        mini
+                        disabled={this.state.spinner}
+                        spinner={this.state.spinner}
+                        htmlType="submit">
+                        {submitButtonText}
+                    </Knapp>
                 </div>
                 <div className="knapperad__element">
-                    <Knapp
-                        htmlType="button"
+                    <button
+                        type="button"
+                        className="lenke"
                         onKeyPress={(e) => {
                             handleKeyPress(avbryt, e);
                         }}
                         onMouseDown={avbryt}>
                         {texts.buttonAbort}
-                    </Knapp>
+                    </button>
                 </div>
             </div>
         );

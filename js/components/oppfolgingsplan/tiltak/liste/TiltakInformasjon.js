@@ -44,10 +44,21 @@ export const TiltakInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSle
             { !lagreKommentarSkjema &&
             <div className="knapperad__element">
                 <Knapp
+                    mini
                     autoFocus={!skalVurdereTiltak(element, fnr)}
                     onClick={visLagreKommentarSkjema}>
                     {texts.tiltakInformasjonKnapper.buttonComment}
                 </Knapp>
+            </div>
+            }
+            { aktoerHarOpprettetElement &&
+            <div className="knapperad__element">
+                <button
+                    className="knapp--endre knapp--tiltak--endre"
+                    type="button"
+                    onClick={visLagreSkjema}>
+                    {texts.tiltakInformasjonKnapper.buttonEdit}
+                </button>
             </div>
             }
             { aktoerHarOpprettetElement &&
@@ -60,16 +71,6 @@ export const TiltakInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSle
                     }}
                     aria-pressed={visLagreSkjema}>
                     {texts.tiltakInformasjonKnapper.buttonDelete}
-                </button>
-            </div>
-            }
-            { aktoerHarOpprettetElement &&
-            <div className="knapperad__element">
-                <button
-                    className="knapp--endre knapp--tiltak--endre"
-                    type="button"
-                    onClick={visLagreSkjema}>
-                    {texts.tiltakInformasjonKnapper.buttonEdit}
                 </button>
             </div>
             }
