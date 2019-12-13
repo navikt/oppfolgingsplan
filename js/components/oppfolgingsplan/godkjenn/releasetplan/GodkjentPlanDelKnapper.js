@@ -77,6 +77,7 @@ const GodkjentPlanDelKnapper = (
         </p>
         }
         <div className="knapperad knapperad--justervenstre">
+            {!oppfolgingsdialog.godkjentPlan.deltMedFastlege &&
             <div className="knapperad__element">
                 <Hovedknapp
                     mini
@@ -87,6 +88,7 @@ const GodkjentPlanDelKnapper = (
                     {texts.buttonShareWithFastlege}
                 </Hovedknapp>
             </div>
+            }
             { !oppfolgingsdialog.godkjentPlan.deltMedNAV &&
             <div className="knapperad__element">
                 <Knapp
