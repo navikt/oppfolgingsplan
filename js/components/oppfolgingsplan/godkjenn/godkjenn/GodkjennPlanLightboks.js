@@ -40,6 +40,7 @@ export class GodkjennPlanLightboksComponent extends Component {
         };
         this.godkjennPlan = this.godkjennPlan.bind(this);
         this.handledChange = this.handledChange.bind(this);
+        this.formRef = React.createRef();
     }
 
     componentDidMount() {
@@ -47,6 +48,7 @@ export class GodkjennPlanLightboksComponent extends Component {
             opprettplan: 'true',
         });
         this.handleInitialize();
+        window.scrollTo(0, this.formRef.current.offsetTop);
     }
 
     handleInitialize() {
@@ -88,7 +90,7 @@ export class GodkjennPlanLightboksComponent extends Component {
             handleSubmit,
             oppfolgingsdialog,
         } = this.props;
-        return (<div className="panel godkjennPlanLightboks">
+        return (<div ref={this.formRef} className="panel godkjennPlanLightboks">
             <form onSubmit={handleSubmit(this.godkjennPlan)} className="godkjennPlanSkjema">
                 <h2>{texts.title}</h2>
 

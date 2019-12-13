@@ -24,7 +24,7 @@ describe('GodkjennPlanLightboks', () => {
             oppfolgingsdialog={getOppfolgingsdialog()}
             handleSubmit={handleSubmit}
             initialize={initialize}
-        />);
+        />, { disableLifecycleMethods: true });
     });
 
     it('Skal vise panel', () => {

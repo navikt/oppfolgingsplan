@@ -86,7 +86,7 @@ describe('Arbeidsoppgaver', () => {
                 lagreArbeidsoppgave={lagreArbeidsoppgave}
                 slettArbeidsoppgave={slettArbeidsoppgave}
                 arbeidsforhold={arbeidsforhold}
-            />);
+            />, { disableLifecycleMethods: true });
         });
 
         it('Skal vise ArbeidsoppgaverInfoboksStilling', () => {
@@ -120,7 +120,7 @@ describe('Arbeidsoppgaver', () => {
                 arbeidsoppgaver={{
                     lagringFeilet: false,
                 }}
-            />);
+            />, { disableLifecycleMethods: true });
             component.setProps({ arbeidsoppgaver: { lagringFeilet: true } });
             expect(component.state().varselTekst).to.equal('En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.');
         });
@@ -135,7 +135,7 @@ describe('Arbeidsoppgaver', () => {
                     lagringFeilet: false,
                     feiletOppgaveId: 5,
                 }}
-            />);
+            />, { disableLifecycleMethods: true });
             component.setProps({ arbeidsoppgaver: { lagringFeilet: true, feiletOppgaveId: 5 } });
             expect(component.state().varselTekst).to.equal('');
         });
@@ -155,7 +155,7 @@ describe('Arbeidsoppgaver', () => {
                 slettArbeidsoppgave={slettArbeidsoppgave}
                 arbeidsforhold={arbeidsforhold}
                 arbeidsoppgaver={{ lagret: true }}
-            />);
+            />, { disableLifecycleMethods: true });
         });
 
         it('Skal vise ArbeidsoppgaverInfoboksStilling', () => {
@@ -177,7 +177,7 @@ describe('Arbeidsoppgaver', () => {
                 lagreArbeidsoppgave={lagreArbeidsoppgave}
                 slettArbeidsoppgave={slettArbeidsoppgave}
                 arbeidsforhold={arbeidsforhold}
-            />);
+            />, { disableLifecycleMethods: true });
             expect(componentMedNyeArbeidsoppgaver.find(NotifikasjonBoksVurderingOppgave)).to.have.length(1);
         });
 

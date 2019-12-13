@@ -84,7 +84,9 @@ class Arbeidsoppgaver extends Component {
         this.scrollToForm = this.scrollToForm.bind(this);
         this.visFeilMelding = this.visFeilMelding.bind(this);
         this.skjulSkjema = this.skjulSkjema.bind(this);
+        this.formRef = React.createRef();
     }
+
     componentWillMount() {
         window.location.hash = 'arbeidsoppgaver';
         window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
@@ -93,6 +95,8 @@ class Arbeidsoppgaver extends Component {
     componentDidMount() {
         if (this.state.visArbeidsoppgaveSkjema && this.lagreSkjema) {
             this.scrollToForm();
+        } else {
+            window.scrollTo(0, this.formRef.current.offsetTop);
         }
     }
 
@@ -172,7 +176,7 @@ class Arbeidsoppgaver extends Component {
         return (
             (() => {
                 return isEmpty(oppfolgingsdialog.arbeidsoppgaveListe) ?
-                    <div>
+                    <div ref={this.formRef}>
                         { this.state.visArbeidsoppgaveSkjema &&
                         <ArbeidsoppgaverInfoboksStilling
                             oppfolgingsplan={oppfolgingsdialog}
@@ -204,7 +208,7 @@ class Arbeidsoppgaver extends Component {
                         }
                     </div>
                     :
-                    <div>
+                    <div ref={this.formRef}>
                         {
                             antallIkkeVurdererteArbOppgaver > 0 && <NotifikasjonBoksVurderingOppgave
                                 antallIkkeVurderte={antallIkkeVurdererteArbOppgaver}
