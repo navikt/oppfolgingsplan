@@ -10,6 +10,7 @@ import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsplan
 import GodkjentPlanAvbruttTidspunkt from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanAvbruttTidspunkt';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
+import { ButtonDownload } from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanHandlingKnapper';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -84,6 +85,10 @@ describe('GodkjentPlanAvbrutt', () => {
         />);
         expect(komponentAktiv.find('div.godkjentPlanAvbrutt_lenke')).to.have.length(1);
         expect(komponentAktiv.find('a')).to.have.length(1);
+    });
+
+    it('Skal vise ButtonDownload', () => {
+        expect(komponent.find(ButtonDownload)).to.have.length(1);
     });
 
     it('Skal vise en OppfolgingsplanInnholdboks', () => {
