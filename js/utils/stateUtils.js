@@ -97,7 +97,7 @@ export const populerPlanFraState = (_oppfolgingsplan, state) => {
     oppfolgingsplan.arbeidsgiver.naermesteLeder.aktivFom = naermesteleder && naermesteleder.aktivFom;
     oppfolgingsplan.arbeidsgiver.naermesteLeder.aktivTom = naermesteleder && naermesteleder.aktivTom;
     oppfolgingsplan.arbeidsgiver.forrigeNaermesteLeder = finnForrigeNaermesteLeder(oppfolgingsplan.arbeidstaker.fnr, oppfolgingsplan.virksomhet.virksomhetsnummer, state);
-    oppfolgingsplan.sistEndretAv.navn = finnNavn(oppfolgingsplan.arbeidstaker.fnr, state);
+    oppfolgingsplan.sistEndretAv.navn = finnNavn(oppfolgingsplan.sistEndretAv.fnr, state);
     oppfolgingsplan.arbeidsoppgaveListe.map((_arbeidsoppgave) => {
         const arbeidsoppgave = _arbeidsoppgave;
         arbeidsoppgave.opprettetAv.navn = finnNavn(arbeidsoppgave.opprettetAv.fnr, state);
