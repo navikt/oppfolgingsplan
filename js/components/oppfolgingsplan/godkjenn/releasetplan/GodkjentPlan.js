@@ -10,8 +10,10 @@ import {
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
-import GodkjentPlanKnapper from './GodkjentPlanKnapper';
 import Lightbox from '../../../Lightbox';
+import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
+import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
+import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 
 const texts = {
     godkjentPlan: {
@@ -115,44 +117,54 @@ class GodkjentPlan extends Component {
         const godkjentPlan = oppfolgingsdialog.godkjentPlan;
 
         return (
-            <OppfolgingsplanInnholdboks
-                svgUrl={`${rootUrl}/img/svg/plan-godkjent.svg`}
-                svgAlt="godkjent"
-                tittel={texts.godkjentPlan.title}
-            >
-                <div className="godkjentPlan">
-                    {
-                        this.state.visBekreftelse && <Lightbox lukkLightbox={this.lukkBekreftelse}>
-                            <AvbrytPlanBekreftelse
-                                oppfolgingsdialog={oppfolgingsdialog}
-                                avbrytDialog={avbrytDialog}
-                            />
-                        </Lightbox>
-                    }
+            <React.Fragment>
+                <OppfolgingsplanInnholdboks
+                    classnames="godkjentPlanOppfolgingsplanInfoboks"
+                    svgUrl={`${rootUrl}/img/svg/plan-godkjent.svg`}
+                    svgAlt="godkjent"
+                    tittel={texts.godkjentPlan.title}
+                >
+                    <div className="godkjentPlan">
+                        {
+                            this.state.visBekreftelse && <Lightbox onClose={this.lukkBekreftelse}>
+                                <AvbrytPlanBekreftelse
+                                    oppfolgingsdialog={oppfolgingsdialog}
+                                    avbrytDialog={avbrytDialog}
+                                />
+                            </Lightbox>
+                        }
 
-                    { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}</p> }
+                        { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}</p> }
 
-                    <GodkjennPlanTidspunkt
-                        rootUrl={rootUrl}
-                        gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt}
-                        oppfolgingsdialog={oppfolgingsdialog}
-                        avbrytDialog={avbrytDialog}
-                        visBekreftelse={this.state.visBekreftelse}
-                    />
-                    <GodkjentPlanUtvidbar
-                        dokument={dokument}
-                    />
-                    <GodkjentPlanKnapper
-                        oppfolgingsdialog={oppfolgingsdialog}
-                        apneBekreftelse={this.apneBekreftelse}
-                        delmednav={delmednav}
-                        delMedNavFunc={delMedNavFunc}
-                        fastlegeDeling={fastlegeDeling}
-                        delMedFastlege={delMedFastlege}
-                        rootUrlPlaner={rootUrlPlaner}
-                    />
-                </div>
-            </OppfolgingsplanInnholdboks>
+                        <GodkjennPlanTidspunkt
+                            rootUrl={rootUrl}
+                            gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt}
+                            oppfolgingsdialog={oppfolgingsdialog}
+                            avbrytDialog={avbrytDialog}
+                            visBekreftelse={this.state.visBekreftelse}
+                        />
+                        <GodkjentPlanDeltBekreftelse
+                            oppfolgingsplan={oppfolgingsdialog}
+                        />
+                        <GodkjentPlanUtvidbar
+                            dokument={dokument}
+                        />
+                        {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper
+                            oppfolgingsplan={oppfolgingsdialog}
+                            delmednav={delmednav}
+                            delMedNavFunc={delMedNavFunc}
+                            fastlegeDeling={fastlegeDeling}
+                            delMedFastlege={delMedFastlege}
+                        />
+                        }
+                    </div>
+                </OppfolgingsplanInnholdboks>
+                <GodkjentPlanHandlingKnapper
+                    oppfolgingsplan={oppfolgingsdialog}
+                    apneBekreftelse={this.apneBekreftelse}
+                    rootUrlPlaner={rootUrlPlaner}
+                />
+            </React.Fragment>
         );
     }
 }

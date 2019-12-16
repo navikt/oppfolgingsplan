@@ -7,9 +7,11 @@ import { Utvidbar } from '@navikt/digisyfo-npm';
 import GodkjentPlan, {
     GodkjentPlanUtvidbar,
 } from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlan';
-import GodkjentPlanKnapper from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanKnapper';
+import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDelKnapper';
+import GodkjentPlanHandlingKnapper from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanHandlingKnapper';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDeltBekreftelse';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -51,12 +53,20 @@ describe('GodkjentPlan', () => {
         expect(komponentDefault.find('p')).to.have.length(1);
     });
 
+    it('Skal vise en GodkjentPlanDeltBekreftelse', () => {
+        expect(komponentDefault.find(GodkjentPlanDeltBekreftelse)).to.have.length(1);
+    });
+
     it('Skal vise en GodkjentPlanUtvidbar', () => {
         expect(komponentDefault.find(GodkjentPlanUtvidbar)).to.have.length(1);
     });
 
-    it('Skal vise en GodkjentPlanKnapper', () => {
-        expect(komponentDefault.find(GodkjentPlanKnapper)).to.have.length(1);
+    it('Skal vise en GodkjentPlanDelKnapper', () => {
+        expect(komponentDefault.find(GodkjentPlanDelKnapper)).to.have.length(1);
+    });
+
+    it('Skal vise en GodkjentPlanHandlingKnapper', () => {
+        expect(komponentDefault.find(GodkjentPlanHandlingKnapper)).to.have.length(1);
     });
 
     describe('Tvungen Godkjenning', () => {

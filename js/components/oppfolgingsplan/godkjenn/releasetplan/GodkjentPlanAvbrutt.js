@@ -13,9 +13,11 @@ import {
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
-import GodkjentPlanDelKnapper from './GodkjentPlanDelKnapper';
+import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanAvbruttTidspunkt from './GodkjentPlanAvbruttTidspunkt';
 import getContextRoot from '../../../../utils/getContextRoot';
+import { ButtonDownload } from './GodkjentPlanHandlingKnapper';
+import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 
 const texts = {
     godkjentPlanAvbrutt: {
@@ -99,20 +101,29 @@ class GodkjentPlanAvbrutt extends Component {
                         <GodkjentPlanAvbruttTidspunkt
                             oppfolgingsplan={oppfolgingsdialog}
                         />
+                        <GodkjentPlanDeltBekreftelse
+                            oppfolgingsplan={oppfolgingsdialog}
+                        />
                         <p>
                             {textChangeBy(finnSistEndretAvNavn(oppfolgingsdialog), toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt))}
                         </p>
                         <GodkjentPlanUtvidbar
                             dokument={dokument}
                         />
-                        <GodkjentPlanDelKnapper
+                        {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper
                             className="godkjentPlanAvbruttDelKnapper"
-                            oppfolgingsdialog={oppfolgingsdialog}
+                            oppfolgingsplan={oppfolgingsdialog}
                             delmednav={delmednav}
                             delMedNavFunc={delMedNavFunc}
                             fastlegeDeling={fastlegeDeling}
                             delMedFastlege={delMedFastlege}
                         />
+                        }
+                        <div className="knapperad knapperad--justervenstre">
+                            <ButtonDownload
+                                oppfolgingsplan={oppfolgingsdialog}
+                            />
+                        </div>
                     </div>
                 </OppfolgingsplanInnholdboks>
             </div>
