@@ -46,11 +46,16 @@ class Tiltak extends Component {
         this.toggleTiltakSkjema = this.toggleTiltakSkjema.bind(this);
         this.visOppdateringFeilet = this.visOppdateringFeilet.bind(this);
         this.skjulSkjema = this.skjulSkjema.bind(this);
+        this.formRef = React.createRef();
     }
 
     componentWillMount() {
         window.location.hash = 'tiltak';
         window.sessionStorage.setItem('hash', 'tiltak');
+    }
+
+    componentDidMount() {
+        window.scrollTo(0, this.formRef.current.offsetTop);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -132,7 +137,7 @@ class Tiltak extends Component {
         return (
             (() => {
                 return isEmpty(oppfolgingsdialog.tiltakListe) ?
-                    <div>
+                    <div ref={this.formRef}>
                         {
                             !this.state.visTiltakSkjema ?
                                 <OppfolgingsplanInfoboks
@@ -168,7 +173,7 @@ class Tiltak extends Component {
                         }
                     </div>
                     :
-                    <div>
+                    <div ref={this.formRef}>
                         <TiltakInfoboks
                             visTiltakSkjema={this.state.visTiltakSkjema}
                             toggleSkjema={this.toggleTiltakSkjema}

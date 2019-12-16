@@ -67,7 +67,7 @@ describe('Tiltak', () => {
             tiltak={{
                 lagringFeilet: false,
             }}
-        />);
+        />, { disableLifecycleMethods: true });
         component.setProps({ tiltak: { lagringFeilet: true } });
         expect(component.state().varselTekst).to.equal('En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.');
     });
@@ -79,7 +79,7 @@ describe('Tiltak', () => {
                 lagringFeilet: false,
                 feiletTiltakId: 5,
             }}
-        />);
+        />, { disableLifecycleMethods: true });
         component.setProps({ tiltak: { lagringFeilet: true, feiletTiltakId: 5 } });
         expect(component.state().varselTekst).to.equal('');
     });
@@ -99,7 +99,7 @@ describe('Tiltak', () => {
                 oppfolgingsdialogerHentet
                 lagreTiltak={lagreTiltak}
                 slettTiltak={slettTiltak}
-            />);
+            />, { disableLifecycleMethods: true });
         });
         it('Skal vise OppfolgingsplanInfoboks, om det ikke er tiltak', () => {
             expect(componentUtenTiltak.find(OppfolgingsplanInfoboks)).to.have.length(1);
@@ -126,7 +126,7 @@ describe('Tiltak', () => {
                 lagreTiltak={lagreTiltak}
                 slettTiltak={slettTiltak}
                 tiltak={{ lagret: true }}
-            />);
+            />, { disableLifecycleMethods: true });
         });
 
         it('Skal vise TiltakListe, om det er tiltak', () => {
