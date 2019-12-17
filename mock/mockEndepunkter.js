@@ -3,6 +3,9 @@ const fs = require('fs');
 const request = require('request');
 const express = require('express');
 
+const mockOppfolgingsplan = require('./oppfolgingsplan/mockOppfolgingsplan');
+const dateUtil = require('./util/dateUtil');
+
 const uuid = () => {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
         const r = Math.random() * 16 | 0;
@@ -17,7 +20,6 @@ const ARBEIDSGIVERE = 'arbeidsgivere';
 const METADATA = 'metadata';
 const NAERMESTELEDERE = 'naermesteledere';
 const FORRIGE_LEDER = 'forrigeLeder';
-const OPPFOELGINGSDIALOGER = 'oppfoelgingsdialoger';
 const SOKNADER = 'soknader';
 const SYFOUNLEASH = 'syfounleash';
 const SYKEFORLOEAP = 'sykeforloep';
@@ -44,7 +46,6 @@ lastFilTilMinne(ARBEIDSGIVERS_SYKMELDINGER);
 lastFilTilMinne(ARBEIDSGIVERE);
 lastFilTilMinne(METADATA);
 lastFilTilMinne(NAERMESTELEDERE);
-lastFilTilMinne(OPPFOELGINGSDIALOGER);
 lastFilTilMinne(SOKNADER);
 lastFilTilMinne(SYFOUNLEASH);
 lastFilTilMinne(SYKEFORLOEAP);
@@ -60,13 +61,6 @@ lastFilTilMinne(PERSON);
 lastFilTilMinne(VIRKSOMHET);
 lastFilTilMinne(FORRIGE_LEDER);
 lastFilTilMinne(SISTE);
-
-const MILLISEKUNDER_PER_DAG = 86400000;
-const leggTilDagerPaDato = (dato, dager) => {
-    const nyDato = new Date(dato);
-    nyDato.setTime(nyDato.getTime() + (dager * MILLISEKUNDER_PER_DAG));
-    return new Date(nyDato);
-};
 
 const SYKMELDING_TYPE = {
     SYKMELDING_INAKTIV: {
@@ -90,8 +84,8 @@ const getSykmeldinger = (type) => {
                 ...sykmelding.mulighetForArbeid,
                 perioder: [{
                     ...sykmelding.mulighetForArbeid.perioder[0],
-                    fom: leggTilDagerPaDato(today, (type.fomUke * 7)).toJSON(),
-                    tom: leggTilDagerPaDato(today, (type.tomUke * 7)).toJSON(),
+                    fom: dateUtil.leggTilDagerPaDato(today, (type.fomUke * 7)).toJSON(),
+                    tom: dateUtil.leggTilDagerPaDato(today, (type.tomUke * 7)).toJSON(),
                 }],
             },
         },
@@ -180,7 +174,7 @@ function mockForOpplaeringsmiljo(server) {
 
     server.get('/syfooppfolgingsplanservice/api/arbeidstaker/oppfolgingsplaner', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[OPPFOELGINGSDIALOGER]));
+        res.send(mockOppfolgingsplan.getOppfolgingsplaner(mockOppfolgingsplan.TYPE_DEFAULT));
     });
 
     server.get('/syfooppfolgingsplanservice/api/tilgang', (req, res) => {
