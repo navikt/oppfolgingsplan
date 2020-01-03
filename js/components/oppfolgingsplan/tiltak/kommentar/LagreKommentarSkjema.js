@@ -70,7 +70,7 @@ export const LagreKommentarKnapper = ({ avbryt, spinner }) => {
             </div>
             <div className="knapperad__element">
                 <button
-                    className="lenke lenke--avbryt"
+                    className="lenke"
                     type="button"
                     onKeyPress={(e) => { handleKeyPress(avbryt, e); }}
                     onMouseDown={avbryt}>
