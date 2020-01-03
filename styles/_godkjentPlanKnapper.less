@@ -6,7 +6,6 @@
     padding-top: 1em;
     padding-bottom: 1em;
     button.lenke {
-        font-weight: 600;
         border-bottom: none;
     }
     .knapp--standard, .knapp--hoved {
@@ -68,26 +67,16 @@
     .godkjentPlanKnapper__knapp--endre {
         &::before {
             content: "";
-            background: data-uri("./img/svg/endre-plan.svg") no-repeat center center;
-            padding: 1em;
-        }
-        &:hover {
-            &::before {
-                background: data-uri("./img/svg/endre-plan--hover.svg") no-repeat center center;
-            }
+            background: data-uri("./img/svg/pencil.svg") no-repeat center center;
+            padding: 1.5em;
         }
     }
 
     .godkjentPlanKnapper__knapp--tidligere {
         &::before {
             content: "";
-            background: data-uri("./img/svg/binders.svg") no-repeat center center;
-            padding: 1em 1em;
-        }
-        &:hover {
-            &::before {
-                background: data-uri("./img/svg/binders--hover.svg") no-repeat center center;
-            }
+            background: data-uri("./img/svg/clock.svg") no-repeat center center;
+            padding: 1.5em;
         }
     }
 
@@ -106,11 +95,7 @@
 .godkjentPlanDelKnapper__lastNed {
     &::before {
         content: "";
-        background: data-uri("./img/svg/last-ned.svg") no-repeat center center;
-        padding: 1em 1em;
-    }
-    a {
-        color: @navBla;
-        font-weight: 600;
+        background: data-uri("./img/svg/download.svg") no-repeat center center;
+        padding: 1.5em;
     }
 }
