@@ -8,7 +8,7 @@ import { erIkkeOppfolgingsdialogUtfylt } from '../../../../utils/oppfolgingsdial
 import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
 
 const texts = {
-    bjorn: 'Er du ferdig med denne planen og ønsker å sende den til godkjenning?',
+    bjorn: 'Er du ferdig med denne planen og ønsker å sende den til arbeidsgiveren din for godkjenning?',
     buttonGodkjenn: 'Jeg er ferdig',
 };
 

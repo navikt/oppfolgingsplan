@@ -50,31 +50,27 @@ class Godkjenn extends Component {
             settAktivtSteg,
             rootUrl,
         } = this.props;
-        return (<div>
-            {
-                (() => {
-                    if (this.state.visGodkjenPlanSkjema) {
-                        return (<GodkjennPlanLightboks
-                            avbryt={this.lukkGodkjenPlanSkjema}
-                            rootUrl={rootUrl}
-                            oppfolgingsdialog={oppfolgingsdialog}
-                            godkjennPlan={this.sendGodkjennPlan}
-                        />);
-                    }
-                    return (<div ref={this.formRef} className="godkjennPlanOversikt">
-                        <GodkjennPlanOversiktInformasjon
-                            oppfolgingsdialog={oppfolgingsdialog}
-                            rootUrl={rootUrl}
-                        />
+        return (<div ref={this.formRef} className="godkjennPlanOversikt">
+            <GodkjennPlanOversiktInformasjon
+                oppfolgingsdialog={oppfolgingsdialog}
+                rootUrl={rootUrl}
+            />
+            {!this.state.visGodkjenPlanSkjema &&
+            <ReviderEllerGodkjennPlan
+                oppfolgingsdialog={oppfolgingsdialog}
+                rootUrl={rootUrl}
+                settAktivtSteg={settAktivtSteg}
+                visSendTilGodkjenning={this.visGodkjenPlanSkjema}
+            />
+            }
 
-                        <ReviderEllerGodkjennPlan
-                            oppfolgingsdialog={oppfolgingsdialog}
-                            rootUrl={rootUrl}
-                            settAktivtSteg={settAktivtSteg}
-                            visSendTilGodkjenning={this.visGodkjenPlanSkjema}
-                        />
-                    </div>);
-                })()
+            {this.state.visGodkjenPlanSkjema &&
+            <GodkjennPlanLightboks
+                avbryt={this.lukkGodkjenPlanSkjema}
+                rootUrl={rootUrl}
+                oppfolgingsdialog={oppfolgingsdialog}
+                godkjennPlan={this.sendGodkjennPlan}
+            />
             }
         </div>);
     }
