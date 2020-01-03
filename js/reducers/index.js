@@ -9,7 +9,6 @@ import avbrytdialogReducer from './avbrytdialog';
 import delmednav from './delmednav';
 import dokument from './dokument';
 import fastlegeDeling from './fastlegeDeling';
-import forespoerselRevidering from './forespoerselRevidering';
 import forrigenaermesteleder from './forrigenaermesteleder';
 import kommentar from './kommentar';
 import kontaktinfo from './kontaktinfo';
@@ -38,7 +37,6 @@ const reducers = {
     dineSykmeldinger,
     history,
     dokument,
-    forespoerselRevidering,
     kommentar,
     kopierDialogReducer,
     navigasjontoggles,
