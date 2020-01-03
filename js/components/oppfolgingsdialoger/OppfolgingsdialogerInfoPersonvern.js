@@ -5,6 +5,7 @@ const texts = {
         Oppfølgingsplanen skal gjøre det lettere for deg å bli i jobben.
         Du og arbeidsgiveren lager planen sammen og skriver inn opplysninger fra hver deres kant.
         Formålet er finne ut hvilke oppgaver du kan gjøre hvis det legges til rette. Dere kan endre planen når som helst etter hvert som dere ser hvordan det går.
+        Alle godkjente planer mellom deg og arbeidsgiveren vil også bli tilgjengelige for arbeidsplassen i Altinn.
     `,
     readMore: {
         title: 'Les mer om:',

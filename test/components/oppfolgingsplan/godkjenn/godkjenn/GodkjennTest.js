@@ -5,6 +5,7 @@ import chaiEnzyme from 'chai-enzyme';
 import Godkjenn from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/Godkjenn';
 import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanLightboks from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanLightboks';
+import ReviderEllerGodkjennPlan from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/ReviderEllerGodkjennPlan';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -45,11 +46,35 @@ describe('Godkjenn', () => {
         expect(komponentDefault.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
     });
 
-    it('Skal vise et GodkjennPlanLightboks, dersom visGodkjenPlanSkjema er true', () => {
+    it('Skal vise ReviderEllerGodkjennPlan, om visGodkjenPlanSkjema er false', () => {
+        const komponent = shallow(<Godkjenn />, { disableLifecycleMethods: true });
+        komponent.setState({
+            visGodkjenPlanSkjema: false,
+        });
+        expect(komponent.find(ReviderEllerGodkjennPlan)).to.have.length(1);
+    });
+
+    it('Skal ikke vise ReviderEllerGodkjennPlan, om visGodkjenPlanSkjema er true', () => {
+        const komponent = shallow(<Godkjenn />, { disableLifecycleMethods: true });
+        komponent.setState({
+            visGodkjenPlanSkjema: true,
+        });
+        expect(komponent.find(ReviderEllerGodkjennPlan)).to.have.length(0);
+    });
+
+    it('Skal vise GodkjennPlanLightboks, om visGodkjenPlanSkjema er true', () => {
         const komponent = shallow(<Godkjenn />, { disableLifecycleMethods: true });
         komponent.setState({
             visGodkjenPlanSkjema: true,
         });
         expect(komponent.find(GodkjennPlanLightboks)).to.have.length(1);
+    });
+
+    it('Skal ikke vise GodkjennPlanLightboks, om visGodkjenPlanSkjema er false', () => {
+        const komponent = shallow(<Godkjenn />, { disableLifecycleMethods: true });
+        komponent.setState({
+            visGodkjenPlanSkjema: false,
+        });
+        expect(komponent.find(GodkjennPlanLightboks)).to.have.length(0);
     });
 });

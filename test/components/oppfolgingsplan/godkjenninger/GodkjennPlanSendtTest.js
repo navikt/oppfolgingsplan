@@ -10,6 +10,7 @@ import GodkjennPlanSendt, {
 import OppfolgingsplanInnholdboks from '../../../../js/components/app/OppfolgingsplanInnholdboks';
 import GodkjennPlanOversiktInformasjon from '../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanOversiktInformasjon';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
+import GodkjennPlanVenterInfo from '../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanVenterInfo';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -65,7 +66,10 @@ describe('GodkjennPlanSendt', () => {
         it('Skal vise en GodkjennPlanSendtInfoTekst med overskrift og tekst', () => {
             expect(komponent.find('div.godkjennPlanSendt_infoTekst')).to.have.length(1);
             expect(komponent.find('h3')).to.have.length(1);
-            expect(komponent.find('p')).to.have.length(1);
+        });
+
+        it('Skal vise GodkjennPlanVenterInfo', () => {
+            expect(komponent.find(GodkjennPlanVenterInfo)).to.have.length(1);
         });
     });
 });

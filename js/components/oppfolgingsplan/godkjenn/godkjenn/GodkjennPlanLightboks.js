@@ -13,13 +13,10 @@ import { erIkkeOppfolgingsdialogUtfylt } from '../../../../utils/oppfolgingsdial
 import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import GodkjennPlanVenterInfo from './GodkjennPlanVenterInfo';
 
 const texts = {
-    title: 'Du sender nå en oppfølgingsplan til arbeidsgiveren din for godkjenning',
-    info: `
-        Arbeidsgiveren din kan deretter gjøre endringer i oppfølgingsplanen.
-        Da får du den til ny godkjenning. Alle godkjente planer mellom deg og arbeidsgiveren vil også bli tilgjengelige for arbeidsplassen i Altinn.
-    `,
+    title: 'Send til arbeidsgiveren din for godkjenning',
     titleDatovelger: 'Når skal planen vare fra og til?',
     checkboxLabel: 'Jeg er enig i denne oppfølgingsplanen',
     buttonSend: 'Send til godkjenning',
@@ -94,7 +91,7 @@ export class GodkjennPlanLightboksComponent extends Component {
             <form onSubmit={handleSubmit(this.godkjennPlan)} className="godkjennPlanSkjema">
                 <h2>{texts.title}</h2>
 
-                <p>{texts.info}</p>
+                <GodkjennPlanVenterInfo />
 
                 <hr />
 
