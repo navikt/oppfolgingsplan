@@ -8,7 +8,6 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { GodkjennPlanLightboksComponent } from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanLightboks';
 import GodkjennPlanSkjemaDatovelger from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanSkjemaDatovelger';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
-import GodkjennPlanVenterInfo from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanVenterInfo';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -39,9 +38,7 @@ describe('GodkjennPlanLightboks', () => {
     it('Skal vise overskrifter og tekster', () => {
         expect(komponent.find('h2')).to.have.length(1);
         expect(komponent.find('h3')).to.have.length(1);
-    });
-    it('Skal vise GodkjennPlanVenterInfo', () => {
-        expect(komponent.find(GodkjennPlanVenterInfo)).to.have.length(1);
+        expect(komponent.find('p')).to.have.length(1);
     });
 
     it('Skal vise GodkjennPlanSkjemaDatovelger', () => {

@@ -13,10 +13,13 @@ import { erIkkeOppfolgingsdialogUtfylt } from '../../../../utils/oppfolgingsdial
 import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import GodkjennPlanVenterInfo from './GodkjennPlanVenterInfo';
 
 const texts = {
     title: 'Send til arbeidsgiveren din for godkjenning',
+    approvalInfo: `
+        Etter at du har sendt oppfølgingsplanen til godkjenning kan arbeidsgiveren din enten godkjenne planen
+        eller gjøre endringer og sende den tilbake til deg for ny godkjenning.
+    `,
     titleDatovelger: 'Når skal planen vare fra og til?',
     checkboxLabel: 'Jeg er enig i denne oppfølgingsplanen',
     buttonSend: 'Send til godkjenning',
@@ -91,7 +94,7 @@ export class GodkjennPlanLightboksComponent extends Component {
             <form onSubmit={handleSubmit(this.godkjennPlan)} className="godkjennPlanSkjema">
                 <h2>{texts.title}</h2>
 
-                <GodkjennPlanVenterInfo />
+                <p>{texts.approvalInfo}</p>
 
                 <hr />
 
