@@ -120,9 +120,10 @@ class GodkjentPlan extends Component {
             <React.Fragment>
                 <OppfolgingsplanInnholdboks
                     classnames="godkjentPlanOppfolgingsplanInfoboks"
-                    svgUrl={`${rootUrl}/img/svg/plan-godkjent.svg`}
+                    svgUrl={`${rootUrl}/img/svg/hake-groenn--lys.svg`}
                     svgAlt="godkjent"
                     tittel={texts.godkjentPlan.title}
+                    mediumIcon
                 >
                     <div className="godkjentPlan">
                         {
