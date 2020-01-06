@@ -142,6 +142,10 @@ function mockForLokaltMiljo(server) {
     server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/nullstillGodkjenning', (req, res) => {
         res.send();
     });
+
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/avvis', (req, res) => {
+        res.send();
+    });
 }
 
 function mockForOpplaeringsmiljo(server) {
