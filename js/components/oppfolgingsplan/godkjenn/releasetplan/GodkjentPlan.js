@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
+import styled from 'styled-components';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import {
     delMedFastlegePt,
@@ -34,6 +35,10 @@ const textBothApprovedOppfolgingsplan = (lederNavn) => {
     return `Denne versjonen av planen er godkjent av ${lederNavn} og deg.`;
 };
 
+const UtvidbarStyled = styled(Utvidbar)`
+    margin-top: 2.5em;
+`;
+
 export const GodkjentPlanUtvidbar = ({ dokument }) => {
     let panel;
     if (dokument.henter) {
@@ -50,11 +55,11 @@ export const GodkjentPlanUtvidbar = ({ dokument }) => {
         });
     }
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjentPlanUtvidbar.title}>
+        <UtvidbarStyled tittel={texts.godkjentPlanUtvidbar.title}>
             <div className="godkjentPlanPdf">
                 { panel }
             </div>
-        </Utvidbar>
+        </UtvidbarStyled>
     );
 };
 GodkjentPlanUtvidbar.propTypes = {
