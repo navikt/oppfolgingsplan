@@ -1,5 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const Icon = styled.img`
+        height: auto; 
+        width: ${(props) => {
+        if (props.liteikon) {
+            return '2em';
+        } else if (props.mediumIcon) {
+            return '4em';
+        }
+        return '8em';
+    }}
+`;
+
 
 const OppfolgingsplanInfoboks = (
     {
@@ -11,19 +25,10 @@ const OppfolgingsplanInfoboks = (
         liteikon,
         mediumIcon,
     }) => {
-    const icon = () => {
-        if (liteikon) {
-            return ({ width: '2em' });
-        } else if (mediumIcon) {
-            return ({ width: '4em' });
-        }
-        return {};
-    };
-
     return (
         <div className={`panel ${classnames}`}>
             <div className="illustrertTittel">
-                <img className="illustrertTittel__img" src={svgUrl} alt={svgAlt} style={icon()} />
+                <Icon src={svgUrl} alt={svgAlt} liteikon={liteikon} mediumIcon={mediumIcon} />
                 <h2 className="illustrertTittel__tittel">{tittel}</h2>
             </div>
             {children}
