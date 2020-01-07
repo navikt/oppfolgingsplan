@@ -2,25 +2,31 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
+import { Undertekst } from 'nav-frontend-typografi';
 import GodkjennPlanSkjemaDatovelger, {
     FELTER,
     GodkjennPlanSkjemaDatovelgerFelt,
 } from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanSkjemaDatovelger';
 import Datovelger from '../../../../../js/components/skjema/Datovelger';
+import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('GodkjennPlanSkjemaDatovelger', () => {
     let komponentDefault;
+    let oppfolgingsplan;
 
     beforeEach(() => {
-        komponentDefault = shallow(<GodkjennPlanSkjemaDatovelger />);
+        oppfolgingsplan = getOppfolgingsdialog({});
+        komponentDefault = shallow(<GodkjennPlanSkjemaDatovelger
+            oppfolgingsplan={oppfolgingsplan}
+        />);
     });
 
 
-    it('Skal vise en GodkjennPlanSkjemaDatovelger', () => {
-        expect(komponentDefault.find('div.godkjennPlanSkjema__datovelger__rad')).to.have.length(1);
+    it('Skal vise 2 rader i GodkjennPlanSkjemaDatovelger', () => {
+        expect(komponentDefault.find('div.godkjennPlanSkjema__datovelger__rad')).to.have.length(2);
     });
 
     it('Skal vise 3 GodkjennPlanSkjemaDatovelgerFelt', () => {
@@ -39,6 +45,9 @@ describe('GodkjennPlanSkjemaDatovelger', () => {
         expect(komponentDefault.find(GodkjennPlanSkjemaDatovelgerFelt).at(2).prop('felt').navn).to.equal(FELTER.evalueringinnen.navn);
     });
 
+    it('Skal vise Undertekst om datoer er foreslått', () => {
+        expect(komponentDefault.find(Undertekst)).to.have.length(1);
+    });
 
     describe('GodkjennPlanSkjemaDatovelgerFelt', () => {
         function storageMock() {
