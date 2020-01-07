@@ -35,7 +35,7 @@ const textBothApprovedOppfolgingsplan = (lederNavn) => {
     return `Denne versjonen av planen er godkjent av ${lederNavn} og deg.`;
 };
 
-const UtvidbarStyled = styled(Utvidbar)`
+export const UtvidbarStyled = styled(Utvidbar)`
     margin-top: 2.5em;
 `;
 

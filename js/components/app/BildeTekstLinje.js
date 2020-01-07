@@ -19,7 +19,6 @@ const Div = styled.div`
 const Img = styled.img`
     width: 1.5em;
     min-width: 1.5em;
-    margin-top: 0.3em;
 `;
 
 const BildeTekstLinje = ({ imgAlt, imgUrl, tekst }) => {
