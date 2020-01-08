@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Knapp } from 'nav-frontend-knapper';
 import {
@@ -7,6 +8,7 @@ import {
     delmednavPt,
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
+import getContextRoot from '../../../../utils/getContextRoot';
 
 const texts = {
     shareWithNAVError: 'Noe gikk feil da du prøvde å dele planen. Prøv igjen om litt.',
@@ -16,7 +18,9 @@ const texts = {
         For å dele planen kan du laste den ned, skrive den ut og ta den med deg neste gang du er hos legen.
     `,
     buttonShareWithNAV: 'Del med NAV',
+    sharedWithNAV: 'Planen er delt med NAV',
     buttonShareWithFastlege: 'Del med fastlegen',
+    sharedWithFastlege: 'Planen er delt med fastlegen',
 };
 
 export const delingFeiletNav = (delmednav) => {
@@ -38,43 +42,85 @@ export const isGodkjentPlanDelKnapperAvailable = (oppfolgingsplan) => {
     return !(oppfolgingsplan.godkjentPlan.deltMedFastlege && oppfolgingsplan.godkjentPlan.deltMedNAV);
 };
 
+const ButtonColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+`;
+
+export const ButtonRow = styled.div`
+    display: flex;
+    flex-wrap: wrap; 
+    margin-bottom: 1em;
+`;
+
+export const ButtonStyled = styled(Knapp)`
+    margin: .5em 1em .5em 0
+`;
+
+const IconAndText = styled.div`
+    display: flex;
+    align-items: center;
+    margin: .5em 0
+`;
+
+const Text = styled.p`
+    margin: 0;
+`;
+
+const Image = styled.img`
+    width: 1.5em;
+    margin-right: .5em;
+`;
+
 const GodkjentPlanDelKnapper = (
     {
-        className = '',
         oppfolgingsplan,
         delmednav,
         delMedNavFunc,
         fastlegeDeling,
         delMedFastlege,
     }) => {
-    return (<div className={`godkjentPlanDelKnapper ${className}`}>
-        <div className="knapperad knapperad--justervenstre">
-            {!oppfolgingsplan.godkjentPlan.deltMedFastlege &&
-            <div className="knapperad__element">
-                <Knapp
-                    mini
-                    disabled={fastlegeDeling.sender}
-                    onClick={() => {
-                        delMedFastlege(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
-                    }}>
-                    {texts.buttonShareWithFastlege}
-                </Knapp>
-            </div>
-            }
-            { !oppfolgingsplan.godkjentPlan.deltMedNAV &&
-            <div className="knapperad__element">
-                <Knapp
+    return (<ButtonColumn>
+        <ButtonRow>
+            {!oppfolgingsplan.godkjentPlan.deltMedNAV &&
+                <ButtonStyled
                     mini
                     disabled={delmednav.sender}
+                    spinner={delmednav.sender}
                     onClick={() => {
                         delMedNavFunc(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
                     }}>
                     {texts.buttonShareWithNAV}
-                </Knapp>
-            </div>
+                </ButtonStyled>
             }
-        </div>
-        { (delingFeiletNav(delmednav) || delingFeiletFastlege(fastlegeDeling)) &&
+            {delmednav.sendt &&
+
+                <IconAndText>
+                    <Image src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="hake" />
+                    <Text>{texts.sharedWithNAV}</Text>
+                </IconAndText>
+            }
+            {!oppfolgingsplan.godkjentPlan.deltMedFastlege &&
+                <ButtonStyled
+                    mini
+                    disabled={fastlegeDeling.sender}
+                    spinner={fastlegeDeling.sender}
+                    onClick={() => {
+                        delMedFastlege(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
+                    }}>
+                    {texts.buttonShareWithFastlege}
+                </ButtonStyled>
+            }
+            {fastlegeDeling.sendt &&
+
+            <IconAndText>
+                <Image src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="hake" />
+                <Text>{texts.sharedWithFastlege}</Text>
+            </IconAndText>
+            }
+        </ButtonRow>
+        {(delingFeiletNav(delmednav) || delingFeiletFastlege(fastlegeDeling)) &&
         <Alertstripe
             className="alertstripe--notifikasjonboks"
             type="advarsel"
@@ -82,11 +128,10 @@ const GodkjentPlanDelKnapper = (
             {hentLedetekstDeltPlanFeilet(delmednav)}
         </Alertstripe>
         }
-    </div>);
+    </ButtonColumn>);
 };
 
 GodkjentPlanDelKnapper.propTypes = {
-    className: PropTypes.string,
     oppfolgingsplan: oppfolgingsplanPt,
     delmednav: delmednavPt,
     fastlegeDeling: delMedFastlegePt,
