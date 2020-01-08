@@ -9,7 +9,7 @@ import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
 import { EditButton } from './EditButton';
-import { SharingCheckbox } from './ShareingCheckbox';
+import { SharingCheckbox } from './SharingCheckbox';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {

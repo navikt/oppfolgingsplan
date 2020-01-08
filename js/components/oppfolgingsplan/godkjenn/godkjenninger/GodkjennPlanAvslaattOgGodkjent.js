@@ -8,7 +8,7 @@ import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInf
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import { EditButton } from './EditButton';
-import { SharingCheckbox } from './ShareingCheckbox';
+import { SharingCheckbox } from './SharingCheckbox';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
