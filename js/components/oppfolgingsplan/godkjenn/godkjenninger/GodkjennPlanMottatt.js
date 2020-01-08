@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
-import { Checkbox } from 'nav-frontend-skjema';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
@@ -10,6 +9,7 @@ import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
 import { EditButton } from './EditButton';
+import { SharingCheckbox } from './SharingCheckbox';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
@@ -23,6 +23,7 @@ const texts = {
         title: 'Ønsker du å godkjenne denne versjonen?',
     },
     delMedNav: 'Del planen med NAV',
+    preDelMedNav: 'Planen vil bli delt med NAV ved godkjenning',
 };
 
 const TextReceived = ({ leaderName }) => {
@@ -60,13 +61,7 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) 
 
     return (
         <div className="knapperad knapperad--justervenstre">
-            <div>
-                <Checkbox
-                    checked={delMedNav}
-                    onChange={handleChange}
-                    label={texts.delMedNav}
-                />
-            </div>
+            <SharingCheckbox checked={delMedNav} onChange={handleChange} oppfolgingsplan={oppfolgingsdialog} />
             <div className="knapperad__element">
                 <Hovedknapp
                     name="godkjentKnapp"

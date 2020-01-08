@@ -66,7 +66,7 @@ describe('GodkjennPlanMottatt', () => {
     });
 
     describe('GodkjennPlanMottattKnapper', () => {
-        const komponent = shallow(<GodkjennPlanMottattKnapper />);
+        const komponent = shallow(<GodkjennPlanMottattKnapper oppfolgingsdialog={oppfolgingsdialog} />);
 
         it('Skal vise en submit knapp', () => {
             expect(komponent.find(Hovedknapp)).to.have.length(1);
