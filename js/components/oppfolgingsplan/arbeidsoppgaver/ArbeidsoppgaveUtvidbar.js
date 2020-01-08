@@ -227,12 +227,10 @@ class ArbeidsoppgaveUtvidbar extends Component {
                         className="arbeidsoppgaverListe__rad arbeidsoppgaverListe__rad--element"
                         ref={(ref) => { this.jstoggle = ref; }}
                         aria-label={element.arbeidsoppgavenavn}>
-                        <a
-                            href="javscript:void(0)"
+                        <button
                             aria-expanded={this.state.erApen}
                             ref={(ref) => { this.utvidbarToggle = ref; }}
-                            role="button"
-                            className="utvidbar__toggle"
+                            className="utvidbar__toggle arbeidsoppgaverListe__toggle"
                             onClick={(event) => { this.toggle(event); }}
                         >
                             <div ref={(ref) => { this.utvidbar = ref; }} className="arbeidsoppgaverListe__utvidbarrad">
@@ -245,7 +243,7 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                     rootUrlImg={rootUrlImg}
                                 />
                             </div>
-                        </a>
+                        </button>
                         <div
                             style={{ height: this.state.hoyde }}
                             className={`utvidbar__innholdContainer${this.state.containerClassName}`}
