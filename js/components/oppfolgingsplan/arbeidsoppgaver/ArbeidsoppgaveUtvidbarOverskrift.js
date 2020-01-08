@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { KANGJENNOMFOERES } from '../../../konstanter';
 import { arbeidsoppgavePt } from '../../../propTypes/opproptypes';
+import ArbeidsoppgaveInformasjonKnapper from './ArbeidsoppgaveInformasjonKnapper';
 
 const texts = {
     hentArbeidsoppgaveUnderTekst: {
@@ -38,18 +40,35 @@ export const hentArbeidsoppgaveUnderTekst = (arbeidsoppgave) => {
     return texts.hentArbeidsoppgaveUnderTekst.ikkeVurdert;
 };
 
+const ArbeidsoppgaveUtvidbarOverskriftKolonneImg = styled.div`
+    display: flex;
+    align-items: center;
+    flex-grow: 0;
+`;
+
 const ArbeidsoppgaveUtvidbarOverskrift = (
     {
         erApen,
+        fnr,
         arbeidsoppgave,
+        visLagreSkjema,
+        sendSlett,
         rootUrlImg,
     }) => {
     return (<div className="arbeidsoppgaveTabellUtvidbarOverskrift">
         <div className="arbeidsoppgaverListe__kol">
-            <img className="arbeidsoppgaveUtvidbarOverskrift__ikon" src={hentArbeidsoppgaveIkon(arbeidsoppgave, rootUrlImg)} alt="" />
+            <ArbeidsoppgaveUtvidbarOverskriftKolonneImg>
+                <img className="arbeidsoppgaveUtvidbarOverskrift__ikon" src={hentArbeidsoppgaveIkon(arbeidsoppgave, rootUrlImg)} alt="" />
+            </ArbeidsoppgaveUtvidbarOverskriftKolonneImg>
             <div className="arbeidsoppgaveUtvidbarOverskrift__tekst">
                 <p>{arbeidsoppgave.arbeidsoppgavenavn}</p>
                 <p>{hentArbeidsoppgaveUnderTekst(arbeidsoppgave)}</p>
+                <ArbeidsoppgaveInformasjonKnapper
+                    arbeidsoppgave={arbeidsoppgave}
+                    fnr={fnr}
+                    visLagreSkjema={visLagreSkjema}
+                    sendSlett={sendSlett}
+                />
             </div>
             <i className={`nav-frontend-chevron ${erApen ? 'chevron--opp' : 'chevron--ned'} chevron--stor`} />
         </div>
@@ -58,7 +77,10 @@ const ArbeidsoppgaveUtvidbarOverskrift = (
 
 ArbeidsoppgaveUtvidbarOverskrift.propTypes = {
     erApen: PropTypes.bool,
+    fnr: PropTypes.string,
     arbeidsoppgave: arbeidsoppgavePt,
+    visLagreSkjema: PropTypes.func,
+    sendSlett: PropTypes.func,
     rootUrlImg: PropTypes.string,
 };
 

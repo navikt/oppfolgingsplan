@@ -198,9 +198,9 @@ class ArbeidsoppgaveUtvidbar extends Component {
         this.props.visFeilMelding(false);
     }
 
-    sendSlett(id) {
+    sendSlett(event, id) {
+        event.stopPropagation();
         this.props.sendSlett(id);
-        this.lukk();
     }
 
     sendLagre(nyeVerdier) {
@@ -238,7 +238,10 @@ class ArbeidsoppgaveUtvidbar extends Component {
                             <div ref={(ref) => { this.utvidbar = ref; }} className="arbeidsoppgaverListe__utvidbarrad">
                                 <ArbeidsoppgaveUtvidbarOverskrift
                                     erApen={this.state.erApen}
+                                    fnr={fnr}
                                     arbeidsoppgave={element}
+                                    visLagreSkjema={this.visLagreSkjema}
+                                    sendSlett={this.sendSlett}
                                     rootUrlImg={rootUrlImg}
                                 />
                             </div>
@@ -254,10 +257,7 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                 { this.state.visInnhold && !this.state.visLagreSkjema &&
                                 <ArbeidsoppgaveInformasjon
                                     element={element}
-                                    fnr={fnr}
                                     brukerType={brukerType}
-                                    visLagreSkjema={this.visLagreSkjema}
-                                    sendSlett={this.sendSlett}
                                     oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
                                     varselTekst={this.state.varselTekst}
                                     rootUrlImg={rootUrlImg}

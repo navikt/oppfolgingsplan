@@ -5,11 +5,6 @@ import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 import { arbeidsoppgavePt } from '../../../propTypes/opproptypes';
 
 const texts = {
-    arbeidsoppgaveInformasjonKnapper: {
-        buttonDelete: 'Slett',
-        buttonEdit: 'Endre',
-        buttonVurdering: 'Gi din vurdering',
-    },
     arbeidsoppgaveInformasjonInnhold: {
         ikkeVurdert: 'Gi arbeidsgiveren din en vurdering på om du kan gjennomføre denne arbeidsoppgaven og hva som kan hjelpe deg.',
         tilrettelegging: {
@@ -21,38 +16,6 @@ const texts = {
         beskrivelseLabel: 'Beskrivelse',
         createdByLabel: 'Lagt til av',
     },
-};
-
-export const ArbeidsoppgaveInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSlett }) => {
-    const elementId = element.arbeidsoppgaveId;
-    const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
-    return (
-        <div className="arbeidsoppgaveInformasjonKnapper knapperad knapperad--justervenstre">
-            <button
-                type="button"
-                className={`${element.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard'} knapperad__element`}
-                aria-pressed={visLagreSkjema}
-                onClick={visLagreSkjema}>
-                {element.gjennomfoering
-                    ? texts.arbeidsoppgaveInformasjonKnapper.buttonEdit
-                    : texts.arbeidsoppgaveInformasjonKnapper.buttonVurdering
-                }
-            </button>
-            { aktoerHarOpprettetElement &&
-            <button
-                type="button"
-                onClick={() => { sendSlett(elementId); }}
-                className="knapperad__element knapp--slett">
-                {texts.arbeidsoppgaveInformasjonKnapper.buttonDelete}
-            </button>
-            }
-        </div>);
-};
-ArbeidsoppgaveInformasjonKnapper.propTypes = {
-    element: arbeidsoppgavePt,
-    fnr: PropTypes.string,
-    visLagreSkjema: PropTypes.func,
-    sendSlett: PropTypes.func,
 };
 
 export const ArbeidsoppgaveInformasjonInnhold = ({ arbeidsoppgave }) => {
@@ -121,9 +84,6 @@ ArbeidsoppgaveInformasjonInnhold.propTypes = {
 const ArbeidsoppgaveInformasjon = (
     {
         element,
-        fnr,
-        visLagreSkjema,
-        sendSlett,
         oppdateringFeilet,
         varselTekst,
         rootUrlImg,
@@ -140,21 +100,11 @@ const ArbeidsoppgaveInformasjon = (
                 rootUrlImg={rootUrlImg}
             />
             }
-
-            <ArbeidsoppgaveInformasjonKnapper
-                element={element}
-                fnr={fnr}
-                visLagreSkjema={visLagreSkjema}
-                sendSlett={sendSlett}
-            />
         </div>);
 };
 
 ArbeidsoppgaveInformasjon.propTypes = {
     element: arbeidsoppgavePt,
-    fnr: PropTypes.string,
-    visLagreSkjema: PropTypes.func,
-    sendSlett: PropTypes.func,
     oppdateringFeilet: PropTypes.bool,
     varselTekst: PropTypes.string,
     rootUrlImg: PropTypes.string,
