@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
-import { Checkbox } from 'nav-frontend-skjema';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsdialogUtils';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import { EditButton } from './EditButton';
+import { SharingCheckbox } from './ShareingCheckbox';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
@@ -51,17 +51,7 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsplan }) =>
 
     return (
         <div className="knapperad knapperad--justervenstre">
-            <div>
-                {
-                    oppfolgingsplan.godkjenninger.find((godkjenning) => { return godkjenning.delMedNav; })
-                        ? <p>{texts.preDelMedNav}</p>
-                        : <Checkbox
-                            checked={delMedNav}
-                            onChange={handleChange}
-                            label={texts.delMedNav}
-                        />
-                }
-            </div>
+            <SharingCheckbox checked={delMedNav} onChange={handleChange} oppfolgingsplan={oppfolgingsplan} />
             <div className="knapperad__element">
                 <Hovedknapp
                     name="godkjentKnapp"
