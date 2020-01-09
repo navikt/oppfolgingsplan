@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { erSynligIViewport } from '@navikt/digisyfo-npm';
 import {
     arbeidsoppgavePt,
@@ -10,10 +11,15 @@ import {
 import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
 import ArbeidsoppgaveUtvidbarOverskrift from './ArbeidsoppgaveUtvidbarOverskrift';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
+import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
 const texts = {
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
 };
+
+const ArbeidsoppgaveVarselFeilStyled = styled.div`
+    padding: 0 1em;
+`;
 
 class ArbeidsoppgaveUtvidbar extends Component {
     constructor(props) {
@@ -46,10 +52,8 @@ class ArbeidsoppgaveUtvidbar extends Component {
                 (nextProps.arbeidsoppgaverReducer.slettingFeilet && nextProps.arbeidsoppgaverReducer.slettingFeilet !== this.props.arbeidsoppgaverReducer.slettingFeilet))
                 && nextProps.arbeidsoppgaverReducer.feiletOppgaveId > 0) {
                 if (nextProps.arbeidsoppgaverReducer.slettingFeilet) {
-                    this.visElementInformasjon();
                     this.props.visFeilMelding(true);
                     this.visFeil(false, true, texts.updateError);
-                    this.apne();
                 } else if (nextProps.arbeidsoppgaverReducer.lagringFeilet) {
                     this.visLagreSkjema();
                     this.props.visFeilMelding(true);
@@ -215,7 +219,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
         const {
             element,
             fnr,
-            brukerType,
             arbeidsoppgaverReducer,
             rootUrlImg,
             feilMelding,
@@ -255,10 +258,8 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                 { this.state.visInnhold && !this.state.visLagreSkjema &&
                                 <ArbeidsoppgaveInformasjon
                                     element={element}
-                                    brukerType={brukerType}
-                                    oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
+                                    oppdateringFeilet={this.state.visLagringFeilet && feilMelding}
                                     varselTekst={this.state.varselTekst}
-                                    rootUrlImg={rootUrlImg}
                                 />
                                 }
                                 { this.state.visInnhold && this.state.visLagreSkjema &&
@@ -267,7 +268,7 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                     arbeidsoppgave={element}
                                     form={element.arbeidsoppgaveId.toString()}
                                     avbryt={this.visElementInformasjon}
-                                    oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
+                                    oppdateringFeilet={this.state.visLagringFeilet && feilMelding}
                                     varselTekst={this.state.varselTekst}
                                     arbeidsoppgaverReducer={arbeidsoppgaverReducer}
                                     rootUrlImg={rootUrlImg}
@@ -275,6 +276,13 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                 }
                             </div>
                         </div>
+                        { this.state.visSlettingFeilet && feilMelding &&
+                        <ArbeidsoppgaveVarselFeilStyled>
+                            <ArbeidsoppgaveVarselFeil
+                                tekst={texts.updateError}
+                            />
+                        </ArbeidsoppgaveVarselFeilStyled>
+                        }
                     </article>
                 );
             })()
@@ -285,7 +293,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
 ArbeidsoppgaveUtvidbar.propTypes = {
     element: arbeidsoppgavePt,
     fnr: PropTypes.string,
-    brukerType: PropTypes.string,
     sendSlett: PropTypes.func,
     sendLagre: PropTypes.func,
     erApen: PropTypes.bool.isRequired,

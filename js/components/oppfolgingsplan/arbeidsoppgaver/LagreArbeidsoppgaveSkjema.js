@@ -392,7 +392,6 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
                 { oppdateringFeilet &&
                 <ArbeidsoppgaveVarselFeil
                     tekst={varselTekst}
-                    rootUrlImg={rootUrlImg}
                 />
                 }
 
