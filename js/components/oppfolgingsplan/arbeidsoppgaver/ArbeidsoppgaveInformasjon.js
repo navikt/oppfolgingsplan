@@ -86,7 +86,6 @@ const ArbeidsoppgaveInformasjon = (
         element,
         oppdateringFeilet,
         varselTekst,
-        rootUrlImg,
     }) => {
     return (
         <div className={'arbeidsoppgaveInformasjon'}>
@@ -97,7 +96,6 @@ const ArbeidsoppgaveInformasjon = (
             { oppdateringFeilet &&
             <ArbeidsoppgaveVarselFeil
                 tekst={varselTekst}
-                rootUrlImg={rootUrlImg}
             />
             }
         </div>);
@@ -107,7 +105,6 @@ ArbeidsoppgaveInformasjon.propTypes = {
     element: arbeidsoppgavePt,
     oppdateringFeilet: PropTypes.bool,
     varselTekst: PropTypes.string,
-    rootUrlImg: PropTypes.string,
 };
 
 export default ArbeidsoppgaveInformasjon;
