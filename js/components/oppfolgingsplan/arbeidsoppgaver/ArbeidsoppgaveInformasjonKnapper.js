@@ -23,6 +23,7 @@ const ArbeidsoppgaveInformasjonKnapper = (
     {
         arbeidsoppgave,
         fnr,
+        lagreSkjema,
         visLagreSkjema,
         sendSlett,
     }) => {
@@ -30,16 +31,17 @@ const ArbeidsoppgaveInformasjonKnapper = (
     const aktoerHarOpprettetElement = fnr === (arbeidsoppgave.opprettetAv && arbeidsoppgave.opprettetAv.fnr);
     return (
         <ArbeidsoppgaveInformasjonKnapperStyled className="arbeidsoppgaveInformasjonKnapper">
-            <button
+            {!lagreSkjema && <button
                 type="button"
                 className={`${arbeidsoppgave.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard'}`}
                 aria-pressed={visLagreSkjema}
-                onClick={visLagreSkjema}>
+                onClick={(event) => { visLagreSkjema(event); }}>
                 {arbeidsoppgave.gjennomfoering
                     ? texts.buttonEdit
                     : texts.buttonVurdering
                 }
             </button>
+            }
             { aktoerHarOpprettetElement &&
             <button
                 type="button"
@@ -53,6 +55,7 @@ const ArbeidsoppgaveInformasjonKnapper = (
 ArbeidsoppgaveInformasjonKnapper.propTypes = {
     arbeidsoppgave: arbeidsoppgavePt,
     fnr: PropTypes.string,
+    lagreSkjema: PropTypes.bool,
     visLagreSkjema: PropTypes.func,
     sendSlett: PropTypes.func,
 };

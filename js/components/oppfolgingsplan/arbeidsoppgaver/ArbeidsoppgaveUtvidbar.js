@@ -186,18 +186,20 @@ class ArbeidsoppgaveUtvidbar extends Component {
         }
     }
 
-    visLagreSkjema() {
+    visLagreSkjema(event) {
+        event.stopPropagation();
         this.setState({
             visLagreSkjema: true,
-            visInnhold: true,
         });
         this.props.visFeilMelding(false);
+        if (!this.state.erApen) {
+            this.apne();
+        }
     }
 
     visElementInformasjon() {
         this.setState({
             visLagreSkjema: false,
-            visInnhold: true,
         });
         this.props.visFeilMelding(false);
     }
@@ -211,7 +213,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
         this.props.sendLagre(nyeVerdier);
         this.setState({
             visLagreSkjema: false,
-            visInnhold: true,
         });
     }
 
@@ -241,6 +242,7 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                     erApen={this.state.erApen}
                                     fnr={fnr}
                                     arbeidsoppgave={element}
+                                    lagreSkjema={this.state.visLagreSkjema}
                                     visLagreSkjema={this.visLagreSkjema}
                                     sendSlett={this.sendSlett}
                                     rootUrlImg={rootUrlImg}
@@ -262,7 +264,7 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                     varselTekst={this.state.varselTekst}
                                 />
                                 }
-                                { this.state.visInnhold && this.state.visLagreSkjema &&
+                                { this.state.visLagreSkjema &&
                                 <LagreArbeidsoppgaveSkjema
                                     sendLagre={this.sendLagre}
                                     arbeidsoppgave={element}

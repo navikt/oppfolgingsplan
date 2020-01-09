@@ -51,6 +51,7 @@ const ArbeidsoppgaveUtvidbarOverskrift = (
         erApen,
         fnr,
         arbeidsoppgave,
+        lagreSkjema,
         visLagreSkjema,
         sendSlett,
         rootUrlImg,
@@ -66,6 +67,7 @@ const ArbeidsoppgaveUtvidbarOverskrift = (
                 <ArbeidsoppgaveInformasjonKnapper
                     arbeidsoppgave={arbeidsoppgave}
                     fnr={fnr}
+                    lagreSkjema={lagreSkjema}
                     visLagreSkjema={visLagreSkjema}
                     sendSlett={sendSlett}
                 />
@@ -79,6 +81,7 @@ ArbeidsoppgaveUtvidbarOverskrift.propTypes = {
     erApen: PropTypes.bool,
     fnr: PropTypes.string,
     arbeidsoppgave: arbeidsoppgavePt,
+    lagreSkjema: PropTypes.bool,
     visLagreSkjema: PropTypes.func,
     sendSlett: PropTypes.func,
     rootUrlImg: PropTypes.string,
