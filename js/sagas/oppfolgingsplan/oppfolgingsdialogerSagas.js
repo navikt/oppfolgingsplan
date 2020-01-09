@@ -6,7 +6,6 @@ import {
     get,
     post,
 } from '../../gateway-api/gatewayApi';
-import logger from '../../logg/logging';
 import * as actions from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
 
 export function* hentSykmeldtOppfolginger() {
@@ -18,7 +17,6 @@ export function* hentSykmeldtOppfolginger() {
         yield put(actions.oppfolgingsdialogerHentet(data));
     } catch (e) {
         log(e);
-        logger.error(`Kunne ikke hente oppfolgingsdialoger for arbeidstaker. ${e.message}`);
         yield put(actions.hentOppfolgingsdialogerFeilet());
     }
 }

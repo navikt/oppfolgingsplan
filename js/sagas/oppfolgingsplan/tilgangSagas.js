@@ -5,7 +5,6 @@ import {
     hentSyfoapiUrl,
     get,
 } from '../../gateway-api/gatewayApi';
-import logger from '../../logg/logging';
 import * as actions from '../../actions/oppfolgingsplan/sjekkTilgang_actions';
 
 export function* sjekkerTilgang() {
@@ -20,7 +19,6 @@ export function* sjekkerTilgang() {
             return;
         }
         log(e);
-        logger.error(`Kunne ikke hente tilgang for arbeidstaker. ${e.message}`);
         yield put(actions.sjekkTilgangFeilet());
     }
 }
