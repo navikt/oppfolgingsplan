@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Knapp } from 'nav-frontend-knapper';
 import { STATUS_TILTAK } from '../../../../konstanter';
 import {
     kommentarReducerPt,
@@ -10,18 +9,11 @@ import TiltakVarselFeil from './../TiltakVarselFeil';
 import KommentarListe from '../kommentar/KommentarListe';
 import LagreKommentarSkjema from '../kommentar/LagreKommentarSkjema';
 import TiltakForeslaattAv from '../TiltakForeslaattAv';
-import {
-    skalVurdereTiltak,
-    sorterKommentarerEtterOpprettet,
-} from '../../../../utils/tiltakUtils';
+import { sorterKommentarerEtterOpprettet } from '../../../../utils/tiltakUtils';
 import TiltakVarselVurdering from './TiltakVarselVurdering';
+import TiltakInformasjonKnapper from './TiltakInformasjonKnapper';
 
 const texts = {
-    tiltakInformasjonKnapper: {
-        buttonComment: 'Kommenter',
-        buttonDelete: 'Slett',
-        buttonEdit: 'Endre',
-    },
     tiltakInformasjonBeskrivelse: {
         label: 'BESKRIVELSE',
     },
@@ -35,55 +27,6 @@ const texts = {
         updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
         tiltakVarselVurdering: 'Dette tiltaket mangler en vurdering fra lederen din',
     },
-};
-
-export const TiltakInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSlett, lagreKommentarSkjema, visLagreKommentarSkjema }) => {
-    const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
-    return (
-        <div className="knapperad__tiltak knapperad--justervenstre">
-            { !lagreKommentarSkjema &&
-            <div className="knapperad__element">
-                <Knapp
-                    mini
-                    autoFocus={!skalVurdereTiltak(element, fnr)}
-                    onClick={visLagreKommentarSkjema}>
-                    {texts.tiltakInformasjonKnapper.buttonComment}
-                </Knapp>
-            </div>
-            }
-            { aktoerHarOpprettetElement &&
-            <div className="knapperad__element">
-                <button
-                    className="knapp--endre knapp--tiltak--endre"
-                    type="button"
-                    onClick={visLagreSkjema}>
-                    {texts.tiltakInformasjonKnapper.buttonEdit}
-                </button>
-            </div>
-            }
-            { aktoerHarOpprettetElement &&
-            <div className="knapperad__element">
-                <button
-                    className="knapp--slett"
-                    type="button"
-                    onClick={() => {
-                        sendSlett(element.tiltakId);
-                    }}
-                    aria-pressed={visLagreSkjema}>
-                    {texts.tiltakInformasjonKnapper.buttonDelete}
-                </button>
-            </div>
-            }
-        </div>
-    );
-};
-TiltakInformasjonKnapper.propTypes = {
-    element: tiltakPt,
-    fnr: PropTypes.string,
-    visLagreSkjema: PropTypes.func,
-    sendSlett: PropTypes.func,
-    lagreKommentarSkjema: PropTypes.bool,
-    visLagreKommentarSkjema: PropTypes.func,
 };
 
 export const TiltakInformasjonBeskrivelse = ({ tiltak }) => {

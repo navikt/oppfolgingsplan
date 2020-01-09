@@ -6,12 +6,12 @@ import kommentar from '../../../../../js/reducers/kommentar';
 import TiltakInformasjon, {
     TiltakInformasjonBeskrivelse,
     TiltakInformasjonGjennomfoering,
-    TiltakInformasjonKnapper,
     TabellTiltakBeskrivelseIkkeAktuelt,
 } from '../../../../../js/components/oppfolgingsplan/tiltak/liste/TiltakInformasjon';
 import LagreKommentarSkjema from '../../../../../js/components/oppfolgingsplan/tiltak/kommentar/LagreKommentarSkjema';
 import KommentarListe from '../../../../../js/components/oppfolgingsplan/tiltak/kommentar/KommentarListe';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import TiltakInformasjonKnapper from '../../../../../js/components/oppfolgingsplan/tiltak/liste/TiltakInformasjonKnapper';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
