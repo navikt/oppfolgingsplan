@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { KANGJENNOMFOERES } from '../../../konstanter';
-import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 import { arbeidsoppgavePt } from '../../../propTypes/opproptypes';
 
 const texts = {
@@ -84,27 +82,17 @@ ArbeidsoppgaveInformasjonInnhold.propTypes = {
 const ArbeidsoppgaveInformasjon = (
     {
         element,
-        oppdateringFeilet,
-        varselTekst,
     }) => {
     return (
         <div className={'arbeidsoppgaveInformasjon'}>
             <ArbeidsoppgaveInformasjonInnhold
                 arbeidsoppgave={element}
             />
-
-            { oppdateringFeilet &&
-            <ArbeidsoppgaveVarselFeil
-                tekst={varselTekst}
-            />
-            }
         </div>);
 };
 
 ArbeidsoppgaveInformasjon.propTypes = {
     element: arbeidsoppgavePt,
-    oppdateringFeilet: PropTypes.bool,
-    varselTekst: PropTypes.string,
 };
 
 export default ArbeidsoppgaveInformasjon;

@@ -55,10 +55,14 @@ class ArbeidsoppgaveUtvidbar extends Component {
                     this.props.visFeilMelding(true);
                     this.visFeil(false, true, texts.updateError);
                 } else if (nextProps.arbeidsoppgaverReducer.lagringFeilet) {
-                    this.visLagreSkjema();
                     this.props.visFeilMelding(true);
                     this.visFeil(true, false, texts.updateError);
-                    this.apne();
+                    this.setState({
+                        visLagreSkjema: true,
+                    });
+                    if (!this.state.erApen) {
+                        this.apne();
+                    }
                 } else if (!nextProps.arbeidsoppgaverReducer.lagringFeilet && !nextProps.arbeidsoppgaverReducer.slettingFeilet) {
                     this.visFeil(false, false, '');
                 }
@@ -260,8 +264,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                 { this.state.visInnhold && !this.state.visLagreSkjema &&
                                 <ArbeidsoppgaveInformasjon
                                     element={element}
-                                    oppdateringFeilet={this.state.visLagringFeilet && feilMelding}
-                                    varselTekst={this.state.varselTekst}
                                 />
                                 }
                                 { this.state.visLagreSkjema &&
