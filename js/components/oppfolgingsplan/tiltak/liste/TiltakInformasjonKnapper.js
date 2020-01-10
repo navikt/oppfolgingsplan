@@ -14,6 +14,7 @@ const TiltakInformasjonKnapper = (
     {
         element,
         fnr,
+        lagreSkjema,
         visLagreSkjema,
         sendSlett,
         lagreKommentarSkjema,
@@ -22,22 +23,12 @@ const TiltakInformasjonKnapper = (
     const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
     return (
         <div className="knapperad__tiltak knapperad--justervenstre">
-            { !lagreKommentarSkjema &&
-            <div className="knapperad__element">
-                <Knapp
-                    mini
-                    autoFocus={!skalVurdereTiltak(element, fnr)}
-                    onClick={visLagreKommentarSkjema}>
-                    {texts.buttonComment}
-                </Knapp>
-            </div>
-            }
-            { aktoerHarOpprettetElement &&
+            { !lagreSkjema && aktoerHarOpprettetElement &&
             <div className="knapperad__element">
                 <button
                     className="knapp--endre knapp--tiltak--endre"
                     type="button"
-                    onClick={visLagreSkjema}>
+                    onClick={(event) => { visLagreSkjema(event); }}>
                     {texts.buttonEdit}
                 </button>
             </div>
@@ -47,12 +38,20 @@ const TiltakInformasjonKnapper = (
                 <button
                     className="knapp--slett"
                     type="button"
-                    onClick={() => {
-                        sendSlett(element.tiltakId);
-                    }}
+                    onClick={(event) => { sendSlett(event, element.tiltakId); }}
                     aria-pressed={visLagreSkjema}>
                     {texts.buttonDelete}
                 </button>
+            </div>
+            }
+            { !lagreKommentarSkjema &&
+            <div className="knapperad__element">
+                <Knapp
+                    mini
+                    autoFocus={!skalVurdereTiltak(element, fnr)}
+                    onClick={(event) => { visLagreKommentarSkjema(event); }}>
+                    {texts.buttonComment}
+                </Knapp>
             </div>
             }
         </div>
@@ -61,6 +60,7 @@ const TiltakInformasjonKnapper = (
 TiltakInformasjonKnapper.propTypes = {
     element: tiltakPt,
     fnr: PropTypes.string,
+    lagreSkjema: PropTypes.bool,
     visLagreSkjema: PropTypes.func,
     sendSlett: PropTypes.func,
     lagreKommentarSkjema: PropTypes.bool,
