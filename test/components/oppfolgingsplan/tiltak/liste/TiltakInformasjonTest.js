@@ -11,7 +11,6 @@ import TiltakInformasjon, {
 import LagreKommentarSkjema from '../../../../../js/components/oppfolgingsplan/tiltak/kommentar/LagreKommentarSkjema';
 import KommentarListe from '../../../../../js/components/oppfolgingsplan/tiltak/kommentar/KommentarListe';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
-import TiltakInformasjonKnapper from '../../../../../js/components/oppfolgingsplan/tiltak/liste/TiltakInformasjonKnapper';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -25,6 +24,7 @@ describe('TiltakInformasjon', () => {
         komponent = shallow(<TiltakInformasjon
             element={oppfolgingsdialog.tiltakListe[0]}
             kommentarReducer={kommentar}
+            lagreKommentarSkjema
         />);
     });
 
@@ -61,12 +61,7 @@ describe('TiltakInformasjon', () => {
         expect(komponent.find(TabellTiltakBeskrivelseIkkeAktuelt)).to.have.length(1);
     });
 
-    it('Skal vise TiltakInformasjonKnapper', () => {
-        expect(komponent.find(TiltakInformasjonKnapper)).to.have.length(1);
-    });
-
     it('Skal vise LagreKommentarSkjema', () => {
-        komponent.setState({ lagreKommentarSkjema: true });
         expect(komponent.find(LagreKommentarSkjema)).to.have.length(1);
     });
 

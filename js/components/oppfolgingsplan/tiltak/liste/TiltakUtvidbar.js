@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { erSynligIViewport } from '@navikt/digisyfo-npm';
 import {
     kommentarReducerPt,
@@ -11,10 +12,15 @@ import {
 import TiltakSkjema from '../TiltakSkjema';
 import TiltakListeRad from './TiltakListeRad';
 import TiltakInformasjon from './TiltakInformasjon';
+import TiltakVarselFeil from '../TiltakVarselFeil';
 
 const texts = {
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
 };
+
+const TiltakVarselFeilStyled = styled.div`
+    padding: 0 1em;
+`;
 
 class TiltakUtvidbar extends Component {
     constructor(props) {
@@ -25,6 +31,7 @@ class TiltakUtvidbar extends Component {
             hoyde: !props.erApen ? '0' : 'auto',
             visInnhold: props.erApen,
             harTransisjon: false,
+            lagreKommentarSkjema: false,
             visLagreSkjema: false,
             visVurderingSkjema: false,
             visLagringFeilet: false,
@@ -39,9 +46,15 @@ class TiltakUtvidbar extends Component {
         this.visFeil = this.visFeil.bind(this);
         this.sendSlett = this.sendSlett.bind(this);
         this.sendLagre = this.sendLagre.bind(this);
+        this.visLagreKommentarSkjema = this.visLagreKommentarSkjema.bind(this);
+        this.skjulLagreKommentarSkjema = this.skjulLagreKommentarSkjema.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
+        if (this.props.element.tiltakId === nextProps.kommentarReducer.tiltakId &&
+            this.props.kommentarReducer.lagrer && nextProps.kommentarReducer.lagret) {
+            this.skjulLagreKommentarSkjema();
+        }
         if (this.props.element.tiltakId === nextProps.tiltakReducer.feiletTiltakId) {
             if (((nextProps.tiltakReducer.lagringFeilet && nextProps.tiltakReducer.lagringFeilet !== this.props.tiltakReducer.lagringFeilet) ||
                 (nextProps.tiltakReducer.slettingFeilet && nextProps.tiltakReducer.slettingFeilet !== this.props.tiltakReducer.slettingFeilet))
@@ -52,10 +65,15 @@ class TiltakUtvidbar extends Component {
                     this.visFeil(false, true, texts.updateError);
                     this.apne();
                 } else if (nextProps.tiltakReducer.lagringFeilet) {
-                    this.visLagreSkjema();
                     this.props.visFeilMelding(true);
                     this.visFeil(true, false, texts.updateError);
-                    this.apne();
+                    this.setState({
+                        lagreKommentarSkjema: false,
+                        visLagreSkjema: true,
+                    });
+                    if (!this.state.erApen) {
+                        this.apne();
+                    }
                 } else if (!nextProps.tiltakReducer.lagringFeilet && !nextProps.tiltakReducer.slettingFeilet) {
                     this.visFeil(false, false, '');
                 }
@@ -170,23 +188,47 @@ class TiltakUtvidbar extends Component {
         }
     }
 
-    visLagreSkjema() {
+    visLagreSkjema(event) {
+        event.stopPropagation();
         this.setState({
-            visInnhold: true,
+            lagreKommentarSkjema: false,
             visLagreSkjema: true,
         });
         this.props.visFeilMelding(false);
+        if (!this.state.erApen) {
+            this.apne();
+        }
     }
 
     visElementInformasjon() {
         this.setState({
+            lagreKommentarSkjema: false,
             visLagreSkjema: false,
-            visInnhold: true,
         });
         this.props.visFeilMelding(false);
     }
 
-    sendSlett(id) {
+    visLagreKommentarSkjema(event) {
+        event.stopPropagation();
+        this.setState({
+            visLagreSkjema: false,
+            lagreKommentarSkjema: true,
+        });
+        if (!this.state.erApen) {
+            this.apne();
+        }
+    }
+
+    skjulLagreKommentarSkjema() {
+        this.setState({
+            visInnhold: true,
+            lagreKommentarSkjema: false,
+        });
+        this.props.visFeilMelding(false);
+    }
+
+    sendSlett(event, id) {
+        event.stopPropagation();
         this.props.sendSlett(id);
         this.lukk();
     }
@@ -195,7 +237,6 @@ class TiltakUtvidbar extends Component {
         this.props.sendLagre(nyeVerdier);
         this.setState({
             visLagreSkjema: false,
-            visInnhold: true,
         });
     }
 
@@ -229,6 +270,12 @@ class TiltakUtvidbar extends Component {
                                 <TiltakListeRad
                                     tiltak={element}
                                     erApen={this.state.erApen}
+                                    fnr={fnr}
+                                    sendSlett={this.sendSlett}
+                                    lagreSkjema={this.state.visLagreSkjema}
+                                    visLagreSkjema={this.visLagreSkjema}
+                                    lagreKommentarSkjema={this.state.lagreKommentarSkjema}
+                                    visLagreKommentarSkjema={this.visLagreKommentarSkjema}
                                 />
                             </div>
                         </a>
@@ -243,11 +290,11 @@ class TiltakUtvidbar extends Component {
                                 <TiltakInformasjon
                                     element={element}
                                     fnr={fnr}
-                                    visLagreSkjema={this.visLagreSkjema}
-                                    sendSlett={this.sendSlett}
+                                    lagreKommentarSkjema={this.state.lagreKommentarSkjema}
+                                    skjulLagreKommentarSkjema={this.skjulLagreKommentarSkjema}
                                     sendLagreKommentar={sendLagreKommentar}
                                     sendSlettKommentar={sendSlettKommentar}
-                                    oppdaterTiltakFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet)}
+                                    oppdaterTiltakFeilet={this.state.visLagringFeilet}
                                     varselTekst={this.state.varselTekst}
                                     tiltakReducer={tiltakReducer}
                                     kommentarReducer={kommentarReducer}
@@ -273,6 +320,16 @@ class TiltakUtvidbar extends Component {
                                 }
                             </div>
                         </div>
+                        {this.state.visSlettingFeilet && feilMelding &&
+                        <TiltakVarselFeilStyled>
+                            <TiltakVarselFeil
+                                tekst={texts.updateError}
+                                onTransitionEnd={() => {
+                                    this.onTransitionEnd();
+                                }}
+                            />
+                        </TiltakVarselFeilStyled>
+                        }
                     </article>);
             })()
         );

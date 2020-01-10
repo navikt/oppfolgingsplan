@@ -3,6 +3,7 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import TiltakListeRad from '../../../../../js/components/oppfolgingsplan/tiltak/liste/TiltakListeRad';
+import TiltakInformasjonKnapper from '../../../../../js/components/oppfolgingsplan/tiltak/liste/TiltakInformasjonKnapper';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
@@ -43,5 +44,9 @@ describe('TiltakListeRad', () => {
 
     it('Skal vise chevron', () => {
         expect(komponent.find('i')).to.have.length(1);
+    });
+
+    it('Skal vise TiltakInformasjonKnapper', () => {
+        expect(komponent.find(TiltakInformasjonKnapper)).to.have.length(1);
     });
 });
