@@ -15,6 +15,8 @@ import Lightbox from '../../../Lightbox';
 import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
+import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
+import getContextRoot from '../../../../utils/getContextRoot';
 
 const texts = {
     godkjentPlan: {
@@ -39,31 +41,18 @@ export const UtvidbarStyled = styled(Utvidbar)`
     margin-top: 2.5em;
 `;
 
-export const GodkjentPlanUtvidbar = ({ dokument }) => {
-    let panel;
-    if (dokument.henter) {
-        panel = <div className="app-spinner" aria-label="Vent litt mens siden laster" />;
-    } else if (dokument.hentingFeilet) {
-        panel = (<div className="godkjentPlanPdf__feilmelding">
-            {texts.godkjentPlanUtvidbar.requestFeilet}
-        </div>);
-    } else {
-        panel = dokument.data && dokument.data.map((url, idx) => {
-            return (<div key={idx} className="godkjentPlanPdf__dokument">
-                <img className="godkjentPlanPdf__side" src={url} alt="godkjentplan" type="application/pdf" />
-            </div>);
-        });
-    }
+export const GodkjentPlanUtvidbar = ({ oppfolgingsdialog }) => {
     return (
         <UtvidbarStyled tittel={texts.godkjentPlanUtvidbar.title}>
-            <div className="godkjentPlanPdf">
-                { panel }
-            </div>
+            <GodkjennPlanOversiktInformasjon
+                oppfolgingsdialog={oppfolgingsdialog}
+                rootUrl={getContextRoot()}
+            />
         </UtvidbarStyled>
     );
 };
 GodkjentPlanUtvidbar.propTypes = {
-    dokument: dokumentReducerPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
 };
 export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {
     return (
@@ -111,7 +100,6 @@ class GodkjentPlan extends Component {
         const {
             oppfolgingsdialog,
             avbrytDialog,
-            dokument,
             rootUrl,
             rootUrlPlaner,
             delMedNavFunc,
@@ -153,7 +141,7 @@ class GodkjentPlan extends Component {
                             oppfolgingsplan={oppfolgingsdialog}
                         />
                         <GodkjentPlanUtvidbar
-                            dokument={dokument}
+                            oppfolgingsdialog={oppfolgingsdialog}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper
                             oppfolgingsplan={oppfolgingsdialog}

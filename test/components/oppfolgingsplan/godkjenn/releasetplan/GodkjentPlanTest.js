@@ -135,9 +135,5 @@ describe('GodkjentPlan', () => {
         it('Skal vise en UtvidbarStyled', () => {
             expect(komponent.find(UtvidbarStyled)).to.have.length(1);
         });
-
-        it('Skal vise plan som bestaar av 2 pdf sider', () => {
-            expect(komponent.find('img.godkjentPlanPdf__side')).to.have.length(2);
-        });
     });
 });
