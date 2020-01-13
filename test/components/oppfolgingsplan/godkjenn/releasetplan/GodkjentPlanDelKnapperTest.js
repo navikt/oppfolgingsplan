@@ -4,9 +4,11 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { Knapp } from 'nav-frontend-knapper';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
-import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDelKnapper';
+import GodkjentPlanDelKnapper, {
+    ButtonRow,
+    ButtonStyled,
+} from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDelKnapper';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -42,8 +44,8 @@ describe('GodkjentPlanDelKnapper', () => {
         />);
     });
 
-    it('Skal vise knapperad', () => {
-        expect(komponent.find('div.knapperad')).to.have.length(1);
+    it('Skal vise ButtonRow', () => {
+        expect(komponent.find(ButtonRow)).to.have.length(1);
     });
 
     it('Skal vise Alertstripe dersom delmednav sendingFeilet er true', () => {
@@ -90,7 +92,7 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find(Knapp)).to.have.length(2);
+        expect(komponent.find(ButtonStyled)).to.have.length(2);
     });
 
     it('Skal vise 1 knapp dersom godkjent plan er delt med NAV, men ikke fastlege', () => {
@@ -109,7 +111,7 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find(Knapp)).to.have.length(1);
+        expect(komponent.find(ButtonStyled)).to.have.length(1);
     });
 
     it('Skal vise 1 knapp dersom godkjent plan er delt med fastlege, men ikke NAV', () => {
@@ -128,6 +130,6 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find(Knapp)).to.have.length(1);
+        expect(komponent.find(ButtonStyled)).to.have.length(1);
     });
 });

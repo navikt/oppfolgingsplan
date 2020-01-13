@@ -335,5 +335,6 @@ export const delMedFastlegePt = PropTypes.shape({
 export const delmednavPt = PropTypes.shape({
     data: PropTypes.map,
     sender: PropTypes.bool,
+    sendt: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
 });
