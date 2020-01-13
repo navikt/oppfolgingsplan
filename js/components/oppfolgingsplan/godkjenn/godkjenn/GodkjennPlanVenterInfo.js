@@ -3,11 +3,11 @@ import React from 'react';
 const texts = {
     infolist: {
         ingress: 'Arbeidsgiveren din kan enten godkjenne eller gjøre endringer i oppfølgingsplanen:',
-        noChangesApproval: 'Godkjenner arbeidsgiveren vil du motta et varsel om at har dere opprettet en gjeldende plan.',
+        noChangesApproval: 'Godkjenner arbeidsgiveren, har dere opprettet en gjeldende plan.',
         changesWithAproval: 'Gjør arbeisgiveren endringer og sender den tilbake til deg for godkjenning, vil du motta et varsel om å ta stilling dette.',
         changesNoApproval: `
-            Mottar du ikke varsel knyttet til planen har ikke arbeidsgiveren din tatt stilling til den. 
-            For å komme videre kan du ta kontakt med din arbeidsgiver eller logge inn på Ditt NAV og se om det er gjort endringer i oppfølgingsplanen. 
+            Mottar du ikke varsel knyttet til planen er det mulig at arbeidsgiveren din ikke har tatt stilling til den.
+            For å se om det er skjedd noe kan du gå inn på denne oppfølgingsplanen igjen.
         `,
     },
 };
