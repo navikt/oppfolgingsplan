@@ -12,6 +12,8 @@ import GodkjentPlanHandlingKnapper from '../../../../../js/components/oppfolging
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDeltBekreftelse';
+import GodkjennPlanOversiktInformasjon
+    from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanOversiktInformasjon';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -136,8 +138,8 @@ describe('GodkjentPlan', () => {
             expect(komponent.find(UtvidbarStyled)).to.have.length(1);
         });
 
-        it('Skal vise plan som bestaar av 2 pdf sider', () => {
-            expect(komponent.find('img.godkjentPlanPdf__side')).to.have.length(2);
+        it('Skal vise en GodkjennPlanOversiktInformasjon', () => {
+            expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
         });
     });
 });
