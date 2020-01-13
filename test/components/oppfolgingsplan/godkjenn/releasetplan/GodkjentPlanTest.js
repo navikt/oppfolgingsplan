@@ -12,6 +12,8 @@ import GodkjentPlanHandlingKnapper from '../../../../../js/components/oppfolging
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDeltBekreftelse';
+import GodkjennPlanOversiktInformasjon
+    from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanOversiktInformasjon';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -134,6 +136,10 @@ describe('GodkjentPlan', () => {
 
         it('Skal vise en UtvidbarStyled', () => {
             expect(komponent.find(UtvidbarStyled)).to.have.length(1);
+        });
+
+        it('Skal vise en GodkjennPlanOversiktInformasjon', () => {
+            expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
         });
     });
 });
