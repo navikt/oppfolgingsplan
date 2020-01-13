@@ -33,7 +33,7 @@ const ArbeidsoppgaveInformasjonKnapper = (
         <ArbeidsoppgaveInformasjonKnapperStyled className="arbeidsoppgaveInformasjonKnapper">
             {!lagreSkjema && <button
                 type="button"
-                className={`${arbeidsoppgave.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard'}`}
+                className={`${arbeidsoppgave.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard knapp--mini'}`}
                 aria-pressed={visLagreSkjema}
                 onClick={(event) => { visLagreSkjema(event); }}>
                 {arbeidsoppgave.gjennomfoering
