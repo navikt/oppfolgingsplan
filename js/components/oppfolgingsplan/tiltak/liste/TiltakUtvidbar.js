@@ -22,6 +22,14 @@ const TiltakVarselFeilStyled = styled.div`
     padding: 0 1em;
 `;
 
+const UtvidbarButtonStyled = styled.button`
+    border: none;
+    width: 100%;
+    display: flex;
+    text-align: left;
+    padding: 0;
+`;
+
 class TiltakUtvidbar extends Component {
     constructor(props) {
         super(props);
@@ -259,12 +267,9 @@ class TiltakUtvidbar extends Component {
                         className="oppfolgingsdialogtabell__rad oppfolgingsdialogtabell__rad--element"
                         ref={(ref) => { this.jstoggle = ref; }}
                         aria-label={element.tiltaknavn}>
-                        <a
-                            href="javscript:void(0)"
+                        <UtvidbarButtonStyled
                             aria-expanded={this.state.erApen}
                             ref={(ref) => { this.utvidbarToggle = ref; }}
-                            role="button"
-                            className="utvidbar__toggle"
                             onClick={(event) => { this.toggle(event); }}>
                             <div ref={(ref) => { this.utvidbar = ref; }} className="oppfolgingsdialogtabell__utvidbarrad">
                                 <TiltakListeRad
@@ -278,7 +283,7 @@ class TiltakUtvidbar extends Component {
                                     visLagreKommentarSkjema={this.visLagreKommentarSkjema}
                                 />
                             </div>
-                        </a>
+                        </UtvidbarButtonStyled>
                         <div
                             style={{ height: this.state.hoyde }}
                             className={`utvidbar__innholdContainer${this.state.containerClassName}`}
