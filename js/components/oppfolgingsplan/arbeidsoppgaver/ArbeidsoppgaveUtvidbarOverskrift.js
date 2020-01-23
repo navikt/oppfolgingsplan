@@ -42,7 +42,7 @@ export const hentArbeidsoppgaveUnderTekst = (arbeidsoppgave) => {
 
 const ArbeidsoppgaveUtvidbarOverskriftKolonneImg = styled.div`
     display: flex;
-    align-items: center;
+    align-self: flex-start;
     flex-grow: 0;
 `;
 
