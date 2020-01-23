@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Checkbox } from 'nav-frontend-skjema';
-import { AlertStripe } from 'nav-frontend-alertstriper';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import getContextRoot from '../../../../utils/getContextRoot';
 
