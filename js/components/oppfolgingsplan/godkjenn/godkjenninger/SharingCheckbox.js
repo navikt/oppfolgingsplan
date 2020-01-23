@@ -1,12 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Checkbox } from 'nav-frontend-skjema';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import getContextRoot from '../../../../utils/getContextRoot';
 
 const texts = {
     delMedNav: 'Del planen med NAV',
-    preDelMedNav: 'Planen vil bli delt med NAV ved godkjenning',
+    preDelMedNav: 'Planen blir delt med NAV når du godkjenner den.',
 };
+
+const Icon = styled.img`
+    height: auto;
+    width: 1.5em;
+    margin-right: 0.5em;
+`;
+
+const IconTextBox = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 2em;
+`;
 
 export const SharingCheckbox = ({ oppfolgingsplan, checked, onChange }) => {
     return (
@@ -15,7 +29,9 @@ export const SharingCheckbox = ({ oppfolgingsplan, checked, onChange }) => {
                 oppfolgingsplan.godkjenninger.find((godkjenning) => {
                     return godkjenning.delMedNav;
                 })
-                    ? <p>{texts.preDelMedNav}</p>
+                    ? <IconTextBox>
+                        <Icon src={`${getContextRoot()}/img/svg/info-sirkel-fyll.svg`} alt="info" />
+                        <strong>{texts.preDelMedNav}</strong></IconTextBox>
                     : <Checkbox
                         checked={checked}
                         onChange={onChange}
