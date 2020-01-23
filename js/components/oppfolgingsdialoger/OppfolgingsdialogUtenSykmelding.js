@@ -3,7 +3,7 @@ import getContextRoot from '../../utils/getContextRoot';
 
 const texts = {
     title: 'Aktiv oppfølgingsplan',
-    info: 'Du kan ikke lage en ny oppfølgingsplan fordi du ikke har en aktiv sykmelding på dette tidspunktet.',
+    info: 'Du kan ikke lage en ny oppfølgingsplan fordi du ikke er sykmeldt nå.',
 };
 
 const OppfolgingsdialogUtenSykmelding = () => {

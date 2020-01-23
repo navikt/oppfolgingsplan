@@ -2,12 +2,11 @@ import React from 'react';
 
 const texts = {
     infolist: {
-        ingress: 'Arbeidsgiveren din kan enten godkjenne eller gjøre endringer i oppfølgingsplanen:',
-        noChangesApproval: 'Godkjenner arbeidsgiveren, har dere opprettet en gjeldende plan.',
-        changesWithAproval: 'Gjør arbeisgiveren endringer og sender den tilbake til deg for godkjenning, vil du motta et varsel om å ta stilling dette.',
+        ingress: 'Lederen din kan godkjenne eller gjøre endringer i oppfølgingsplanen.',
+        noChangesApproval: 'Godkjenner lederen, har dere opprettet en plan.',
+        changesWithAproval: 'Gjør lederen endringer, får du en melding om at du kan ta stilling til endringene.',
         changesNoApproval: `
-            Mottar du ikke varsel knyttet til planen er det mulig at arbeidsgiveren din ikke har tatt stilling til den.
-            For å se om det er skjedd noe kan du gå inn på denne oppfølgingsplanen igjen.
+            Får du ikke noen melding, er det mulig at lederen din ikke har tatt stilling til planen ennå. Du kan gå inn i oppfølgingsplanen for å se om det har skjedd noe.
         `,
     },
 };

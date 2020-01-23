@@ -22,7 +22,7 @@ const texts = {
         title: 'Ønsker du å godkjenne denne versjonen?',
     },
     delMedNav: 'Del planen med NAV',
-    preDelMedNav: 'Planen vil bli delt med NAV ved godkjenning',
+    preDelMedNav: 'Planen vil bli delt med NAV når du har godkjent den.',
 };
 
 const TextReceived = ({ leaderName }) => {

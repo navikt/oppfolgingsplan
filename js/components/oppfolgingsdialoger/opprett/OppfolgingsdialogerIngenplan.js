@@ -12,7 +12,7 @@ const texts = {
     tittel: 'Aktiv oppfølgingsplan',
     inngangspanel: {
         tittel: 'Du har ingen aktiv oppfølgingsplan',
-        paragraph: 'Du kan når som helst lage en ny plan. Her legger du inn arbeidsoppgaver, de tiltakene som skal gjelde, og når de skal gjelde for.',
+        paragraph: 'Dere kan når som helst lage en ny plan. Da legger dere inn arbeidsoppgavene dine og noen forslag til hva som skal til for at du skal klare dem.',
     },
     knapper: {
         lagNy: 'Lag en ny plan',
