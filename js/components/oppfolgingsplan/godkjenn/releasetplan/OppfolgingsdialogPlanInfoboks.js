@@ -4,10 +4,9 @@ const texts = {
     title: 'Hva skjer nå?',
     info: {
         paragraph1: `
-            Innen fire uker skal den som har sykmeldt deg få se planen.
-            Når du og arbeidsgiveren din har blitt enige om planen, kan dere dele den digitalt med både legen og NAV.
+            Innen fire uker skal fastlegen din få se planen. Du og lederen din kan dele den med både legen og NAV når dere er blitt enige.
         `,
-        paragraph2: 'NAV kan ikke se planen før dere har delt den. Dere kan dele den når dere selv ønsker. I tillegg kan NAV be arbeidsgiveren din om å få se den.',
+        paragraph2: 'OBS: NAV kan ikke se planen før dere har delt den.',
     },
 };
 

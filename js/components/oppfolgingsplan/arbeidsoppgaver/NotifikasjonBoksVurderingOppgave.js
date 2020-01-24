@@ -4,7 +4,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 
 const hentTekst = (antallTiltak) => {
     const tekst = antallTiltak > 1 ? 'arbeidsoppgaver' : 'arbeidsoppgave';
-    return `Din nærmeste leder ønsker en vurdering av ${antallTiltak} ${tekst}`;
+    return `Lederen din ønsker en vurdering av ${antallTiltak} ${tekst}`;
 };
 
 const NotifikasjonBoksVurderingOppgave = (

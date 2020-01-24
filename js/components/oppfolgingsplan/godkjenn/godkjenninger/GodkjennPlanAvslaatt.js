@@ -6,7 +6,7 @@ import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks'
 import getContextRoot from '../../../../utils/getContextRoot';
 
 const texts = {
-    title: 'Lederen din er visst ikke helt enig',
+    title: 'Lederen din har noen forslag',
     paragraphInfo: 'Du kan gjøre endringer slik at dere får en god plan.',
     buttonMakeChanges: 'Rediger planen',
 };

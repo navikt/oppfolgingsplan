@@ -19,11 +19,10 @@ const texts = {
     },
     godkjennPlanAvslaattOgGodkjent: {
         title: 'Mottatt endring',
-        paragraphInfoWhen: 'Du sendte arbeidsgiveren din en versjon av oppfølgingsplanen.',
-        paragraphInfoWho: ' har foretatt noen endringer og sendt den tilbake til deg.',
+        paragraphInfoWho: ' har gjort noen endringer i planen og sendt den tilbake til deg.',
     },
     delMedNav: 'Del planen med NAV',
-    preDelMedNav: 'Planen vil bli delt med NAV ved godkjenning',
+    preDelMedNav: 'Planen vil bli delt med NAV når du har godkjent den.',
 };
 
 export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsplan, rootUrl }) => {
@@ -84,7 +83,6 @@ const GodkjennPlanAvslaattOgGodkjent = (
         >
             <div>
                 <p>
-                    {texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWhen}<br />
                     {`${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}${texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWho}`}
                 </p>
 

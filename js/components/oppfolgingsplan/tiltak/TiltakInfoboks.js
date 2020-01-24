@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { Knapp } from 'nav-frontend-knapper';
 
 export const tekster = {
-    tittel: 'Hva kan hjelpe deg tilbake i arbeid?',
+    tittel: 'Hva kan gjøre det lettere å jobbe?',
     knapp: '+ Legg til nytt tiltak',
 };
 

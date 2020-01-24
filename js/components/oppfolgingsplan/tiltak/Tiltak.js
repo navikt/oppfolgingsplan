@@ -20,11 +20,8 @@ import TiltakListe from './liste/TiltakListe';
 const texts = {
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
     infoboks: {
-        title: 'Hva kan hjelpe deg tilbake i arbeid?',
-        info: `
-            Når du og arbeidsgiveren din har fått et overblikk over oppgavene, kan dere fortsette med å se på hva slags tilrettelegging arbeidsplassen kan tilby.
-            Dere legger inn tiltakene sammen.
-        `,
+        title: 'Hva kan gjøre det lettere å jobbe?',
+        info: 'Når dere har fått oversikt over arbeidsoppgavene dine, kan dere se på hva slags tilrettelegging det er mulig å tilby.',
     },
 };
 

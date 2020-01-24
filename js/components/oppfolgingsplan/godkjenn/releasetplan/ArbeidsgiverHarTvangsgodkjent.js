@@ -11,8 +11,8 @@ import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks'
 
 const texts = {
     getDocumentFailet: 'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
-    title: 'Lederen din har opprettet en versjon av oppfølgingsplanen',
-    paragraphInfo: 'Om du er uenig i innholdet i planen så må du snakke med arbeidsgiveren din.',
+    title: 'Lederen din har laget en oppfølgingsplan',
+    paragraphInfo: 'Hvis du er uenig i innholdet, må du snakke med lederen din.',
     utvidbarTitle: 'Se planen',
     buttonConfirm: 'Videre',
 };

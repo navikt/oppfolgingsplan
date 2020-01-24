@@ -22,8 +22,8 @@ const texts = {
     infoboks: {
         title: 'Hva er oppgavene dine på denne arbeidsplassen?',
         info: `
-            Når du og arbeidsgiveren din skal finne de beste tiltakene sammen, er det en god start å lage en oversikt over arbeidsoppgavene.
-            Her kan du legge inn hvilke oppgaver du har og samtidig ta stilling til om du kan gjøre noen av dem mens du er sykmeldt.
+            Du starter med å lage en oversikt over arbeidsoppgavene dine. 
+            Samtidig tar du stilling til om du kan gjøre noen av dem mens du er sykmeldt.
         `,
     },
     arbeidsoppgaverInfoboksStilling: {

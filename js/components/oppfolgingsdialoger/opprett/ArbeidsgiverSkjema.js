@@ -21,7 +21,7 @@ import Radioknapper from '../../skjema/Radioknapper';
 const texts = {
     arbeidsgiverSkjema: {
         question: 'Hvilken arbeidsgiver skal du lage en plan med?',
-        buttonSubmit: 'Send',
+        buttonSubmit: 'VELG ARBEIDSGIVER',
     },
     velgArbeidsgiverUndertekst: {
         alreadyCreatedPlan: 'Du har allerede en oppfølgingsplan med denne arbeidsgiveren',

@@ -19,19 +19,18 @@ import {
 } from '../../../../utils/tiltakUtils';
 
 const texts = {
-    title: 'Send til arbeidsgiveren din for godkjenning',
+    title: 'Send til lederen din for godkjenning',
     approvalInfo: `
-        Etter at du har sendt oppfølgingsplanen til godkjenning kan arbeidsgiveren din enten godkjenne planen
-        eller gjøre endringer og sende den tilbake til deg for ny godkjenning.
+        Når du har sendt planen, kan lederen din enten godkjenne den eller gjøre endringer og sende den tilbake til deg for ny godkjenning.
     `,
-    titleDatovelger: 'Når skal planen vare fra og til?',
+    titleDatovelger: 'Hvor lenge skal planen vare?',
     checkboxLabel: 'Jeg er enig i denne oppfølgingsplanen',
     buttonSend: 'Send til godkjenning',
     buttonCancel: 'Avbryt',
 };
 
 export const textDelMedNav = (leaderName) => {
-    return <span>Jeg ønsker å dele planen med NAV når <b>{leaderName}</b> har godkjent planen</span>;
+    return <span>Jeg ønsker å dele planen med NAV når {leaderName} har godkjent planen</span>;
 };
 export const GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN = 'GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN';
 
