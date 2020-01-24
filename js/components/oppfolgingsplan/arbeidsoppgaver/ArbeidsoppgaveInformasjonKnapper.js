@@ -31,17 +31,20 @@ const ArbeidsoppgaveInformasjonKnapper = (
     const aktoerHarOpprettetElement = fnr === (arbeidsoppgave.opprettetAv && arbeidsoppgave.opprettetAv.fnr);
     return (
         <ArbeidsoppgaveInformasjonKnapperStyled className="arbeidsoppgaveInformasjonKnapper">
-            {!lagreSkjema && <button
+            <button
                 type="button"
                 className={`${arbeidsoppgave.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard knapp--mini'}`}
                 aria-pressed={visLagreSkjema}
-                onClick={(event) => { visLagreSkjema(event); }}>
+                onClick={(event) => {
+                    if (!lagreSkjema) {
+                        visLagreSkjema(event);
+                    }
+                }}>
                 {arbeidsoppgave.gjennomfoering
                     ? texts.buttonEdit
                     : texts.buttonVurdering
                 }
             </button>
-            }
             { aktoerHarOpprettetElement &&
             <button
                 type="button"
