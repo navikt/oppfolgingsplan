@@ -92,15 +92,13 @@ const GodkjennPlanAvslaattOgGodkjent = (
                     rootUrl={rootUrl}
                     gyldighetstidspunkt={sistOppfolgingsplan}
                 />
-
-                <EditButton
-                    oppfolgingsdialog={oppfolgingsplan}
-                    avvisDialog={avvisDialog}
-                />
-
                 <GodkjennPlanMottattUtvidbar
                     oppfolgingsplan={oppfolgingsplan}
                     rootUrl={rootUrl}
+                />
+                <EditButton
+                    oppfolgingsdialog={oppfolgingsplan}
+                    avvisDialog={avvisDialog}
                 />
                 <GodkjennPlanMottattKnapper
                     oppfolgingsplan={oppfolgingsplan}
