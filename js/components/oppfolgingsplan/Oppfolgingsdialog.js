@@ -4,7 +4,6 @@ import { sykeforlopsPerioderReducerPt } from '@navikt/digisyfo-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
     finnOgHentArbeidsforholdSomMangler,
-    finnOgHentForrigeNaermesteLedereSomMangler,
     finnOgHentKontaktinfoSomMangler,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentPersonerSomMangler,
@@ -44,13 +43,12 @@ export const erAvvistAvArbeidstaker = (oppfolgingsdialog) => {
 
 class Oppfolgingsdialog extends Component {
     componentWillMount() {
-        const { oppfolgingsdialog, virksomhet, person, kontaktinfo, forrigenaermesteleder, naermesteleder,
-            hentForrigeNaermesteLeder, hentVirksomhet, hentPerson, hentNaermesteLeder, hentKontaktinfo,
+        const { oppfolgingsdialog, virksomhet, person, kontaktinfo, naermesteleder,
+            hentVirksomhet, hentPerson, hentNaermesteLeder, hentKontaktinfo,
             arbeidsforhold, hentArbeidsforhold, sykeforlopsPerioderReducer, hentSykeforlopsPerioder } = this.props;
         this.props.settDialog(oppfolgingsdialog.id);
         finnOgHentVirksomheterSomMangler([oppfolgingsdialog], virksomhet, hentVirksomhet);
         finnOgHentPersonerSomMangler([oppfolgingsdialog], person, hentPerson);
-        finnOgHentForrigeNaermesteLedereSomMangler([oppfolgingsdialog], forrigenaermesteleder, hentForrigeNaermesteLeder);
         finnOgHentNaermesteLedereSomMangler([oppfolgingsdialog], naermesteleder, hentNaermesteLeder);
         finnOgHentKontaktinfoSomMangler([oppfolgingsdialog], kontaktinfo, hentKontaktinfo);
         finnOgHentArbeidsforholdSomMangler([oppfolgingsdialog], arbeidsforhold, hentArbeidsforhold);
@@ -184,7 +182,6 @@ Oppfolgingsdialog.propTypes = {
     dokument: oppfolgingsplanProptypes.dokumentReducerPt,
     virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     person: oppfolgingsplanProptypes.personReducerPt,
-    forrigenaermesteleder: oppfolgingsplanProptypes.forrigenaermestelederReducerPt,
     naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
     kontaktinfo: oppfolgingsplanProptypes.kontaktinfoReducerPt,
     arbeidsforhold: oppfolgingsplanProptypes.arbeidsforholdReducerPt,
@@ -211,7 +208,6 @@ Oppfolgingsdialog.propTypes = {
     hentVirksomhet: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
     hentPerson: PropTypes.func,
-    hentForrigeNaermesteLeder: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
     hentArbeidsforhold: PropTypes.func,
     hentSykeforlopsPerioder: PropTypes.func,

@@ -19,7 +19,6 @@ const ARBEIDSGIVERS_SYKMELDINGER = 'arbeidsgiversSykmeldinger';
 const ARBEIDSGIVERE = 'arbeidsgivere';
 const METADATA = 'metadata';
 const NAERMESTELEDERE = 'naermesteledere';
-const FORRIGE_LEDER = 'forrigeLeder';
 const SOKNADER = 'soknader';
 const SYFOUNLEASH = 'syfounleash';
 const SYKEFORLOEAP = 'sykeforloep';
@@ -59,7 +58,6 @@ lastFilTilMinne(NAERMESTELEDER);
 lastFilTilMinne(PERIODER);
 lastFilTilMinne(PERSON);
 lastFilTilMinne(VIRKSOMHET);
-lastFilTilMinne(FORRIGE_LEDER);
 lastFilTilMinne(SISTE);
 
 const SYKMELDING_TYPE = {
@@ -185,11 +183,6 @@ function mockForOpplaeringsmiljo(server) {
     server.get('/syfooprest/api/virksomhet/:virksomhetsnummer', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[VIRKSOMHET]));
-    });
-
-    server.get('/syfooprest/api/naermesteleder/:fnr/forrige', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[FORRIGE_LEDER]));
     });
 
     server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/sett', (req, res) => {

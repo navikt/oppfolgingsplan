@@ -30,7 +30,6 @@ import {
 import { delMedFastlege } from '../../actions/oppfolgingsplan/delMedFastlege_actions';
 import { delMedNav as delMedNavFunc } from '../../actions/oppfolgingsplan/delmednav_actions';
 import { hentPdfurler } from '../../actions/oppfolgingsplan/dokument_actions';
-import { hentForrigeNaermesteLeder } from '../../actions/oppfolgingsplan/forrigeNaermesteLeder_actions';
 import { hentKontaktinfo } from '../../actions/oppfolgingsplan/kontaktinfo_actions';
 import {
     lagreKommentar,
@@ -180,7 +179,6 @@ Container.propTypes = {
     arbeidsoppgaver: oppfolgingsplanProptypes.arbeidsoppgaverReducerPt,
     dineSykmeldinger: dinesykmeldingerReducerPt,
     dokument: oppfolgingsplanProptypes.dokumentReducerPt,
-    forrigenaermesteleder: oppfolgingsplanProptypes.forrigenaermestelederReducerPt,
     navigasjontoggles: oppfolgingsplanProptypes.navigasjonstogglesReducerPt,
     naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
     oppfolgingsdialogerReducer: oppfolgingsplanProptypes.oppfolgingsplanerAtPt,
@@ -216,7 +214,6 @@ Container.propTypes = {
     hentVirksomhet: PropTypes.func,
     hentPerson: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
-    hentForrigeNaermesteLeder: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
     hentSykeforlopsPerioder: PropTypes.func,
 };
@@ -260,7 +257,6 @@ export function mapStateToProps(state, ownProps) {
         delmednav: state.delmednav,
         dokument: state.dokument,
         fastlegeDeling: state.fastlegeDeling,
-        forrigenaermesteleder: state.forrigenaermesteleder,
         kontaktinfo: state.kontaktinfo,
         naermesteleder: state.naermesteleder,
         navigasjontoggles: state.navigasjontoggles,
@@ -310,7 +306,6 @@ export default connect(mapStateToProps, {
     hentVirksomhet,
     hentPerson,
     hentKontaktinfo,
-    hentForrigeNaermesteLeder,
     hentNaermesteLeder,
     hentSykeforlopsPerioder,
     delMedFastlege,

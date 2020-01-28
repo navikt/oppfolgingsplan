@@ -17,10 +17,6 @@ export const finnNyesteGodkjenning = (godkjenninger) => {
     })[0];
 };
 
-export const harForrigeNaermesteLeder = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder;
-};
-
 export const harNaermesteLeder = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
 };

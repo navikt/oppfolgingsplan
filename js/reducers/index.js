@@ -9,7 +9,6 @@ import avbrytdialogReducer from './avbrytdialog';
 import delmednav from './delmednav';
 import dokument from './dokument';
 import fastlegeDeling from './fastlegeDeling';
-import forrigenaermesteleder from './forrigenaermesteleder';
 import kommentar from './kommentar';
 import kontaktinfo from './kontaktinfo';
 import kopierDialogReducer from './kopierOppfolgingsdialog';
@@ -52,7 +51,6 @@ const reducers = {
     virksomhet,
     kontaktinfo,
     sykeforlopsPerioder,
-    forrigenaermesteleder,
     naermesteleder,
     timeout,
     form: formReducer,
