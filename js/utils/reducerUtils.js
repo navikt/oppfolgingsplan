@@ -123,7 +123,10 @@ export const finnOgHentPersonerSomMangler = (oppfolgingsdialoger, person, hentPe
     });
     fnrSet.forEach((fnr) => {
         if (!henterEllerHarHentetPerson(fnr, person)) {
-            hentPerson(fnr);
+            const virksomhetsnummer = oppfolgingsdialoger.filter((oppfolgingsplan) => {
+                return finnFodselsnumreKnyttetTilDialog(oppfolgingsplan).has(fnr);
+            })[0].virksomhet.virksomhetsnummer;
+            hentPerson(fnr, virksomhetsnummer);
         }
     });
 };
