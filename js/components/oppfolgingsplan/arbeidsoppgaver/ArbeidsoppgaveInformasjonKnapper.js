@@ -9,14 +9,10 @@ const texts = {
     buttonVurdering: 'Gi din vurdering',
 };
 
-const ArbeidsoppgaveInformasjonKnapperStyled = styled.div`
+const ArbeidsoppgaveButtonsRow = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr;
     padding-top: 1em;
-    text-align: left;
-    
-    button {
-        display: inline-block;
-        margin-right: 1em;
-    }
 `;
 
 const ArbeidsoppgaveInformasjonKnapper = (
@@ -30,30 +26,36 @@ const ArbeidsoppgaveInformasjonKnapper = (
     const elementId = arbeidsoppgave.arbeidsoppgaveId;
     const aktoerHarOpprettetElement = fnr === (arbeidsoppgave.opprettetAv && arbeidsoppgave.opprettetAv.fnr);
     return (
-        <ArbeidsoppgaveInformasjonKnapperStyled className="arbeidsoppgaveInformasjonKnapper">
-            <button
-                type="button"
-                className={`${arbeidsoppgave.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard knapp--mini'}`}
-                aria-pressed={visLagreSkjema}
-                onClick={(event) => {
-                    if (!lagreSkjema) {
+        <ArbeidsoppgaveButtonsRow>
+            <div>
+                {!lagreSkjema &&
+                <button
+                    type="button"
+                    className={`${arbeidsoppgave.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard knapp--mini'}`}
+                    aria-pressed={visLagreSkjema}
+                    onClick={(event) => {
                         visLagreSkjema(event);
+                    }}>
+                    {arbeidsoppgave.gjennomfoering
+                        ? texts.buttonEdit
+                        : texts.buttonVurdering
                     }
-                }}>
-                {arbeidsoppgave.gjennomfoering
-                    ? texts.buttonEdit
-                    : texts.buttonVurdering
+                </button>
                 }
-            </button>
-            { aktoerHarOpprettetElement &&
-            <button
-                type="button"
-                onClick={(event) => { sendSlett(event, elementId); }}
-                className="knapperad__element knapp--slett">
-                {texts.buttonDelete}
-            </button>
-            }
-        </ArbeidsoppgaveInformasjonKnapperStyled>);
+            </div>
+            <div>
+                {aktoerHarOpprettetElement &&
+                <button
+                    type="button"
+                    onClick={(event) => {
+                        sendSlett(event, elementId);
+                    }}
+                    className="knapperad__element knapp--slett">
+                    {texts.buttonDelete}
+                </button>
+                }
+            </div>
+        </ArbeidsoppgaveButtonsRow>);
 };
 ArbeidsoppgaveInformasjonKnapper.propTypes = {
     arbeidsoppgave: arbeidsoppgavePt,
