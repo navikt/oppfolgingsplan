@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
+import styled from 'styled-components';
 import { tiltakPt } from '../../../../propTypes/opproptypes';
+import ButtonEditIcon from '../../../app/buttons/ButtonEditIcon';
+import ButtonDeleteIcon from '../../../app/buttons/ButtonDeleteIcon';
 import { skalVurdereTiltak } from '../../../../utils/tiltakUtils';
 
 const texts = {
@@ -9,6 +12,12 @@ const texts = {
     buttonDelete: 'Slett',
     buttonEdit: 'Endre',
 };
+
+const TiltakButtonsRow = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr;
+    padding-top: 1em;
+`;
 
 const TiltakInformasjonKnapper = (
     {
@@ -22,39 +31,39 @@ const TiltakInformasjonKnapper = (
     }) => {
     const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
     return (
-        <div className="knapperad__tiltak knapperad--justervenstre">
-            { !lagreSkjema && aktoerHarOpprettetElement &&
-            <div className="knapperad__element">
-                <button
-                    className="knapp--endre knapp--tiltak--endre"
-                    type="button"
-                    onClick={(event) => { visLagreSkjema(event); }}>
-                    {texts.buttonEdit}
-                </button>
+        <TiltakButtonsRow>
+
+            <div>
+                {!lagreSkjema && aktoerHarOpprettetElement &&
+                <ButtonEditIcon
+                    click={(event) => {
+                        visLagreSkjema(event);
+                    }}
+                />
+                }
             </div>
-            }
-            { aktoerHarOpprettetElement &&
-            <div className="knapperad__element">
-                <button
-                    className="knapp--slett"
-                    type="button"
-                    onClick={(event) => { sendSlett(event, element.tiltakId); }}
-                    aria-pressed={visLagreSkjema}>
-                    {texts.buttonDelete}
-                </button>
+            <div>
+                {aktoerHarOpprettetElement &&
+                <ButtonDeleteIcon
+                    click={(event) => {
+                        sendSlett(event, element.tiltakId);
+                    }}
+                />
+                }
             </div>
-            }
-            { !lagreKommentarSkjema &&
-            <div className="knapperad__element">
+            <div>
+                {!lagreKommentarSkjema &&
                 <Knapp
                     mini
                     autoFocus={!skalVurdereTiltak(element, fnr)}
-                    onClick={(event) => { visLagreKommentarSkjema(event); }}>
+                    onClick={(event) => {
+                        visLagreKommentarSkjema(event);
+                    }}>
                     {texts.buttonComment}
                 </Knapp>
+                }
             </div>
-            }
-        </div>
+        </TiltakButtonsRow>
     );
 };
 TiltakInformasjonKnapper.propTypes = {
