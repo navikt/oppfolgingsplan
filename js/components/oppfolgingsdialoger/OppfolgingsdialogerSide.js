@@ -8,7 +8,6 @@ import {
     hentOppfolgingsdialoger,
     opprettOppfolgingsdialog,
 } from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
-import { hentForrigeNaermesteLeder } from '../../actions/oppfolgingsplan/forrigeNaermesteLeder_actions';
 import { hentNaermesteLeder } from '../../actions/oppfolgingsplan/naermesteLeder_actions';
 import { bekreftNyNaermesteLeder } from '../../actions/oppfolgingsplan/nyNaermesteleder_actions';
 import { hentPerson } from '../../actions/oppfolgingsplan/person_actions';
@@ -144,7 +143,6 @@ Container.propTypes = {
     oppfolgingsdialogerReducer: oppfolgingsplanProptypes.oppfolgingsplanerAtPt,
     person: oppfolgingsplanProptypes.personReducerPt,
     naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
-    forrigenaermesteleder: oppfolgingsplanProptypes.forrigenaermestelederReducerPt,
     tilgang: oppfolgingsplanProptypes.tilgangReducerPt,
     virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
@@ -153,7 +151,6 @@ Container.propTypes = {
     avkreftLeder: PropTypes.func,
     bekreftNyNaermesteLeder: PropTypes.func,
     hentDineSykmeldinger: PropTypes.func,
-    hentForrigeNaermesteLeder: PropTypes.func,
     hentLedere: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
     hentOppfolgingsdialoger: PropTypes.func,
@@ -193,7 +190,6 @@ export const mapStateToProps = (state) => {
         avkrefterLederReducer: state.ledere,
         dinesykmeldinger: state.dineSykmeldinger,
         naermesteleder: state.naermesteleder,
-        forrigenaermesteleder: state.forrigenaermesteleder,
         kopierDialogReducer: state.kopierDialogReducer,
         naermesteLedere: state.ledere,
         oppfolgingsdialogerReducer: state.oppfolgingsdialoger,
@@ -222,7 +218,6 @@ export default connect(mapStateToProps, {
     hentLedere,
     hentVirksomhet,
     hentPerson,
-    hentForrigeNaermesteLeder,
     hentNaermesteLeder,
     kopierOppfolgingsdialog,
     opprettOppfolgingsdialog,

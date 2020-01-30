@@ -26,15 +26,6 @@ const finnNaermesteLeder = (fnr, virksomhetsnummer, state) => {
         })[0] || null;
 };
 
-const finnForrigeNaermesteLeder = (fnr, virksomhetsnummer, state) => {
-    return (state.forrigenaermesteleder && state.forrigenaermesteleder.data
-        .filter((naermesteleder) => {
-            return naermesteleder.fnr === fnr && naermesteleder.virksomhetsnummer === virksomhetsnummer;
-        }).map((naermesteleder) => {
-            return naermesteleder.forrigeNaermesteLeder;
-        })[0]) || null;
-};
-
 const finnVirksomhetsnavn = (virksomhetsnummer, state) => {
     return state.virksomhet.data
         .filter((virksomhet) => {
@@ -96,7 +87,6 @@ export const populerPlanFraState = (_oppfolgingsplan, state) => {
     oppfolgingsplan.arbeidsgiver.naermesteLeder.erAktiv = naermesteleder && naermesteleder.erAktiv;
     oppfolgingsplan.arbeidsgiver.naermesteLeder.aktivFom = naermesteleder && naermesteleder.aktivFom;
     oppfolgingsplan.arbeidsgiver.naermesteLeder.aktivTom = naermesteleder && naermesteleder.aktivTom;
-    oppfolgingsplan.arbeidsgiver.forrigeNaermesteLeder = finnForrigeNaermesteLeder(oppfolgingsplan.arbeidstaker.fnr, oppfolgingsplan.virksomhet.virksomhetsnummer, state);
     oppfolgingsplan.sistEndretAv.navn = finnNavn(oppfolgingsplan.sistEndretAv.fnr, state);
     oppfolgingsplan.arbeidsoppgaveListe.map((_arbeidsoppgave) => {
         const arbeidsoppgave = _arbeidsoppgave;

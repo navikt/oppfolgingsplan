@@ -34,14 +34,6 @@ export const henterEllerHarHentetVirksomhet = (virksomhetsnummer, virksomhet) =>
     }).length > 0;
 };
 
-export const henterEllerHarHentetForrigeNaermesteLeder = (fnr, virksomhetsnummer, forrigenaermesteleder) => {
-    return forrigenaermesteleder.henter.filter((henter) => {
-        return henter.virksomhetsnummer === virksomhetsnummer && henter.fnr === fnr;
-    }).length > 0 || forrigenaermesteleder.hentet.filter((hentet) => {
-        return hentet.virksomhetsnummer === virksomhetsnummer && hentet.fnr === fnr;
-    }).length > 0;
-};
-
 export const henterEllerHarHentetPerson = (fnr, person) => {
     return person.henter.filter((henter) => {
         return henter === fnr;
@@ -93,9 +85,6 @@ export const finnFodselsnumreKnyttetTilDialog = (oppfolgingsdialog) => {
         fnrSet.add(arbeidsoppgave.opprettetAv.fnr);
         fnrSet.add(arbeidsoppgave.sistEndretAv.fnr);
     });
-    if (oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder && oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder.fnr) {
-        fnrSet.add(oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder.fnr);
-    }
     return fnrSet;
 };
 
@@ -189,23 +178,6 @@ export const finnOgHentNaermesteLedereSomMangler = (oppfolgingsdialoger, naermes
     naermesteLedereForFnrHosVirksomhetSet.forEach((naermesteLederForFnrHosVirksomhet) => {
         if (!henterEllerHarHentetNaermesteLeder(naermesteLederForFnrHosVirksomhet.fnr, naermesteLederForFnrHosVirksomhet.virksomhetsnummer, naermesteleder)) {
             hentNaermesteLeder(naermesteLederForFnrHosVirksomhet.fnr, naermesteLederForFnrHosVirksomhet.virksomhetsnummer);
-        }
-    });
-};
-
-export const finnOgHentForrigeNaermesteLedereSomMangler = (oppfolgingsdialoger, forrigenaermesteleder, hentForrigeNaermesteLeder) => {
-    const forrigeNaermesteLedereForFnrHosVirksomhet = [];
-    oppfolgingsdialoger.forEach((oppfolgingsdialog) => {
-        forrigeNaermesteLedereForFnrHosVirksomhet.push({
-            fnr: oppfolgingsdialog.arbeidstaker.fnr,
-            virksomhetsnummer: oppfolgingsdialog.virksomhet.virksomhetsnummer,
-        });
-    });
-    const forrigeNaermesteLedereForFnrHosVirksomhetSet = finnUnikeElementer(forrigeNaermesteLedereForFnrHosVirksomhet);
-    forrigeNaermesteLedereForFnrHosVirksomhetSet.forEach((forrigeNaermesteLederForFnrHosVirksomhet) => {
-        // eslint-disable-next-line max-len
-        if (!henterEllerHarHentetForrigeNaermesteLeder(forrigeNaermesteLederForFnrHosVirksomhet.fnr, forrigeNaermesteLederForFnrHosVirksomhet.virksomhetsnummer, forrigenaermesteleder)) {
-            hentForrigeNaermesteLeder(forrigeNaermesteLederForFnrHosVirksomhet.fnr, forrigeNaermesteLederForFnrHosVirksomhet.virksomhetsnummer);
         }
     });
 };

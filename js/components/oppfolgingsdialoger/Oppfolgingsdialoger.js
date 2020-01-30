@@ -6,14 +6,11 @@ import {
 } from '../../propTypes';
 import Sidetopp from '../Sidetopp';
 import {
-    harForrigeNaermesteLeder,
-    harNaermesteLeder,
-    isEmpty,
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
-    finnTidligereOppfolgingsdialoger,
-    finnBrukersSisteInnlogging,
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
+    finnTidligereOppfolgingsdialoger,
     harTidligereOppfolgingsdialoger,
+    isEmpty,
 } from '../../utils/oppfolgingsdialogUtils';
 import { sykmeldtHarGyldigSykmelding } from '../../utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
@@ -22,12 +19,10 @@ import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
-    finnOgHentForrigeNaermesteLedereSomMangler,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentPersonerSomMangler,
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
-import NyNaermestelederInfoboks from './NyNaermestelederInfoboks';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
@@ -39,32 +34,20 @@ const texts = {
     },
 };
 
-const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
-    const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger);
-    return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
-        return harForrigeNaermesteLeder(oppfolgingsdialog) &&
-            harNaermesteLeder(oppfolgingsdialog) &&
-            new Date(sisteInnlogging).toISOString().split('T')[0] <= new Date(oppfolgingsdialog.arbeidsgiver.naermesteLeder.aktivFom).toISOString().split('T')[0];
-    })[0];
-};
-
 class Oppfolgingsdialoger extends Component {
     componentWillMount() {
         const {
             oppfolgingsdialoger,
             virksomhet,
             person,
-            forrigenaermesteleder,
             naermesteleder,
             hentPerson,
             hentVirksomhet,
             hentNaermesteLeder,
-            hentForrigeNaermesteLeder,
         } = this.props;
         finnOgHentVirksomheterSomMangler(oppfolgingsdialoger, virksomhet, hentVirksomhet);
         finnOgHentPersonerSomMangler(oppfolgingsdialoger, person, hentPerson);
         finnOgHentNaermesteLedereSomMangler(oppfolgingsdialoger, naermesteleder, hentNaermesteLeder);
-        finnOgHentForrigeNaermesteLedereSomMangler(oppfolgingsdialoger, forrigenaermesteleder, hentForrigeNaermesteLeder);
 
         window.sessionStorage.removeItem('hash');
     }
@@ -72,9 +55,6 @@ class Oppfolgingsdialoger extends Component {
     render() {
         const {
             oppfolgingsdialoger = [],
-            avkreftLeder,
-            bekreftetNyNaermesteLeder,
-            bekreftNyNaermesteLeder,
             kopierOppfolgingsdialog,
             opprettOppfolgingsdialog,
             dinesykmeldinger,
@@ -82,15 +62,8 @@ class Oppfolgingsdialoger extends Component {
         } = this.props;
         let panel;
         const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger);
-        const oppfolgingsdialogMedNyNaermesteLeder = finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder(oppfolgingsdialoger);
         if (erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere(oppfolgingsdialoger, dinesykmeldinger.data, naermesteLedere.data)) {
             panel = (<IngenledereInfoboks />);
-        } else if (!bekreftetNyNaermesteLeder && oppfolgingsdialogMedNyNaermesteLeder) {
-            panel = (<NyNaermestelederInfoboks
-                oppfolgingsplan={oppfolgingsdialogMedNyNaermesteLeder}
-                avkreftNyNaermesteleder={avkreftLeder}
-                bekreftNyNaermesteLeder={bekreftNyNaermesteLeder}
-            />);
         } else if (!sykmeldtHarGyldigSykmelding(dinesykmeldinger.data)) {
             panel = (
                 <div>
@@ -135,18 +108,13 @@ class Oppfolgingsdialoger extends Component {
 Oppfolgingsdialoger.propTypes = {
     dinesykmeldinger: dinesykmeldingerReducerPt,
     naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
-    forrigenaermesteleder: oppfolgingsplanProptypes.forrigenaermestelederReducerPt,
     naermesteLedere: ledereReducerPt,
     person: oppfolgingsplanProptypes.personReducerPt,
     virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
-    bekreftetNyNaermesteLeder: PropTypes.bool,
-    bekreftNyNaermesteLeder: PropTypes.func,
-    avkreftLeder: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     hentPerson: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
-    hentForrigeNaermesteLeder: PropTypes.func,
     kopierOppfolgingsdialog: PropTypes.func,
     opprettOppfolgingsdialog: PropTypes.func,
 };
