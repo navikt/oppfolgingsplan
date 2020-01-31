@@ -195,7 +195,7 @@ function mockForOpplaeringsmiljo(server) {
     });
 
 
-    server.get('/syfooprest/api/person/:fnr/:virksomhet', (req, res) => {
+    server.get('/syfooprest/api/person/:fnr', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[PERSON]));
     });

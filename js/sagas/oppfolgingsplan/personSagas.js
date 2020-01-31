@@ -9,7 +9,7 @@ export function* hentPersonSaga(action) {
     yield put(actions.henterPerson(action.fnr));
     try {
         const host = HOST_NAMES.SYFOOPREST;
-        const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/person/${action.fnr}/${action.virksomhetsnummer}`;
+        const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/person/${action.fnr}`;
         const url = fullNaisUrl(host, path);
         const person = yield call(get, url);
 

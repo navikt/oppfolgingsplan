@@ -70,24 +70,6 @@ export const henterEllerHarHentetArbeidsforhold = (fnr, virksomhetsnummer, arbei
     }).length > 0;
 };
 
-export const finnFodselsnumreKnyttetTilDialog = (oppfolgingsdialog) => {
-    const fnrSet = new Set();
-    fnrSet.add(oppfolgingsdialog.arbeidstaker.fnr);
-    fnrSet.add(oppfolgingsdialog.sistEndretAv.fnr);
-    oppfolgingsdialog.godkjenninger.forEach((godkjenning) => {
-        fnrSet.add(godkjenning.godkjentAv.fnr);
-    });
-    oppfolgingsdialog.tiltakListe.forEach((tiltak) => {
-        fnrSet.add(tiltak.opprettetAv.fnr);
-        fnrSet.add(tiltak.sistEndretAv.fnr);
-    });
-    oppfolgingsdialog.arbeidsoppgaveListe.forEach((arbeidsoppgave) => {
-        fnrSet.add(arbeidsoppgave.opprettetAv.fnr);
-        fnrSet.add(arbeidsoppgave.sistEndretAv.fnr);
-    });
-    return fnrSet;
-};
-
 export const finnOgHentVirksomheterSomMangler = (oppfolgingsdialoger, virksomhet, hentVirksomhet) => {
     const virksomhetsnummerSet = new Set();
     oppfolgingsdialoger.forEach((oppfolgingsdialog) => {
@@ -103,19 +85,14 @@ export const finnOgHentVirksomheterSomMangler = (oppfolgingsdialoger, virksomhet
     });
 };
 
-export const finnOgHentPersonerSomMangler = (oppfolgingsdialoger, person, hentPerson) => {
+export const finnOgHentPersonerSomMangler = (oppfolgingsplaner, person, hentPerson) => {
     const fnrSet = new Set();
-    oppfolgingsdialoger.forEach((oppfolgingsdialog) => {
-        finnFodselsnumreKnyttetTilDialog(oppfolgingsdialog).forEach((fnr) => {
-            fnrSet.add(fnr);
-        });
+    oppfolgingsplaner.forEach((oppfolgingsplan) => {
+        fnrSet.add(oppfolgingsplan.arbeidstaker.fnr);
     });
     fnrSet.forEach((fnr) => {
         if (!henterEllerHarHentetPerson(fnr, person)) {
-            const virksomhetsnummer = oppfolgingsdialoger.filter((oppfolgingsplan) => {
-                return finnFodselsnumreKnyttetTilDialog(oppfolgingsplan).has(fnr);
-            })[0].virksomhet.virksomhetsnummer;
-            hentPerson(fnr, virksomhetsnummer);
+            hentPerson(fnr);
         }
     });
 };

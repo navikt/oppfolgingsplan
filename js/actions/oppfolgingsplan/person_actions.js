@@ -3,11 +3,10 @@ export const HENTER_PERSON = 'HENTER_PERSON';
 export const PERSON_HENTET = 'PERSON_HENTET';
 export const HENT_PERSON_FEILET = 'HENT_PERSON_FEILET';
 
-export const hentPerson = (fnr, virksomhetsnummer) => {
+export const hentPerson = (fnr) => {
     return {
         type: HENT_PERSON_FORESPURT,
         fnr,
-        virksomhetsnummer,
     };
 };
 
