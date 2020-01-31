@@ -276,7 +276,7 @@ function getDefaultOppfolgingsplaner() {
                     gjennomfoering: null,
                     opprettetAv: {
                         navn: ' ',
-                        fnr: '110110110110',
+                        fnr: '11011011011',
                         epost: null,
                         tlf: null,
                         sistInnlogget: null,
@@ -286,7 +286,7 @@ function getDefaultOppfolgingsplaner() {
                     },
                     sistEndretAv: {
                         navn: ' ',
-                        fnr: null,
+                        fnr: '11011011011',
                         epost: null,
                         tlf: null,
                         sistInnlogget: null,
@@ -310,7 +310,7 @@ function getDefaultOppfolgingsplaner() {
                     gjennomfoering: null,
                     opprettetAv: {
                         navn: ' ',
-                        fnr: '110110110110',
+                        fnr: '11011011011',
                         epost: null,
                         tlf: null,
                         sistInnlogget: null,
@@ -320,7 +320,7 @@ function getDefaultOppfolgingsplaner() {
                     },
                     sistEndretAv: {
                         navn: ' ',
-                        fnr: '110110110110',
+                        fnr: '11011011011',
                         epost: null,
                         tlf: null,
                         sistInnlogget: null,
