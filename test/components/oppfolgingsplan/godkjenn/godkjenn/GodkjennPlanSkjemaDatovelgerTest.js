@@ -50,6 +50,7 @@ describe('GodkjennPlanSkjemaDatovelger', () => {
     });
 
     describe('GodkjennPlanSkjemaDatovelgerFelt', () => {
+        Object.defineProperty(window, 'sessionStorage', { value: global.sessionStorage, configurable: true, enumerable: true, writable: true });
         function storageMock() {
             const storage = {};
 

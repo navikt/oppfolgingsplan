@@ -6,6 +6,7 @@ import brukerinfo from '../../js/reducers/brukerinfo';
 // eslint-disable-next-line no-unused-vars
 let item;
 
+Object.defineProperty(window, 'localStorage', { value: global.localStorage, configurable: true, enumerable: true, writable: true });
 window.localStorage = {};
 window.localStorage.getItem = (i) => {
     return i;
