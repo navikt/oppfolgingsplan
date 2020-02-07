@@ -1,17 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Knapp } from 'nav-frontend-knapper';
 import styled from 'styled-components';
 import { tiltakPt } from '../../../../propTypes/opproptypes';
 import ButtonEditIcon from '../../../app/buttons/ButtonEditIcon';
 import ButtonDeleteIcon from '../../../app/buttons/ButtonDeleteIcon';
-import { skalVurdereTiltak } from '../../../../utils/tiltakUtils';
+import ButtonComment from '../../../app/buttons/ButtonComment';
 
-const texts = {
-    buttonComment: 'Kommenter',
-    buttonDelete: 'Slett',
-    buttonEdit: 'Endre',
-};
 
 const TiltakButtonsRow = styled.div`
     display: grid;
@@ -53,14 +47,12 @@ const TiltakInformasjonKnapper = (
             </div>
             <div>
                 {!lagreKommentarSkjema &&
-                <Knapp
-                    mini
-                    autoFocus={!skalVurdereTiltak(element, fnr)}
-                    onClick={(event) => {
+                <ButtonComment
+                    count={element.kommentarer.length}
+                    click={(event) => {
                         visLagreKommentarSkjema(event);
-                    }}>
-                    {texts.buttonComment}
-                </Knapp>
+                    }}
+                />
                 }
             </div>
         </TiltakButtonsRow>
