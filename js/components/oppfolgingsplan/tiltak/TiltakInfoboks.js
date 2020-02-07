@@ -2,11 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { Knapp } from 'nav-frontend-knapper';
+import styled from 'styled-components';
 
 export const tekster = {
     tittel: 'Hva kan gjøre det lettere å jobbe?',
     knapp: '+ Legg til nytt tiltak',
 };
+
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+`;
 
 const TiltakInfoboks = (
     {
@@ -20,13 +26,15 @@ const TiltakInfoboks = (
     return (
         <div className="tiltakInfoboks">
             <h3 className={classNames}>{tekster.tittel}</h3>
-            {!visTiltakSkjema && <Knapp
-                mini
-                htmlType="submit"
-                aria-pressed={visTiltakSkjema}
-                onClick={toggleSkjema}>
-                {tekster.knapp}
-            </Knapp>
+            {!visTiltakSkjema && <Wrapper>
+                <Knapp
+                    mini
+                    htmlType="submit"
+                    aria-pressed={visTiltakSkjema}
+                    onClick={toggleSkjema}>
+                    {tekster.knapp}
+                </Knapp>
+            </Wrapper>
             }
         </div>);
 };
