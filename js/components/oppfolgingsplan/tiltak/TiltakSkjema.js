@@ -70,7 +70,7 @@ export const TiltakNavn = ({ felt }) => {
             className="skjemaelement__label"
             id={felt.navn}
             htmlFor={`${felt.navn}-input`}>
-            {felt.tekst}
+            <b>{felt.tekst}</b>
         </label>
         <Field
             className="input--fullbredde"
@@ -107,7 +107,7 @@ export const TiltakBeskrivelse = (
         :
         <div className="lagretiltakskjema__inputgruppe">
             <label className="skjemaelement__label" id={felt.navn} htmlFor={`${felt.navn}-input`}>
-                {felt.tekst}
+                <b>{felt.tekst}</b>
             </label>
             <Field
                 className="input__tiltak--beskrivelse"
