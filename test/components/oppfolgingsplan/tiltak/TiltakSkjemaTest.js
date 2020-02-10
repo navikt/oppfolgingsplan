@@ -7,7 +7,7 @@ import {
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
 import { Field } from 'redux-form';
-import { Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import getTiltak from '../../../mock/mockTiltak';
 import TiltakKnapper from '../../../../js/components/oppfolgingsplan/tiltak/TiltakKnapper';
 import TiltakDatovelger from '../../../../js/components/oppfolgingsplan/tiltak/TiltakDatovelger';
@@ -87,7 +87,7 @@ describe('TiltakSkjema', () => {
     describe('TiltakKnapper', () => {
         it('Skal vise rett submit knapp og avbryt lenke,', () => {
             komponent = mount(<TiltakKnapper tiltak={tiltak} />);
-            expect(komponent.find(Knapp)).to.have.length(1);
+            expect(komponent.find(Hovedknapp)).to.have.length(1);
             expect(komponent.find('button.lenke')).to.have.length(1);
         });
     });
