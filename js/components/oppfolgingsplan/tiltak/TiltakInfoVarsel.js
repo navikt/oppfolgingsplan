@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
 
 const TiltakInfoVarsel = ({ tekst }) => {
-    return (<Alertstripe
-        className="alertstripe--notifikasjonboks"
-        type="info">
+    return (<Alertstripe type="info" className="alertstripe--notifikasjonboks">
         {tekst}
     </Alertstripe>);
 };
