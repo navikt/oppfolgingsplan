@@ -17,6 +17,7 @@ import {
     getEndDateFromTiltakListe,
     getStartDateFromTiltakListe,
 } from '../../../../utils/tiltakUtils';
+import { erHerokuApp } from '../../../../utils/urlUtils';
 
 const texts = {
     title: 'Send til lederen din for godkjenning',
@@ -130,7 +131,13 @@ export class GodkjennPlanLightboksComponent extends Component {
 
                 <div className="knapperad">
                     <div className="knapperad__element">
-                        <Hovedknapp htmlType="submit">
+                        <Hovedknapp
+                            htmlType="submit"
+                            onClick={(e) => {
+                                if (erHerokuApp()) {
+                                    e.preventDefault();
+                                }
+                            }}>
                             {texts.buttonSend}
                         </Hovedknapp>
                     </div>
