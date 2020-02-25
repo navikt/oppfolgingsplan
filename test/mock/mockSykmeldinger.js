@@ -25,7 +25,7 @@ export const leggTilMnderOgDagerPaaDato = (dato, mnder, dager) => {
 export const getArbeidsgivere = [
     {
         virksomhetsnummer: '123456788',
-        navn: 'Pontypandy Fire Service',
+        navn: 'Hogwarts School of Witchcraft and Wizardry',
         harNaermesteLeder: false,
     },
     {
@@ -37,7 +37,7 @@ export const getArbeidsgivere = [
 
 const arbeidsgiver = {
     virksomhetsnummer: '123456789',
-    navn: 'Pontypandy Fire Service',
+    navn: 'Hogwarts School of Witchcraft and Wizardry',
     harNaermesteLeder: false,
 };
 
@@ -62,7 +62,7 @@ export const getSykmeldinger = [
             fornavn: 'Helen',
             etternavn: 'Flood',
         },
-        arbeidsgiver: 'Pontypandy Fire Service',
+        arbeidsgiver: 'Hogwarts School of Witchcraft and Wizardry',
         diagnose: {
             hoveddiagnose: {
                 diagnose: 'TENDINITT INA',
