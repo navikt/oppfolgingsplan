@@ -84,7 +84,7 @@ describe('reducerUtils', () => {
         });
     });
 
-    describe('finnOgHentForrigeNaermesteLedereSomMangler', () => {
+    describe('finnOgHentArbeidsforholdSomMangler', () => {
         it('Finner arbeidsforhold som skal hentes og kaller hentArbeidsforhold', () => {
             const hentArbeidsforhold = sinon.spy();
             const arbeidsforhold = {
