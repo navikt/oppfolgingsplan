@@ -163,10 +163,7 @@ class Oppfolgingsdialog extends Component {
             { oppfolgingsdialogAvbruttOgNyOpprettet &&
             <AvbruttGodkjentPlanVarsel />
             }
-            { !utenSamtykke(oppfolgingsdialog) &&
-                <MidlertidigAlertStripeFastlegedeling />
-            }
-
+            <MidlertidigAlertStripeFastlegedeling />
             <SideOverskrift
                 tittel={oppfolgingsdialog.virksomhet.navn}
             />
