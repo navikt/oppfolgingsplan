@@ -14,6 +14,7 @@ import {
 } from '../../utils/oppfolgingsdialogUtils';
 import { sykmeldtHarGyldigSykmelding } from '../../utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
+import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
@@ -22,7 +23,7 @@ import {
     finnOgHentPersonerSomMangler,
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
-import NotifikasjonBoksAdvarsel from './NotifikasjonBoksAdvarsel';
+import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
 
@@ -31,24 +32,6 @@ const texts = {
     noActiveSykmelding: {
         titleTidligerePlaner: 'Tidligere oppfølgingsplaner',
     },
-    alertstripeDelMedNAVInfo: 'Det er for tiden ikke mulig å dele oppfølgingsplaner med fastlegen ' +
-        'på grunn av endringer i registre utenfor NAV som ikke er varslet. Vi jobber med å tilpasse våre systemer.',
-};
-
-const textAlertstripeCancelledPlan = (counterPart) => {
-    return `${counterPart} har startet en ny oppfølgingsplan. Den gamle er arkivert.`;
-};
-
-const alertstripeTexts = (cancelledPlaner) => {
-    const alertTexts = [];
-
-    alertTexts.push(texts.alertstripeDelMedNAVInfo);
-
-    if (cancelledPlaner.length > 0) {
-        alertTexts.push(textAlertstripeCancelledPlan(cancelledPlaner[0].arbeidstaker.navn));
-    }
-
-    return alertTexts;
 };
 
 class Oppfolgingsdialoger extends Component {
@@ -79,7 +62,6 @@ class Oppfolgingsdialoger extends Component {
         } = this.props;
         let panel;
         const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger);
-        const allAlertstripeTexts = alertstripeTexts(dialogerAvbruttAvMotpartSidenSistInnlogging);
         if (erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere(oppfolgingsdialoger, dinesykmeldinger.data, naermesteLedere.data)) {
             panel = (<IngenledereInfoboks />);
         } else if (!sykmeldtHarGyldigSykmelding(dinesykmeldinger.data)) {
@@ -108,8 +90,10 @@ class Oppfolgingsdialoger extends Component {
             );
         }
         return (<div>
-            { allAlertstripeTexts.length > 0 && <NotifikasjonBoksAdvarsel
-                texts={allAlertstripeTexts}
+            { dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 &&
+            <AvbruttPlanNotifikasjonBoksAdvarsel
+                motpartnavn={dialogerAvbruttAvMotpartSidenSistInnlogging[0].sistEndretAv.navn}
+                rootUrl={getContextRoot()}
             />
             }
             <Sidetopp
