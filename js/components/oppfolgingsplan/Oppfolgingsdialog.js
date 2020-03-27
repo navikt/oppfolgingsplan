@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Alertstripe from 'nav-frontend-alertstriper';
 import { sykeforlopsPerioderReducerPt } from '@navikt/digisyfo-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
@@ -34,6 +35,18 @@ const skalViseSamtykke = (oppfolgingsdialog) => {
     return harNaermesteLeder(oppfolgingsdialog)
         && utenSamtykke(oppfolgingsdialog)
         && (inneholderGodkjentPlan(oppfolgingsdialog) || inneholderGodkjenningerAvArbeidstaker(oppfolgingsdialog));
+};
+
+const midlertidigTekstFastlegedeling = 'Det er for tiden ikke mulig å dele oppfølgingsplaner med fastlegen på grunn av endringer '
+                                     + 'i registre utenfor NAV som ikke er varslet. Vi jobber med å tilpasse våre systemer.';
+
+const MidlertidigAlertStripeFastlegedeling = () => {
+    return (<Alertstripe
+        className="alertstripe--notifikasjonboks"
+        type="info"
+        solid>
+        {midlertidigTekstFastlegedeling}
+    </Alertstripe>);
 };
 
 export const erAvvistAvArbeidstaker = (oppfolgingsdialog) => {
@@ -150,6 +163,7 @@ class Oppfolgingsdialog extends Component {
             { oppfolgingsdialogAvbruttOgNyOpprettet &&
             <AvbruttGodkjentPlanVarsel />
             }
+            <MidlertidigAlertStripeFastlegedeling />
             <SideOverskrift
                 tittel={oppfolgingsdialog.virksomhet.navn}
             />
