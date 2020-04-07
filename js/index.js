@@ -10,6 +10,7 @@ import {
 } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
+import * as Sentry from '@sentry/browser';
 import {
     forlengInnloggetSesjon,
     setPerformOnHttpCalls,
@@ -22,6 +23,8 @@ import rootSaga from './sagas';
 import '../styles/styles.less';
 import './logging';
 import reducers from './reducers';
+
+Sentry.init({ dsn: 'https://0a85ce6fefed42a49d44a727614d6b97@sentry.gc.nav.no/25' });
 
 const rootReducer = combineReducers(reducers);
 
