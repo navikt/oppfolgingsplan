@@ -81,15 +81,15 @@ export class Container extends Component {
             this.props.hentOppfolgingsdialoger();
         }
         if (oppfolgingsplanHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
+            window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
             this.props.hentOppfolgingsdialoger();
         }
         if (kopierDialogReducer.sender && nextProps.kopierDialogReducer.sendt) {
+            window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
             this.props.hentOppfolgingsdialoger();
         }
         if (oppfolgingsdialogerReducer.opprettet && !oppfolgingsdialogerReducer.hentet && nextProps.oppfolgingsdialogerReducer.hentet) {
             history.push(`${getContextRoot()}/oppfolgingsplaner/${nextProps.oppfolgingsdialogerReducer.opprettetId}`);
-            window.location.hash = 'arbeidsoppgaver';
-            window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
         }
         if (kopierDialogReducer.sendt && !oppfolgingsdialogerReducer.hentet && nextProps.oppfolgingsdialogerReducer.hentet) {
             history.push(`${getContextRoot()}/oppfolgingsplaner/${nextProps.kopierDialogReducer.data}`);

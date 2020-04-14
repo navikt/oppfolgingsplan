@@ -79,6 +79,15 @@ const texts = {
 };
 
 export class Container extends Component {
+    constructor(props) {
+        super(props);
+        const hashValue = window.sessionStorage.getItem('hash');
+        if (hashValue === 'arbeidsoppgaver' && hashValue !== window.location.hash) {
+            window.location.hash = hashValue;
+            this.props.settAktivtSteg(1);
+        }
+    }
+
     componentWillMount() {
         const { tilgang, oppfolgingsdialogerReducer } = this.props;
         if (!henterEllerHarHentetTilgang(tilgang)) {
