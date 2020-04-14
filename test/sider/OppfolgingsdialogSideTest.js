@@ -164,6 +164,7 @@ describe('Container', () => {
     describe('Container', () => {
         let sjekkTilgang;
         let hentOppfolgingsdialoger;
+        let settAktivtSteg;
         let settDialog;
         let hentArbeidsforhold;
         let hentDineSykmeldinger;
@@ -198,6 +199,7 @@ describe('Container', () => {
 
             sjekkTilgang = sinon.spy();
             hentOppfolgingsdialoger = sinon.spy();
+            settAktivtSteg = sinon.spy();
             settDialog = sinon.spy();
             hentArbeidsforhold = sinon.spy();
             hentDineSykmeldinger = sinon.spy();
@@ -215,6 +217,7 @@ describe('Container', () => {
                 toggles={toggles}
                 hentOppfolgingsdialoger={hentOppfolgingsdialoger}
                 sjekkTilgang={sjekkTilgang}
+                settAktivtSteg={settAktivtSteg}
                 settDialog={settDialog}
                 hentArbeidsforhold={hentArbeidsforhold}
                 hentDineSykmeldinger={hentDineSykmeldinger}
@@ -234,6 +237,7 @@ describe('Container', () => {
                 toggles={toggles}
                 hentOppfolgingsdialoger={hentOppfolgingsdialoger}
                 sjekkTilgang={sjekkTilgang}
+                settAktivtSteg={settAktivtSteg}
                 settDialog={settDialog}
                 hentArbeidsforhold={hentArbeidsforhold}
                 hentDineSykmeldinger={hentDineSykmeldinger}
@@ -253,6 +257,7 @@ describe('Container', () => {
                 toggles={toggles}
                 hentOppfolgingsdialoger={hentOppfolgingsdialoger}
                 sjekkTilgang={sjekkTilgang}
+                settAktivtSteg={settAktivtSteg}
                 settDialog={settDialog}
                 hentArbeidsforhold={hentArbeidsforhold}
                 hentDineSykmeldinger={hentDineSykmeldinger}
@@ -272,6 +277,7 @@ describe('Container', () => {
                 toggles={toggles}
                 hentOppfolgingsdialoger={hentOppfolgingsdialoger}
                 sjekkTilgang={sjekkTilgang}
+                settAktivtSteg={settAktivtSteg}
                 settDialog={settDialog}
                 hentArbeidsforhold={hentArbeidsforhold}
                 hentDineSykmeldinger={hentDineSykmeldinger}
@@ -289,6 +295,7 @@ describe('Container', () => {
                 toggles={toggles}
                 hentOppfolgingsdialoger={hentOppfolgingsdialoger}
                 sjekkTilgang={sjekkTilgang}
+                settAktivtSteg={settAktivtSteg}
                 settDialog={settDialog}
                 hentArbeidsforhold={hentArbeidsforhold}
                 hentDineSykmeldinger={hentDineSykmeldinger}
@@ -306,6 +313,7 @@ describe('Container', () => {
                 toggles={toggles}
                 hentOppfolgingsdialoger={hentOppfolgingsdialoger}
                 sjekkTilgang={sjekkTilgang}
+                settAktivtSteg={settAktivtSteg}
                 settDialog={settDialog}
                 hentArbeidsforhold={hentArbeidsforhold}
                 hentDineSykmeldinger={hentDineSykmeldinger}
@@ -325,6 +333,7 @@ describe('Container', () => {
                 toggles={toggles}
                 hentOppfolgingsdialoger={hentOppfolgingsdialoger}
                 sjekkTilgang={sjekkTilgang}
+                settAktivtSteg={settAktivtSteg}
                 settDialog={settDialog}
                 hentArbeidsforhold={hentArbeidsforhold}
                 hentDineSykmeldinger={hentDineSykmeldinger}
