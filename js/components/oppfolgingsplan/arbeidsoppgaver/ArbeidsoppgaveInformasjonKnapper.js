@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { arbeidsoppgavePt } from '../../../propTypes/opproptypes';
+import MiniSpinner from '../../MiniSpinner';
 
 const texts = {
     buttonDelete: 'Slett',
@@ -25,6 +26,8 @@ const ArbeidsoppgaveInformasjonKnapper = (
     }) => {
     const elementId = arbeidsoppgave.arbeidsoppgaveId;
     const aktoerHarOpprettetElement = fnr === (arbeidsoppgave.opprettetAv && arbeidsoppgave.opprettetAv.fnr);
+
+    const [sletter, setSletter] = useState(false);
     return (
         <ArbeidsoppgaveButtonsRow>
             <div>
@@ -44,15 +47,22 @@ const ArbeidsoppgaveInformasjonKnapper = (
                 }
             </div>
             <div>
-                {aktoerHarOpprettetElement &&
-                <button
-                    type="button"
-                    onClick={(event) => {
-                        sendSlett(event, elementId);
-                    }}
-                    className="knapperad__element knapp--slett">
-                    {texts.buttonDelete}
-                </button>
+                { aktoerHarOpprettetElement &&
+                    <div>
+                        {sletter
+                            ? <MiniSpinner />
+                            : <button
+                                type="button"
+                                onClick={(event) => {
+                                    setSletter(true);
+                                    sendSlett(event, elementId);
+                                }}
+                                disabled={sletter}
+                                className="knapperad__element knapp--slett">
+                                {texts.buttonDelete}
+                            </button>
+                        }
+                    </div>
                 }
             </div>
         </ArbeidsoppgaveButtonsRow>);
