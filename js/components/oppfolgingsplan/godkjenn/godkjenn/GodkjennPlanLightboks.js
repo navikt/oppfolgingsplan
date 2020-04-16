@@ -41,6 +41,7 @@ export class GodkjennPlanLightboksComponent extends Component {
         this.state = {
             visIkkeUtfyltFeilmelding: false,
             opprettplan: 'true',
+            submitting: false,
         };
         this.godkjennPlan = this.godkjennPlan.bind(this);
         this.handledChange = this.handledChange.bind(this);
@@ -78,6 +79,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                 evalueres: new Date(fraInputdatoTilJSDato(values.evalueringsdato)),
             };
             this.props.godkjennPlan(gyldighetstidspunkt, this.state.opprettplan, values.delMedNav);
+            this.setState({ submitting: true });
         }
     }
 
@@ -133,6 +135,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                     <div className="knapperad__element">
                         <Hovedknapp
                             htmlType="submit"
+                            spinner={this.state.submitting}
                             onClick={(e) => {
                                 if (erHerokuApp()) {
                                     e.preventDefault();
