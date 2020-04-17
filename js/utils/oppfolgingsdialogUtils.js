@@ -217,3 +217,9 @@ export const finnSistEndretAvNavn = (oppfolgingsplan) => {
 export const skalDeleMedNav = (delMedNav, oppfolgingsdialog) => {
     return delMedNav || oppfolgingsdialog.godkjenninger.find((godkjenning) => { return godkjenning.delMedNav; });
 };
+
+export const erArbeidstakerEgenLeder = (oppfolgingsdialog) => {
+    return oppfolgingsdialog.arbeidstaker
+        && oppfolgingsdialog.arbeidsgiver.naermesteLeder
+        && oppfolgingsdialog.arbeidstaker.fnr === oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
+};

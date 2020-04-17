@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Bjorn } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import { erIkkeOppfolgingsdialogUtfylt } from '../../../../utils/oppfolgingsdialogUtils';
+import {
+    erArbeidstakerEgenLeder,
+    erIkkeOppfolgingsdialogUtfylt,
+} from '../../../../utils/oppfolgingsdialogUtils';
 import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
 
 const texts = {
     bjorn: 'Er du ferdig med denne planen og ønsker å sende den til arbeidsgiveren din for godkjenning?',
     buttonGodkjenn: 'Jeg er ferdig',
+    arbeidstakerLeaderSamePerson: {
+        info: 'Fordi du er din egen leder, må du logge inn som arbeidsgiver for å fullføre planen.',
+    },
 };
 
 export const ReviderEllerGodkjennPlanKnapperad = (
@@ -54,22 +61,34 @@ class ReviderEllerGodkjennPlan extends Component {
             settAktivtSteg,
             rootUrl,
         } = this.props;
+        const visEgenLederVisning = erArbeidstakerEgenLeder(oppfolgingsdialog);
         return (<div className="godkjennPlanOversiktInformasjon">
             <div className="panel godkjennPlanOversiktInformasjon__panel">
-                <Bjorn
-                    className="z-index-1"
-                    rootUrl={rootUrl}>
-                    <p>{texts.bjorn}</p>
-                </Bjorn>
-                { this.state.visIkkeUtfyltFeilmelding &&
-                <IkkeUtfyltPlanFeilmelding
-                    oppfolgingsdialog={oppfolgingsdialog}
-                    settAktivtSteg={settAktivtSteg}
-                />
+                {visEgenLederVisning ?
+                    <Alertstripe
+                        className="alertstripe--notifikasjonboks"
+                        type="info"
+                        solid>
+                        {texts.arbeidstakerLeaderSamePerson.info}
+                    </Alertstripe>
+                    :
+                    <React.Fragment>
+                        <Bjorn
+                            className="z-index-1"
+                            rootUrl={rootUrl}>
+                            <p>{texts.bjorn}</p>
+                        </Bjorn>
+                        { this.state.visIkkeUtfyltFeilmelding &&
+                        <IkkeUtfyltPlanFeilmelding
+                            oppfolgingsdialog={oppfolgingsdialog}
+                            settAktivtSteg={settAktivtSteg}
+                        />
+                        }
+                        <ReviderEllerGodkjennPlanKnapperad
+                            godkjennPlan={this.godkjennPlan}
+                        />
+                    </React.Fragment>
                 }
-                <ReviderEllerGodkjennPlanKnapperad
-                    godkjennPlan={this.godkjennPlan}
-                />
             </div>
         </div>);
     }
