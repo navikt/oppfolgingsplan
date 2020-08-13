@@ -20,6 +20,7 @@ import {
 import getContextRoot from '../../utils/getContextRoot';
 import Arbeidsoppgaver from './arbeidsoppgaver/Arbeidsoppgaver';
 import AvbruttGodkjentPlanVarsel from './AvbruttGodkjentPlanVarsel';
+import LagreOgAvslutt from './LagreOgAvslutt';
 import NavigasjonsBunn from './NavigasjonsBunn';
 import NavigasjonsTopp from './NavigasjonsTopp';
 import ReleasetPlanAT from './godkjenn/releasetplan/ReleasetPlanAT';
@@ -86,6 +87,7 @@ class Oppfolgingsdialog extends Component {
             && !inneholderGodkjenninger(oppfolgingsdialog);
         let panel;
         let disableNavigation = false;
+        let skalViseAvsluttOgLagre = false;
         if (skalViseSamtykke(oppfolgingsdialog)) {
             disableNavigation = true;
             panel = (<Samtykke
@@ -117,32 +119,34 @@ class Oppfolgingsdialog extends Component {
             />);
         } else {
             (() => {
-                if (navigasjontoggles.steg === 1) {
-                    panel = (<Arbeidsoppgaver
-                        arbeidsoppgaver={arbeidsoppgaver}
-                        oppfolgingsdialog={oppfolgingsdialog}
-                        lagreArbeidsoppgave={lagreArbeidsoppgave}
-                        slettArbeidsoppgave={slettArbeidsoppgave}
-                    />);
-                } else if (navigasjontoggles.steg === 2) {
-                    panel = (<Tiltak
-                        tiltak={tiltak}
-                        oppfolgingsdialog={oppfolgingsdialog}
-                        lagreTiltak={lagreTiltak}
-                        slettTiltak={slettTiltak}
-                        lagreKommentar={lagreKommentar}
-                        slettKommentar={slettKommentar}
-                    />);
-                } else if (!harNaermesteLeder(oppfolgingsdialog)) {
-                    panel = (<IngenlederInfoboks />);
-                } else {
-                    panel = (<Godkjenn
-                        oppfolgingsdialog={oppfolgingsdialog}
-                        settAktivtSteg={settAktivtSteg}
-                        godkjennPlan={godkjennDialog}
-                        rootUrl={`${getContextRoot()}`}
-                    />);
-                }
+              if (navigasjontoggles.steg === 1) {
+                skalViseAvsluttOgLagre = true;
+                panel = (<Arbeidsoppgaver
+                    arbeidsoppgaver={arbeidsoppgaver}
+                    oppfolgingsdialog={oppfolgingsdialog}
+                    lagreArbeidsoppgave={lagreArbeidsoppgave}
+                    slettArbeidsoppgave={slettArbeidsoppgave}
+                  />);
+              } else if (navigasjontoggles.steg === 2) {
+                skalViseAvsluttOgLagre = true;
+                panel = (<Tiltak
+                    tiltak={tiltak}
+                    oppfolgingsdialog={oppfolgingsdialog}
+                    lagreTiltak={lagreTiltak}
+                    slettTiltak={slettTiltak}
+                    lagreKommentar={lagreKommentar}
+                    slettKommentar={slettKommentar}
+                  />);
+              } else if (!harNaermesteLeder(oppfolgingsdialog)) {
+                panel = (<IngenlederInfoboks />);
+              } else {
+                panel = (<Godkjenn
+                    oppfolgingsdialog={oppfolgingsdialog}
+                    settAktivtSteg={settAktivtSteg}
+                    godkjennPlan={godkjennDialog}
+                    rootUrl={`${getContextRoot()}`}
+                  />);
+              }
             })();
         }
 
@@ -169,7 +173,8 @@ class Oppfolgingsdialog extends Component {
                 steg={navigasjontoggles.steg}
                 rootUrlPlaner={getContextRoot()}
             />
-        </div>);
+        {skalViseAvsluttOgLagre && <LagreOgAvslutt />}
+      </div>);
     }
 }
 

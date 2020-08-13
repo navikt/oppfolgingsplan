@@ -52,6 +52,7 @@
 @import "_knapperad";
 @import "_knapperSykefravaer";
 @import "_kommentarListe";
+@import "_lagreOgAvslutt";
 @import "_layout";
 @import "_lenker";
 @import "_modal";
@@ -81,49 +82,49 @@
 @import "_utvidbar";
 
 @bakgrunnGraa: #efefef;
-@fargeRosa : #e3b0a8;
+@fargeRosa: #e3b0a8;
 @lenkeGraa: #c8c8c8;
 @blueLight: #c3ddf4;
-@lyseroed: #E3B0A8;
+@lyseroed: #e3b0a8;
 
 @arbeidsoppgaveUtvibarOverskriftIkonBredde: 2em;
 
 .medHjelpetekst {
-	display: flex;
-	position: relative;
-	align-items: flex-start;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
 }
 
 p {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .mixin-panel-padding() {
-	padding-left: 1em;
-	padding-right: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
 
-	@media(min-width: @screen-sm-min) {
-		padding-left: 2em;
-		padding-right: 2em;
-	}
+  @media (min-width: @screen-sm-min) {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
 }
 
 .typo-sitat-mixin {
-	.typo-normal-mixin();
-	font-style: italic;.knapp--tekst
-q {
-	quotes: "\201C" "\201D";
-}
+  .typo-normal-mixin();
+  font-style: italic;
+  .knapp--tekst q {
+    quotes: "\201C""\201D";
+  }
 }
 
 .z-index-1 {
-	* {
-		z-index: 1 !important;
-	}
+  * {
+    z-index: 1 !important;
+  }
 }
 
 .tekst--dynamisk {
-	white-space: pre-line;
-	overflow-wrap: break-word;
-	word-wrap: break-word;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
