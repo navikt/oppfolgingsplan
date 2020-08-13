@@ -87,7 +87,7 @@ class Oppfolgingsdialog extends Component {
             && !inneholderGodkjenninger(oppfolgingsdialog);
         let panel;
         let disableNavigation = false;
-        let skalViseAvsluttOgLagre = false;
+        let skalViseAvsluttOgLagre = navigasjontoggles.steg === 1 || navigasjontoggles.steg === 2;
         if (skalViseSamtykke(oppfolgingsdialog)) {
             disableNavigation = true;
             panel = (<Samtykke
@@ -120,7 +120,6 @@ class Oppfolgingsdialog extends Component {
         } else {
             (() => {
                 if (navigasjontoggles.steg === 1) {
-                    skalViseAvsluttOgLagre = true;
                     panel = (<Arbeidsoppgaver
                         arbeidsoppgaver={arbeidsoppgaver}
                         oppfolgingsdialog={oppfolgingsdialog}
@@ -128,7 +127,6 @@ class Oppfolgingsdialog extends Component {
                         slettArbeidsoppgave={slettArbeidsoppgave}
                     />);
                 } else if (navigasjontoggles.steg === 2) {
-                    skalViseAvsluttOgLagre = true;
                     panel = (<Tiltak
                         tiltak={tiltak}
                         oppfolgingsdialog={oppfolgingsdialog}

@@ -1,32 +1,18 @@
 import React from 'react';
-import { Flatknapp } from 'nav-frontend-knapper';
-import history from '../../history';
+import { Link } from 'react-router';
 import getContextRoot from '../../utils/getContextRoot';
 
 const tekster = {
     knapp: 'Lagre og avslutt',
 };
 
-const sendTilLandingsside = () => {
-    history.push(`${getContextRoot()}/oppfolgingsplaner`);
-};
-
-const handleKeyPress = (lagreOgAvslutt, e) => {
-    e.preventDefault();
-    if (e.nativeEvent.keyCode === 13) {
-        lagreOgAvslutt();
-    }
-};
-
 const LagreOgAvslutt = () => {
     return (
-        <nav className="lagreOgAvslutt">
-            <Flatknapp
-                onKeyPress={(e) => { handleKeyPress(sendTilLandingsside, e); }}
-                onMouseDown={() => { sendTilLandingsside(); }}>
+        <div className="knapperad">
+            <Link className="knapperad__element knapp knapp--flat" to={`${getContextRoot()}/oppfolgingsplaner`}>
                 {tekster.knapp}
-            </Flatknapp>
-        </nav>
+            </Link>
+        </div>
     );
 };
 
