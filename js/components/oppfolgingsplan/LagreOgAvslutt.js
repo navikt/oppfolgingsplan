@@ -1,31 +1,33 @@
-import React from "react";
-import { Flatknapp } from "nav-frontend-knapper";
+import React from 'react';
+import { Flatknapp } from 'nav-frontend-knapper';
+import history from '../../history';
+import getContextRoot from '../../utils/getContextRoot';
 
 const tekster = {
-  knapp: "Lagre og avslutt",
+    knapp: 'Lagre og avslutt',
 };
 
-const lagreOgAvslutt = () => {
-  history.push(`${getContextRoot()}/oppfolgingsplaner`);
+const sendTilLandingsside = () => {
+    history.push(`${getContextRoot()}/oppfolgingsplaner`);
 };
 
 const handleKeyPress = (lagreOgAvslutt, e) => {
-  e.preventDefault();
-  if (e.nativeEvent.keyCode === 13) {
-    lagreOgAvslutt();
-  }
+    e.preventDefault();
+    if (e.nativeEvent.keyCode === 13) {
+        lagreOgAvslutt();
+    }
 };
 
 const LagreOgAvslutt = () => {
-  return (
-    <nav className="lagreOgAvslutt">
-      <Flatknapp
-        onKeyPress={(e) => { handleKeyPress(lagreOgAvslutt, e); }}
-        onMouseDown={() => { lagreOgAvslutt(); }}>
-        {tekster.knapp}
-      </Flatknapp>
-    </nav>
-  );
+    return (
+        <nav className="lagreOgAvslutt">
+            <Flatknapp
+                onKeyPress={(e) => { handleKeyPress(sendTilLandingsside, e); }}
+                onMouseDown={() => { sendTilLandingsside(); }}>
+                {tekster.knapp}
+            </Flatknapp>
+        </nav>
+    );
 };
 
 export default LagreOgAvslutt;
