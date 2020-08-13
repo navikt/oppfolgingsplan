@@ -20,7 +20,7 @@ import {
 import getContextRoot from '../../utils/getContextRoot';
 import Arbeidsoppgaver from './arbeidsoppgaver/Arbeidsoppgaver';
 import AvbruttGodkjentPlanVarsel from './AvbruttGodkjentPlanVarsel';
-import LagreOgAvslutt from './LagreOgAvslutt';
+import LagreOgAvsluttKnapp from './LagreOgAvsluttKnapp';
 import NavigasjonsBunn from './NavigasjonsBunn';
 import NavigasjonsTopp from './NavigasjonsTopp';
 import ReleasetPlanAT from './godkjenn/releasetplan/ReleasetPlanAT';
@@ -171,7 +171,7 @@ class Oppfolgingsdialog extends Component {
                 steg={navigasjontoggles.steg}
                 rootUrlPlaner={getContextRoot()}
             />
-            {skalViseAvsluttOgLagre && <LagreOgAvslutt />}
+            {skalViseAvsluttOgLagre && <LagreOgAvsluttKnapp />}
         </div>);
     }
 }

@@ -6,7 +6,7 @@ const tekster = {
     knapp: 'Lagre og avslutt',
 };
 
-const LagreOgAvslutt = () => {
+const LagreOgAvsluttKnapp = () => {
     return (
         <div className="knapperad">
             <Link className="knapperad__element knapp knapp--flat" to={`${getContextRoot()}/oppfolgingsplaner`}>
@@ -16,4 +16,4 @@ const LagreOgAvslutt = () => {
     );
 };
 
-export default LagreOgAvslutt;
+export default LagreOgAvsluttKnapp;
