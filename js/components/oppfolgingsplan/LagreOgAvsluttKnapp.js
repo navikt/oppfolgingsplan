@@ -9,7 +9,7 @@ const tekster = {
 const LagreOgAvsluttKnapp = () => {
     return (
         <div className="knapperad">
-            <Link className="knapperad__element knapp knapp--flat" to={`${getContextRoot()}/oppfolgingsplaner`}>
+            <Link className="knapperad__element knapp knapp--flat lagreOgAvslutt" to={`${getContextRoot()}/oppfolgingsplaner`}>
                 {tekster.knapp}
             </Link>
         </div>
