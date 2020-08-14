@@ -20,6 +20,7 @@ import {
 import getContextRoot from '../../utils/getContextRoot';
 import Arbeidsoppgaver from './arbeidsoppgaver/Arbeidsoppgaver';
 import AvbruttGodkjentPlanVarsel from './AvbruttGodkjentPlanVarsel';
+import LagreOgAvsluttKnapp from './LagreOgAvsluttKnapp';
 import NavigasjonsBunn from './NavigasjonsBunn';
 import NavigasjonsTopp from './NavigasjonsTopp';
 import ReleasetPlanAT from './godkjenn/releasetplan/ReleasetPlanAT';
@@ -86,6 +87,7 @@ class Oppfolgingsdialog extends Component {
             && !inneholderGodkjenninger(oppfolgingsdialog);
         let panel;
         let disableNavigation = false;
+        const skalViseAvsluttOgLagre = navigasjontoggles.steg === 1 || navigasjontoggles.steg === 2;
         if (skalViseSamtykke(oppfolgingsdialog)) {
             disableNavigation = true;
             panel = (<Samtykke
@@ -169,6 +171,7 @@ class Oppfolgingsdialog extends Component {
                 steg={navigasjontoggles.steg}
                 rootUrlPlaner={getContextRoot()}
             />
+            {skalViseAvsluttOgLagre && <LagreOgAvsluttKnapp />}
         </div>);
     }
 }
