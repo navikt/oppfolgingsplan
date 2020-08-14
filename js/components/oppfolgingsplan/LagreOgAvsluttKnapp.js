@@ -1,17 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router';
+import styled from 'styled-components';
 import getContextRoot from '../../utils/getContextRoot';
 
 const tekster = {
     knapp: 'Fortsett senere',
 };
 
+const LinkStyled = styled(Link)`
+    text-transform: initial !important;
+`;
+
 const LagreOgAvsluttKnapp = () => {
     return (
         <div className="knapperad">
-            <Link className="knapperad__element knapp knapp--flat lagreOgAvslutt" to={`${getContextRoot()}/oppfolgingsplaner`}>
+            <LinkStyled className="knapperad__element knapp knapp--flat" to={`${getContextRoot()}/oppfolgingsplaner`}>
                 {tekster.knapp}
-            </Link>
+            </LinkStyled>
         </div>
     );
 };
