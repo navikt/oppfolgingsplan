@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import getContextRoot from '../../utils/getContextRoot';
 
 const tekster = {
-    knapp: 'Lagre og avslutt',
+    knapp: 'Fortsett senere',
 };
 
 const LagreOgAvsluttKnapp = () => {
