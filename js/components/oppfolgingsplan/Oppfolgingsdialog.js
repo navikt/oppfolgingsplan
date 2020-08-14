@@ -87,7 +87,7 @@ class Oppfolgingsdialog extends Component {
             && !inneholderGodkjenninger(oppfolgingsdialog);
         let panel;
         let disableNavigation = false;
-        let skalViseAvsluttOgLagre = navigasjontoggles.steg === 1 || navigasjontoggles.steg === 2;
+        const skalViseAvsluttOgLagre = navigasjontoggles.steg === 1 || navigasjontoggles.steg === 2;
         if (skalViseSamtykke(oppfolgingsdialog)) {
             disableNavigation = true;
             panel = (<Samtykke
