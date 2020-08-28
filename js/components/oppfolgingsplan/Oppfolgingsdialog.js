@@ -105,7 +105,6 @@ class Oppfolgingsdialog extends Component {
             />);
         } else if (harNaermesteLeder(oppfolgingsdialog) && inneholderGodkjentPlan(oppfolgingsdialog)) {
             disableNavigation = true;
-            // Her
             panel = (<ReleasetPlanAT
                 oppfolgingsdialog={oppfolgingsdialog}
                 hentPdfurler={hentPdfurler}
