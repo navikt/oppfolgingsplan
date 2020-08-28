@@ -128,7 +128,6 @@ class Oppfolgingsdialog extends Component {
                         slettArbeidsoppgave={slettArbeidsoppgave}
                     />);
                 } else if (navigasjontoggles.steg === 2) {
-                    skalViseAvsluttOgLagre = true;
                     panel = (<Tiltak
                         tiltak={tiltak}
                         oppfolgingsdialog={oppfolgingsdialog}
