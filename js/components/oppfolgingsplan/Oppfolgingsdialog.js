@@ -120,6 +120,7 @@ class Oppfolgingsdialog extends Component {
         } else {
             (() => {
                 if (navigasjontoggles.steg === 1) {
+                    skalViseAvsluttOgLagre = true;
                     panel = (<Arbeidsoppgaver
                         arbeidsoppgaver={arbeidsoppgaver}
                         oppfolgingsdialog={oppfolgingsdialog}
@@ -127,6 +128,7 @@ class Oppfolgingsdialog extends Component {
                         slettArbeidsoppgave={slettArbeidsoppgave}
                     />);
                 } else if (navigasjontoggles.steg === 2) {
+                    skalViseAvsluttOgLagre = true;
                     panel = (<Tiltak
                         tiltak={tiltak}
                         oppfolgingsdialog={oppfolgingsdialog}
@@ -135,7 +137,6 @@ class Oppfolgingsdialog extends Component {
                         lagreKommentar={lagreKommentar}
                         slettKommentar={slettKommentar}
                     />);
-                    skalViseAvsluttOgLagre = true;
                 } else if (!harNaermesteLeder(oppfolgingsdialog)) {
                     panel = (<IngenlederInfoboks />);
                 } else {
