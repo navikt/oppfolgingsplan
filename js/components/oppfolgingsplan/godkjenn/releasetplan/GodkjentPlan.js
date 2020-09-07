@@ -17,6 +17,7 @@ import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './God
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
 import getContextRoot from '../../../../utils/getContextRoot';
+import BildeTekstLinje from '../../../app/BildeTekstLinje';
 
 const texts = {
     godkjentPlan: {
@@ -31,10 +32,27 @@ const texts = {
         info: 'Hvis du endrer planen, må du sende den til godkjenning hos den andre. Etter godkjenning blir den en gjeldende plan.',
         button: 'Gjør endringer',
     },
+    tvungenGodkjenning: {
+        info: 'Planen er laget av arbeidsgiveren din. Er du uenig i innholdet, må du snakke med',
+    },
 };
 
 const textBothApprovedOppfolgingsplan = (lederNavn) => {
     return `Denne versjonen av planen er godkjent av ${lederNavn} og deg.`;
+};
+
+export const TextForcedApprovedOppfolgingsplan = ({ rootUrl, oppfolgingsplan }) => {
+    return (
+        <BildeTekstLinje
+            imgUrl={`${rootUrl}/img/svg/report-problem-circle.svg`}
+            alt="info"
+            tekst={`${texts.tvungenGodkjenning.info} ${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}.`}
+        />
+    );
+};
+TextForcedApprovedOppfolgingsplan.propTypes = {
+    rootUrl: PropTypes.string,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
 
 export const UtvidbarStyled = styled(Utvidbar)`
@@ -54,6 +72,7 @@ export const GodkjentPlanUtvidbar = ({ oppfolgingsdialog }) => {
 GodkjentPlanUtvidbar.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
 };
+
 export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {
     return (
         <div className="avbrytPlanBekreftelse">
@@ -129,6 +148,12 @@ class GodkjentPlan extends Component {
                         }
 
                         { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}</p> }
+                        { godkjentPlan.tvungenGodkjenning &&
+                            <TextForcedApprovedOppfolgingsplan
+                                rootUrl={rootUrl}
+                                oppfolgingsplan={oppfolgingsdialog}
+                            />
+                        }
 
                         <GodkjennPlanTidspunkt
                             rootUrl={rootUrl}
