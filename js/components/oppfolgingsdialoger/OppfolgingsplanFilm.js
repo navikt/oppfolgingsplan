@@ -1,4 +1,5 @@
 import React from 'react';
+import Panel from 'nav-frontend-paneler';
 import Video from '../app/Video';
 import { OPPFOLGINGSPLAN } from '../../enums/filmer';
 
@@ -16,7 +17,7 @@ const TextLink = () => {
 };
 
 const OppfolgingsplanFilm = () => {
-    return (<div className="panel">
+    return (<Panel border>
         <h2 className="panel__tittel">
             {texts.title}
         </h2>
@@ -24,7 +25,7 @@ const OppfolgingsplanFilm = () => {
         <p>
             <TextLink />
         </p>
-    </div>);
+    </Panel>);
 };
 
 export default OppfolgingsplanFilm;

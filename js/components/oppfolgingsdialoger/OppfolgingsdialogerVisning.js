@@ -27,7 +27,7 @@ const texts = {
             title: 'Tidligere oppfølgingsplaner',
         },
         teaserAktive: {
-            titleMultiplePlaner: 'Aktiv oppfølgingsplaner',
+            titleMultiplePlaner: 'Aktive oppfølgingsplaner',
             titleSinglePlan: 'Aktiv oppfølgingsplan',
         },
     },
