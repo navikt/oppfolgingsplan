@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
 
 const tekster = {
     knapp: '+ Legg til ny arbeidsoppgave',
@@ -13,7 +14,7 @@ const ArbeidsoppgaverInfoboks = (
         visSkjema,
         toggleSkjema,
     }) => {
-    return (<div className="arbeidsoppgaverInfoboks">
+    return (<Panel className="arbeidsoppgaverInfoboks" border>
         <h3>{tittel}</h3>
         { children }
         {!visSkjema && <Knapp
@@ -25,7 +26,7 @@ const ArbeidsoppgaverInfoboks = (
             {tekster.knapp}
         </Knapp>
         }
-    </div>);
+    </Panel>);
 };
 
 ArbeidsoppgaverInfoboks.propTypes = {

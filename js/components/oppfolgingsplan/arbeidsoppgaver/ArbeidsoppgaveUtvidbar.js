@@ -4,6 +4,7 @@ import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { erSynligIViewport } from '@navikt/digisyfo-npm';
+import { Panel } from 'nav-frontend-paneler';
 import {
     arbeidsoppgavePt,
     arbeidsoppgaverReducerPt,
@@ -220,63 +221,65 @@ class ArbeidsoppgaveUtvidbar extends Component {
         return (
             (() => {
                 return (
-                    <article
-                        className="arbeidsoppgaverListe__rad arbeidsoppgaverListe__rad--element"
-                        ref={(ref) => { this.jstoggle = ref; }}
-                        aria-label={element.arbeidsoppgavenavn}>
-                        <button
-                            aria-expanded={this.state.erApen}
-                            ref={(ref) => { this.utvidbarToggle = ref; }}
-                            className="utvidbar__toggle arbeidsoppgaverListe__toggle"
-                            onClick={(event) => { this.toggle(event); }}
-                        >
-                            <div ref={(ref) => { this.utvidbar = ref; }} className="arbeidsoppgaverListe__utvidbarrad">
-                                <ArbeidsoppgaveUtvidbarOverskrift
-                                    erApen={this.state.erApen}
-                                    fnr={fnr}
-                                    arbeidsoppgave={element}
-                                    lagreSkjema={this.state.visLagreSkjema}
-                                    visLagreSkjema={this.visLagreSkjema}
-                                    sendSlett={this.sendSlett}
-                                    rootUrlImg={rootUrlImg}
-                                />
+                    <Panel border>
+                        <article
+                            className="arbeidsoppgaverListe__rad arbeidsoppgaverListe__rad--element"
+                            ref={(ref) => { this.jstoggle = ref; }}
+                            aria-label={element.arbeidsoppgavenavn}>
+                            <button
+                                aria-expanded={this.state.erApen}
+                                ref={(ref) => { this.utvidbarToggle = ref; }}
+                                className="utvidbar__toggle arbeidsoppgaverListe__toggle"
+                                onClick={(event) => { this.toggle(event); }}
+                            >
+                                <div ref={(ref) => { this.utvidbar = ref; }} className="arbeidsoppgaverListe__utvidbarrad">
+                                    <ArbeidsoppgaveUtvidbarOverskrift
+                                        erApen={this.state.erApen}
+                                        fnr={fnr}
+                                        arbeidsoppgave={element}
+                                        lagreSkjema={this.state.visLagreSkjema}
+                                        visLagreSkjema={this.visLagreSkjema}
+                                        sendSlett={this.sendSlett}
+                                        rootUrlImg={rootUrlImg}
+                                    />
+                                </div>
+                            </button>
+                            <div
+                                style={{ height: this.state.hoyde }}
+                                className={`utvidbar__innholdContainer${this.state.containerClassName}`}
+                                onTransitionEnd={() => {
+                                    this.onTransitionEnd();
+                                }}
+                            >
+                                <div ref={(ref) => { this.innhold = ref; }}>
+                                    { this.state.visInnhold && !this.state.visLagreSkjema &&
+                                    <ArbeidsoppgaveInformasjon
+                                        element={element}
+                                    />
+                                    }
+                                    { this.state.visLagreSkjema &&
+                                    <LagreArbeidsoppgaveSkjema
+                                        sendLagre={this.sendLagre}
+                                        arbeidsoppgave={element}
+                                        form={element.arbeidsoppgaveId.toString()}
+                                        avbryt={this.visElementInformasjon}
+                                        oppdateringFeilet={this.state.visLagringFeilet && feilMelding}
+                                        varselTekst={this.state.varselTekst}
+                                        arbeidsoppgaverReducer={arbeidsoppgaverReducer}
+                                        rootUrlImg={rootUrlImg}
+                                    />
+                                    }
+                                </div>
                             </div>
-                        </button>
-                        <div
-                            style={{ height: this.state.hoyde }}
-                            className={`utvidbar__innholdContainer${this.state.containerClassName}`}
-                            onTransitionEnd={() => {
-                                this.onTransitionEnd();
-                            }}
-                        >
-                            <div ref={(ref) => { this.innhold = ref; }}>
-                                { this.state.visInnhold && !this.state.visLagreSkjema &&
-                                <ArbeidsoppgaveInformasjon
-                                    element={element}
+                            { this.state.visSlettingFeilet && feilMelding &&
+                            <ArbeidsoppgaveVarselFeilStyled>
+                                <ArbeidsoppgaveVarselFeil
+                                    tekst={texts.updateError}
                                 />
-                                }
-                                { this.state.visLagreSkjema &&
-                                <LagreArbeidsoppgaveSkjema
-                                    sendLagre={this.sendLagre}
-                                    arbeidsoppgave={element}
-                                    form={element.arbeidsoppgaveId.toString()}
-                                    avbryt={this.visElementInformasjon}
-                                    oppdateringFeilet={this.state.visLagringFeilet && feilMelding}
-                                    varselTekst={this.state.varselTekst}
-                                    arbeidsoppgaverReducer={arbeidsoppgaverReducer}
-                                    rootUrlImg={rootUrlImg}
-                                />
-                                }
-                            </div>
-                        </div>
-                        { this.state.visSlettingFeilet && feilMelding &&
-                        <ArbeidsoppgaveVarselFeilStyled>
-                            <ArbeidsoppgaveVarselFeil
-                                tekst={texts.updateError}
-                            />
-                        </ArbeidsoppgaveVarselFeilStyled>
-                        }
-                    </article>
+                            </ArbeidsoppgaveVarselFeilStyled>
+                            }
+                        </article>
+                    </Panel>
                 );
             })()
         );
