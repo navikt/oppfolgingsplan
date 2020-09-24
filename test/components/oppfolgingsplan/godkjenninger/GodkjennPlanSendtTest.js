@@ -3,6 +3,7 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { Utvidbar } from '@navikt/digisyfo-npm';
+import { Panel } from 'nav-frontend-paneler';
 import GodkjennPlanSendt, {
     GodkjennPlanSendtInfoTekst,
     GodkjennPlanSendtUtvidbar,
@@ -64,7 +65,7 @@ describe('GodkjennPlanSendt', () => {
         const komponent = shallow(<GodkjennPlanSendtInfoTekst />);
 
         it('Skal vise en GodkjennPlanSendtInfoTekst med overskrift og tekst', () => {
-            expect(komponent.find('div.godkjennPlanSendt_infoTekst')).to.have.length(1);
+            expect(komponent.find(Panel)).to.have.length(1);
             expect(komponent.find('h3')).to.have.length(1);
         });
 

@@ -11,8 +11,8 @@ const expect = chai.expect;
 describe('OppfolgingsdialogInfoboks', () => {
     const komponent = shallow(<OppfolgingsdialogPlanInfoboks />);
 
-    it('Viser en div', () => {
-        expect(komponent.find('div.panel')).to.have.length(1);
+    it('Viser et Panel', () => {
+        expect(komponent.find(Panel)).to.have.length(1);
     });
 
     it('Viser en h3', () => {
