@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
 import {
     opprettOppfolgingArbeidsgiverPt,
 } from '../../../propTypes';
@@ -66,29 +67,31 @@ const OppfolgingsdialogerIngenplan = (
         <header className="oppfolgingsdialogerIngenplan__header">
             <h2>{texts.tittel}</h2>
         </header>
-        <div className="oppfolgingsdialogerIngenplan__blokk">
-            <img alt="tom-plan" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-tom.svg`} />
-            <div className="inngangspanel__innhold">
-                <header className="inngangspanel__header">
-                    <h3 className="js-title">
-                        <span className="inngangspanel__tittel">
-                            {texts.inngangspanel.tittel}
-                        </span>
-                    </h3>
-                </header>
-                <div>
-                    <p className="oppfolgingsdialoger__start_tekst">
-                        {texts.inngangspanel.paragraph}
-                    </p>
-                    <OppfolgingsdialogerIngenplanKnapper
-                        arbeidsgivere={arbeidsgivere}
-                        oppfolgingsplaner={oppfolgingsplaner}
-                        opprett={opprett}
-                        visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
-                    />
+        <Panel border>
+            <div className="oppfolgingsdialogerIngenplan__blokk">
+                <img alt="tom-plan" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-tom.svg`} />
+                <div className="inngangspanel__innhold">
+                    <header className="inngangspanel__header">
+                        <h3 className="js-title">
+                            <span className="inngangspanel__tittel">
+                                {texts.inngangspanel.tittel}
+                            </span>
+                        </h3>
+                    </header>
+                    <div>
+                        <p className="oppfolgingsdialoger__start_tekst">
+                            {texts.inngangspanel.paragraph}
+                        </p>
+                        <OppfolgingsdialogerIngenplanKnapper
+                            arbeidsgivere={arbeidsgivere}
+                            oppfolgingsplaner={oppfolgingsplaner}
+                            opprett={opprett}
+                            visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </Panel>
     </div>);
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
+import { Panel } from 'nav-frontend-paneler';
 import OppfolgingsdialogPlanInfoboks from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/OppfolgingsdialogPlanInfoboks';
 
 chai.use(chaiEnzyme());

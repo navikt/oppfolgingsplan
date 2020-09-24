@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Panel } from 'nav-frontend-paneler';
 
 const OppfolgingsplanInfoboks = (
     {
@@ -9,7 +10,7 @@ const OppfolgingsplanInfoboks = (
         tekst,
         children,
     }) => {
-    return (<div className="panel blokk">
+    return (<Panel border>
         <div className="illustrertTittel">
             <img className="illustrertTittel__img" src={svgUrl} alt={svgAlt} />
             <h2 className="illustrertTittel__tittel">{tittel}</h2>
@@ -17,7 +18,7 @@ const OppfolgingsplanInfoboks = (
         <p>{tekst}</p>
 
         {children}
-    </div>);
+    </Panel>);
 };
 
 OppfolgingsplanInfoboks.propTypes = {

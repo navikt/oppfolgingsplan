@@ -1,4 +1,5 @@
 import React from 'react';
+import { Panel } from 'nav-frontend-paneler';
 import getContextRoot from '../../utils/getContextRoot';
 
 const texts = {
@@ -11,16 +12,18 @@ const OppfolgingsdialogUtenSykmelding = () => {
         <header className="oppfolgingsdialogUtenAktivSykmelding__header">
             <h2>{texts.title}</h2>
         </header>
-        <div className="oppfolgingsdialogUtenAktivSykmelding__blokk">
-            <img alt="ikke-aktiv-sykmeldt" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg`} />
-            <div className="inngangspanel__innhold">
-                <div>
-                    <p className="oppfolgingsdialoger__start_tekst">
-                        {texts.info}
-                    </p>
+        <Panel border>
+            <div className="oppfolgingsdialogUtenAktivSykmelding__blokk">
+                <img alt="ikke-aktiv-sykmeldt" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg`} />
+                <div className="inngangspanel__innhold">
+                    <div>
+                        <p className="oppfolgingsdialoger__start_tekst">
+                            {texts.info}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Panel>
     </div>);
 };
 
