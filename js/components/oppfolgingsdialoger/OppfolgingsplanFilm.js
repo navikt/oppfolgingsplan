@@ -17,7 +17,7 @@ const TextLink = () => {
 };
 
 const OppfolgingsplanFilm = () => {
-    return (<Panel border>
+    return (<Panel>
         <h2 className="panel__tittel">
             {texts.title}
         </h2>
