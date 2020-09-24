@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { Panel } from 'nav-frontend-paneler';
 import {
     STATUS_TILTAK,
     tekstfeltRegex,
@@ -207,45 +208,47 @@ export class TiltakSkjemaKomponent extends Component {
             tiltakReducer,
         } = this.props;
         return (
-            <div className="utvidbar__innholdContainer">
-                <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()} >
+            <Panel border>
+                <div className="utvidbar__innholdContainer">
+                    <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()} >
 
-                    { (!tiltak || !tiltak.opprettetAv || aktoerHarOpprettetElement(fnr, tiltak)) &&
-                    <TiltakNavn
-                        felt={FELTER.tiltaknavn}
-                    />
-                    }
-                    <TiltakBeskrivelse
-                        felt={FELTER.beskrivelse}
-                        tiltak={tiltak}
-                        fnr={fnr}
-                    />
+                        { (!tiltak || !tiltak.opprettetAv || aktoerHarOpprettetElement(fnr, tiltak)) &&
+                        <TiltakNavn
+                            felt={FELTER.tiltaknavn}
+                        />
+                        }
+                        <TiltakBeskrivelse
+                            felt={FELTER.beskrivelse}
+                            tiltak={tiltak}
+                            fnr={fnr}
+                        />
 
-                    <TiltakForeslaattAv
-                        tiltak={tiltak}
-                    />
+                        <TiltakForeslaattAv
+                            tiltak={tiltak}
+                        />
 
-                    { this.state.status !== STATUS_TILTAK.IKKE_AKTUELT &&
-                    <TiltakDatovelger
-                        felter={FELTER}
-                        tiltak={this.visFeiletTiltak() ? tiltakReducer.tiltak : tiltak}
-                    />
-                    }
+                        { this.state.status !== STATUS_TILTAK.IKKE_AKTUELT &&
+                        <TiltakDatovelger
+                            felter={FELTER}
+                            tiltak={this.visFeiletTiltak() ? tiltakReducer.tiltak : tiltak}
+                        />
+                        }
 
-                    { oppdateringFeilet &&
-                    <TiltakVarselFeil
-                        tekst={varselTekst}
-                    />
-                    }
+                        { oppdateringFeilet &&
+                        <TiltakVarselFeil
+                            tekst={varselTekst}
+                        />
+                        }
 
-                    <TiltakKnapper
-                        avbryt={this.avbryt}
-                        tiltak={tiltak}
-                        visFeilMelding={visFeilMelding}
-                        tiltakReducer={tiltakReducer}
-                    />
-                </form>
-            </div>);
+                        <TiltakKnapper
+                            avbryt={this.avbryt}
+                            tiltak={tiltak}
+                            visFeilMelding={visFeilMelding}
+                            tiltakReducer={tiltakReducer}
+                        />
+                    </form>
+                </div>
+            </Panel>);
     }
 }
 
