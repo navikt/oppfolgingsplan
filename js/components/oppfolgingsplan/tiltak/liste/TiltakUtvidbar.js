@@ -4,7 +4,6 @@ import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { erSynligIViewport } from '@navikt/digisyfo-npm';
-import { Panel } from 'nav-frontend-paneler';
 import {
     kommentarReducerPt,
     tiltakPt,
@@ -265,36 +264,35 @@ class TiltakUtvidbar extends Component {
         return (
             (() => {
                 return (
-                    <Panel border>
-                        <article
-                            className="oppfolgingsdialogtabell__rad oppfolgingsdialogtabell__rad--element"
-                            ref={(ref) => { this.jstoggle = ref; }}
-                            aria-label={element.tiltaknavn}>
-                            <UtvidbarButtonStyled
-                                aria-expanded={this.state.erApen}
-                                ref={(ref) => { this.utvidbarToggle = ref; }}
-                                onClick={(event) => { this.toggle(event); }}>
-                                <div ref={(ref) => { this.utvidbar = ref; }} className="oppfolgingsdialogtabell__utvidbarrad">
-                                    <TiltakListeRad
-                                        tiltak={element}
-                                        erApen={this.state.erApen}
-                                        fnr={fnr}
-                                        sendSlett={this.sendSlett}
-                                        lagreSkjema={this.state.visLagreSkjema}
-                                        visLagreSkjema={this.visLagreSkjema}
-                                        lagreKommentarSkjema={this.state.lagreKommentarSkjema}
-                                        visLagreKommentarSkjema={this.visLagreKommentarSkjema}
-                                    />
-                                </div>
-                            </UtvidbarButtonStyled>
-                            <div
-                                style={{ height: this.state.hoyde }}
-                                className={`utvidbar__innholdContainer${this.state.containerClassName}`}
-                                onTransitionEnd={() => {
-                                    this.onTransitionEnd();
-                                }}>
-                                <div ref={(ref) => { this.innhold = ref; }}>
-                                    { this.state.visInnhold && !this.state.visLagreSkjema &&
+                    <article
+                        className="oppfolgingsdialogtabell__rad oppfolgingsdialogtabell__rad--element"
+                        ref={(ref) => { this.jstoggle = ref; }}
+                        aria-label={element.tiltaknavn}>
+                        <UtvidbarButtonStyled
+                            aria-expanded={this.state.erApen}
+                            ref={(ref) => { this.utvidbarToggle = ref; }}
+                            onClick={(event) => { this.toggle(event); }}>
+                            <div ref={(ref) => { this.utvidbar = ref; }} className="oppfolgingsdialogtabell__utvidbarrad">
+                                <TiltakListeRad
+                                    tiltak={element}
+                                    erApen={this.state.erApen}
+                                    fnr={fnr}
+                                    sendSlett={this.sendSlett}
+                                    lagreSkjema={this.state.visLagreSkjema}
+                                    visLagreSkjema={this.visLagreSkjema}
+                                    lagreKommentarSkjema={this.state.lagreKommentarSkjema}
+                                    visLagreKommentarSkjema={this.visLagreKommentarSkjema}
+                                />
+                            </div>
+                        </UtvidbarButtonStyled>
+                        <div
+                            style={{ height: this.state.hoyde }}
+                            className={`utvidbar__innholdContainer${this.state.containerClassName}`}
+                            onTransitionEnd={() => {
+                                this.onTransitionEnd();
+                            }}>
+                            <div ref={(ref) => { this.innhold = ref; }}>
+                                { this.state.visInnhold && !this.state.visLagreSkjema &&
                                     <TiltakInformasjon
                                         element={element}
                                         fnr={fnr}
@@ -310,8 +308,8 @@ class TiltakUtvidbar extends Component {
                                         visFeilMelding={visFeilMelding}
                                         rootUrlImg={rootUrlImg}
                                     />
-                                    }
-                                    { this.state.visInnhold && this.state.visLagreSkjema &&
+                                }
+                                { this.state.visInnhold && this.state.visLagreSkjema &&
                                     <TiltakSkjema
                                         sendLagre={this.sendLagre}
                                         tiltak={element}
@@ -325,10 +323,10 @@ class TiltakUtvidbar extends Component {
                                         tiltakReducer={tiltakReducer}
                                         rootUrlImg={rootUrlImg}
                                     />
-                                    }
-                                </div>
+                                }
                             </div>
-                            {this.state.visSlettingFeilet && feilMelding &&
+                        </div>
+                        {this.state.visSlettingFeilet && feilMelding &&
                             <TiltakVarselFeilStyled>
                                 <TiltakVarselFeil
                                     tekst={texts.updateError}
@@ -337,9 +335,9 @@ class TiltakUtvidbar extends Component {
                                     }}
                                 />
                             </TiltakVarselFeilStyled>
-                            }
-                        </article>
-                    </Panel>);
+                        }
+                    </article>
+                );
             })()
         );
     }
