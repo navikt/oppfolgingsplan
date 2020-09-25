@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Utvidbar } from '@navikt/digisyfo-npm';
+import { Panel } from 'nav-frontend-paneler';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsdialogUtils';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
@@ -35,10 +36,10 @@ const GodkjenPlanSentBlokk = (narmestelederName) => {
 
 export const GodkjennPlanSendtInfoTekst = () => {
     return (
-        <div className="blokk godkjennPlanSendt_infoTekst">
+        <Panel border>
             <h3 className="typo-element">{texts.godkjennPlanSendtInfoTekst.title}</h3>
             <GodkjennPlanVenterInfo />
-        </div>
+        </Panel>
     );
 };
 

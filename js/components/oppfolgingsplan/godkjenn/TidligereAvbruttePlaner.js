@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Panel } from 'nav-frontend-paneler';
 import { restdatoTildato } from '../../../utils/datoUtils';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 
@@ -14,7 +15,7 @@ const textLink = (date) => {
 const TidligereAvbruttePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
     if (oppfolgingsdialog.avbruttPlanListe && oppfolgingsdialog.avbruttPlanListe.length > 0) {
         return (
-            <div className="tidligereAvbruttePlaner">
+            <Panel border className="tidligereAvbruttePlaner">
                 <p>{texts.title}</p>
                 <ul>
                     {
@@ -30,7 +31,7 @@ const TidligereAvbruttePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
                         })
                     }
                 </ul>
-            </div>
+            </Panel>
         );
     }
     return null;
