@@ -8,6 +8,7 @@ import GodkjentPlan from '../../../../../js/components/oppfolgingsplan/godkjenn/
 import Samtykke from '../../../../../js/components/oppfolgingsplan/godkjenn/samtykke/Samtykke';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 import OppfolgingsdialogPlanInfoboks from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/OppfolgingsdialogPlanInfoboks';
+import TidligereAvbruttePlaner from '../../../../../js/components/oppfolgingsplan/godkjenn/TidligereAvbruttePlaner';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -78,6 +79,11 @@ describe('ReleasetPlan', () => {
             },
         })} />);
         expect(komponent.find(Samtykke)).to.have.length(1);
+    });
+
+    it('Skal vise TidligereAvbruttePlaner', () => {
+        komponent = shallow(<ReleasetPlan oppfolgingsdialog={oppfolgingsdialogMedSamtykke} />);
+        expect(komponent.find(TidligereAvbruttePlaner)).to.have.length(1);
     });
 
     it('Skal vise en GodkjentPlan med samtykke', () => {

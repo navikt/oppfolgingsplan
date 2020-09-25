@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from 'nav-frontend-paneler';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 const texts = {
     title: 'Hva skjer nå?',
@@ -13,7 +13,7 @@ const texts = {
 
 const OppfolgingsdialogPlanInfoboks = () => {
     return (
-        <Panel border>
+        <AlertStripe type="info" className="alertstripe--notifikasjonboks">
             <h3 className="panel__tittel">{texts.title}</h3>
             <p>
                 {texts.info.paragraph1}
@@ -21,7 +21,7 @@ const OppfolgingsdialogPlanInfoboks = () => {
                 <br />
                 {texts.info.paragraph2}
             </p>
-        </Panel>);
+        </AlertStripe>);
 };
 
 export default OppfolgingsdialogPlanInfoboks;
