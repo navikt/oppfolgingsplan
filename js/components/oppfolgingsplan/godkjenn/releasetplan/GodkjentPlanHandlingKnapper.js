@@ -83,7 +83,6 @@ class GodkjentPlanHandlingKnapper extends Component {
 GodkjentPlanHandlingKnapper.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
     apneBekreftelse: PropTypes.func,
-    rootUrlPlaner: PropTypes.string,
 };
 
 export default GodkjentPlanHandlingKnapper;
