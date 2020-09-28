@@ -33,6 +33,7 @@ const StyledLink = styled(Link)`
 const StyledNav = styled.nav`
     display: flex;
     justify-content: flex-start;
+    margin-top: 2rem;
 `;
 
 const BackToOversikt = () => {

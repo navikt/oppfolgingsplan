@@ -10,6 +10,7 @@ import GodkjentPlan from './GodkjentPlan';
 import GodkjentPlanAvbrutt from './GodkjentPlanAvbrutt';
 import Samtykke from '../samtykke/Samtykke';
 import OppfolgingsdialogPlanInfoboks from './OppfolgingsdialogPlanInfoboks';
+import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 
 const manglerSamtykke = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidstaker.samtykke === null;
@@ -64,6 +65,10 @@ const ReleasetPlan = (
                 rootUrlPlaner={rootUrlPlaner}
             />
             <OppfolgingsdialogPlanInfoboks />
+            <TidligereAvbruttePlaner
+                oppfolgingsdialog={oppfolgingsdialog}
+                rootUrlPlaner={rootUrlPlaner}
+            />
         </div>
     );
 };
