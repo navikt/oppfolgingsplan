@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Utvidbar } from '@navikt/digisyfo-npm';
-import { Panel } from 'nav-frontend-paneler';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsdialogUtils';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
@@ -11,9 +10,6 @@ import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanVenterInfo from '../godkjenn/GodkjennPlanVenterInfo';
 
 const texts = {
-    godkjennPlanSendtInfoTekst: {
-        title: 'Hva skjer nå?',
-    },
     godkjennPlanSendtUtvidbar: {
         title: 'Se planen',
     },
@@ -36,10 +32,7 @@ const GodkjenPlanSentBlokk = (narmestelederName) => {
 
 export const GodkjennPlanSendtInfoTekst = () => {
     return (
-        <Panel border>
-            <h3 className="typo-element">{texts.godkjennPlanSendtInfoTekst.title}</h3>
-            <GodkjennPlanVenterInfo />
-        </Panel>
+        <GodkjennPlanVenterInfo />
     );
 };
 
@@ -85,12 +78,12 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                     }}>
                     {texts.godkjennPlanSendt.buttonUndo}
                 </button>
+                <GodkjennPlanSendtInfoTekst
+                    oppfolgingsdialog={oppfolgingsdialog}
+                />
                 <TidligereAvbruttePlaner
                     oppfolgingsdialog={oppfolgingsdialog}
                     rootUrlPlaner={rootUrlPlaner}
-                />
-                <GodkjennPlanSendtInfoTekst
-                    oppfolgingsdialog={oppfolgingsdialog}
                 />
             </div>
         </OppfolgingsplanInnholdboks>
