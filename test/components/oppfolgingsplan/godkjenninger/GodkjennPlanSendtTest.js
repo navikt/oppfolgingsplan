@@ -3,7 +3,7 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { Utvidbar } from '@navikt/digisyfo-npm';
-import { Panel } from 'nav-frontend-paneler';
+import AlertStripe from 'nav-frontend-alertstriper';
 import GodkjennPlanSendt, {
     GodkjennPlanSendtInfoTekst,
     GodkjennPlanSendtUtvidbar,
@@ -52,25 +52,16 @@ describe('GodkjennPlanSendt', () => {
         expect(komponentDefault.find('button.lenke')).to.have.length(1);
     });
 
+    it('Skal vise GodkjennPlanVenterInfo', () => {
+        expect(komponentDefault.find(GodkjennPlanVenterInfo)).to.have.length(1);
+    });
+
     describe('GodkjennPlanSendtUtvidbar', () => {
         const komponent = shallow(<GodkjennPlanSendtUtvidbar />);
 
         it('Skal vise en Utvidbar med en GodkjennPlanOversiktInformasjon', () => {
             expect(komponent.find(Utvidbar)).to.have.length(1);
             expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
-        });
-    });
-
-    describe('GodkjennPlanSendtInfoTekst', () => {
-        const komponent = shallow(<GodkjennPlanSendtInfoTekst />);
-
-        it('Skal vise en GodkjennPlanSendtInfoTekst med overskrift og tekst', () => {
-            expect(komponent.find(Panel)).to.have.length(1);
-            expect(komponent.find('h3')).to.have.length(1);
-        });
-
-        it('Skal vise GodkjennPlanVenterInfo', () => {
-            expect(komponent.find(GodkjennPlanVenterInfo)).to.have.length(1);
         });
     });
 });

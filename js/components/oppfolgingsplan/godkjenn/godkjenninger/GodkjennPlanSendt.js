@@ -30,12 +30,6 @@ const GodkjenPlanSentBlokk = (narmestelederName) => {
     );
 };
 
-export const GodkjennPlanSendtInfoTekst = () => {
-    return (
-        <GodkjennPlanVenterInfo />
-    );
-};
-
 export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
     return (
         <Utvidbar tittel={texts.godkjennPlanSendtUtvidbar.title}>
@@ -78,9 +72,7 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                     }}>
                     {texts.godkjennPlanSendt.buttonUndo}
                 </button>
-                <GodkjennPlanSendtInfoTekst
-                    oppfolgingsdialog={oppfolgingsdialog}
-                />
+                <GodkjennPlanVenterInfo />
                 <TidligereAvbruttePlaner
                     oppfolgingsdialog={oppfolgingsdialog}
                     rootUrlPlaner={rootUrlPlaner}
