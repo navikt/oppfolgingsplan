@@ -293,50 +293,51 @@ class TiltakUtvidbar extends Component {
                             }}>
                             <div ref={(ref) => { this.innhold = ref; }}>
                                 { this.state.visInnhold && !this.state.visLagreSkjema &&
-                                <TiltakInformasjon
-                                    element={element}
-                                    fnr={fnr}
-                                    lagreKommentarSkjema={this.state.lagreKommentarSkjema}
-                                    skjulLagreKommentarSkjema={this.skjulLagreKommentarSkjema}
-                                    sendLagreKommentar={sendLagreKommentar}
-                                    sendSlettKommentar={sendSlettKommentar}
-                                    oppdaterTiltakFeilet={this.state.visLagringFeilet}
-                                    varselTekst={this.state.varselTekst}
-                                    tiltakReducer={tiltakReducer}
-                                    kommentarReducer={kommentarReducer}
-                                    feilMelding={feilMelding}
-                                    visFeilMelding={visFeilMelding}
-                                    rootUrlImg={rootUrlImg}
-                                />
+                                    <TiltakInformasjon
+                                        element={element}
+                                        fnr={fnr}
+                                        lagreKommentarSkjema={this.state.lagreKommentarSkjema}
+                                        skjulLagreKommentarSkjema={this.skjulLagreKommentarSkjema}
+                                        sendLagreKommentar={sendLagreKommentar}
+                                        sendSlettKommentar={sendSlettKommentar}
+                                        oppdaterTiltakFeilet={this.state.visLagringFeilet}
+                                        varselTekst={this.state.varselTekst}
+                                        tiltakReducer={tiltakReducer}
+                                        kommentarReducer={kommentarReducer}
+                                        feilMelding={feilMelding}
+                                        visFeilMelding={visFeilMelding}
+                                        rootUrlImg={rootUrlImg}
+                                    />
                                 }
                                 { this.state.visInnhold && this.state.visLagreSkjema &&
-                                <TiltakSkjema
-                                    sendLagre={this.sendLagre}
-                                    tiltak={element}
-                                    form={element.tiltakId.toString()}
-                                    fnr={fnr}
-                                    id={element.tiltakId}
-                                    avbryt={this.visElementInformasjon}
-                                    oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
-                                    varselTekst={this.state.varselTekst}
-                                    visFeilMelding={visFeilMelding}
-                                    tiltakReducer={tiltakReducer}
-                                    rootUrlImg={rootUrlImg}
-                                />
+                                    <TiltakSkjema
+                                        sendLagre={this.sendLagre}
+                                        tiltak={element}
+                                        form={element.tiltakId.toString()}
+                                        fnr={fnr}
+                                        id={element.tiltakId}
+                                        avbryt={this.visElementInformasjon}
+                                        oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
+                                        varselTekst={this.state.varselTekst}
+                                        visFeilMelding={visFeilMelding}
+                                        tiltakReducer={tiltakReducer}
+                                        rootUrlImg={rootUrlImg}
+                                    />
                                 }
                             </div>
                         </div>
                         {this.state.visSlettingFeilet && feilMelding &&
-                        <TiltakVarselFeilStyled>
-                            <TiltakVarselFeil
-                                tekst={texts.updateError}
-                                onTransitionEnd={() => {
-                                    this.onTransitionEnd();
-                                }}
-                            />
-                        </TiltakVarselFeilStyled>
+                            <TiltakVarselFeilStyled>
+                                <TiltakVarselFeil
+                                    tekst={texts.updateError}
+                                    onTransitionEnd={() => {
+                                        this.onTransitionEnd();
+                                    }}
+                                />
+                            </TiltakVarselFeilStyled>
                         }
-                    </article>);
+                    </article>
+                );
             })()
         );
     }

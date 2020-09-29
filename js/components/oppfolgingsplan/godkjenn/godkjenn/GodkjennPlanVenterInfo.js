@@ -1,6 +1,8 @@
 import React from 'react';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 const texts = {
+    title: 'Hva skjer nå?',
     infolist: {
         ingress: 'Lederen din kan godkjenne eller gjøre endringer i oppfølgingsplanen.',
         noChangesApproval: 'Godkjenner lederen, har dere opprettet en plan.',
@@ -14,14 +16,15 @@ const texts = {
 
 const GodkjennPlanVenterInfo = () => {
     return (
-        <React.Fragment>
+        <AlertStripe type="info" className="alertstripe--notifikasjonboks">
+            <h3 className="panel__tittel">{texts.title}</h3>
             <p>{texts.infolist.ingress}</p>
             <ul>
                 <li>{texts.infolist.noChangesApproval}</li>
                 <li>{texts.infolist.changesWithAproval}</li>
                 <li>{texts.infolist.changesNoApproval}</li>
             </ul>
-        </React.Fragment>);
+        </AlertStripe>);
 };
 
 export default GodkjennPlanVenterInfo;

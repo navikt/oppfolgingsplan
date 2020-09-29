@@ -27,7 +27,7 @@ const texts = {
         `,
     },
     arbeidsoppgaverInfoboksStilling: {
-        title: 'Lag en liste over arbeidsoppgavene dine',
+        title: 'Legg til arbeidsoppgaver',
     },
 };
 

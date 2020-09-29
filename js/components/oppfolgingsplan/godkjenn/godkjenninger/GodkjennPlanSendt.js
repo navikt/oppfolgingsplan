@@ -10,9 +10,6 @@ import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanVenterInfo from '../godkjenn/GodkjennPlanVenterInfo';
 
 const texts = {
-    godkjennPlanSendtInfoTekst: {
-        title: 'Hva skjer nå?',
-    },
     godkjennPlanSendtUtvidbar: {
         title: 'Se planen',
     },
@@ -29,15 +26,6 @@ const GodkjenPlanSentBlokk = (narmestelederName) => {
             <p>
                 {text}<b>{narmestelederName}</b>
             </p>
-        </div>
-    );
-};
-
-export const GodkjennPlanSendtInfoTekst = () => {
-    return (
-        <div className="blokk godkjennPlanSendt_infoTekst">
-            <h3 className="typo-element">{texts.godkjennPlanSendtInfoTekst.title}</h3>
-            <GodkjennPlanVenterInfo />
         </div>
     );
 };
@@ -84,12 +72,10 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                     }}>
                     {texts.godkjennPlanSendt.buttonUndo}
                 </button>
+                <GodkjennPlanVenterInfo />
                 <TidligereAvbruttePlaner
                     oppfolgingsdialog={oppfolgingsdialog}
                     rootUrlPlaner={rootUrlPlaner}
-                />
-                <GodkjennPlanSendtInfoTekst
-                    oppfolgingsdialog={oppfolgingsdialog}
                 />
             </div>
         </OppfolgingsplanInnholdboks>

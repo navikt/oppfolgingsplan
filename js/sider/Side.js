@@ -18,14 +18,13 @@ export const Utlogget = () => {
         melding="Hvis du vil fortsette å bruke denne tjenesten, må du logge deg inn på nytt." />);
 };
 
-export const setAppClass = (laster, erInnlogget, hvitBakgrunn) => {
+export const setAppClass = (laster, erInnlogget) => {
     const el = document.getElementById('maincontent');
-    const app = hvitBakgrunn ? 'app-white-bg' : 'app';
     if (el) {
         if (laster && erInnlogget) {
-            el.className = `${app} app--laster`;
+            el.className = 'app app--laster';
         } else {
-            el.className = app;
+            el.className = 'app';
         }
     }
 };
@@ -79,12 +78,12 @@ export class SideComponent extends Component {
     }
 
     render() {
-        const { children, tittel, brodsmuler = [], laster, begrenset, erInnlogget, hvitBakgrunn } = this.props;
+        const { children, tittel, brodsmuler = [], laster, begrenset, erInnlogget } = this.props;
         const sideClassNames = getClassNames(laster, erInnlogget);
         const innholdClassNames = cn('side__innhold', {
             'side__innhold--begrenset js-begrensning': begrenset || !erInnlogget || !toggleHeleAppen(),
         });
-        setAppClass(laster, erInnlogget, hvitBakgrunn);
+        setAppClass(laster, erInnlogget);
 
         return (<DocumentTitle title={tittel + (tittel.length > 0 ? ' - www.nav.no' : 'www.nav.no')}>
             <div className={sideClassNames} aria-busy={laster}>

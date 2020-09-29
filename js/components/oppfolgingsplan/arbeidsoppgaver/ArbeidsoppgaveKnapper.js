@@ -9,7 +9,7 @@ import {
 const texts = {
     buttonAbort: 'Avbryt',
     buttonCreate: 'Lagre arbeidsoppgave',
-    buttonUpdate: 'Lagre arbeidsoppgave',
+    buttonUpdate: 'Lagre',
 };
 
 const handleKeyPress = (avbryt, e) => {

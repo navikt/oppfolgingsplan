@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { Panel } from 'nav-frontend-paneler';
 import { tekstfeltRegex } from '../../../konstanter';
 import InfoVarsel from './InfoVarsel';
 import Checkbox from '../../skjema/Checkbox';
@@ -248,6 +249,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
         this.toggleCheckbox = this.toggleCheckbox.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.avbryt = this.avbryt.bind(this);
+        this.border = this.border.bind(this);
     }
     componentDidMount() {
         this.handleInitialize();
@@ -343,6 +345,10 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
         this.props.avbryt();
     }
 
+    border() {
+        return !this.props.arbeidsoppgave;
+    }
+
     render() {
         const {
             arbeidsoppgave,
@@ -353,54 +359,50 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
             rootUrlImg,
         } = this.props;
         return (
-            <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()}>
+            <Panel border={this.border()}>
+                <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()}>
 
-                {
-                    (!arbeidsoppgave || (arbeidsoppgaverReducer.arbeidsoppgave && !arbeidsoppgaverReducer)) && <ArbeidsoppgaveNavn
-                        felt={FELTER.arbeidsoppgavenavn}
-                        arbeidsoppgave={arbeidsoppgave} />
-                }
-
-                <ArbeidsoppgaveGjennomfoeringSvar
-                    handleOptionChange={this.handleOptionChange}
-                    gjennomfoeringSvarValgt={this.state.gjennomfoeringSvarValgt}
-                    arbeidsoppgave={arbeidsoppgave}
-                />
-
-                {
-                    this.state.gjennomfoeringSvarValgt === KANGJENNOMFOERES.TILRETTELEGGING &&
-                    <ArbeidsoppgaveTilrettelegging
-                        toggleCheckbox={this.toggleCheckbox}
+                    {
+                        (!arbeidsoppgave || (arbeidsoppgaverReducer.arbeidsoppgave && !arbeidsoppgaverReducer)) && <ArbeidsoppgaveNavn
+                            felt={FELTER.arbeidsoppgavenavn}
+                            arbeidsoppgave={arbeidsoppgave} />
+                    }
+                    <ArbeidsoppgaveGjennomfoeringSvar
+                        handleOptionChange={this.handleOptionChange}
+                        gjennomfoeringSvarValgt={this.state.gjennomfoeringSvarValgt}
                         arbeidsoppgave={arbeidsoppgave}
                     />
-                }
-
-                {
-                    this.state.gjennomfoeringSvarValgt !== KANGJENNOMFOERES.KAN &&
-                    <ArbeidsoppgaveBeskrivelse
-                        felt={FELTER.beskrivelse}
-                        gjennomfoeringSvarValgt={this.state.gjennomfoeringSvarValgt}
+                    {
+                        this.state.gjennomfoeringSvarValgt === KANGJENNOMFOERES.TILRETTELEGGING &&
+                        <ArbeidsoppgaveTilrettelegging
+                            toggleCheckbox={this.toggleCheckbox}
+                            arbeidsoppgave={arbeidsoppgave}
+                        />
+                    }
+                    {
+                        this.state.gjennomfoeringSvarValgt !== KANGJENNOMFOERES.KAN &&
+                        <ArbeidsoppgaveBeskrivelse
+                            felt={FELTER.beskrivelse}
+                            gjennomfoeringSvarValgt={this.state.gjennomfoeringSvarValgt}
+                        />
+                    }
+                    {this.state.gjennomfoeringSvarValgt !== KANGJENNOMFOERES.KAN &&
+                    <InfoVarsel
+                        rootUrlImg={rootUrlImg}
+                        tekst={texts.infoVarsel} />
+                    }
+                    { oppdateringFeilet &&
+                    <ArbeidsoppgaveVarselFeil
+                        tekst={varselTekst}
                     />
-                }
-
-                {this.state.gjennomfoeringSvarValgt !== KANGJENNOMFOERES.KAN &&
-                <InfoVarsel
-                    rootUrlImg={rootUrlImg}
-                    tekst={texts.infoVarsel} />
-                }
-
-                { oppdateringFeilet &&
-                <ArbeidsoppgaveVarselFeil
-                    tekst={varselTekst}
-                />
-                }
-
-                <ArbeidsoppgaveKnapper
-                    avbryt={this.avbryt}
-                    arbeidsoppgave={arbeidsoppgave}
-                    arbeidsoppgaverReducer={arbeidsoppgaverReducer}
-                />
-            </form>
+                    }
+                    <ArbeidsoppgaveKnapper
+                        avbryt={this.avbryt}
+                        arbeidsoppgave={arbeidsoppgave}
+                        arbeidsoppgaverReducer={arbeidsoppgaverReducer}
+                    />
+                </form>
+            </Panel>
         );
     }
 }
