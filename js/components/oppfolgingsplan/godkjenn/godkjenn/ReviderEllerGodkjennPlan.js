@@ -67,8 +67,7 @@ class ReviderEllerGodkjennPlan extends Component {
                 {visEgenLederVisning ?
                     <Alertstripe
                         className="alertstripe--notifikasjonboks"
-                        type="info"
-                        solid>
+                        type="info">
                         {texts.arbeidstakerLeaderSamePerson.info}
                     </Alertstripe>
                     :
