@@ -24,17 +24,10 @@
 
 .inngangspanel {
     padding: 1em;
-    background-repeat: no-repeat;
-    background-position: 97% 2rem;
-    background-size: 1rem 1rem;
-    transition: background-position ease-in-out .1s;
-    transform: translate3d(0, 0, 0);
     display: flex;
-    width: 100%;
-    color: @navMorkGra;
     font-size: 1rem;
     text-align: left;
-    margin-top: -1px;
+    color: @navMorkGra;
 
     &:hover, &:focus {
         position: relative;
@@ -48,10 +41,6 @@
     &:focus {
         background-color: @white;
         outline: 3px solid @orangeFocus;
-    }
-
-    @media(min-width: @screen-sm-min) {
-        background-position: 97% 35px;
     }
 }
 
