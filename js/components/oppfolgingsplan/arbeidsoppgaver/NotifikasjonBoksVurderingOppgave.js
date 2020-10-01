@@ -13,8 +13,7 @@ const NotifikasjonBoksVurderingOppgave = (
     }) => {
     return (<Alertstripe
         className="alertstripe--notifikasjonboks"
-        type="advarsel"
-        solid>
+        type="advarsel">
         {hentTekst(antallIkkeVurderte)}
     </Alertstripe>);
 };
