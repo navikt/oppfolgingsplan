@@ -1,18 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsdialogUtils';
-import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanVenterInfo from '../godkjenn/GodkjennPlanVenterInfo';
+import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
-    godkjennPlanSendtEkspanderbar: {
-        title: 'Se planen',
-    },
     godkjennPlanSendt: {
         title: 'Sendt til godkjenning',
         buttonUndo: 'Avbryt planen',
@@ -28,21 +24,6 @@ const GodkjenPlanSentBlokk = (narmestelederName) => {
             </p>
         </div>
     );
-};
-
-export const GodkjennPlanSendtEkspanderbar = ({ oppfolgingsdialog, rootUrl }) => {
-    return (
-        <Ekspanderbartpanel border tittel={texts.godkjennPlanSendtEkspanderbar.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsdialog}
-                rootUrl={rootUrl}
-            />
-        </Ekspanderbartpanel>
-    );
-};
-GodkjennPlanSendtEkspanderbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-    rootUrl: PropTypes.string,
 };
 
 const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, rootUrlPlaner }) => {
@@ -61,9 +42,8 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                     gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsdialog.godkjenninger).gyldighetstidspunkt}
                 />
 
-                <GodkjennPlanSendtEkspanderbar
-                    oppfolgingsdialog={oppfolgingsdialog}
-                    rootUrl={rootUrl}
+                <PlanEkspanderbar
+                    oppfolgingsplan={oppfolgingsdialog}
                 />
                 <button
                     className="lenke lenke--avbryt"

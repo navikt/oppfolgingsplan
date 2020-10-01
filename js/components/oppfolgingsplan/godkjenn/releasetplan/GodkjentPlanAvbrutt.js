@@ -35,7 +35,7 @@ const textChangeBy = (personName, date) => {
     return `Denne oppfølgingsplanen ble åpnet for endring av ${personName} ${date}`;
 };
 
-export const GodkjentPlanUtvidbar = ({ dokument }) => {
+export const GodkjentPlanEkspanderbar = ({ dokument }) => {
     let panel;
 
     if (dokument.henter) {
@@ -59,7 +59,7 @@ export const GodkjentPlanUtvidbar = ({ dokument }) => {
         </Ekspanderbartpanel>
     );
 };
-GodkjentPlanUtvidbar.propTypes = {
+GodkjentPlanEkspanderbar.propTypes = {
     dokument: dokumentReducerPt,
 };
 
@@ -108,7 +108,7 @@ class GodkjentPlanAvbrutt extends Component {
                         <p>
                             {textChangeBy(finnSistEndretAvNavn(oppfolgingsdialog), toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt))}
                         </p>
-                        <GodkjentPlanUtvidbar
+                        <GodkjentPlanEkspanderbar
                             dokument={dokument}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper

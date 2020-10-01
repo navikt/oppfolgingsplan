@@ -10,6 +10,7 @@ import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
 import { EditButton } from './EditButton';
 import { SharingCheckbox } from './SharingCheckbox';
+import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
@@ -36,21 +37,6 @@ TextReceived.propTypes = {
     leaderName: PropTypes.string,
 };
 
-export const GodkjennPlanMottattEkspanderbar = ({ oppfolgingsdialog, rootUrl }) => {
-    return (
-        <Ekspanderbartpanel border tittel={texts.godkjennPlanMottattUtvidbar.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsdialog}
-                rootUrl={rootUrl}
-            />
-        </Ekspanderbartpanel>
-    );
-};
-
-GodkjennPlanMottattEkspanderbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-    rootUrl: PropTypes.string,
-};
 export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) => {
     const [delMedNav, setDelMedNav] = useState(false);
 
@@ -107,9 +93,8 @@ const GodkjennPlanMottatt = (
                         gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt}
                     />
                 </div>
-                <GodkjennPlanMottattEkspanderbar
-                    oppfolgingsdialog={oppfolgingsdialog}
-                    rootUrl={rootUrl}
+                <PlanEkspanderbar
+                    oppfolgingsplan={oppfolgingsdialog}
                 />
                 <EditButton
                     oppfolgingsdialog={oppfolgingsdialog}

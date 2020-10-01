@@ -3,15 +3,13 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import OppfolgingsplanInnholdboks from '../../../../js/components/app/OppfolgingsplanInnholdboks';
 import GodkjennPlanMottatt, {
-    GodkjennPlanMottattEkspanderbar,
     GodkjennPlanMottattKnapper,
 } from '../../../../js/components/oppfolgingsplan/godkjenn/godkjenninger/GodkjennPlanMottatt';
-import GodkjennPlanOversiktInformasjon from '../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanTilAltinnTekst from '../../../../js/components/oppfolgingsplan/godkjenn/godkjenninger/GodkjennPlanTilAltinnTekst';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
+import PlanEkspanderbar from '../../../../js/components/oppfolgingsplan/godkjenn/PlanEkspanderbar';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -44,25 +42,16 @@ describe('GodkjennPlanMottatt', () => {
         expect(komponentDefault.find('p')).to.have.length(1);
     });
 
-    it('Skal vise en GodkjennPlanMottattUtvidbar', () => {
-        expect(komponentDefault.find(GodkjennPlanMottattEkspanderbar)).to.have.length(1);
-    });
-
     it('Skal vise GodkjennPlanTilAltinnTekst', () => {
         expect(komponentDefault.find(GodkjennPlanTilAltinnTekst)).to.have.length(1);
     });
 
-    it('Skal vise et GodkjennPlanMottattKnapper', () => {
-        expect(komponentDefault.find(GodkjennPlanMottattKnapper)).to.have.length(1);
+    it('Skal vise en PlanEkspanderbar ', () => {
+        expect(komponentDefault.find(PlanEkspanderbar)).to.have.length(1);
     });
 
-    describe('GodkjennPlanMottattUtvidbar', () => {
-        const komponent = shallow(<GodkjennPlanMottattEkspanderbar />);
-
-        it('Skal vise et Ekspanderbartpanel med en GodkjennPlanOversiktInformasjon', () => {
-            expect(komponent.find(Ekspanderbartpanel)).to.have.length(1);
-            expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
-        });
+    it('Skal vise et GodkjennPlanMottattKnapper', () => {
+        expect(komponentDefault.find(GodkjennPlanMottattKnapper)).to.have.length(1);
     });
 
     describe('GodkjennPlanMottattKnapper', () => {
