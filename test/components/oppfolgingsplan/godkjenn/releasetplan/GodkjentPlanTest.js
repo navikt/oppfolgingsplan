@@ -3,10 +3,10 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import GodkjentPlan, {
-    GodkjentPlanUtvidbar,
+    GodkjentPlanEkspanderbar,
     TextForcedApprovedOppfolgingsplan,
-    UtvidbarStyled,
 } from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlan';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDelKnapper';
 import GodkjentPlanHandlingKnapper from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanHandlingKnapper';
@@ -60,7 +60,7 @@ describe('GodkjentPlan', () => {
     });
 
     it('Skal vise en GodkjentPlanUtvidbar', () => {
-        expect(komponentDefault.find(GodkjentPlanUtvidbar)).to.have.length(1);
+        expect(komponentDefault.find(GodkjentPlanEkspanderbar)).to.have.length(1);
     });
 
     it('Skal vise en GodkjentPlanDelKnapper', () => {
@@ -106,7 +106,7 @@ describe('GodkjentPlan', () => {
             expect(k2.find(TextForcedApprovedOppfolgingsplan)).to.have.length(1);
         });
 
-        const k3 = shallow(<GodkjentPlanUtvidbar
+        const k3 = shallow(<GodkjentPlanEkspanderbar
             hentPdfurler={hentPdfurler}
             dokument={dokument}
             oppfolgingsdialog={tvungenGodkjentDialog}
@@ -118,10 +118,10 @@ describe('GodkjentPlan', () => {
     });
 
     describe('GodkjentPlanUtvidbar', () => {
-        const komponent = shallow(<GodkjentPlanUtvidbar dokument={dokument} />);
+        const komponent = shallow(<GodkjentPlanEkspanderbar dokument={dokument} />);
 
-        it('Skal vise en UtvidbarStyled', () => {
-            expect(komponent.find(UtvidbarStyled)).to.have.length(1);
+        it('Skal vise et Ekspanderbartpanel', () => {
+            expect(komponent.find(Ekspanderbartpanel)).to.have.length(1);
         });
 
         it('Skal vise en GodkjennPlanOversiktInformasjon', () => {

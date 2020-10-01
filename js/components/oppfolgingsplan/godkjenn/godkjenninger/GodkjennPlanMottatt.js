@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
@@ -36,18 +36,18 @@ TextReceived.propTypes = {
     leaderName: PropTypes.string,
 };
 
-export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
+export const GodkjennPlanMottattEkspanderbar = ({ oppfolgingsdialog, rootUrl }) => {
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjennPlanMottattUtvidbar.title}>
+        <Ekspanderbartpanel border tittel={texts.godkjennPlanMottattUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsdialog}
                 rootUrl={rootUrl}
             />
-        </Utvidbar>
+        </Ekspanderbartpanel>
     );
 };
 
-GodkjennPlanMottattUtvidbar.propTypes = {
+GodkjennPlanMottattEkspanderbar.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
     rootUrl: PropTypes.string,
 };
@@ -107,7 +107,7 @@ const GodkjennPlanMottatt = (
                         gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt}
                     />
                 </div>
-                <GodkjennPlanMottattUtvidbar
+                <GodkjennPlanMottattEkspanderbar
                     oppfolgingsdialog={oppfolgingsdialog}
                     rootUrl={rootUrl}
                 />

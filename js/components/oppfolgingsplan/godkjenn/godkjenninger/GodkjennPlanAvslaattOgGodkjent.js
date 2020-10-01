@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsdialogUtils';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
@@ -11,7 +11,7 @@ import { EditButton } from './EditButton';
 import { SharingCheckbox } from './SharingCheckbox';
 
 const texts = {
-    godkjennPlanMottattUtvidbar: {
+    godkjennPlanMottattEkspanderbar: {
         title: 'Se planen',
     },
     godkjennPlanMottattKnapper: {
@@ -25,17 +25,17 @@ const texts = {
     preDelMedNav: 'Planen vil bli delt med NAV når du har godkjent den.',
 };
 
-export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsplan, rootUrl }) => {
+export const GodkjennPlanMottattEkspanderbar = ({ oppfolgingsplan, rootUrl }) => {
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjennPlanMottattUtvidbar.title}>
+        <Ekspanderbartpanel border tittel={texts.godkjennPlanMottattEkspanderbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsplan}
                 rootUrl={rootUrl}
             />
-        </Utvidbar>
+        </Ekspanderbartpanel>
     );
 };
-GodkjennPlanMottattUtvidbar.propTypes = {
+GodkjennPlanMottattEkspanderbar.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
     rootUrl: PropTypes.string,
 };
@@ -90,7 +90,7 @@ const GodkjennPlanAvslaattOgGodkjent = (
                     rootUrl={rootUrl}
                     gyldighetstidspunkt={sistOppfolgingsplan}
                 />
-                <GodkjennPlanMottattUtvidbar
+                <GodkjennPlanMottattEkspanderbar
                     oppfolgingsplan={oppfolgingsplan}
                     rootUrl={rootUrl}
                 />

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsdialogUtils';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
@@ -10,7 +10,7 @@ import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanVenterInfo from '../godkjenn/GodkjennPlanVenterInfo';
 
 const texts = {
-    godkjennPlanSendtUtvidbar: {
+    godkjennPlanSendtEkspanderbar: {
         title: 'Se planen',
     },
     godkjennPlanSendt: {
@@ -30,17 +30,17 @@ const GodkjenPlanSentBlokk = (narmestelederName) => {
     );
 };
 
-export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
+export const GodkjennPlanSendtEkspanderbar = ({ oppfolgingsdialog, rootUrl }) => {
     return (
-        <Utvidbar tittel={texts.godkjennPlanSendtUtvidbar.title}>
+        <Ekspanderbartpanel border tittel={texts.godkjennPlanSendtEkspanderbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsdialog}
                 rootUrl={rootUrl}
             />
-        </Utvidbar>
+        </Ekspanderbartpanel>
     );
 };
-GodkjennPlanSendtUtvidbar.propTypes = {
+GodkjennPlanSendtEkspanderbar.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
     rootUrl: PropTypes.string,
 };
@@ -61,7 +61,7 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                     gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsdialog.godkjenninger).gyldighetstidspunkt}
                 />
 
-                <GodkjennPlanSendtUtvidbar
+                <GodkjennPlanSendtEkspanderbar
                     oppfolgingsdialog={oppfolgingsdialog}
                     rootUrl={rootUrl}
                 />

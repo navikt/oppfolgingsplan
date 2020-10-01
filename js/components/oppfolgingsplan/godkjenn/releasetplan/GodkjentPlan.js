@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
-import styled from 'styled-components';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import {
     delMedFastlegePt,
@@ -23,7 +22,7 @@ const texts = {
     godkjentPlan: {
         title: 'Oppfølgingsplanen',
     },
-    godkjentPlanUtvidbar: {
+    godkjentPlanEkspanderbar: {
         title: 'Se planen',
         requestFeilet: 'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
     },
@@ -55,21 +54,17 @@ TextForcedApprovedOppfolgingsplan.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
 };
 
-export const UtvidbarStyled = styled(Utvidbar)`
-    margin-top: 2.5em;
-`;
-
-export const GodkjentPlanUtvidbar = ({ oppfolgingsdialog }) => {
+export const GodkjentPlanEkspanderbar = ({ oppfolgingsdialog }) => {
     return (
-        <UtvidbarStyled tittel={texts.godkjentPlanUtvidbar.title}>
+        <Ekspanderbartpanel border tittel={texts.godkjentPlanEkspanderbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsdialog}
                 rootUrl={getContextRoot()}
             />
-        </UtvidbarStyled>
+        </Ekspanderbartpanel>
     );
 };
-GodkjentPlanUtvidbar.propTypes = {
+GodkjentPlanEkspanderbar.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
 };
 
@@ -165,7 +160,7 @@ class GodkjentPlan extends Component {
                         <GodkjentPlanDeltBekreftelse
                             oppfolgingsplan={oppfolgingsdialog}
                         />
-                        <GodkjentPlanUtvidbar
+                        <GodkjentPlanEkspanderbar
                             oppfolgingsdialog={oppfolgingsdialog}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper
