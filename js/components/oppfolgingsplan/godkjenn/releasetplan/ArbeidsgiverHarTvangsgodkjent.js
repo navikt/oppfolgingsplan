@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import getContextRoot from '../../../../utils/getContextRoot';
 import {
     dokumentReducerPt,
@@ -13,7 +13,7 @@ const texts = {
     getDocumentFailet: 'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
     title: 'Lederen din har laget en oppfølgingsplan',
     paragraphInfo: 'Hvis du er uenig i innholdet, må du snakke med lederen din.',
-    utvidbarTitle: 'Se planen',
+    ekspanderbarTitle: 'Se planen',
     buttonConfirm: 'Videre',
 };
 
@@ -55,11 +55,11 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
             >
                 <div className="arbeidsgiverHarTvangsgodkjent">
                     <p>{texts.paragraphInfo}</p>
-                    <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.utvidbarTitle}>
+                    <Ekspanderbartpanel border tittel={texts.ekspanderbarTitle}>
                         <div className="godkjentPlanPdf">
                             { panel }
                         </div>
-                    </Utvidbar>
+                    </Ekspanderbartpanel>
 
                     <div className="knapperad">
                         <div className="knapperad__element">

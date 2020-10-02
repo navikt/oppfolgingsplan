@@ -1,18 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Utvidbar } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsdialogUtils';
-import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanVenterInfo from '../godkjenn/GodkjennPlanVenterInfo';
+import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
-    godkjennPlanSendtUtvidbar: {
-        title: 'Se planen',
-    },
     godkjennPlanSendt: {
         title: 'Sendt til godkjenning',
         buttonUndo: 'Avbryt planen',
@@ -28,21 +24,6 @@ const GodkjenPlanSentBlokk = (narmestelederName) => {
             </p>
         </div>
     );
-};
-
-export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
-    return (
-        <Utvidbar tittel={texts.godkjennPlanSendtUtvidbar.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsdialog}
-                rootUrl={rootUrl}
-            />
-        </Utvidbar>
-    );
-};
-GodkjennPlanSendtUtvidbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-    rootUrl: PropTypes.string,
 };
 
 const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, rootUrlPlaner }) => {
@@ -61,9 +42,8 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                     gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsdialog.godkjenninger).gyldighetstidspunkt}
                 />
 
-                <GodkjennPlanSendtUtvidbar
-                    oppfolgingsdialog={oppfolgingsdialog}
-                    rootUrl={rootUrl}
+                <PlanEkspanderbar
+                    oppfolgingsplan={oppfolgingsdialog}
                 />
                 <button
                     className="lenke lenke--avbryt"

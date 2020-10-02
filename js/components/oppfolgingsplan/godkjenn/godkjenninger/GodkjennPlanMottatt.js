@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
@@ -10,6 +10,7 @@ import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
 import { EditButton } from './EditButton';
 import { SharingCheckbox } from './SharingCheckbox';
+import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
@@ -36,21 +37,6 @@ TextReceived.propTypes = {
     leaderName: PropTypes.string,
 };
 
-export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
-    return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjennPlanMottattUtvidbar.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsdialog}
-                rootUrl={rootUrl}
-            />
-        </Utvidbar>
-    );
-};
-
-GodkjennPlanMottattUtvidbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-    rootUrl: PropTypes.string,
-};
 export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) => {
     const [delMedNav, setDelMedNav] = useState(false);
 
@@ -107,9 +93,8 @@ const GodkjennPlanMottatt = (
                         gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt}
                     />
                 </div>
-                <GodkjennPlanMottattUtvidbar
-                    oppfolgingsdialog={oppfolgingsdialog}
-                    rootUrl={rootUrl}
+                <PlanEkspanderbar
+                    oppfolgingsplan={oppfolgingsdialog}
                 />
                 <EditButton
                     oppfolgingsdialog={oppfolgingsdialog}

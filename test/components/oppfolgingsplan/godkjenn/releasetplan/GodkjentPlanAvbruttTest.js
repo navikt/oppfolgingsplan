@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import GodkjentPlanAvbrutt, {
-    GodkjentPlanUtvidbar,
+    GodkjentPlanEkspanderbar,
 } from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanAvbrutt';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDelKnapper';
 import GodkjentPlanAvbruttTidspunkt from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanAvbruttTidspunkt';
@@ -100,7 +100,7 @@ describe('GodkjentPlanAvbrutt', () => {
     });
 
     it('Skal vise en GodkjentPlanUtvidbar', () => {
-        expect(komponent.find(GodkjentPlanUtvidbar)).to.have.length(1);
+        expect(komponent.find(GodkjentPlanEkspanderbar)).to.have.length(1);
     });
 
     it('Skal vise en GodkjentPlanDelKnapper', () => {

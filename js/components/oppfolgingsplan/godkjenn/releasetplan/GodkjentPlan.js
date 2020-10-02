@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
-import styled from 'styled-components';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import {
     delMedFastlegePt,
@@ -15,17 +13,12 @@ import Lightbox from '../../../Lightbox';
 import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
-import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
-import getContextRoot from '../../../../utils/getContextRoot';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
+import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
     godkjentPlan: {
         title: 'Oppfølgingsplanen',
-    },
-    godkjentPlanUtvidbar: {
-        title: 'Se planen',
-        requestFeilet: 'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
     },
     avbrytPlanBekreftelse: {
         title: 'Ønsker du å endre planen?',
@@ -53,24 +46,6 @@ export const TextForcedApprovedOppfolgingsplan = ({ rootUrl, oppfolgingsplan }) 
 TextForcedApprovedOppfolgingsplan.propTypes = {
     rootUrl: PropTypes.string,
     oppfolgingsplan: oppfolgingsplanPt,
-};
-
-export const UtvidbarStyled = styled(Utvidbar)`
-    margin-top: 2.5em;
-`;
-
-export const GodkjentPlanUtvidbar = ({ oppfolgingsdialog }) => {
-    return (
-        <UtvidbarStyled tittel={texts.godkjentPlanUtvidbar.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsdialog}
-                rootUrl={getContextRoot()}
-            />
-        </UtvidbarStyled>
-    );
-};
-GodkjentPlanUtvidbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
 };
 
 export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {
@@ -165,8 +140,8 @@ class GodkjentPlan extends Component {
                         <GodkjentPlanDeltBekreftelse
                             oppfolgingsplan={oppfolgingsdialog}
                         />
-                        <GodkjentPlanUtvidbar
-                            oppfolgingsdialog={oppfolgingsdialog}
+                        <PlanEkspanderbar
+                            oppfolgingsplan={oppfolgingsdialog}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper
                             oppfolgingsplan={oppfolgingsdialog}

@@ -2,16 +2,11 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { Utvidbar } from '@navikt/digisyfo-npm';
-import AlertStripe from 'nav-frontend-alertstriper';
-import GodkjennPlanSendt, {
-    GodkjennPlanSendtInfoTekst,
-    GodkjennPlanSendtUtvidbar,
-} from '../../../../js/components/oppfolgingsplan/godkjenn/godkjenninger/GodkjennPlanSendt';
+import GodkjennPlanSendt from '../../../../js/components/oppfolgingsplan/godkjenn/godkjenninger/GodkjennPlanSendt';
 import OppfolgingsplanInnholdboks from '../../../../js/components/app/OppfolgingsplanInnholdboks';
-import GodkjennPlanOversiktInformasjon from '../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanOversiktInformasjon';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
 import GodkjennPlanVenterInfo from '../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/GodkjennPlanVenterInfo';
+import PlanEkspanderbar from '../../../../js/components/oppfolgingsplan/godkjenn/PlanEkspanderbar';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -44,8 +39,8 @@ describe('GodkjennPlanSendt', () => {
         expect(komponentDefault.find('p')).to.have.length(1);
     });
 
-    it('Skal vise en GodkjentPlanUtvidbar', () => {
-        expect(komponentDefault.find(GodkjennPlanSendtUtvidbar)).to.have.length(1);
+    it('Skal vise en PlanEkspanderbar ', () => {
+        expect(komponentDefault.find(PlanEkspanderbar)).to.have.length(1);
     });
 
     it('Skal vise en knapp for aa trekke tilbake sendt godkjenning', () => {
@@ -54,14 +49,5 @@ describe('GodkjennPlanSendt', () => {
 
     it('Skal vise GodkjennPlanVenterInfo', () => {
         expect(komponentDefault.find(GodkjennPlanVenterInfo)).to.have.length(1);
-    });
-
-    describe('GodkjennPlanSendtUtvidbar', () => {
-        const komponent = shallow(<GodkjennPlanSendtUtvidbar />);
-
-        it('Skal vise en Utvidbar med en GodkjennPlanOversiktInformasjon', () => {
-            expect(komponent.find(Utvidbar)).to.have.length(1);
-            expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
-        });
     });
 });
