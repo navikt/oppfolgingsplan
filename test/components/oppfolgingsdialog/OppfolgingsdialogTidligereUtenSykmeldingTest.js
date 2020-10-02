@@ -2,7 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { Link } from 'react-router';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import OppfolgingsdialogTidligereUtenSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogTidligereUtenSykmelding';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
@@ -20,8 +20,8 @@ describe('OppfolgingsdialogTidligereUtenSykmelding', () => {
         />);
     });
 
-    it('Viser en Link', () => {
-        expect(komponent.find(Link)).to.have.length(1);
+    it('Viser Lenkepanel', () => {
+        expect(komponent.find(LenkepanelBase)).to.have.length(1);
     });
 
     it('Viser en span', () => {
