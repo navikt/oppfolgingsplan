@@ -1,5 +1,5 @@
 import React from 'react';
-import LenkepanelBase from 'nav-frontend-lenkepanel';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
 import { finnOppfolgingsdialogMotpartNavn } from '../../utils/oppfolgingsdialogUtils';
 import { hentStatusUtenAktivSykmelding } from '../../utils/teaserUtils';
