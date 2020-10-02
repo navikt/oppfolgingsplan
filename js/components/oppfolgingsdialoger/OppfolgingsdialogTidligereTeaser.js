@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LenkepanelBase from 'nav-frontend-lenkepanel';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import * as opProptypes from '../../propTypes/opproptypes';
 import { finnOppfolgingsdialogMotpartNavn } from '../../utils/oppfolgingsdialogUtils';
 import { hentPlanStatus } from '../../utils/teaserUtils';
@@ -15,6 +15,7 @@ const OppfolgingsdialogTidligereTeaser = (
     return (
         <LenkepanelBase
             href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`}
+            className="inngangspanel--lenkepanel"
             border>
             <div className="inngangspanel">
                 <span className="oppfolgingsplanInnhold__ikon">
