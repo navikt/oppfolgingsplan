@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import { Panel } from 'nav-frontend-paneler';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import {
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
@@ -24,7 +25,7 @@ const texts = {
         linkActivePlan: 'Tilbake til den gjeldende utgave',
         title: 'Tidligere oppfølgingsplan',
     },
-    godkjentPlanUtvidbar: {
+    godkjentPlanEkspanderbar: {
         getDokumentFailed: 'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
         utvidbarTitle: 'Se planen',
     },
@@ -34,14 +35,14 @@ const textChangeBy = (personName, date) => {
     return `Denne oppfølgingsplanen ble åpnet for endring av ${personName} ${date}`;
 };
 
-export const GodkjentPlanUtvidbar = ({ dokument }) => {
+export const GodkjentPlanEkspanderbar = ({ dokument }) => {
     let panel;
 
     if (dokument.henter) {
         panel = <div className="app-spinner" aria-label="Vent litt mens siden laster" />;
     } else if (dokument.hentingFeilet) {
         panel = (<div className="godkjentPlanPdf__feilmelding">
-            {texts.godkjentPlanUtvidbar.getDokumentFailed}
+            {texts.godkjentPlanEkspanderbar.getDokumentFailed}
         </div>);
     } else {
         panel = dokument.data && dokument.data.map((url, idx) => {
@@ -51,14 +52,14 @@ export const GodkjentPlanUtvidbar = ({ dokument }) => {
         });
     }
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjentPlanUtvidbar.utvidbarTitle}>
+        <Ekspanderbartpanel border tittel={texts.godkjentPlanEkspanderbar.utvidbarTitle}>
             <div className="godkjentPlanPdf">
                 { panel }
             </div>
-        </Utvidbar>
+        </Ekspanderbartpanel>
     );
 };
-GodkjentPlanUtvidbar.propTypes = {
+GodkjentPlanEkspanderbar.propTypes = {
     dokument: dokumentReducerPt,
 };
 
@@ -82,7 +83,7 @@ class GodkjentPlanAvbrutt extends Component {
         } = this.props;
         const aktivPlan = finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(oppfolgingsdialoger, oppfolgingsdialog.virksomhet.virksomhetsnummer);
         return (
-            <div className="godkjentPlanAvbrutt">
+            <Panel border className="godkjentPlanAvbrutt">
                 <div className="godkjentPlanAvbrutt_lenke">
                     { aktivPlan &&
                     <a
@@ -107,7 +108,7 @@ class GodkjentPlanAvbrutt extends Component {
                         <p>
                             {textChangeBy(finnSistEndretAvNavn(oppfolgingsdialog), toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt))}
                         </p>
-                        <GodkjentPlanUtvidbar
+                        <GodkjentPlanEkspanderbar
                             dokument={dokument}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper
@@ -126,7 +127,7 @@ class GodkjentPlanAvbrutt extends Component {
                         </div>
                     </div>
                 </OppfolgingsplanInnholdboks>
-            </div>
+            </Panel>
         );
     }
 }
