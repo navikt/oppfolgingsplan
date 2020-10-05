@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { Panel } from 'nav-frontend-paneler';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
 import { finnOppfolgingsdialogMotpartNavn } from '../../utils/oppfolgingsdialogUtils';
 import { hentStatusUtenAktivSykmelding } from '../../utils/teaserUtils';
@@ -8,9 +7,11 @@ import getContextRoot from '../../utils/getContextRoot';
 
 const OppfolgingsdialogTidligereUtenSykmelding = ({ oppfolgingsdialog }) => {
     const planStatus = hentStatusUtenAktivSykmelding(oppfolgingsdialog);
-    return (<article aria-labelledby={`oppfolgingsdialogTidligereUtenSykmelding oppfolgingsdialog-header-aktiv-${oppfolgingsdialog.id}`} >
-        <Link to={`${getContextRoot()}/oppfolgingsplaner/${oppfolgingsdialog.id}`} >
-            <Panel border className="inngangspanel oppfolgingsdialog">
+    return (
+        <LenkepanelBase
+            href={`${getContextRoot()}/oppfolgingsplaner/${oppfolgingsdialog.id}`}
+            border>
+            <div className="inngangspanel">
                 <span className="oppfolgingsplanInnhold__ikon">
                     <img alt="status" src={`${getContextRoot()}/img/svg/${planStatus.img}`} />
                 </span>
@@ -24,9 +25,8 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({ oppfolgingsdialog }) => {
                     </header>
                     <p className="mute inngangspanel__avsnitt" dangerouslySetInnerHTML={{ __html: planStatus.tekst }} />
                 </div>
-            </Panel>
-        </Link>
-    </article>);
+            </div>
+        </LenkepanelBase>);
 };
 
 OppfolgingsdialogTidligereUtenSykmelding.propTypes = {
