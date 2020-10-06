@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
-import GodkjennPlanOversiktInformasjon from '../godkjenn/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
