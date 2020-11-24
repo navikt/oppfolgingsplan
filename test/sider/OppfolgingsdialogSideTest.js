@@ -90,9 +90,6 @@ describe('Container', () => {
             samtykke: {
 
             },
-            sykeforlopsPerioder: {
-                data: [],
-            },
         };
 
         it('Skal returnere props', () => {
