@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { sykeforlopsPerioderReducerPt } from '@navikt/digisyfo-npm';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
     finnOgHentArbeidsforholdSomMangler,
     finnOgHentKontaktinfoSomMangler,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentPersonerSomMangler,
-    finnOgHentSykeforlopsPerioderSomMangler,
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
 import {
@@ -46,14 +44,13 @@ class Oppfolgingsdialog extends Component {
     componentWillMount() {
         const { oppfolgingsdialog, virksomhet, person, kontaktinfo, naermesteleder,
             hentVirksomhet, hentPerson, hentNaermesteLeder, hentKontaktinfo,
-            arbeidsforhold, hentArbeidsforhold, sykeforlopsPerioderReducer, hentSykeforlopsPerioder } = this.props;
+            arbeidsforhold, hentArbeidsforhold } = this.props;
         this.props.settDialog(oppfolgingsdialog.id);
         finnOgHentVirksomheterSomMangler([oppfolgingsdialog], virksomhet, hentVirksomhet);
         finnOgHentPersonerSomMangler([oppfolgingsdialog], person, hentPerson);
         finnOgHentNaermesteLedereSomMangler([oppfolgingsdialog], naermesteleder, hentNaermesteLeder);
         finnOgHentKontaktinfoSomMangler([oppfolgingsdialog], kontaktinfo, hentKontaktinfo);
         finnOgHentArbeidsforholdSomMangler([oppfolgingsdialog], arbeidsforhold, hentArbeidsforhold);
-        finnOgHentSykeforlopsPerioderSomMangler([oppfolgingsdialog], sykeforlopsPerioderReducer, hentSykeforlopsPerioder);
     }
 
     render() {
@@ -190,7 +187,6 @@ Oppfolgingsdialog.propTypes = {
     naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
     kontaktinfo: oppfolgingsplanProptypes.kontaktinfoReducerPt,
     arbeidsforhold: oppfolgingsplanProptypes.arbeidsforholdReducerPt,
-    sykeforlopsPerioderReducer: sykeforlopsPerioderReducerPt,
     fastlegeDeling: oppfolgingsplanProptypes.delMedFastlegePt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
     delmednav: oppfolgingsplanProptypes.delmednavPt,
@@ -215,7 +211,6 @@ Oppfolgingsdialog.propTypes = {
     hentPerson: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
     hentArbeidsforhold: PropTypes.func,
-    hentSykeforlopsPerioder: PropTypes.func,
 };
 
 export default Oppfolgingsdialog;

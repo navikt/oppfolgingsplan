@@ -56,17 +56,6 @@ const finnArbeidsforhold = (fnr, virksomhetsnummer, opprettetDato, state) => {
         });
 };
 
-const finnSykeforlopsPerioder = (fnr, virksomhetsnummer, state) => {
-    const sykeforlopsPerioder = state.sykeforlopsPerioder.data
-        .filter((_sykeforlopsPerioder) => {
-            return _sykeforlopsPerioder.virksomhetsnummer === virksomhetsnummer && _sykeforlopsPerioder.fnr === fnr;
-        })[0] || null;
-    if (!sykeforlopsPerioder) {
-        return [];
-    }
-    return sykeforlopsPerioder.periodeListe;
-};
-
 export const populerPlanFraState = (_oppfolgingsplan, state) => {
     const oppfolgingsplan = _oppfolgingsplan;
     oppfolgingsplan.arbeidstaker.navn = finnNavn(oppfolgingsplan.arbeidstaker.fnr, state);
@@ -76,7 +65,6 @@ export const populerPlanFraState = (_oppfolgingsplan, state) => {
     oppfolgingsplan.arbeidstaker.skalHaVarsel = kontaktinfo.skalHaVarsel;
     // eslint-disable-next-line max-len
     oppfolgingsplan.arbeidstaker.stillinger = finnArbeidsforhold(oppfolgingsplan.arbeidstaker.fnr, oppfolgingsplan.virksomhet.virksomhetsnummer, oppfolgingsplan.opprettetDato, state);
-    oppfolgingsplan.arbeidstaker.sykeforlopsPerioder = finnSykeforlopsPerioder(oppfolgingsplan.arbeidstaker.fnr, oppfolgingsplan.virksomhet.virksomhetsnummer, state);
     oppfolgingsplan.virksomhet.navn = finnVirksomhetsnavn(oppfolgingsplan.virksomhet.virksomhetsnummer, state);
     const naermesteleder = finnNaermesteLeder(oppfolgingsplan.arbeidstaker.fnr, oppfolgingsplan.virksomhet.virksomhetsnummer, state);
     oppfolgingsplan.arbeidsgiver.naermesteLeder.virksomhetsnummer = naermesteleder && naermesteleder.virksomhetsnummer;

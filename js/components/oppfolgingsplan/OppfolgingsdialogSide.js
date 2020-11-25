@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-    sykeforlopsPerioderReducerPt,
-    hentSykeforlopsPerioder,
-} from '@navikt/digisyfo-npm';
 import getContextRoot from '../../utils/getContextRoot';
 import history from '../../history';
 import Side from '../../sider/Side';
@@ -197,7 +193,6 @@ Container.propTypes = {
     virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
     oppfolgingsdialog: oppfolgingsplanProptypes.oppfolgingsplanPt,
-    sykeforlopsPerioder: sykeforlopsPerioderReducerPt,
     brodsmuler: PropTypes.arrayOf(brodsmulePt),
     erOppfolgingsdialogTilgjengelig: PropTypes.bool,
     lagreArbeidsoppgave: PropTypes.func,
@@ -224,7 +219,6 @@ Container.propTypes = {
     hentPerson: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
-    hentSykeforlopsPerioder: PropTypes.func,
 };
 
 export function mapStateToProps(state, ownProps) {
@@ -270,7 +264,6 @@ export function mapStateToProps(state, ownProps) {
         naermesteleder: state.naermesteleder,
         navigasjontoggles: state.navigasjontoggles,
         oppfolgingsdialogerReducer: state.oppfolgingsdialoger,
-        sykeforlopsPerioderReducer: state.sykeforlopsPerioder,
         person: state.person,
         dineSykmeldinger: state.dineSykmeldinger,
         tilgang: state.tilgang,
@@ -316,7 +309,6 @@ export default connect(mapStateToProps, {
     hentPerson,
     hentKontaktinfo,
     hentNaermesteLeder,
-    hentSykeforlopsPerioder,
     delMedFastlege,
     delMedNavFunc,
 })(Container);

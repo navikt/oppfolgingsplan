@@ -1,7 +1,4 @@
-import {
-    sykeforlopsPerioder,
-    timeout,
-} from '@navikt/digisyfo-npm';
+import { timeout } from '@navikt/digisyfo-npm';
 import { reducer as formReducer } from 'redux-form';
 import arbeidsoppgaver from './arbeidsoppgaver';
 import arbeidsforhold from './arbeidsforhold';
@@ -50,7 +47,6 @@ const reducers = {
     person,
     virksomhet,
     kontaktinfo,
-    sykeforlopsPerioder,
     naermesteleder,
     timeout,
     form: formReducer,

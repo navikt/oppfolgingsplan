@@ -29,7 +29,6 @@ const TILGANG = 'tilgang';
 const ARBEIDSFORHOLD = 'arbeidsforhold';
 const KONTAKTINFO = 'kontaktinfo';
 const NAERMESTELEDER = 'naermesteleder';
-const PERIODER = 'perioder';
 const PERSON = 'person';
 const VIRKSOMHET = 'virksomhet';
 const SISTE = 'siste';
@@ -55,7 +54,6 @@ lastFilTilMinne(TILGANG);
 lastFilTilMinne(ARBEIDSFORHOLD);
 lastFilTilMinne(KONTAKTINFO);
 lastFilTilMinne(NAERMESTELEDER);
-lastFilTilMinne(PERIODER);
 lastFilTilMinne(PERSON);
 lastFilTilMinne(VIRKSOMHET);
 lastFilTilMinne(SISTE);
@@ -208,11 +206,6 @@ function mockForOpplaeringsmiljo(server) {
     server.get('/syfooprest/api/naermesteleder/:fnr', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[NAERMESTELEDER]));
-    });
-
-    server.get('/syforest/sykeforloep/siste/perioder', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[PERIODER]));
     });
 
     server.get('/syforest/sykeforloep', (req, res) => {
