@@ -60,7 +60,4 @@ export const ledereReducerPt = PropTypes.shape({
     henter: PropTypes.bool,
     hentet: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
-    avkrefter: PropTypes.bool,
-    avkreftet: PropTypes.bool,
-    avkreftFeilet: PropTypes.bool,
 });

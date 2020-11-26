@@ -20,28 +20,11 @@ export function* hentLedere() {
     }
 }
 
-export function* avkreftLeder(action) {
-    yield put(actions.avkrefterLeder(action.orgnummer));
-    try {
-        yield call(post, `${process.env.REACT_APP_SYFOREST_ROOT}/naermesteledere/${action.orgnummer}/actions/avkreft`);
-        yield put(actions.lederAvkreftet(action.orgnummer));
-    } catch (e) {
-        log(e);
-        yield put(actions.avkreftLederFeilet());
-    }
-}
-
 function* watchHentLedere() {
     yield takeEvery(actiontyper.HENT_LEDERE_FORESPURT, hentLedere);
 }
 
-function* watchAvkreftLeder() {
-    yield takeEvery(actiontyper.AVKREFT_LEDER_FORESPURT, avkreftLeder);
-}
 
 export default function* ledereSagas() {
-    yield all([
-        fork(watchHentLedere),
-        fork(watchAvkreftLeder),
-    ]);
+    yield fork(watchHentLedere);
 }

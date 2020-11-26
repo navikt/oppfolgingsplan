@@ -6,10 +6,6 @@ export const henterEllerHarHentetLedere = (ledere) => {
     return ledere.henter || ledere.hentet;
 };
 
-export const lederHarBlittAvkreftet = (ledere, nesteLedere) => {
-    return ledere.avkrefter && nesteLedere.avkreftet;
-};
-
 export const henterEllerHarHentetTilgang = (tilgang) => {
     return tilgang.henter || tilgang.hentet || tilgang.hentingFeilet;
 };
