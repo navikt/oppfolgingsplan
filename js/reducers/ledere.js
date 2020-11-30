@@ -42,32 +42,6 @@ const ledere = (state = defaultState, action = {}) => {
                 hentet: true,
             };
         }
-        case actiontyper.LEDER_AVKREFTET: {
-            const _ledere = setLederProps(state.data, action.orgnummer, { avkreftet: true });
-
-            return {
-                ...state,
-                avkrefter: false,
-                avkreftet: true,
-                avkreftFeilet: false,
-                data: _ledere,
-            };
-        }
-        case actiontyper.LEDER_AVKREFTET_FEILET: {
-            return {
-                ...state,
-                avkrefter: false,
-                avkreftFeilet: true,
-            };
-        }
-        case actiontyper.AVKREFTER_LEDER: {
-            return {
-                ...state,
-                avkrefter: true,
-                avkreftet: false,
-                avkreftFeilet: false,
-            };
-        }
         default: {
             return state;
         }

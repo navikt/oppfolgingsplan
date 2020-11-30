@@ -27,11 +27,10 @@ import {
     henterEllerHarHentetLedere,
     henterEllerHarHentetOppfolgingsplaner,
     henterEllerHarHentetTilgang,
-    lederHarBlittAvkreftet,
     oppfolgingsplanHarBlittOpprettet,
 } from '../../utils/reducerUtils';
 import { hentDineSykmeldinger } from '../../actions/dineSykmeldinger_actions';
-import { avkreftLeder, hentLedere } from '../../actions/ledere_actions';
+import { hentLedere } from '../../actions/ledere_actions';
 import Oppfolgingsdialoger from './Oppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 
@@ -76,10 +75,6 @@ export class Container extends Component {
             oppfolgingsdialogerReducer,
             naermesteLedere,
         } = this.props;
-        if (lederHarBlittAvkreftet(naermesteLedere, nextProps.naermesteLedere)) {
-            this.props.hentLedere();
-            this.props.hentOppfolgingsdialoger();
-        }
         if (oppfolgingsplanHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
             window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
             this.props.hentOppfolgingsdialoger();
@@ -148,7 +143,6 @@ Container.propTypes = {
     bekreftetNyNaermesteLeder: PropTypes.bool,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
     brodsmuler: PropTypes.arrayOf(brodsmulePt),
-    avkreftLeder: PropTypes.func,
     bekreftNyNaermesteLeder: PropTypes.func,
     hentDineSykmeldinger: PropTypes.func,
     hentLedere: PropTypes.func,
@@ -179,15 +173,11 @@ export const mapStateToProps = (state) => {
             || state.dineSykmeldinger.hentet
             || state.ledere.hentet
             || state.oppfolgingsdialoger.hentet
-            || state.ledere.avkreftet
             || state.oppfolgingsdialoger.opprettet,
         sender: state.oppfolgingsdialoger.oppretter
-            || state.kopierDialogReducer.sender
-            || state.ledere.avkrefter,
+            || state.kopierDialogReducer.sender,
         sendingFeilet: state.oppfolgingsdialoger.hentingFeilet
-            || state.kopierDialogReducer.sendingFeilet
-            || state.ledere.avkreftFeilet,
-        avkrefterLederReducer: state.ledere,
+            || state.kopierDialogReducer.sendingFeilet,
         dinesykmeldinger: state.dineSykmeldinger,
         naermesteleder: state.naermesteleder,
         kopierDialogReducer: state.kopierDialogReducer,
@@ -213,7 +203,6 @@ export default connect(mapStateToProps, {
     hentOppfolgingsdialoger,
     sjekkTilgang,
     bekreftNyNaermesteLeder,
-    avkreftLeder,
     hentDineSykmeldinger,
     hentLedere,
     hentVirksomhet,
