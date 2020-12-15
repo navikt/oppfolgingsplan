@@ -16,8 +16,10 @@ import NotifikasjonBoksVurderingOppgave from './NotifikasjonBoksVurderingOppgave
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
+import StegTittel from "../StegTittel";
 
 const texts = {
+    tittel: 'Arbeidsoppgaver',
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
     infoboks: {
         title: 'Hva er oppgavene dine på denne arbeidsplassen?',
@@ -47,9 +49,9 @@ export const ArbeidsoppgaverInfoboksStilling = (
             visSkjema={visArbeidsoppgaveSkjema}
             toggleSkjema={toggleArbeidsoppgaveSkjema}
         >
-            { oppfolgingsplan.arbeidstaker.stillinger.length > 0 &&
+            {oppfolgingsplan.arbeidstaker.stillinger.length > 0 &&
             <div>
-                { oppfolgingsplan.arbeidstaker.stillinger.map((stilling, idx) => {
+                {oppfolgingsplan.arbeidstaker.stillinger.map((stilling, idx) => {
                     return (<p key={idx}>
                         {textStilling(stilling)}
                     </p>);
@@ -175,75 +177,80 @@ class Arbeidsoppgaver extends Component {
         }).length;
         return (
             (() => {
-                return isEmpty(oppfolgingsdialog.arbeidsoppgaveListe) ?
-                    <div ref={this.formRef}>
-                        { this.state.visArbeidsoppgaveSkjema &&
-                        <ArbeidsoppgaverInfoboksStilling
-                            oppfolgingsplan={oppfolgingsdialog}
-                            visArbeidsoppgaveSkjema={this.state.visArbeidsoppgaveSkjema}
-                            toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}
-                        />
-                        }
-                        {
-                            !this.state.visArbeidsoppgaveSkjema ?
-                                <OppfolgingsplanInfoboks
-                                    svgUrl={`${getContextRoot()}/img/svg/arbeidsoppgave-onboarding.svg`}
-                                    svgAlt="nyArbeidsoppgave"
-                                    tittel={texts.infoboks.title}
-                                    tekst={texts.infoboks.info}
-                                >
-                                    <LeggTilElementKnapper
-                                        visSkjema={this.state.visArbeidsoppgaveSkjema}
-                                        toggleSkjema={this.toggleArbeidsoppgaveSkjema}
-                                    />
-                                </OppfolgingsplanInfoboks> :
-                                <LagreArbeidsoppgaveSkjema
-                                    varselTekst={this.state.varselTekst}
-                                    oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
-                                    sendLagre={this.sendLagreArbeidsoppgave}
-                                    avbryt={this.skjulSkjema}
-                                    arbeidsoppgaverReducer={arbeidsoppgaver}
-                                    rootUrlImg={getContextRoot()}
+                return (
+                    <div>
+                        <StegTittel tittel={texts.tittel}/>
+                        {isEmpty(oppfolgingsdialog.arbeidsoppgaveListe) ?
+                            <div ref={this.formRef}>
+                                {this.state.visArbeidsoppgaveSkjema &&
+                                <ArbeidsoppgaverInfoboksStilling
+                                    oppfolgingsplan={oppfolgingsdialog}
+                                    visArbeidsoppgaveSkjema={this.state.visArbeidsoppgaveSkjema}
+                                    toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}
                                 />
-                        }
+                                }
+                                {
+                                    !this.state.visArbeidsoppgaveSkjema ?
+                                        <OppfolgingsplanInfoboks
+                                            svgUrl={`${getContextRoot()}/img/svg/arbeidsoppgave-onboarding.svg`}
+                                            svgAlt="nyArbeidsoppgave"
+                                            tittel={texts.infoboks.title}
+                                            tekst={texts.infoboks.info}
+                                        >
+                                            <LeggTilElementKnapper
+                                                visSkjema={this.state.visArbeidsoppgaveSkjema}
+                                                toggleSkjema={this.toggleArbeidsoppgaveSkjema}
+                                            />
+                                        </OppfolgingsplanInfoboks> :
+                                        <LagreArbeidsoppgaveSkjema
+                                            varselTekst={this.state.varselTekst}
+                                            oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
+                                            sendLagre={this.sendLagreArbeidsoppgave}
+                                            avbryt={this.skjulSkjema}
+                                            arbeidsoppgaverReducer={arbeidsoppgaver}
+                                            rootUrlImg={getContextRoot()}
+                                        />
+                                }
+                            </div>
+                            :
+                            <div ref={this.formRef}>
+                                {
+                                    antallIkkeVurdererteArbOppgaver > 0 && <NotifikasjonBoksVurderingOppgave
+                                        antallIkkeVurderte={antallIkkeVurdererteArbOppgaver}
+                                        rootUrl={getContextRoot()}
+                                        tekst="oppfolgingsdialog.notifikasjonBoksVurderingOppgave.arbeidstaker.tekst"
+                                    />
+                                }
+                                <ArbeidsoppgaverInfoboksStilling
+                                    oppfolgingsplan={oppfolgingsdialog}
+                                    visArbeidsoppgaveSkjema={this.state.visArbeidsoppgaveSkjema}
+                                    toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}
+                                />
+                                {
+                                    this.state.visArbeidsoppgaveSkjema && <LagreArbeidsoppgaveSkjema
+                                        sendLagre={this.sendLagreArbeidsoppgave}
+                                        avbryt={this.skjulSkjema}
+                                        ref={(lagreSkjema) => {
+                                            this.lagreSkjema = lagreSkjema;
+                                        }}
+                                        varselTekst={this.state.varselTekst}
+                                        oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
+                                        arbeidsoppgaverReducer={arbeidsoppgaver}
+                                        rootUrlImg={getContextRoot()}
+                                    />
+                                }
+                                <ArbeidsoppgaverListe
+                                    liste={sorterArbeidsoppgaverEtterOpprettet(oppfolgingsdialog.arbeidsoppgaveListe)}
+                                    sendLagre={this.sendLagreArbeidsoppgave}
+                                    sendSlett={this.sendSlettArbeidsoppgave}
+                                    fnr={oppfolgingsdialog.arbeidstaker.fnr}
+                                    rootUrlImg={getContextRoot()}
+                                    visFeilMelding={this.visFeilMelding}
+                                    feilMelding={this.state.oppdaterOppgaveFeilet}
+                                />
+                            </div>};
                     </div>
-                    :
-                    <div ref={this.formRef}>
-                        {
-                            antallIkkeVurdererteArbOppgaver > 0 && <NotifikasjonBoksVurderingOppgave
-                                antallIkkeVurderte={antallIkkeVurdererteArbOppgaver}
-                                rootUrl={getContextRoot()}
-                                tekst="oppfolgingsdialog.notifikasjonBoksVurderingOppgave.arbeidstaker.tekst"
-                            />
-                        }
-                        <ArbeidsoppgaverInfoboksStilling
-                            oppfolgingsplan={oppfolgingsdialog}
-                            visArbeidsoppgaveSkjema={this.state.visArbeidsoppgaveSkjema}
-                            toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}
-                        />
-                        {
-                            this.state.visArbeidsoppgaveSkjema && <LagreArbeidsoppgaveSkjema
-                                sendLagre={this.sendLagreArbeidsoppgave}
-                                avbryt={this.skjulSkjema}
-                                ref={(lagreSkjema) => {
-                                    this.lagreSkjema = lagreSkjema;
-                                }}
-                                varselTekst={this.state.varselTekst}
-                                oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
-                                arbeidsoppgaverReducer={arbeidsoppgaver}
-                                rootUrlImg={getContextRoot()}
-                            />
-                        }
-                        <ArbeidsoppgaverListe
-                            liste={sorterArbeidsoppgaverEtterOpprettet(oppfolgingsdialog.arbeidsoppgaveListe)}
-                            sendLagre={this.sendLagreArbeidsoppgave}
-                            sendSlett={this.sendSlettArbeidsoppgave}
-                            fnr={oppfolgingsdialog.arbeidstaker.fnr}
-                            rootUrlImg={getContextRoot()}
-                            visFeilMelding={this.visFeilMelding}
-                            feilMelding={this.state.oppdaterOppgaveFeilet}
-                        />
-                    </div>;
+                )
             })()
         );
     }
