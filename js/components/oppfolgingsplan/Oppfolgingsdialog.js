@@ -29,6 +29,10 @@ import Tiltak from './tiltak/Tiltak';
 import Godkjenn from './godkjenn/godkjenn/Godkjenn';
 import Godkjenninger from './godkjenn/godkjenninger/Godkjenninger';
 
+const textOverskrift = (arbeidsgiver) => {
+    return `Oppfølgingsplan hos ${arbeidsgiver}`;
+};
+
 const skalViseSamtykke = (oppfolgingsdialog) => {
     return harNaermesteLeder(oppfolgingsdialog)
         && utenSamtykke(oppfolgingsdialog)
@@ -152,7 +156,7 @@ class Oppfolgingsdialog extends Component {
             <AvbruttGodkjentPlanVarsel />
             }
             <SideOverskrift
-                tittel={oppfolgingsdialog.virksomhet.navn}
+                tittel={textOverskrift(oppfolgingsdialog.virksomhet.navn)}
             />
             { !disableNavigation && <NavigasjonsTopp
                 disabled={disableNavigation}
