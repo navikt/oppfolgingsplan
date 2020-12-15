@@ -43,6 +43,14 @@ export const utenSamtykke = (oppfoelgingsdialog) => {
     return oppfoelgingsdialog.arbeidstaker.samtykke === null;
 };
 
+export const underArbeid = (oppfolgingsdialog) => {
+    return oppfolgingsdialog && oppfolgingsdialog.status === STATUS.UNDER_ARBEID;
+}
+
+export const ikkeSendtTilGodkjenning = (oppfolgingsdialog) => {
+    return (underArbeid(oppfolgingsdialog) && !inneholderGodkjenningerAvArbeidstaker(oppfolgingsdialog))
+}
+
 export function getOppfolgingsdialog(oppfolgingsdialoger, id) {
     return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
         return oppfolgingsdialog.id.toString() === id.toString();
@@ -169,7 +177,7 @@ export const oppgaverOppfoelgingsdialoger = (oppfolgingsdialoger, sykmeldinger) 
     const nyePlaner = oppfolgingdialogerKnyttetTilGyldigSykmelding
         .filter((plan) => {
             return plan.arbeidstaker.sistInnlogget === null
-                && plan.status === 'UNDER_ARBEID'
+                && plan.status === STATUS.UNDER_ARBEID
                 && plan.sistEndretAv.fnr !== plan.arbeidstaker.fnr
                 && !idAlleredeFunnet(avventendeGodkjenninger, plan.id);
         });

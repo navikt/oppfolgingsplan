@@ -86,7 +86,7 @@ export class Container extends Component {
             window.location.hash = hashValue;
             this.props.settAktivtSteg(1);
         }
-        this.state = { currentPageTitle: texts.pageTitles[0] }
+        this.state = { currentPageTitle: pageTitleOppsummering }
     }
 
     componentWillMount() {
@@ -116,28 +116,31 @@ export class Container extends Component {
     }
 
     componentDidUpdate() {
+        const { oppfolgingsdialog } = this.props;
+        const navigasjonSteg = this.props.navigasjontoggles.steg
+        const utfyllingssideHashes = ['#arbeidsoppgaver', '#tiltak', '#godkjenn'];
+
         if (window.location.hash === '' && window.sessionStorage.getItem('hash')) {
             window.location.hash = window.sessionStorage.getItem('hash');
         }
 
-        const navigasjonsSteg = this.props.navigasjontoggles.steg
-
-        if (window.location.hash === '#arbeidsoppgaver' && navigasjonsSteg !== 1) {
+        if (window.location.hash === '#arbeidsoppgaver' && navigasjonSteg !== 1) {
             this.props.settAktivtSteg(1);
         }
 
-        if (window.location.hash === '#tiltak' && navigasjonsSteg !== 2) {
+        if (window.location.hash === '#tiltak' && navigasjonSteg !== 2) {
             this.props.settAktivtSteg(2);
         }
 
-        if (window.location.hash === '#godkjenn' && navigasjonsSteg !== 3) {
+        if (window.location.hash === '#godkjenn' && navigasjonSteg !== 3) {
             this.props.settAktivtSteg(3);
         }
 
-        const selectedPageTitle = texts.pageTitles[navigasjonsSteg - 1];
-
-        if (this.state.currentPageTitle !== selectedPageTitle) {
-            this.setState({ currentPageTitle: selectedPageTitle })
+        if (utfyllingssideHashes.includes(window.location.hash)) {
+            const selectedPageTitle = texts.pageTitles[navigasjonSteg - 1];
+            this.setPageTitle(selectedPageTitle);
+        } else {
+            this.setPageTitle(pageTitleOppsummering);
         }
     }
 
@@ -184,6 +187,13 @@ export class Container extends Component {
             }
         </Side>);
     }
+
+    setPageTitle(title) {
+        if (this.state.currentPageTitle !== title) {
+            this.setState({ currentPageTitle: title });
+        }
+    }
+
 }
 
 Container.propTypes = {

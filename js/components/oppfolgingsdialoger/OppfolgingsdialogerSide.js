@@ -35,7 +35,7 @@ import Oppfolgingsdialoger from './Oppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 
 const texts = {
-    pageTitle: 'Dine oppfølgingsplaner',
+    pageTitle: 'Oppfølgingsplaner - Oversikt',
     brodsmuler: {
         dittSykefravaer: 'Ditt sykefravær',
         dineOppfolgingsplaner: 'Dine oppfølgingsplaner',

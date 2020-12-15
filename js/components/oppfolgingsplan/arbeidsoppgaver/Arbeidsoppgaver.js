@@ -8,7 +8,10 @@ import {
 } from '../../../propTypes/opproptypes';
 import getContextRoot from '../../../utils/getContextRoot';
 import { capitalizeFirstLetter } from '../../../utils/textUtils';
-import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
+import {
+    isEmpty,
+    ikkeSendtTilGodkjenning,
+} from '../../../utils/oppfolgingsdialogUtils';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../utils/arbeidsoppgaveUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
@@ -88,8 +91,13 @@ class Arbeidsoppgaver extends Component {
     }
 
     componentWillMount() {
-        window.location.hash = 'arbeidsoppgaver';
-        window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
+        const { oppfolgingsdialog } = this.props;
+
+        if (ikkeSendtTilGodkjenning(oppfolgingsdialog)) {
+            window.location.hash = 'arbeidsoppgaver';
+            window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
+        }
+
     }
 
     componentDidMount() {
