@@ -248,7 +248,7 @@ class Arbeidsoppgaver extends Component {
                                     visFeilMelding={this.visFeilMelding}
                                     feilMelding={this.state.oppdaterOppgaveFeilet}
                                 />
-                            </div>};
+                            </div>}
                     </div>
                 )
             })()

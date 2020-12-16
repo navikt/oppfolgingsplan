@@ -207,7 +207,7 @@ class Tiltak extends Component {
                                     feilMelding={this.state.oppdaterTiltakFeilet}
                                     rootUrlImg={getContextRoot()}
                                 />
-                            </div>};
+                            </div>}
                     </div>
                 )
             })()
