@@ -16,8 +16,10 @@ import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import TiltakInfoboks from './TiltakInfoboks';
 import TiltakSkjema from './TiltakSkjema';
 import TiltakListe from './liste/TiltakListe';
+import StegTittel from "../StegTittel";
 
 const texts = {
+    tittel: "Tiltak",
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
     infoboks: {
         title: 'Hva kan gjøre det lettere å jobbe?',
@@ -133,76 +135,81 @@ class Tiltak extends Component {
         } = this.props;
         return (
             (() => {
-                return isEmpty(oppfolgingsdialog.tiltakListe) ?
-                    <div ref={this.formRef}>
-                        {
-                            !this.state.visTiltakSkjema ?
-                                <OppfolgingsplanInfoboks
-                                    svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
-                                    svgAlt="nyttTiltak"
-                                    tittel={texts.infoboks.title}
-                                    tekst={texts.infoboks.info}
-                                    feilType={this.state.feilType}
-                                    feilTekst={this.state.feilTekst}
-                                >
-                                    <LeggTilElementKnapper
-                                        visSkjema={this.state.visTiltakSkjema}
-                                        toggleSkjema={this.toggleTiltakSkjema}
-                                    />
-                                </OppfolgingsplanInfoboks>
-                                :
-                                <div>
-                                    <TiltakInfoboks
-                                        visTiltakSkjema={this.state.visTiltakSkjema}
-                                        toggleSkjema={this.toggleTiltakSkjema}
-                                    />
+                return (
+                    <div>
+                        <StegTittel tittel={texts.tittel}/>
+                        {isEmpty(oppfolgingsdialog.tiltakListe) ?
+                            <div ref={this.formRef}>
+                                {
+                                    !this.state.visTiltakSkjema ?
+                                        <OppfolgingsplanInfoboks
+                                            svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
+                                            svgAlt="nyttTiltak"
+                                            tittel={texts.infoboks.title}
+                                            tekst={texts.infoboks.info}
+                                            feilType={this.state.feilType}
+                                            feilTekst={this.state.feilTekst}
+                                        >
+                                            <LeggTilElementKnapper
+                                                visSkjema={this.state.visTiltakSkjema}
+                                                toggleSkjema={this.toggleTiltakSkjema}
+                                            />
+                                        </OppfolgingsplanInfoboks>
+                                        :
+                                        <div>
+                                            <TiltakInfoboks
+                                                visTiltakSkjema={this.state.visTiltakSkjema}
+                                                toggleSkjema={this.toggleTiltakSkjema}
+                                            />
+                                            <TiltakSkjema
+                                                sendLagre={this.sendLagreTiltak}
+                                                avbryt={this.skjulSkjema}
+                                                fnr={oppfolgingsdialog.arbeidstaker.fnr}
+                                                varselTekst={this.state.varselTekst}
+                                                oppdateringFeilet={this.state.lagreNyTiltakFeilet}
+                                                tiltakReducer={tiltak}
+                                                rootUrlImg={getContextRoot()}
+                                            />
+                                        </div>
+
+                                }
+                            </div>
+                            :
+                            <div ref={this.formRef}>
+                                <TiltakInfoboks
+                                    visTiltakSkjema={this.state.visTiltakSkjema}
+                                    toggleSkjema={this.toggleTiltakSkjema}
+                                />
+                                {
+                                    this.state.visTiltakSkjema &&
                                     <TiltakSkjema
                                         sendLagre={this.sendLagreTiltak}
                                         avbryt={this.skjulSkjema}
                                         fnr={oppfolgingsdialog.arbeidstaker.fnr}
+                                        ref={(lagreSkjema) => {
+                                            this.lagreSkjema = lagreSkjema;
+                                        }}
                                         varselTekst={this.state.varselTekst}
                                         oppdateringFeilet={this.state.lagreNyTiltakFeilet}
                                         tiltakReducer={tiltak}
                                         rootUrlImg={getContextRoot()}
                                     />
-                                </div>
-
-                        }
+                                }
+                                <TiltakListe
+                                    liste={sorterTiltakEtterNyeste(oppfolgingsdialog.tiltakListe)}
+                                    urlImgVarsel={`${getContextRoot()}/img/svg/varseltrekant.svg`}
+                                    sendLagre={this.sendLagreTiltak}
+                                    sendSlett={this.sendSlettTiltak}
+                                    sendLagreKommentar={this.sendLagreKommentar}
+                                    sendSlettKommentar={this.sendSlettKommentar}
+                                    fnr={oppfolgingsdialog.arbeidstaker.fnr}
+                                    visFeilMelding={this.visOppdateringFeilet}
+                                    feilMelding={this.state.oppdaterTiltakFeilet}
+                                    rootUrlImg={getContextRoot()}
+                                />
+                            </div>}
                     </div>
-                    :
-                    <div ref={this.formRef}>
-                        <TiltakInfoboks
-                            visTiltakSkjema={this.state.visTiltakSkjema}
-                            toggleSkjema={this.toggleTiltakSkjema}
-                        />
-                        {
-                            this.state.visTiltakSkjema &&
-                            <TiltakSkjema
-                                sendLagre={this.sendLagreTiltak}
-                                avbryt={this.skjulSkjema}
-                                fnr={oppfolgingsdialog.arbeidstaker.fnr}
-                                ref={(lagreSkjema) => {
-                                    this.lagreSkjema = lagreSkjema;
-                                }}
-                                varselTekst={this.state.varselTekst}
-                                oppdateringFeilet={this.state.lagreNyTiltakFeilet}
-                                tiltakReducer={tiltak}
-                                rootUrlImg={getContextRoot()}
-                            />
-                        }
-                        <TiltakListe
-                            liste={sorterTiltakEtterNyeste(oppfolgingsdialog.tiltakListe)}
-                            urlImgVarsel={`${getContextRoot()}/img/svg/varseltrekant.svg`}
-                            sendLagre={this.sendLagreTiltak}
-                            sendSlett={this.sendSlettTiltak}
-                            sendLagreKommentar={this.sendLagreKommentar}
-                            sendSlettKommentar={this.sendSlettKommentar}
-                            fnr={oppfolgingsdialog.arbeidstaker.fnr}
-                            visFeilMelding={this.visOppdateringFeilet}
-                            feilMelding={this.state.oppdaterTiltakFeilet}
-                            rootUrlImg={getContextRoot()}
-                        />
-                    </div>;
+                )
             })()
         );
     }
