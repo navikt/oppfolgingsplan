@@ -38,7 +38,7 @@ export const TextForcedApprovedOppfolgingsplan = ({ rootUrl, oppfolgingsplan }) 
     return (
         <BildeTekstLinje
             imgUrl={`${rootUrl}/img/svg/report-problem-circle.svg`}
-            alt="info"
+            imgAlt=""
             tekst={`${texts.tvungenGodkjenning.info} ${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}.`}
         />
     );
