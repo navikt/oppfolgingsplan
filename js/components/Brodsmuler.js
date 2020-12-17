@@ -82,7 +82,7 @@ class Brodsmuler extends Component {
         const { brodsmuler } = this.props;
         const synligeBrodsmuler = this.getSynligeBrodsmuler();
         return (<nav className="brodsmuler" aria-label="Du er her: ">
-            <img src={`${getContextRoot()}/img/svg/person.svg`} alt="Du" className="brodsmuler__ikon" />
+            <img src={`${getContextRoot()}/img/svg/person.svg`} alt="" className="brodsmuler__ikon" />
             <div className="brodsmuler__smuler">
                 <a href="/dittnav" className="js-smule brodsmuler__smule">Ditt NAV</a>
                 {brodsmuler.length > 0 && <span className="brodsmule__skille"> / </span>}
