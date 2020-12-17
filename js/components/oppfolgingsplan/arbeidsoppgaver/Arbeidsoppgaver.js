@@ -193,7 +193,7 @@ class Arbeidsoppgaver extends Component {
                                     !this.state.visArbeidsoppgaveSkjema ?
                                         <OppfolgingsplanInfoboks
                                             svgUrl={`${getContextRoot()}/img/svg/arbeidsoppgave-onboarding.svg`}
-                                            svgAlt="nyArbeidsoppgave"
+                                            svgAlt=""
                                             tittel={texts.infoboks.title}
                                             tekst={texts.infoboks.info}
                                         >
