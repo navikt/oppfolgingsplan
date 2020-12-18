@@ -58,12 +58,8 @@ import {
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 
-const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
-const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
-const pageTitleOppsummering = 'Oppfølgingsplan - Oppsummering';
-
 const texts = {
-    pageTitles: [ pageTitleArbeidsoppgaver, pageTitleTiltak, pageTitleOppsummering ],
+    pageTitle: 'Oppfølgingsplaner',
     brodsmuler: {
         dittSykefravaer: 'Ditt sykefravær',
         dineOppfolgingsplaner: 'Dine oppfølgingsplaner',
@@ -86,7 +82,6 @@ export class Container extends Component {
             window.location.hash = hashValue;
             this.props.settAktivtSteg(1);
         }
-        this.state = { currentPageTitle: pageTitleOppsummering }
     }
 
     componentWillMount() {
@@ -116,31 +111,20 @@ export class Container extends Component {
     }
 
     componentDidUpdate() {
-        const { oppfolgingsdialog } = this.props;
-        const navigasjonSteg = this.props.navigasjontoggles.steg
-        const utfyllingssideHashes = ['#arbeidsoppgaver', '#tiltak', '#godkjenn'];
-
         if (window.location.hash === '' && window.sessionStorage.getItem('hash')) {
             window.location.hash = window.sessionStorage.getItem('hash');
         }
 
-        if (window.location.hash === '#arbeidsoppgaver' && navigasjonSteg !== 1) {
+        if (window.location.hash === '#arbeidsoppgaver' && this.props.navigasjontoggles.steg !== 1) {
             this.props.settAktivtSteg(1);
         }
 
-        if (window.location.hash === '#tiltak' && navigasjonSteg !== 2) {
+        if (window.location.hash === '#tiltak' && this.props.navigasjontoggles.steg !== 2) {
             this.props.settAktivtSteg(2);
         }
 
-        if (window.location.hash === '#godkjenn' && navigasjonSteg !== 3) {
+        if (window.location.hash === '#godkjenn' && this.props.navigasjontoggles.steg !== 3) {
             this.props.settAktivtSteg(3);
-        }
-
-        if (utfyllingssideHashes.includes(window.location.hash)) {
-            const selectedPageTitle = texts.pageTitles[navigasjonSteg - 1];
-            this.setPageTitle(selectedPageTitle);
-        } else {
-            this.setPageTitle(pageTitleOppsummering);
         }
     }
 
@@ -157,7 +141,7 @@ export class Container extends Component {
             erOppfolgingsdialogTilgjengelig,
         } = this.props;
         return (<Side
-            tittel={this.state.currentPageTitle}
+            tittel={texts.pageTitle}
             brodsmuler={brodsmuler}
             laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}>
             { (() => {
@@ -187,13 +171,6 @@ export class Container extends Component {
             }
         </Side>);
     }
-
-    setPageTitle(title) {
-        if (this.state.currentPageTitle !== title) {
-            this.setState({ currentPageTitle: title });
-        }
-    }
-
 }
 
 Container.propTypes = {
