@@ -30,7 +30,7 @@ export const SharingCheckbox = ({ oppfolgingsplan, checked, onChange }) => {
                     return godkjenning.delMedNav;
                 })
                     ? <IconTextBox>
-                        <Icon src={`${getContextRoot()}/img/svg/info-sirkel-fyll.svg`} alt="info" />
+                        <Icon src={`${getContextRoot()}/img/svg/info-sirkel-fyll.svg`} alt="" />
                         <strong>{texts.preDelMedNav}</strong></IconTextBox>
                     : <Checkbox
                         checked={checked}
