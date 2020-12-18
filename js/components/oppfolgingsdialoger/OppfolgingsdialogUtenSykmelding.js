@@ -14,7 +14,7 @@ const OppfolgingsdialogUtenSykmelding = () => {
         </header>
         <Panel border>
             <div className="oppfolgingsdialogUtenAktivSykmelding__blokk">
-                <img alt="ikke-aktiv-sykmeldt" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg`} />
+                <img alt="" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg`} />
                 <div className="inngangspanel__innhold">
                     <div>
                         <p className="oppfolgingsdialoger__start_tekst">
