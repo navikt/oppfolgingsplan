@@ -116,8 +116,6 @@ class OppfolgingsdialogerVisning extends Component {
                 id="OppfolgingsdialogTeasereAT"
                 rootUrl={getContextRoot()}
                 rootUrlPlaner={getContextRoot()}
-                svgUrl={`${getContextRoot()}/img/svg/plan-godkjent.svg`}
-                svgAlt="OppfølgingsdialogTidligere"
             />
             }
             <OppfolgingsplanFilm />
