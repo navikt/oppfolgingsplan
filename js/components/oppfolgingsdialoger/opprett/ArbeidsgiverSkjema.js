@@ -45,7 +45,7 @@ export const VelgArbeidsgiverUndertekst = ({ oppfolgingsdialoger, arbeidsgiver }
         </div>);
     } else if (!arbeidsgiver.harNaermesteLeder) {
         return (<div className="velgArbeidsgiverUndertekst">
-            <img className="velgArbeidsgiverUndertekst__ikon" src={`${getContextRoot()}/img/svg/varseltrekant.svg`} alt="varsel" />
+            <img className="velgArbeidsgiverUndertekst__ikon" src={`${getContextRoot()}/img/svg/varseltrekant.svg`} alt="" />
             <span className="velgArbeidsgiverUndertekst__tekst">
                 {texts.velgArbeidsgiverUndertekst.noLeader}
             </span>
