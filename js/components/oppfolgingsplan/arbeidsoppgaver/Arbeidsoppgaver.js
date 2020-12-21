@@ -99,7 +99,6 @@ class Arbeidsoppgaver extends Component {
             window.location.hash = 'arbeidsoppgaver';
             window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
         }
-
     }
 
     componentDidMount() {

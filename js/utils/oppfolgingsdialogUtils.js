@@ -29,6 +29,12 @@ export const inneholderGodkjenninger = (oppfolgingsdialog) => {
     return oppfolgingsdialog.godkjenninger.length > 0;
 };
 
+export const ikkeSendtTilGodkjenning = (oppfolgingsdialog) => {
+    return oppfolgingsdialog
+        && oppfolgingsdialog.status === STATUS.UNDER_ARBEID
+        && !inneholderGodkjenninger(oppfolgingsdialog);
+}
+
 export const inneholderGodkjenningerAvArbeidstaker = (oppfolgingsdialog) => {
     return oppfolgingsdialog.godkjenninger.length > 0
         && oppfolgingsdialog.godkjenninger[0].godkjent
@@ -42,14 +48,6 @@ export const inneholderGodkjentPlan = (oppfolgingsdialog) => {
 export const utenSamtykke = (oppfoelgingsdialog) => {
     return oppfoelgingsdialog.arbeidstaker.samtykke === null;
 };
-
-export const underArbeid = (oppfolgingsdialog) => {
-    return oppfolgingsdialog && oppfolgingsdialog.status === STATUS.UNDER_ARBEID;
-}
-
-export const ikkeSendtTilGodkjenning = (oppfolgingsdialog) => {
-    return (underArbeid(oppfolgingsdialog) && !inneholderGodkjenningerAvArbeidstaker(oppfolgingsdialog))
-}
 
 export function getOppfolgingsdialog(oppfolgingsdialoger, id) {
     return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
