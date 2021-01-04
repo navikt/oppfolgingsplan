@@ -31,7 +31,7 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
         <OppfolgingsplanInnholdboks
             svgUrl={`${rootUrl}/img/svg/hake-groenn--lys.svg`}
             liteikon
-            svgAlt="sendt"
+            svgAlt=""
             tittel={texts.godkjennPlanSendt.title}
         >
             <div className="godkjennPlanSendt">

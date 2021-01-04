@@ -20,7 +20,7 @@ const IngenledereInfoboks = () => {
     return (<div>
         <OppfolgingsplanInfoboks
             svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-ingenleder.svg`}
-            svgAlt="Ingen Leder"
+            svgAlt=""
             tittel={texts.infoboks.title}
             tekst={texts.infoboks.info}
         />

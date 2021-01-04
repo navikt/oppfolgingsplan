@@ -169,13 +169,13 @@ export class Container extends Component {
                 } else if (!erOppfolgingsdialogTilgjengelig) {
                     return (<OppfolgingsplanInfoboks
                         svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
-                        svgAlt="ikkeTilgang"
+                        svgAlt=""
                         tittel={texts.infoboksNotAvailable.title}
                     />);
                 } else if (!tilgang.data.harTilgang) {
                     return (<OppfolgingsplanInfoboks
                         svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
-                        svgAlt="ikkeTilgang"
+                        svgAlt=""
                         tittel={texts.infoboksNoAccess.title}
                         tekst={texts.infoboksNoAccess.text}
                     />);

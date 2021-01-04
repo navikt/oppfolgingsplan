@@ -50,7 +50,7 @@ class ArbeidsgiverHarTvangsgodkjent extends Component {
             <OppfolgingsplanInnholdboks
                 liteikon
                 svgUrl={`${getContextRoot()}/img/svg/varseltrekant.svg`}
-                svgAlt="godkjent"
+                svgAlt=""
                 tittel={texts.title}
             >
                 <div className="arbeidsgiverHarTvangsgodkjent">

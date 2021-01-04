@@ -38,7 +38,7 @@ export const TextForcedApprovedOppfolgingsplan = ({ rootUrl, oppfolgingsplan }) 
     return (
         <BildeTekstLinje
             imgUrl={`${rootUrl}/img/svg/report-problem-circle.svg`}
-            alt="info"
+            imgAlt=""
             tekst={`${texts.tvungenGodkjenning.info} ${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}.`}
         />
     );
@@ -108,7 +108,7 @@ class GodkjentPlan extends Component {
                 <OppfolgingsplanInnholdboks
                     classnames="godkjentPlanOppfolgingsplanInfoboks"
                     svgUrl={`${rootUrl}/img/svg/hake-groenn--lys.svg`}
-                    svgAlt="godkjent"
+                    svgAlt=""
                     tittel={texts.godkjentPlan.title}
                     mediumIcon
                 >

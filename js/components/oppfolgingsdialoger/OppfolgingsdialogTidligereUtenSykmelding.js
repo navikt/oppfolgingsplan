@@ -13,7 +13,7 @@ const OppfolgingsdialogTidligereUtenSykmelding = ({ oppfolgingsdialog }) => {
             border>
             <div className="inngangspanel">
                 <span className="oppfolgingsplanInnhold__ikon">
-                    <img alt="status" src={`${getContextRoot()}/img/svg/${planStatus.img}`} />
+                    <img alt="" src={`${getContextRoot()}/img/svg/${planStatus.img}`} />
                 </span>
                 <div className="inngangspanel__innhold">
                     <header className="inngangspanel__header">

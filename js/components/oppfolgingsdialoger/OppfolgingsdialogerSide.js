@@ -114,7 +114,7 @@ export class Container extends Component {
                     } else if (!tilgang.data.harTilgang) {
                         return (<OppfolgingsplanInfoboks
                             svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
-                            svgAlt="ikkeTilgang"
+                            svgAlt=""
                             tittel={texts.infoboksNoAccess.title}
                             tekst={texts.infoboksNoAccess.info}
                         />);
