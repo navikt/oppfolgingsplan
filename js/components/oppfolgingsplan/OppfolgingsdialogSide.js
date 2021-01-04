@@ -60,10 +60,11 @@ import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 
 const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
 const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
+const pageTitleSePlanen = 'Oppfølgingsplan - Se planen';
 const pageTitleOppsummering = 'Oppfølgingsplan - Oppsummering';
 
 const texts = {
-    pageTitles: [ pageTitleArbeidsoppgaver, pageTitleTiltak, pageTitleOppsummering ],
+    pageTitles: [ pageTitleArbeidsoppgaver, pageTitleTiltak, pageTitleSePlanen ],
     brodsmuler: {
         dittSykefravaer: 'Ditt sykefravær',
         dineOppfolgingsplaner: 'Dine oppfølgingsplaner',
