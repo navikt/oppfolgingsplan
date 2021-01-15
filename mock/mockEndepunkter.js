@@ -15,15 +15,12 @@ const uuid = () => {
 };
 
 const mockData = {};
-const ARBEIDSGIVERS_SYKMELDINGER = 'arbeidsgiversSykmeldinger';
 const ARBEIDSGIVERE = 'arbeidsgivere';
 const METADATA = 'metadata';
 const NAERMESTELEDERE = 'naermesteledere';
-const SOKNADER = 'soknader';
 const SYFOUNLEASH = 'syfounleash';
-const SYKEFORLOEAP = 'sykeforloep';
+const SYKEFORLOP = 'sykeforlop';
 const SYKMELDINGER = 'sykmeldinger';
-const VARSLER = 'varsler';
 const VEDLIKEHOLD = 'vedlikehold';
 const TILGANG = 'tilgang';
 const ARBEIDSFORHOLD = 'arbeidsforhold';
@@ -31,7 +28,6 @@ const KONTAKTINFO = 'kontaktinfo';
 const NAERMESTELEDER = 'naermesteleder';
 const PERSON = 'person';
 const VIRKSOMHET = 'virksomhet';
-const SISTE = 'siste';
 
 const lastFilTilMinne = (filnavn) => {
     fs.readFile(path.join(__dirname, `/data/${filnavn}.json`), (err, data) => {
@@ -40,15 +36,12 @@ const lastFilTilMinne = (filnavn) => {
     });
 };
 
-lastFilTilMinne(ARBEIDSGIVERS_SYKMELDINGER);
 lastFilTilMinne(ARBEIDSGIVERE);
 lastFilTilMinne(METADATA);
 lastFilTilMinne(NAERMESTELEDERE);
-lastFilTilMinne(SOKNADER);
 lastFilTilMinne(SYFOUNLEASH);
-lastFilTilMinne(SYKEFORLOEAP);
+lastFilTilMinne(SYKEFORLOP);
 lastFilTilMinne(SYKMELDINGER);
-lastFilTilMinne(VARSLER);
 lastFilTilMinne(VEDLIKEHOLD);
 lastFilTilMinne(TILGANG);
 lastFilTilMinne(ARBEIDSFORHOLD);
@@ -56,7 +49,6 @@ lastFilTilMinne(KONTAKTINFO);
 lastFilTilMinne(NAERMESTELEDER);
 lastFilTilMinne(PERSON);
 lastFilTilMinne(VIRKSOMHET);
-lastFilTilMinne(SISTE);
 
 const SYKMELDING_TYPE = {
     SYKMELDING_INAKTIV: {
@@ -210,7 +202,7 @@ function mockForOpplaeringsmiljo(server) {
 
     server.get('/syforest/sykeforloep', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[SYKEFORLOEAP]));
+        res.send(JSON.stringify(mockData[SYKEFORLOP]));
     });
 
     server.get('/syforest/sykeforloep/metadata', (req, res) => {
