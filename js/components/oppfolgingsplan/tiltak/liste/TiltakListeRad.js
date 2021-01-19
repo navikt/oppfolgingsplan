@@ -44,15 +44,16 @@ const TiltakListeRad = (
 
     return (
         <div className="tiltaktabell__rad__celle">
-            { tiltak.fom && tiltak.tom && tiltak.status !== STATUS_TILTAK.IKKE_AKTUELT &&
-            <p className="tiltaktabell__meta">{toDateMedMaanedNavn(tiltak.fom)} - {toDateMedMaanedNavn(tiltak.tom)}</p>
-            }
+
             <div className="tiltaktabell__rad__navn">
                 <span className="tiltak__rad__navn--tittel">
                     {tiltak.tiltaknavn}
                 </span>
                 <i className={`nav-frontend-chevron ${erApen ? 'chevron--opp' : 'chevron--ned'} chevron--stor`} />
             </div>
+            { tiltak.fom && tiltak.tom && tiltak.status !== STATUS_TILTAK.IKKE_AKTUELT &&
+            <p className="tiltaktabell__meta">{toDateMedMaanedNavn(tiltak.fom)} - {toDateMedMaanedNavn(tiltak.tom)}</p>
+            }
             { tiltak.status &&
             <div className={`tiltaktabell__rad__status etikett ${klasse}`} >
                 <span className="typo-normal">
