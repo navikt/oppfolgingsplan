@@ -18,6 +18,7 @@ import {
     getStartDateFromTiltakListe,
 } from '../../../../utils/tiltakUtils';
 import { erHerokuApp } from '../../../../utils/urlUtils';
+import ObligatoriskeFelterInfotekst from "../../ObligatoriskeFelterInfotekst";
 
 const texts = {
     title: 'Send til lederen din for godkjenning',
@@ -31,7 +32,7 @@ const texts = {
 };
 
 export const textDelMedNav = (leaderName) => {
-    return <span>Jeg ønsker å dele planen med NAV når {leaderName} har godkjent planen</span>;
+    return <span>Jeg ønsker å dele planen med NAV når {leaderName} har godkjent planen (valgfritt)</span>;
 };
 export const GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN = 'GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN';
 
@@ -101,6 +102,8 @@ export class GodkjennPlanLightboksComponent extends Component {
                 <h2>{texts.title}</h2>
 
                 <p>{texts.approvalInfo}</p>
+
+                <ObligatoriskeFelterInfotekst />
 
                 <hr />
 
