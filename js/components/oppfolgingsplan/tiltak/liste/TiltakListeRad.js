@@ -44,7 +44,6 @@ const TiltakListeRad = (
 
     return (
         <div className="tiltaktabell__rad__celle">
-
             <div className="tiltaktabell__rad__navn">
                 <span className="tiltak__rad__navn--tittel">
                     {tiltak.tiltaknavn}
