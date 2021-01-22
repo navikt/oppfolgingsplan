@@ -48,7 +48,6 @@ const ArbeidsoppgaveUtvidbarOverskriftKolonneImg = styled.div`
 
 const ArbeidsoppgaveUtvidbarOverskrift = (
     {
-        erApen,
         fnr,
         arbeidsoppgave,
         lagreSkjema,
@@ -72,13 +71,11 @@ const ArbeidsoppgaveUtvidbarOverskrift = (
                     sendSlett={sendSlett}
                 />
             </div>
-            <i className={`nav-frontend-chevron ${erApen ? 'chevron--opp' : 'chevron--ned'} chevron--stor`} />
         </div>
     </div>);
 };
 
 ArbeidsoppgaveUtvidbarOverskrift.propTypes = {
-    erApen: PropTypes.bool,
     fnr: PropTypes.string,
     arbeidsoppgave: arbeidsoppgavePt,
     lagreSkjema: PropTypes.bool,
