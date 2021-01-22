@@ -7,7 +7,7 @@ import {
     arbeidsoppgaverReducerPt,
 } from '../../../propTypes/opproptypes';
 import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
-import ArbeidsoppgaveUtvidbarOverskrift from './ArbeidsoppgaveUtvidbarOverskrift';
+import ArbeidsoppgaveOverskrift from './ArbeidsoppgaveOverskrift';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
@@ -19,7 +19,7 @@ const ArbeidsoppgaveVarselFeilStyled = styled.div`
     padding: 0 1em;
 `;
 
-class ArbeidsoppgaveUtvidbar extends Component {
+class Arbeidsoppgave extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -111,8 +111,8 @@ class ArbeidsoppgaveUtvidbar extends Component {
                         aria-label={element.arbeidsoppgavenavn}>
 
                             <div>
-                                <div class="arbeidsoppgaverListe__utvidbarrad">
-                                <ArbeidsoppgaveUtvidbarOverskrift
+                                <div class="arbeidsoppgaverListe__radoverskrift">
+                                <ArbeidsoppgaveOverskrift
                                     fnr={fnr}
                                     arbeidsoppgave={element}
                                     lagreSkjema={this.state.visLagreSkjema}
@@ -154,7 +154,7 @@ class ArbeidsoppgaveUtvidbar extends Component {
     }
 }
 
-ArbeidsoppgaveUtvidbar.propTypes = {
+Arbeidsoppgave.propTypes = {
     element: arbeidsoppgavePt,
     fnr: PropTypes.string,
     sendSlett: PropTypes.func,
@@ -165,7 +165,7 @@ ArbeidsoppgaveUtvidbar.propTypes = {
     arbeidsoppgaverReducer: arbeidsoppgaverReducerPt,
 };
 
-ArbeidsoppgaveUtvidbar.defaultProps = {
+Arbeidsoppgave.defaultProps = {
     Overskrift: 'H3',
 };
 
@@ -175,6 +175,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const ArbeidsoppgaveUtvidbarContainer = connect(mapStateToProps)(ArbeidsoppgaveUtvidbar);
+const ArbeidsoppgaveContainer = connect(mapStateToProps)(Arbeidsoppgave);
 
-export default ArbeidsoppgaveUtvidbarContainer;
+export default ArbeidsoppgaveContainer;
