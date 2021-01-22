@@ -208,7 +208,6 @@ export class TiltakSkjemaKomponent extends Component {
             tiltakReducer,
         } = this.props;
         return (
-            <Panel border>
                 <div className="utvidbar__innholdContainer">
                     <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()} >
 
@@ -247,8 +246,7 @@ export class TiltakSkjemaKomponent extends Component {
                             tiltakReducer={tiltakReducer}
                         />
                     </form>
-                </div>
-            </Panel>);
+                </div>  );
     }
 }
 

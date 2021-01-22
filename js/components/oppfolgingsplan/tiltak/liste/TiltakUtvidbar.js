@@ -22,23 +22,12 @@ const TiltakVarselFeilStyled = styled.div`
     padding: 0 1em;
 `;
 
-const UtvidbarButtonStyled = styled.button`
-    border: none;
-    width: 100%;
-    display: flex;
-    text-align: left;
-    padding: 0;
-`;
+
 
 class TiltakUtvidbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            erApen: props.erApen,
-            containerClassName: '',
-            hoyde: !props.erApen ? '0' : 'auto',
-            visInnhold: props.erApen,
-            harTransisjon: false,
             lagreKommentarSkjema: false,
             visLagreSkjema: false,
             visVurderingSkjema: false,
@@ -46,11 +35,8 @@ class TiltakUtvidbar extends Component {
             visSlettingFeilet: false,
             varselTekst: '',
         };
-        this.setRef = this.setRef.bind(this);
         this.visLagreSkjema = this.visLagreSkjema.bind(this);
         this.visElementInformasjon = this.visElementInformasjon.bind(this);
-        this.scrollTilElement = this.scrollTilElement.bind(this);
-        this.erUtvidbarApenStorreEnnSkjerm = this.erUtvidbarApenStorreEnnSkjerm.bind(this);
         this.visFeil = this.visFeil.bind(this);
         this.sendSlett = this.sendSlett.bind(this);
         this.sendLagre = this.sendLagre.bind(this);
@@ -79,9 +65,6 @@ class TiltakUtvidbar extends Component {
                         lagreKommentarSkjema: false,
                         visLagreSkjema: true,
                     });
-                    if (!this.state.erApen) {
-                        this.apne();
-                    }
                 } else if (!nextProps.tiltakReducer.lagringFeilet && !nextProps.tiltakReducer.slettingFeilet) {
                     this.visFeil(false, false, '');
                 }
@@ -89,46 +72,6 @@ class TiltakUtvidbar extends Component {
         } else if (!nextProps.tiltakReducer.lagringFeilet && !nextProps.tiltakReducer.slettingFeilet) {
             this.visFeil(false, false, '');
         }
-    }
-
-    onTransitionEnd() {
-        if (this.state.harTransisjon) {
-            // Forhindrer scrolling til utenforliggnede
-            // Utvidbar dersom flere er nøstet inni hverandre
-            this.setState({
-                harTransisjon: false,
-            });
-            if (this.state.erApen) {
-                this.scrollTilElement(this.utvidbar);
-                this.setAutoHoyde();
-            } else {
-                this.setState({
-                    visInnhold: false,
-                });
-                if (!erSynligIViewport(this.utvidbar)) {
-                    this.scrollTilElement(this.utvidbar);
-                }
-            }
-        }
-    }
-
-    setRef(ref) {
-        this.setRef = ref;
-    }
-
-    setAutoHoyde() {
-        /* Fjerner animasjonsklassen slik at Safari ikke
-         tegner komponenten på nytt når høyde settes til 'auto': */
-        this.setState({
-            containerClassName: '',
-        });
-        // Setter høyde til auto:
-        setTimeout(() => {
-            this.setState({
-                hoyde: 'auto',
-                containerClassName: '',
-            });
-        }, 0);
     }
 
     visFeil(lagringFeilet, slettingFeilet, tekst) {
@@ -139,64 +82,6 @@ class TiltakUtvidbar extends Component {
         });
     }
 
-    apne() {
-        this.setState({
-            hoyde: '0',
-            containerClassName: ' utvidbar__innholdContainer--medAnimasjon',
-            visInnhold: true,
-            harTransisjon: true,
-        });
-        setTimeout(() => {
-            const hoyde = this.innhold.offsetHeight;
-            this.setState({
-                erApen: true,
-                hoyde,
-            });
-        }, 0);
-    }
-
-    lukk() {
-        const hoyde = this.innhold.offsetHeight;
-        this.setState({
-            hoyde,
-            harTransisjon: true,
-        });
-        setTimeout(() => {
-            this.setState({
-                containerClassName: ' utvidbar__innholdContainer--medAnimasjon',
-                hoyde: '0',
-                erApen: false,
-                lagreKommentarSkjema: false,
-            });
-        }, 0);
-    }
-
-    erUtvidbarApenStorreEnnSkjerm(utvidbar) {
-        const utvidbarTopp = utvidbar.getBoundingClientRect().top;
-        const utvidbarHoyde = this.jstoggle.offsetHeight;
-        const sideHoyde = window.innerHeight;
-        return (utvidbarTopp + utvidbarHoyde) > sideHoyde;
-    }
-
-    scrollTilElement(element) {
-        if (this.state.erApen) {
-            const utvidbar = findDOMNode(element);
-            if (utvidbar && this.erUtvidbarApenStorreEnnSkjerm(utvidbar)) {
-                utvidbar.scrollIntoView({ block: 'start', behavior: 'smooth' });
-                window.scrollBy(0, -200); // Justere visning.
-            }
-        }
-    }
-
-    toggle(e) {
-        e.preventDefault();
-        if (this.state.erApen) {
-            this.lukk();
-        } else {
-            this.apne();
-        }
-    }
-
     visLagreSkjema(event) {
         event.stopPropagation();
         this.setState({
@@ -204,9 +89,6 @@ class TiltakUtvidbar extends Component {
             visLagreSkjema: true,
         });
         this.props.visFeilMelding(false);
-        if (!this.state.erApen) {
-            this.apne();
-        }
     }
 
     visElementInformasjon() {
@@ -239,7 +121,6 @@ class TiltakUtvidbar extends Component {
     sendSlett(event, id) {
         event.stopPropagation();
         this.props.sendSlett(id);
-        this.lukk();
     }
 
     sendLagre(nyeVerdier) {
@@ -266,16 +147,11 @@ class TiltakUtvidbar extends Component {
                 return (
                     <article
                         className="oppfolgingsdialogtabell__rad oppfolgingsdialogtabell__rad--element"
-                        ref={(ref) => { this.jstoggle = ref; }}
                         aria-label={element.tiltaknavn}>
-                        <UtvidbarButtonStyled
-                            aria-expanded={this.state.erApen}
-                            ref={(ref) => { this.utvidbarToggle = ref; }}
-                            onClick={(event) => { this.toggle(event); }}>
-                            <div ref={(ref) => { this.utvidbar = ref; }} className="oppfolgingsdialogtabell__utvidbarrad">
+
+                            <div className="oppfolgingsdialogtabell__utvidbarrad">
                                 <TiltakListeRad
                                     tiltak={element}
-                                    erApen={this.state.erApen}
                                     fnr={fnr}
                                     sendSlett={this.sendSlett}
                                     lagreSkjema={this.state.visLagreSkjema}
@@ -284,48 +160,38 @@ class TiltakUtvidbar extends Component {
                                     visLagreKommentarSkjema={this.visLagreKommentarSkjema}
                                 />
                             </div>
-                        </UtvidbarButtonStyled>
-                        <div
-                            style={{ height: this.state.hoyde }}
-                            className={`utvidbar__innholdContainer${this.state.containerClassName}`}
-                            onTransitionEnd={() => {
-                                this.onTransitionEnd();
-                            }}>
-                            <div ref={(ref) => { this.innhold = ref; }}>
-                                { this.state.visInnhold && !this.state.visLagreSkjema &&
-                                    <TiltakInformasjon
-                                        element={element}
-                                        fnr={fnr}
-                                        lagreKommentarSkjema={this.state.lagreKommentarSkjema}
-                                        skjulLagreKommentarSkjema={this.skjulLagreKommentarSkjema}
-                                        sendLagreKommentar={sendLagreKommentar}
-                                        sendSlettKommentar={sendSlettKommentar}
-                                        oppdaterTiltakFeilet={this.state.visLagringFeilet}
-                                        varselTekst={this.state.varselTekst}
-                                        tiltakReducer={tiltakReducer}
-                                        kommentarReducer={kommentarReducer}
-                                        feilMelding={feilMelding}
-                                        visFeilMelding={visFeilMelding}
-                                        rootUrlImg={rootUrlImg}
-                                    />
-                                }
-                                { this.state.visInnhold && this.state.visLagreSkjema &&
-                                    <TiltakSkjema
-                                        sendLagre={this.sendLagre}
-                                        tiltak={element}
-                                        form={element.tiltakId.toString()}
-                                        fnr={fnr}
-                                        id={element.tiltakId}
-                                        avbryt={this.visElementInformasjon}
-                                        oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
-                                        varselTekst={this.state.varselTekst}
-                                        visFeilMelding={visFeilMelding}
-                                        tiltakReducer={tiltakReducer}
-                                        rootUrlImg={rootUrlImg}
-                                    />
-                                }
-                            </div>
-                        </div>
+                        {!this.state.visLagreSkjema &&
+                        <TiltakInformasjon
+                            element={element}
+                            fnr={fnr}
+                            lagreKommentarSkjema={this.state.lagreKommentarSkjema}
+                            skjulLagreKommentarSkjema={this.skjulLagreKommentarSkjema}
+                            sendLagreKommentar={sendLagreKommentar}
+                            sendSlettKommentar={sendSlettKommentar}
+                            oppdaterTiltakFeilet={this.state.visLagringFeilet}
+                            varselTekst={this.state.varselTekst}
+                            tiltakReducer={tiltakReducer}
+                            kommentarReducer={kommentarReducer}
+                            feilMelding={feilMelding}
+                            visFeilMelding={visFeilMelding}
+                            rootUrlImg={rootUrlImg}
+                        />
+                        }
+                        {this.state.visLagreSkjema &&
+                        <TiltakSkjema
+                            sendLagre={this.sendLagre}
+                            tiltak={element}
+                            form={element.tiltakId.toString()}
+                            fnr={fnr}
+                            id={element.tiltakId}
+                            avbryt={this.visElementInformasjon}
+                            oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
+                            varselTekst={this.state.varselTekst}
+                            visFeilMelding={visFeilMelding}
+                            tiltakReducer={tiltakReducer}
+                            rootUrlImg={rootUrlImg}
+                        />
+                        }
                         {this.state.visSlettingFeilet && feilMelding &&
                             <TiltakVarselFeilStyled>
                                 <TiltakVarselFeil
@@ -350,7 +216,6 @@ TiltakUtvidbar.propTypes = {
     sendLagre: PropTypes.func,
     sendSlettKommentar: PropTypes.func,
     sendLagreKommentar: PropTypes.func,
-    erApen: PropTypes.bool.isRequired,
     kommentarReducer: kommentarReducerPt,
     tiltakReducer: tiltakReducerPt,
     visFeilMelding: PropTypes.func,
@@ -360,7 +225,6 @@ TiltakUtvidbar.propTypes = {
 };
 
 TiltakUtvidbar.defaultProps = {
-    erApen: false,
     Overskrift: 'H3',
 };
 
