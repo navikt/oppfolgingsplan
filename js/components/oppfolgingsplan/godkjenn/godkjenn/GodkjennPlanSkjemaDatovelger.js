@@ -46,7 +46,6 @@ export const GodkjennPlanSkjemaDatovelgerFelt = (
                 {felt.tekst}
             </label>
             <Datovelger
-                name={felt.navn}
                 id={felt.navn}
                 tidligsteFom={null}
                 dato={date || window.sessionStorage.getItem(felt.navn)}

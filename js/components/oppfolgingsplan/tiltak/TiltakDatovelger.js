@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DatovelgerTiltak from '../../skjema/DatovelgerTiltak';
+import Datovelger from '../../skjema/Datovelger';
 import { restdatoTildato } from '../../../utils/datoUtils';
 import { tiltakPt } from '../../../propTypes/opproptypes';
 import {
@@ -16,8 +16,7 @@ export const TiltakDatovelgerFelt = (
     return (
         <div className="tiltakSkjema__datovelger__felt">
             <label htmlFor={felt.navn}>{felt.tekst}</label>
-            <DatovelgerTiltak
-                name={felt.navn}
+            <Datovelger
                 id={felt.navn}
                 dato={dato ? restdatoTildato(dato) : null}
             />
