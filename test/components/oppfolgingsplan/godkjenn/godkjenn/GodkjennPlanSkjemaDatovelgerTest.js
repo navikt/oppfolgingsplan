@@ -89,8 +89,8 @@ describe('GodkjennPlanSkjemaDatovelger', () => {
             expect(komponent.find('label')).to.have.length(1);
         });
 
-        it('Skal vise en Datovelger med feltets navn', () => {
-            expect(komponent.find(Datovelger).prop('name')).to.equal(felt.navn);
+        it('Skal vise en Datovelger med riktig id satt', () => {
+            expect(komponent.find(Datovelger).prop('id')).to.equal(felt.navn);
             expect(komponent.find(Datovelger)).to.have.length(1);
         });
     });
