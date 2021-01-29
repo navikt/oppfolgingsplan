@@ -504,7 +504,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
                         />
                     }
                     {
-                        (this.state.errorList.length > 0 )&&
+                        this.state.errorList.length > 0 &&
                         <Feiloppsummering
                             tittel="For å gå videre må du rette opp følgende:"
                             feil={this.state.errorList}
