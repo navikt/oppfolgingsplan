@@ -5,7 +5,7 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import getArbeidsoppgave from '../../../mock/mockArbeidsoppgave';
 import ArbeidsoppgaverListe from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/ArbeidsoppgaverListe';
-import ArbeidsoppgaveUtvidbar from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/ArbeidsoppgaveUtvidbar';
+import Arbeidsoppgave from '../../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgave';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -28,6 +28,6 @@ describe('ArbeidsoppgaverListe', () => {
     });
 
     it('Skal vise antall TabellRadUtvidbar lik antall arbeidsoppgaver', () => {
-        expect(komponent.find(ArbeidsoppgaveUtvidbar)).to.have.length(liste.length);
+        expect(komponent.find(Arbeidsoppgave)).to.have.length(liste.length);
     });
 });

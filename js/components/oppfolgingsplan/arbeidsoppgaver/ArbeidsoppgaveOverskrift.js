@@ -40,15 +40,14 @@ export const hentArbeidsoppgaveUnderTekst = (arbeidsoppgave) => {
     return texts.hentArbeidsoppgaveUnderTekst.ikkeVurdert;
 };
 
-const ArbeidsoppgaveUtvidbarOverskriftKolonneImg = styled.div`
+const ArbeidsoppgaveOverskriftImg = styled.div`
     display: flex;
     align-self: flex-start;
     flex-grow: 0;
 `;
 
-const ArbeidsoppgaveUtvidbarOverskrift = (
+const ArbeidsoppgaveOverskrift = (
     {
-        erApen,
         fnr,
         arbeidsoppgave,
         lagreSkjema,
@@ -58,10 +57,10 @@ const ArbeidsoppgaveUtvidbarOverskrift = (
     }) => {
     return (<div className="arbeidsoppgaveTabellUtvidbarOverskrift">
         <div className="arbeidsoppgaverListe__kol">
-            <ArbeidsoppgaveUtvidbarOverskriftKolonneImg>
-                <img className="arbeidsoppgaveUtvidbarOverskrift__ikon" src={hentArbeidsoppgaveIkon(arbeidsoppgave, rootUrlImg)} alt="" />
-            </ArbeidsoppgaveUtvidbarOverskriftKolonneImg>
-            <div className="arbeidsoppgaveUtvidbarOverskrift__tekst">
+            <ArbeidsoppgaveOverskriftImg>
+                <img className="arbeidsoppgaveOverskrift__ikon" src={hentArbeidsoppgaveIkon(arbeidsoppgave, rootUrlImg)} alt="" />
+            </ArbeidsoppgaveOverskriftImg>
+            <div className="arbeidsoppgaveOverskrift__tekst">
                 <p>{arbeidsoppgave.arbeidsoppgavenavn}</p>
                 <p>{hentArbeidsoppgaveUnderTekst(arbeidsoppgave)}</p>
                 <ArbeidsoppgaveInformasjonKnapper
@@ -72,13 +71,11 @@ const ArbeidsoppgaveUtvidbarOverskrift = (
                     sendSlett={sendSlett}
                 />
             </div>
-            <i className={`nav-frontend-chevron ${erApen ? 'chevron--opp' : 'chevron--ned'} chevron--stor`} />
         </div>
     </div>);
 };
 
-ArbeidsoppgaveUtvidbarOverskrift.propTypes = {
-    erApen: PropTypes.bool,
+ArbeidsoppgaveOverskrift.propTypes = {
     fnr: PropTypes.string,
     arbeidsoppgave: arbeidsoppgavePt,
     lagreSkjema: PropTypes.bool,
@@ -87,4 +84,4 @@ ArbeidsoppgaveUtvidbarOverskrift.propTypes = {
     rootUrlImg: PropTypes.string,
 };
 
-export default ArbeidsoppgaveUtvidbarOverskrift;
+export default ArbeidsoppgaveOverskrift;
