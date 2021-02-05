@@ -6,7 +6,7 @@ import {
 } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
-import { Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import getTiltak from '../../../mock/mockTiltak';
 import TiltakKnapper from '../../../../js/components/oppfolgingsplan/tiltak/TiltakKnapper';
@@ -17,6 +17,8 @@ import {
     TiltakSkjemaKomponent,
     FELTER,
 } from '../../../../js/components/oppfolgingsplan/tiltak/TiltakSkjema';
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -68,11 +70,17 @@ describe('TiltakSkjema', () => {
 
     describe('TiltakBeskrivelse', () => {
         const felt = FELTER.beskrivelse;
-        const komponent1 = shallow(<TiltakBeskrivelse
-            felt={felt}
-            tiltak={tiltak}
-            fnr={fnr}
-        />);
+        const store = createStore(() => ({}));
+        const Form = reduxForm({form:'testForm'})(TiltakBeskrivelse);
+        const komponent1 = mount(
+            <Provider store={store}>
+                <Form
+                    felt={felt}
+                    tiltak={tiltak}
+                    fnr={fnr}
+                />
+            </Provider>
+        );
 
         it('Skal vise en label', () => {
             expect(komponent1.find('label')).to.have.length(1);
