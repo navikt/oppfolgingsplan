@@ -149,15 +149,13 @@ export const ArbeidsoppgaveBeskrivelse = ({ felt, gjennomfoeringSvarValgt }) => 
         : felt.spoersmaal.tilrettelegging;
     return (
         <div className="skjemaelement lagrearbeidsoppgaveskjema__inputgruppe">
-            <label className="skjemaelement__label" id={felt.navn} htmlFor={`${felt.navn}-input`}>
-                {spoersmaal}
-            </label>
             <Field
                 className="input--fullbredde"
                 name={felt.navn}
                 id={`${felt.navn}-input`}
                 aria-labelledby={felt.navn}
                 maxLength={MAX_LENGTH}
+                label={spoersmaal}
                 component={Tekstomraade}
                 placeholder="Skriv inn tekst"
                 rows="5"

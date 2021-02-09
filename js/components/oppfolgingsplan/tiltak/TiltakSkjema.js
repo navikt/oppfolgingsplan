@@ -107,14 +107,12 @@ export const TiltakBeskrivelse = (
         </div>
         :
         <div className="lagretiltakskjema__inputgruppe">
-            <label className="skjemaelement__label" id={felt.navn} htmlFor={`${felt.navn}-input`}>
-                <b>{felt.tekst}</b>
-            </label>
             <Field
                 className="input__tiltak--beskrivelse"
                 name={felt.navn}
                 id={`${felt.navn}-input`}
                 aria-labelledby={felt.navn}
+                label={felt.tekst}
                 component={TekstOmrade}
                 placeholder="Skriv her"
             />
