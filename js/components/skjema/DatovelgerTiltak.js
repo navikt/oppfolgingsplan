@@ -6,12 +6,7 @@ import MaskedInput from 'react-maskedinput';
 import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import Feilmelding from './Feilmelding';
 import DayPickerComponent from './DayPicker';
-import {
-    erGyldigDato,
-    erGyldigDatoformat,
-} from '../../utils/datoUtils';
 import { fieldPropTypes } from '../../propTypes/fieldproptypes';
-
 export const DATOVELGERFELT_SKJEMA = 'DATOVELGERFELT_SKJEMA';
 
 export class DatoField extends Component {
@@ -151,29 +146,17 @@ const mapStateToProps = (state, ownProps) => {
     const inputValue = selector(state, inputName);
     return {
         inputValue,
+        isFormSubmitted: ownProps.isFormSubmitted,
     };
 };
 
 const ConnectedDatoField = connect(mapStateToProps)(DatoField);
 
-export const validerDatoField = (input) => {
-    if (!input) {
-        return 'Du må oppgi en dato';
-    } else if (!erGyldigDatoformat(input)) {
-        return 'Datoen må være på formatet dd.mm.åååå';
-    } else if (!erGyldigDato(input)) {
-        return 'Datoen er ikke gyldig';
-    }
-    return undefined;
-};
-
 const DatovelgerTiltak = (props) => {
     return (<Field
         component={ConnectedDatoField}
         skjemanavn={DATOVELGERFELT_SKJEMA}
-        validate={(input) => {
-            return validerDatoField(input);
-        }}
+        validate={props.isFormSubmitted ? props.validateDato : undefined}
         {...props} />);
 };
 
@@ -181,6 +164,8 @@ DatovelgerTiltak.propTypes = {
     tidligsteFom: PropTypes.instanceOf(Date),
     senesteTom: PropTypes.instanceOf(Date),
     initialize: PropTypes.func,
+    validateDato: PropTypes.func,
+    isFormSubmitted: PropTypes.bool,
 };
 
 export default DatovelgerTiltak;

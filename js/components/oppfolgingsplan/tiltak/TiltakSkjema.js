@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
-import { Panel } from 'nav-frontend-paneler';
-import {
-    STATUS_TILTAK,
-    tekstfeltRegex,
-} from '../../../konstanter';
-import {
-    restdatoTildato,
-    sluttDatoSenereEnnStartDato,
-} from '../../../utils/datoUtils';
-import {
-    konvertDatoTiltak,
-    konvertDatoTiltakMedPunkt,
-} from '../../../utils/tiltakUtils';
-import {
-    tiltakPt,
-    tiltakReducerPt,
-} from '../../../propTypes/opproptypes';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { Panel} from 'nav-frontend-paneler';
+import { Feiloppsummering} from 'nav-frontend-skjema';
+import { STATUS_TILTAK, tekstfeltRegex } from '../../../konstanter';
+import { erGyldigDato, erGyldigDatoformat, restdatoTildato, sluttDatoSenereEnnStartDato } from '../../../utils/datoUtils';
+import { konvertDatoTiltak, konvertDatoTiltakMedPunkt} from '../../../utils/tiltakUtils';
+import { tiltakPt, tiltakReducerPt } from '../../../propTypes/opproptypes';
 import TekstFelt from '../../skjema/TekstFelt';
 import TekstOmrade from '../../skjema/TekstOmrade';
 import TiltakDatovelger from './TiltakDatovelger';
@@ -45,18 +34,22 @@ const texts = {
 export const FELTER = {
     tiltaknavn: {
         navn: 'tiltaknavn',
+        id: 'tiltaknavn-input',
         tekst: texts.felter.tiltaknavn,
     },
     beskrivelse: {
         navn: 'beskrivelse',
+        id: 'beskrivelse-input',
         tekst: texts.felter.beskrivelse,
     },
     startdato: {
         navn: 'fom',
+        id: 'fom',
         tekst: texts.felter.startdato,
     },
     sluttdato: {
         navn: 'tom',
+        id: 'tom',
         tekst: texts.felter.sluttdato,
     },
 };
@@ -65,7 +58,7 @@ export const aktoerHarOpprettetElement = (fnr, tiltak) => {
     return fnr === tiltak.opprettetAv.fnr;
 };
 
-export const TiltakNavn = ({ felt }) => {
+export const TiltakNavn = ({felt, isFormSubmitted, validate}) => {
     return (<div className="lagretiltakskjema__inputgruppe">
         <label
             className="skjemaelement__label"
@@ -76,16 +69,19 @@ export const TiltakNavn = ({ felt }) => {
         <Field
             className="input--fullbredde"
             name={felt.navn}
-            id={`${felt.navn}-input`}
+            id={`${felt.id}`}
             aria-labelledby={felt.navn}
             component={TekstFelt}
             placeholder="Skriv her"
+            validate={isFormSubmitted ? validate : undefined}
         />
     </div>);
 };
 
 TiltakNavn.propTypes = {
     felt: tiltakSkjemaFeltPt,
+    isFormSubmitted: PropTypes.bool,
+    validate: PropTypes.func,
 };
 
 export const TiltakBeskrivelse = (
@@ -93,15 +89,17 @@ export const TiltakBeskrivelse = (
         felt,
         tiltak,
         fnr,
+        isFormSubmitted,
+        validate,
     }) => {
     return (tiltak && tiltak.opprettetAv && !aktoerHarOpprettetElement(fnr, tiltak) ?
         <div className="lagretiltakskjema__inputgruppe">
-            { tiltak && tiltak.beskrivelse &&
+            {tiltak && tiltak.beskrivelse &&
             [
                 <label key={`tiltak-besk-label-${tiltak.tiltakId}`} className="tiltaktabell--beskrivelse">
                     {texts.felter.beskrivelseLabel}
                 </label>,
-                <p key={`tiltak-besk-p-${tiltak.tiltakId}`} >{tiltak.beskrivelse}</p>,
+                <p key={`tiltak-besk-p-${tiltak.tiltakId}`}>{tiltak.beskrivelse}</p>,
             ]
             }
         </div>
@@ -115,6 +113,7 @@ export const TiltakBeskrivelse = (
                 label={felt.tekst}
                 component={TekstOmrade}
                 placeholder="Skriv her"
+                validate={isFormSubmitted ? validate : undefined}
             />
             <TiltakInfoVarsel
                 tekst={texts.felter.beskrivelsePersonvern}
@@ -126,6 +125,8 @@ TiltakBeskrivelse.propTypes = {
     felt: tiltakSkjemaFeltPt,
     tiltak: tiltakPt,
     fnr: PropTypes.string,
+    isFormSubmitted: PropTypes.bool,
+    validate: PropTypes.func,
 };
 
 export class TiltakSkjemaKomponent extends Component {
@@ -135,6 +136,7 @@ export class TiltakSkjemaKomponent extends Component {
             status: STATUS_TILTAK.FORSLAG,
             visLagringFeiletNyTiltak: false,
             varselTekst: '',
+            errorList: [],
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.setStatus = this.setStatus.bind(this);
@@ -142,6 +144,7 @@ export class TiltakSkjemaKomponent extends Component {
         this.visFeiletTiltak = this.visFeiletTiltak.bind(this);
         this.avbryt = this.avbryt.bind(this);
     }
+
     componentDidMount() {
         this.handleInitialize();
     }
@@ -155,7 +158,7 @@ export class TiltakSkjemaKomponent extends Component {
     visFeiletTiltak() {
         return ((!this.props.tiltakReducer.tiltakId && !this.props.tiltak && this.props.tiltakReducer.tiltak) ||
             (this.props.tiltakReducer.tiltak && this.props.tiltak &&
-            this.props.tiltakReducer.tiltakId && this.props.tiltak.tiltakId === this.props.tiltakReducer.tiltakId));
+                this.props.tiltakReducer.tiltakId && this.props.tiltak.tiltakId === this.props.tiltakReducer.tiltakId));
     }
 
     handleInitialize() {
@@ -173,14 +176,67 @@ export class TiltakSkjemaKomponent extends Component {
         } else {
             initData.status = this.state.status;
         }
-        this.setStatus(initData.status);
+        this.setState({
+            isFormSubmitted: false,
+            status: initData.status,
+        });
         this.props.initialize(initData);
     }
 
     hentSkjemaClassName() {
         return this.props.tiltak ? 'tiltaktabell__rad__utvidbar' : 'tiltakSkjema';
     }
+
     handleSubmit(values) {
+        const errorObject = {
+            tiltaknavn: '',
+            beskrivelse: '',
+            gjennomfoering: '',
+            beskrivelseIkkeAktuelt: '',
+            tom: '',
+            fom: '',
+            _error: 'Validering av tiltakskjema feilet',
+        };
+
+        this.setState({
+            isFormSubmitted: true,
+        });
+
+        const errorList = [];
+        const feilmeldingerObject = this.validateAllFields(values);
+
+        if (feilmeldingerObject.tiltaknavn) {
+            errorObject.tiltaknavn = feilmeldingerObject.tiltaknavn;
+            errorList.push({skjemaelementId: FELTER.tiltaknavn.id, feilmelding: feilmeldingerObject.tiltaknavn});
+        }
+
+        if (feilmeldingerObject.beskrivelse) {
+            errorObject.beskrivelse = feilmeldingerObject.beskrivelse;
+            errorList.push({skjemaelementId: FELTER.beskrivelse.id, feilmelding: feilmeldingerObject.beskrivelse});
+        }
+
+        if (feilmeldingerObject.fom) {
+            errorObject.fom = feilmeldingerObject.fom;
+            errorList.push({skjemaelementId: FELTER.startdato.id, feilmelding: feilmeldingerObject.fom});
+        }
+
+        if (feilmeldingerObject.tom) {
+            errorObject.tom = feilmeldingerObject.tom;
+            errorList.push({skjemaelementId: FELTER.sluttdato.id, feilmelding: feilmeldingerObject.tom});
+        }
+
+        if (feilmeldingerObject.tiltaknavn || feilmeldingerObject.beskrivelse || feilmeldingerObject.fom || feilmeldingerObject.tom) {
+            this.setState({
+                errorList,
+            });
+
+            throw new SubmissionError(errorObject);
+        }
+
+        this.setState({
+            errorList: [],
+        });
+
         const nyeVerdier = Object.assign(values);
         if (this.props.tiltak) {
             nyeVerdier.tiltakId = this.props.tiltak.tiltakId;
@@ -199,6 +255,121 @@ export class TiltakSkjemaKomponent extends Component {
         return !this.props.tiltak;
     }
 
+    updateFeilOppsummeringState = (feilmelding, elementId) => {
+        const i = this.state.errorList.findIndex((obj => obj.skjemaelementId === elementId));
+        let errorList = this.state.errorList;
+
+        if (i > -1 && feilmelding !== undefined) {
+            errorList[i].feilmelding = feilmelding;
+        } else if (i > -1 && feilmelding === undefined) {
+            errorList.splice(i, 1);
+            this.setState({
+                errorlist: errorList,
+            })
+        } else if (i === -1 && feilmelding !== undefined) {
+            errorList.push({skjemaelementId: elementId, feilmelding: feilmelding})
+        }
+    }
+
+    validateTiltaknavnFelt = (value) => {
+        let feilmelding = undefined;
+
+        if (!value || value.trim().length === 0) {
+            feilmelding = 'Fyll inn tiltak';
+        } else if (value.match(tekstfeltRegex)) {
+            feilmelding = 'Ugyldig spesialtegn er oppgitt';
+        }
+
+        const navnLengde = value ? value.length : 0;
+        const navnMaksLengde = 100;
+
+        if (navnLengde > navnMaksLengde) {
+            feilmelding = `Maks ${navnMaksLengde} tegn tillatt`;
+        }
+
+        this.updateFeilOppsummeringState(feilmelding, FELTER.tiltaknavn.id);
+
+        return feilmelding;
+    }
+
+    validateDatoFelt = (value) => {
+        let feilmelding = undefined;
+
+        if (!value || value.trim().length === 0) {
+            feilmelding = 'Du må oppgi en dato';
+        } else if (!erGyldigDatoformat(value)) {
+            feilmelding = 'Datoen må være på formatet dd.mm.åååå';
+        } else if (!erGyldigDato(value)) {
+            feilmelding = 'Datoen er ikke gyldig';
+        }
+
+        return feilmelding;
+    };
+
+    validateStartDato = (value) => {
+        this.state.fom = value;
+        const feilmelding = this.validateDatoFelt(value);
+
+        this.updateFeilOppsummeringState(feilmelding, FELTER.startdato.id);
+
+        if (feilmelding === undefined) {
+            this.props.untouch(OPPRETT_TILTAK_NY, 'fom');
+        }
+
+        return feilmelding;
+    }
+
+    validateSluttDato = (value) => {
+        this.props.touch(OPPRETT_TILTAK_NY, 'tom');
+        let feilmelding = this.validateDatoFelt(value);
+
+        if ((this.state.fom && value) && !sluttDatoSenereEnnStartDato(konvertDatoTiltakMedPunkt(this.state.fom), konvertDatoTiltakMedPunkt(value))) {
+            feilmelding = 'Sluttdato må være etter startdato';
+        }
+        this.updateFeilOppsummeringState(feilmelding, FELTER.sluttdato.id);
+
+        if (feilmelding === undefined) {
+            this.props.untouch(OPPRETT_TILTAK_NY, 'tom');
+        }
+
+        return feilmelding;
+    }
+
+    validateBeskrivelseFelt = (value) => {
+        let feilmelding = undefined;
+
+        if (!value || value.trim().length === 0) {
+            feilmelding = 'Fyll inn beskrivelse';
+        } else if (value.match(tekstfeltRegex)) {
+            feilmelding = 'Ugyldig spesialtegn er oppgitt';
+        }
+
+        const beskrivelseLengde = value ? value.length : 0;
+        const beskrivelseMaksLengde = 2000;
+
+        if (beskrivelseLengde > beskrivelseMaksLengde) {
+            feilmelding = `Maks ${beskrivelseMaksLengde} tegn tillatt`;
+        }
+
+        this.updateFeilOppsummeringState(feilmelding, FELTER.beskrivelse.id);
+
+        return feilmelding;
+    }
+
+    validateAllFields = (values) => {
+        const tiltaknavnValue = values.tiltaknavn;
+        const beskrivelseValue = values.beskrivelse;
+        const fomValue = values.fom;
+        const tomValue = values.tom;
+
+        return {
+            tiltaknavn: this.validateTiltaknavnFelt(tiltaknavnValue),
+            beskrivelse: this.validateBeskrivelseFelt(beskrivelseValue),
+            fom: this.validateSluttDato(fomValue),
+            tom: this.validateSluttDato(tomValue),
+        };
+    }
+
     render() {
         const {
             tiltak,
@@ -212,33 +383,47 @@ export class TiltakSkjemaKomponent extends Component {
         return (
             <Panel border={this.border()}>
                 <div className="utvidbar__innholdContainer">
-                    <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()} >
+                    <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()}>
 
-                        { (!tiltak || !tiltak.opprettetAv || aktoerHarOpprettetElement(fnr, tiltak)) &&
+                        {(!tiltak || !tiltak.opprettetAv || aktoerHarOpprettetElement(fnr, tiltak)) &&
                         <TiltakNavn
                             felt={FELTER.tiltaknavn}
+                            validate={this.validateTiltaknavnFelt}
+                            isFormSubmitted={this.state.isFormSubmitted}
                         />
                         }
                         <TiltakBeskrivelse
                             felt={FELTER.beskrivelse}
                             tiltak={tiltak}
                             fnr={fnr}
+                            validate={this.validateBeskrivelseFelt}
+                            isFormSubmitted={this.state.isFormSubmitted}
                         />
 
                         <TiltakForeslaattAv
                             tiltak={tiltak}
                         />
 
-                        { this.state.status !== STATUS_TILTAK.IKKE_AKTUELT &&
+                        {this.state.status !== STATUS_TILTAK.IKKE_AKTUELT &&
                         <TiltakDatovelger
                             felter={FELTER}
                             tiltak={this.visFeiletTiltak() ? tiltakReducer.tiltak : tiltak}
+                            validateStartdato={this.validateStartDato}
+                            validateSluttdato={this.validateSluttDato}
+                            isFormSubmitted={this.state.isFormSubmitted}
                         />
                         }
 
-                        { oppdateringFeilet &&
+                        {oppdateringFeilet &&
                         <TiltakVarselFeil
                             tekst={varselTekst}
+                        />
+                        }
+
+                        {this.state.errorList.length > 0 &&
+                        <Feiloppsummering
+                            tittel="For å gå videre må du rette opp følgende:"
+                            feil={this.state.errorList}
                         />
                         }
 
@@ -267,39 +452,8 @@ TiltakSkjemaKomponent.propTypes = {
     tiltakReducer: tiltakReducerPt,
 };
 
-const validate = (values) => {
-    const feilmeldinger = {};
-    if (!values.tiltaknavn || values.tiltaknavn.trim().length === 0) {
-        feilmeldinger.tiltaknavn = 'Fyll inn tiltak';
-    } else if (values.tiltaknavn.match(tekstfeltRegex)) {
-        feilmeldinger.tiltaknavn = 'Ugyldig spesialtegn er oppgitt';
-    }
-    const navnLengde = values.tiltaknavn ? values.tiltaknavn.length : 0;
-    const navnMaksLengde = 100;
-    if (navnLengde > navnMaksLengde) {
-        feilmeldinger.tiltaknavn = `Maks ${navnMaksLengde} tegn tillatt`;
-    }
-    if (!values.beskrivelse || values.beskrivelse.trim().length === 0) {
-        feilmeldinger.beskrivelse = 'Fyll inn beskrivelse';
-    } else if (values.beskrivelse.match(tekstfeltRegex)) {
-        feilmeldinger.beskrivelse = 'Ugyldig spesialtegn er oppgitt';
-    }
-    const beskrivelseLengde = values.beskrivelse ? values.beskrivelse.length : 0;
-    const beskrivelseMaksLengde = 2000;
-    if (beskrivelseLengde > beskrivelseMaksLengde) {
-        feilmeldinger.beskrivelse = `Maks ${beskrivelseMaksLengde} tegn tillatt`;
-    }
-
-    if (values.fom && values.tom && !sluttDatoSenereEnnStartDato(konvertDatoTiltakMedPunkt(values.fom), konvertDatoTiltakMedPunkt(values.tom))) {
-        feilmeldinger.tom = 'Sluttdato må være etter startdato';
-    }
-
-    return feilmeldinger;
-};
-
 const ReduxSkjema = reduxForm({
     form: OPPRETT_TILTAK_NY,
-    validate,
 })(TiltakSkjemaKomponent);
 
 export default ReduxSkjema;

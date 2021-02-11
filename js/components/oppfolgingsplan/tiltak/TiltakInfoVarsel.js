@@ -5,7 +5,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 const TiltakInfoVarsel = ({ tekst }) => {
     return (<Alertstripe
         type="info"
-        className="alertstripe--notifikasjonboks">
+        className="alertstripe--notifikasjonboks  alertstripe--notifikasjonboks--top-padded">
         {tekst}
     </Alertstripe>);
 };
