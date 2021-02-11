@@ -58,18 +58,22 @@ export const aktoerHarOpprettetElement = (fnr, tiltak) => {
     return fnr === tiltak.opprettetAv.fnr;
 };
 
-export const TiltakNavn = ({felt, isFormSubmitted, validate}) => {
+export const TiltakNavn = ({
+                               felt,
+                               isFormSubmitted,
+                               validate
+                           }) => {
     return (<div className="lagretiltakskjema__inputgruppe">
         <label
             className="skjemaelement__label"
             id={felt.navn}
-            htmlFor={`${felt.navn}-input`}>
+            htmlFor={felt.id}>
             <b>{felt.tekst}</b>
         </label>
         <Field
             className="input--fullbredde"
             name={felt.navn}
-            id={`${felt.id}`}
+            id={felt.id}
             aria-labelledby={felt.navn}
             component={TekstFelt}
             placeholder="Skriv her"
@@ -191,8 +195,6 @@ export class TiltakSkjemaKomponent extends Component {
         const errorObject = {
             tiltaknavn: '',
             beskrivelse: '',
-            gjennomfoering: '',
-            beskrivelseIkkeAktuelt: '',
             tom: '',
             fom: '',
             _error: 'Validering av tiltakskjema feilet',
