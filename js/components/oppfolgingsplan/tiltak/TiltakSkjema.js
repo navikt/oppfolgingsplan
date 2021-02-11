@@ -58,11 +58,12 @@ export const aktoerHarOpprettetElement = (fnr, tiltak) => {
     return fnr === tiltak.opprettetAv.fnr;
 };
 
-export const TiltakNavn = ({
-                               felt,
-                               isFormSubmitted,
-                               validate
-                           }) => {
+export const TiltakNavn = (
+    {
+        felt,
+        isFormSubmitted,
+        validate
+    }) => {
     return (<div className="lagretiltakskjema__inputgruppe">
         <label
             className="skjemaelement__label"

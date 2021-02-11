@@ -160,12 +160,13 @@ ArbeidsoppgaveNavn.propTypes = {
     validate: PropTypes.func,
 };
 
-export const ArbeidsoppgaveBeskrivelse = ({
-                                              felt,
-                                              gjennomfoeringSvarValgt,
-                                              isFormSubmitted,
-                                              validate,
-                                          }) => {
+export const ArbeidsoppgaveBeskrivelse = (
+    {
+        felt,
+        gjennomfoeringSvarValgt,
+        isFormSubmitted,
+        validate,
+    }) => {
     const spoersmaal = gjennomfoeringSvarValgt === KANGJENNOMFOERES.KAN_IKKE
         ? felt.spoersmaal.kanikke
         : felt.spoersmaal.tilrettelegging;
