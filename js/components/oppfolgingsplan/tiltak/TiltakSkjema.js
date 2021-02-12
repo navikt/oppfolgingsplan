@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { Panel} from 'nav-frontend-paneler';
-import { Feiloppsummering} from 'nav-frontend-skjema';
+import { Panel } from 'nav-frontend-paneler';
+import { Feiloppsummering } from 'nav-frontend-skjema';
 import { STATUS_TILTAK, tekstfeltRegex } from '../../../konstanter';
 import { erGyldigDato, erGyldigDatoformat, restdatoTildato, sluttDatoSenereEnnStartDato } from '../../../utils/datoUtils';
-import { konvertDatoTiltak, konvertDatoTiltakMedPunkt} from '../../../utils/tiltakUtils';
+import { konvertDatoTiltak, konvertDatoTiltakMedPunkt } from '../../../utils/tiltakUtils';
 import { tiltakPt, tiltakReducerPt } from '../../../propTypes/opproptypes';
 import TekstFelt from '../../skjema/TekstFelt';
 import TekstOmrade from '../../skjema/TekstOmrade';
@@ -62,7 +62,7 @@ export const TiltakNavn = (
     {
         felt,
         isFormSubmitted,
-        validate
+        validate,
     }) => {
     return (<div className="lagretiltakskjema__inputgruppe">
         <label
@@ -210,22 +210,22 @@ export class TiltakSkjemaKomponent extends Component {
 
         if (feilmeldingerObject.tiltaknavn) {
             errorObject.tiltaknavn = feilmeldingerObject.tiltaknavn;
-            errorList.push({skjemaelementId: FELTER.tiltaknavn.id, feilmelding: feilmeldingerObject.tiltaknavn});
+            errorList.push({ skjemaelementId: FELTER.tiltaknavn.id, feilmelding: feilmeldingerObject.tiltaknavn });
         }
 
         if (feilmeldingerObject.beskrivelse) {
             errorObject.beskrivelse = feilmeldingerObject.beskrivelse;
-            errorList.push({skjemaelementId: FELTER.beskrivelse.id, feilmelding: feilmeldingerObject.beskrivelse});
+            errorList.push({ skjemaelementId: FELTER.beskrivelse.id, feilmelding: feilmeldingerObject.beskrivelse });
         }
 
         if (feilmeldingerObject.fom) {
             errorObject.fom = feilmeldingerObject.fom;
-            errorList.push({skjemaelementId: FELTER.startdato.id, feilmelding: feilmeldingerObject.fom});
+            errorList.push({ skjemaelementId: FELTER.startdato.id, feilmelding: feilmeldingerObject.fom });
         }
 
         if (feilmeldingerObject.tom) {
             errorObject.tom = feilmeldingerObject.tom;
-            errorList.push({skjemaelementId: FELTER.sluttdato.id, feilmelding: feilmeldingerObject.tom});
+            errorList.push({ skjemaelementId: FELTER.sluttdato.id, feilmelding: feilmeldingerObject.tom });
         }
 
         if (feilmeldingerObject.tiltaknavn || feilmeldingerObject.beskrivelse || feilmeldingerObject.fom || feilmeldingerObject.tom) {
@@ -259,8 +259,8 @@ export class TiltakSkjemaKomponent extends Component {
     }
 
     updateFeilOppsummeringState = (feilmelding, elementId) => {
-        const i = this.state.errorList.findIndex((obj => obj.skjemaelementId === elementId));
-        let errorList = this.state.errorList;
+        const i = this.state.errorList.findIndex(((obj) => { return obj.skjemaelementId === elementId; }));
+        const errorList = this.state.errorList;
 
         if (i > -1 && feilmelding !== undefined) {
             errorList[i].feilmelding = feilmelding;
@@ -268,14 +268,14 @@ export class TiltakSkjemaKomponent extends Component {
             errorList.splice(i, 1);
             this.setState({
                 errorlist: errorList,
-            })
+            });
         } else if (i === -1 && feilmelding !== undefined) {
-            errorList.push({skjemaelementId: elementId, feilmelding: feilmelding})
+            errorList.push({ skjemaelementId: elementId, feilmelding });
         }
     }
 
     validateTiltaknavnFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
             feilmelding = 'Fyll inn tiltak';
@@ -296,7 +296,7 @@ export class TiltakSkjemaKomponent extends Component {
     }
 
     validateDatoFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
             feilmelding = 'Du må oppgi en dato';
@@ -339,7 +339,7 @@ export class TiltakSkjemaKomponent extends Component {
     }
 
     validateBeskrivelseFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
             feilmelding = 'Fyll inn beskrivelse';
@@ -368,7 +368,7 @@ export class TiltakSkjemaKomponent extends Component {
         return {
             tiltaknavn: this.validateTiltaknavnFelt(tiltaknavnValue),
             beskrivelse: this.validateBeskrivelseFelt(beskrivelseValue),
-            fom: this.validateSluttDato(fomValue),
+            fom: this.validateStartDato(fomValue),
             tom: this.validateSluttDato(tomValue),
         };
     }
