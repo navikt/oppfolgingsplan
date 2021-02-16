@@ -55,7 +55,6 @@ class Tiltak extends Component {
                     this.visElementInformasjon();
                     this.props.visFeilMelding(true);
                     this.visFeil(false, true, texts.updateError);
-                    this.apne();
                 } else if (nextProps.tiltakReducer.lagringFeilet) {
                     this.props.visFeilMelding(true);
                     this.visFeil(true, false, texts.updateError);
@@ -70,12 +69,6 @@ class Tiltak extends Component {
         } else if (!nextProps.tiltakReducer.lagringFeilet && !nextProps.tiltakReducer.slettingFeilet) {
             this.visFeil(false, false, '');
         }
-    }
-
-    apne() {
-        this.setState({
-            erApen: true,
-        });
     }
 
     visFeil(lagringFeilet, slettingFeilet, tekst) {
