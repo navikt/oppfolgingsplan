@@ -21,7 +21,6 @@ const TiltakVarselFeilStyled = styled.div`
 `;
 
 
-
 class Tiltak extends Component {
     constructor(props) {
         super(props);
@@ -70,6 +69,12 @@ class Tiltak extends Component {
         } else if (!nextProps.tiltakReducer.lagringFeilet && !nextProps.tiltakReducer.slettingFeilet) {
             this.visFeil(false, false, '');
         }
+    }
+
+    apne() {
+        this.setState({
+            erApen: true,
+        });
     }
 
     visFeil(lagringFeilet, slettingFeilet, tekst) {
@@ -147,17 +152,17 @@ class Tiltak extends Component {
                         className="oppfolgingsdialogtabell__rad oppfolgingsdialogtabell__rad--element"
                         aria-label={element.tiltaknavn}>
 
-                            <div className="oppfolgingsdialogtabell__radoverskrift">
-                                <TiltakListeRad
-                                    tiltak={element}
-                                    fnr={fnr}
-                                    sendSlett={this.sendSlett}
-                                    lagreSkjema={this.state.visLagreSkjema}
-                                    visLagreSkjema={this.visLagreSkjema}
-                                    lagreKommentarSkjema={this.state.lagreKommentarSkjema}
-                                    visLagreKommentarSkjema={this.visLagreKommentarSkjema}
-                                />
-                            </div>
+                        <div className="oppfolgingsdialogtabell__radoverskrift">
+                            <TiltakListeRad
+                                tiltak={element}
+                                fnr={fnr}
+                                sendSlett={this.sendSlett}
+                                lagreSkjema={this.state.visLagreSkjema}
+                                visLagreSkjema={this.visLagreSkjema}
+                                lagreKommentarSkjema={this.state.lagreKommentarSkjema}
+                                visLagreKommentarSkjema={this.visLagreKommentarSkjema}
+                            />
+                        </div>
                         {!this.state.visLagreSkjema &&
                         <TiltakInformasjon
                             element={element}
@@ -233,6 +238,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const TiltakContainer = connect(mapStateToProps, null, null, { pure:false })(Tiltak);
+const TiltakContainer = connect(mapStateToProps, null, null, { pure: false })(Tiltak);
 
 export default TiltakContainer;
