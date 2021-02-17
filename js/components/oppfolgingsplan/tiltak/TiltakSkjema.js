@@ -272,7 +272,7 @@ export class TiltakSkjemaKomponent extends Component {
         } else if (i === -1 && feilmelding !== undefined) {
             errorList.push({ skjemaelementId: elementId, feilmelding });
         }
-    }
+    };
 
     validateTiltaknavnFelt = (value) => {
         let feilmelding;
@@ -293,7 +293,7 @@ export class TiltakSkjemaKomponent extends Component {
         this.updateFeilOppsummeringState(feilmelding, FELTER.tiltaknavn.id);
 
         return feilmelding;
-    }
+    };
 
     validateDatoFelt = (value) => {
         let feilmelding;
@@ -320,7 +320,7 @@ export class TiltakSkjemaKomponent extends Component {
         }
 
         return feilmelding;
-    }
+    };
 
     validateSluttDato = (value) => {
         this.props.touch(OPPRETT_TILTAK_NY, 'tom');
@@ -336,7 +336,7 @@ export class TiltakSkjemaKomponent extends Component {
         }
 
         return feilmelding;
-    }
+    };
 
     validateBeskrivelseFelt = (value) => {
         let feilmelding;
@@ -357,7 +357,7 @@ export class TiltakSkjemaKomponent extends Component {
         this.updateFeilOppsummeringState(feilmelding, FELTER.beskrivelse.id);
 
         return feilmelding;
-    }
+    };
 
     validateAllFields = (values) => {
         const tiltaknavnValue = values.tiltaknavn;
@@ -371,7 +371,7 @@ export class TiltakSkjemaKomponent extends Component {
             fom: this.validateStartDato(fomValue),
             tom: this.validateSluttDato(tomValue),
         };
-    }
+    };
 
     render() {
         const {
