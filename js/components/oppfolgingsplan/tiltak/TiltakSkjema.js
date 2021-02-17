@@ -278,7 +278,7 @@ export class TiltakSkjemaKomponent extends Component {
         let feilmelding;
 
         if (!value || value.trim().length === 0) {
-            feilmelding = 'Fyll inn tiltak';
+            feilmelding = 'Fyll inn overskrift';
         } else if (value.match(tekstfeltRegex)) {
             feilmelding = 'Ugyldig spesialtegn er oppgitt';
         }
