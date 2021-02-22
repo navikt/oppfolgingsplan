@@ -117,20 +117,24 @@ export class GodkjennPlanLightboksComponent extends Component {
 
                 <div className="inputgruppe">
                     <div className="skjema__input">
-                        <Field
-                            className="checkboks"
-                            id="godkjennInput"
-                            name="godkjennInput"
-                            component={CheckboxSelvstendig}
-                            label={texts.checkboxLabel}
-                        />
-                        <Field
-                            className="checkboks"
-                            id="delMedNav"
-                            name="delMedNav"
-                            component={CheckboxSelvstendig}
-                            label={textDelMedNav(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}
-                        />
+                        <div className="skjema__checkbox-container">
+                            <Field
+                                className="checkboks"
+                                id="godkjennInput"
+                                name="godkjennInput"
+                                component={CheckboxSelvstendig}
+                                label={texts.checkboxLabel}
+                            />
+                        </div>
+                        <div className="skjema__checkbox-container">
+                            <Field
+                                className="checkboks"
+                                id="delMedNav"
+                                name="delMedNav"
+                                component={CheckboxSelvstendig}
+                                label={textDelMedNav(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}
+                            />
+                        </div>
                     </div>
                 </div>
 
