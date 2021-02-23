@@ -20,8 +20,6 @@ const TiltakVarselFeilStyled = styled.div`
     padding: 0 1em;
 `;
 
-
-
 class Tiltak extends Component {
     constructor(props) {
         super(props);
@@ -48,14 +46,15 @@ class Tiltak extends Component {
             this.skjulLagreKommentarSkjema();
         }
         if (this.props.element.tiltakId === nextProps.tiltakReducer.feiletTiltakId) {
-            if (((nextProps.tiltakReducer.lagringFeilet && nextProps.tiltakReducer.lagringFeilet !== this.props.tiltakReducer.lagringFeilet) ||
-                (nextProps.tiltakReducer.slettingFeilet && nextProps.tiltakReducer.slettingFeilet !== this.props.tiltakReducer.slettingFeilet))
+            if (((nextProps.tiltakReducer.lagringFeilet && nextProps.tiltakReducer.lagringFeilet !==
+                this.props.tiltakReducer.lagringFeilet) ||
+                (nextProps.tiltakReducer.slettingFeilet && nextProps.tiltakReducer.slettingFeilet !==
+                    this.props.tiltakReducer.slettingFeilet))
                 && nextProps.tiltakReducer.feiletTiltakId > 0) {
                 if (nextProps.tiltakReducer.slettingFeilet) {
                     this.visElementInformasjon();
                     this.props.visFeilMelding(true);
                     this.visFeil(false, true, texts.updateError);
-                    this.apne();
                 } else if (nextProps.tiltakReducer.lagringFeilet) {
                     this.props.visFeilMelding(true);
                     this.visFeil(true, false, texts.updateError);
@@ -145,60 +144,61 @@ class Tiltak extends Component {
                 return (
                     <article
                         className="oppfolgingsdialogtabell__rad oppfolgingsdialogtabell__rad--element"
-                        aria-label={element.tiltaknavn}>
+                        aria-label={ element.tiltaknavn }>
 
-                            <div className="oppfolgingsdialogtabell__radoverskrift">
-                                <TiltakListeRad
-                                    tiltak={element}
-                                    fnr={fnr}
-                                    sendSlett={this.sendSlett}
-                                    lagreSkjema={this.state.visLagreSkjema}
-                                    visLagreSkjema={this.visLagreSkjema}
-                                    lagreKommentarSkjema={this.state.lagreKommentarSkjema}
-                                    visLagreKommentarSkjema={this.visLagreKommentarSkjema}
-                                />
-                            </div>
-                        {!this.state.visLagreSkjema &&
+                        <div className="oppfolgingsdialogtabell__radoverskrift">
+                            <TiltakListeRad
+                                tiltak={ element }
+                                fnr={ fnr }
+                                sendSlett={ this.sendSlett }
+                                lagreSkjema={ this.state.visLagreSkjema }
+                                visLagreSkjema={ this.visLagreSkjema }
+                                lagreKommentarSkjema={ this.state.lagreKommentarSkjema }
+                                visLagreKommentarSkjema={ this.visLagreKommentarSkjema }
+                            />
+                        </div>
+                        { !this.state.visLagreSkjema &&
                         <TiltakInformasjon
-                            element={element}
-                            fnr={fnr}
-                            lagreKommentarSkjema={this.state.lagreKommentarSkjema}
-                            skjulLagreKommentarSkjema={this.skjulLagreKommentarSkjema}
-                            sendLagreKommentar={sendLagreKommentar}
-                            sendSlettKommentar={sendSlettKommentar}
-                            oppdaterTiltakFeilet={this.state.visLagringFeilet}
-                            varselTekst={this.state.varselTekst}
-                            tiltakReducer={tiltakReducer}
-                            kommentarReducer={kommentarReducer}
-                            feilMelding={feilMelding}
-                            visFeilMelding={visFeilMelding}
-                            rootUrlImg={rootUrlImg}
+                            element={ element }
+                            fnr={ fnr }
+                            lagreKommentarSkjema={ this.state.lagreKommentarSkjema }
+                            skjulLagreKommentarSkjema={ this.skjulLagreKommentarSkjema }
+                            sendLagreKommentar={ sendLagreKommentar }
+                            sendSlettKommentar={ sendSlettKommentar }
+                            oppdaterTiltakFeilet={ this.state.visLagringFeilet }
+                            varselTekst={ this.state.varselTekst }
+                            tiltakReducer={ tiltakReducer }
+                            kommentarReducer={ kommentarReducer }
+                            feilMelding={ feilMelding }
+                            visFeilMelding={ visFeilMelding }
+                            rootUrlImg={ rootUrlImg }
                         />
                         }
-                        {this.state.visLagreSkjema &&
+                        { this.state.visLagreSkjema &&
                         <TiltakSkjema
-                            sendLagre={this.sendLagre}
-                            tiltak={element}
-                            form={element.tiltakId.toString()}
-                            fnr={fnr}
-                            id={element.tiltakId}
-                            avbryt={this.visElementInformasjon}
-                            oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
-                            varselTekst={this.state.varselTekst}
-                            visFeilMelding={visFeilMelding}
-                            tiltakReducer={tiltakReducer}
-                            rootUrlImg={rootUrlImg}
+                            sendLagre={ this.sendLagre }
+                            tiltak={ element }
+                            form={ element.tiltakId.toString() }
+                            fnr={ fnr }
+                            id={ element.tiltakId }
+                            avbryt={ this.visElementInformasjon }
+                            oppdateringFeilet={ (this.state.visLagringFeilet || this.state.visSlettingFeilet) &&
+                            feilMelding }
+                            varselTekst={ this.state.varselTekst }
+                            visFeilMelding={ visFeilMelding }
+                            tiltakReducer={ tiltakReducer }
+                            rootUrlImg={ rootUrlImg }
                         />
                         }
-                        {this.state.visSlettingFeilet && feilMelding &&
-                            <TiltakVarselFeilStyled>
-                                <TiltakVarselFeil
-                                    tekst={texts.updateError}
-                                    onTransitionEnd={() => {
-                                        this.onTransitionEnd();
-                                    }}
-                                />
-                            </TiltakVarselFeilStyled>
+                        { this.state.visSlettingFeilet && feilMelding &&
+                        <TiltakVarselFeilStyled>
+                            <TiltakVarselFeil
+                                tekst={ texts.updateError }
+                                onTransitionEnd={ () => {
+                                    this.onTransitionEnd();
+                                } }
+                            />
+                        </TiltakVarselFeilStyled>
                         }
                     </article>
                 );
@@ -233,6 +233,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const TiltakContainer = connect(mapStateToProps, null, null, { pure:false })(Tiltak);
+const TiltakContainer = connect(mapStateToProps, null, null, { pure: false })(Tiltak);
 
 export default TiltakContainer;
