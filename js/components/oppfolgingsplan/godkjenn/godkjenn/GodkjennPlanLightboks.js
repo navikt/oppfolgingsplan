@@ -6,6 +6,7 @@ import {
     Field,
     reduxForm,
     formValueSelector,
+    SubmissionError,
 } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import {
@@ -121,7 +122,7 @@ export class GodkjennPlanLightboksComponent extends Component {
             startdato: '',
             sluttdato: '',
             evalueringsdato: '',
-            _error: 'Validering av tiltakskjema feilet',
+            _error: 'Validering av skjema feilet',
         };
 
         this.setState({
