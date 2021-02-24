@@ -24,6 +24,7 @@ export const Radioknapp = ({ input, value, children, id, label, checked, labelSe
         </div>) : label;
     return (<div>
         <Radio
+            className="skjema__input-container"
             id={getId(id)}
             type="radio"
             {...input}
