@@ -111,7 +111,7 @@ class Arbeidsoppgave extends Component {
                         aria-label={element.arbeidsoppgavenavn}>
 
                             <div>
-                                <div class="arbeidsoppgaverListe__radoverskrift">
+                                <div className="arbeidsoppgaverListe__radoverskrift">
                                 <ArbeidsoppgaveOverskrift
                                     fnr={fnr}
                                     arbeidsoppgave={element}
