@@ -19,7 +19,6 @@ import tiltakSagas from './oppfolgingsplan/tiltakSagas';
 import virksomhetSagas from './oppfolgingsplan/virksomhetSagas';
 
 import dineSykmeldingerSagas from './dineSykmeldingerSagas';
-import sykeforloepSagas from './sykeforloepSagas';
 import ledereSagas from './ledereSagas';
 
 export default function* rootSaga() {
@@ -43,7 +42,6 @@ export default function* rootSaga() {
         personSagas(),
         kontaktinfoSagas(),
         naermesteLederSagas(),
-        sykeforloepSagas(),
         ledereSagas(),
     ]);
 }
