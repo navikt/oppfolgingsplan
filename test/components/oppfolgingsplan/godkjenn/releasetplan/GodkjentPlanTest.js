@@ -11,7 +11,6 @@ import GodkjentPlanHandlingKnapper from '../../../../../js/components/oppfolging
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDeltBekreftelse';
-import { GodkjentPlanEkspanderbar } from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanAvbrutt';
 import PlanEkspanderbar from '../../../../../js/components/oppfolgingsplan/godkjenn/PlanEkspanderbar';
 
 chai.use(chaiEnzyme());
@@ -103,14 +102,6 @@ describe('GodkjentPlan', () => {
 
         it('Skal vise infotekst om tvungen godkjenning', () => {
             expect(k2.find(TextForcedApprovedOppfolgingsplan)).to.have.length(1);
-        });
-
-        const k3 = shallow(<GodkjentPlanEkspanderbar
-            dokument={dokument}
-        />);
-
-        it('Skal ikke vise infotekst', () => {
-            expect(k3.find('p')).to.have.length(0);
         });
     });
 });

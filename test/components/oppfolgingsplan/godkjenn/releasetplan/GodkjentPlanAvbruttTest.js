@@ -3,9 +3,8 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import GodkjentPlanAvbrutt, {
-    GodkjentPlanEkspanderbar,
-} from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanAvbrutt';
+import PlanEkspanderbar from '../../../../../js/components/oppfolgingsplan/godkjenn/PlanEkspanderbar';
+import GodkjentPlanAvbrutt from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanAvbrutt';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDelKnapper';
 import GodkjentPlanAvbruttTidspunkt from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanAvbruttTidspunkt';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
@@ -19,8 +18,6 @@ describe('GodkjentPlanAvbrutt', () => {
     let clock;
     let oppfolgingsdialog;
     let oppfolgingsdialoger;
-    let hentPdfurler = sinon.spy();
-    let dokument;
     let delmednav;
     let fastlegeDeling;
     let komponent;
@@ -47,13 +44,6 @@ describe('GodkjentPlanAvbrutt', () => {
             },
         });
         oppfolgingsdialoger = [oppfolgingsdialog];
-        hentPdfurler = sinon.spy();
-        dokument = {
-            hentet: true,
-            henter: false,
-            hentingFeilet: false,
-            data: ['enUrl', 'toUrl'],
-        };
         delmednav = {
             sendingFeilet: false,
         };
@@ -63,8 +53,6 @@ describe('GodkjentPlanAvbrutt', () => {
         komponent = shallow(<GodkjentPlanAvbrutt
             delmednav={delmednav}
             fastlegeDeling={fastlegeDeling}
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
             oppfolgingsdialog={oppfolgingsdialog}
             oppfolgingsdialoger={oppfolgingsdialoger}
         />);
@@ -78,8 +66,6 @@ describe('GodkjentPlanAvbrutt', () => {
         const komponentAktiv = shallow(<GodkjentPlanAvbrutt
             delmednav={delmednav}
             fastlegeDeling={fastlegeDeling}
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
             oppfolgingsdialog={oppfolgingsdialog}
             oppfolgingsdialoger={oppfolgingsdialoger}
         />);
@@ -99,8 +85,8 @@ describe('GodkjentPlanAvbrutt', () => {
         expect(komponent.find(GodkjentPlanAvbruttTidspunkt)).to.have.length(1);
     });
 
-    it('Skal vise en GodkjentPlanUtvidbar', () => {
-        expect(komponent.find(GodkjentPlanEkspanderbar)).to.have.length(1);
+    it('Skal vise en PlanEkspanderbar', () => {
+        expect(komponent.find(PlanEkspanderbar)).to.have.length(1);
     });
 
     it('Skal vise en GodkjentPlanDelKnapper', () => {

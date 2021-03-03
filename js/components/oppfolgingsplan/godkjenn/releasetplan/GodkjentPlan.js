@@ -5,7 +5,6 @@ import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks'
 import {
     delMedFastlegePt,
     delmednavPt,
-    dokumentReducerPt,
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
@@ -74,12 +73,6 @@ class GodkjentPlan extends Component {
         };
         this.apneBekreftelse = this.apneBekreftelse.bind(this);
         this.lukkBekreftelse = this.lukkBekreftelse.bind(this);
-    }
-
-    componentWillMount() {
-        if ((!this.props.dokument.hentet && !this.props.dokument.henter) || this.props.dokument.id !== this.props.oppfolgingsdialog.id) {
-            this.props.hentPdfurler(this.props.oppfolgingsdialog.id, 1);
-        }
     }
 
     apneBekreftelse() {
@@ -169,10 +162,8 @@ GodkjentPlan.propTypes = {
     fastlegeDeling: delMedFastlegePt,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
-    dokument: dokumentReducerPt,
     delMedNavFunc: PropTypes.func,
     delMedFastlege: PropTypes.func,
-    hentPdfurler: PropTypes.func,
     avbrytDialog: PropTypes.func,
 };
 

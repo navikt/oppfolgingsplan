@@ -47,8 +47,6 @@ class ReleasetPlanAT extends Component {
         if (!this.state.settTvungenGodkjenning && foersteInnloggingSidenGodkjenning(oppfolgingsdialog) && planBleTvangsgodkjent(oppfolgingsdialog)) {
             return (<ArbeidsgiverHarTvangsgodkjent
                 oppfolgingsdialog={oppfolgingsdialog}
-                hentPdfurler={hentPdfurler}
-                dokument={dokument}
                 markerMottattTvungenGodkjenning={this.markerMottattTvungenGodkjenning}
             />);
         }

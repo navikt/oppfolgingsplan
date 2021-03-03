@@ -3,6 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
+import PlanEkspanderbar from '../../../js/components/oppfolgingsplan/godkjenn/PlanEkspanderbar';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
 import ArbeidsgiverHarTvangsgodkjent from '../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ArbeidsgiverHarTvangsgodkjent';
 import OppfolgingsplanInnholdboks from '../../../js/components/app/OppfolgingsplanInnholdboks';
@@ -12,51 +13,19 @@ const expect = chai.expect;
 
 describe('ArbeidsgiverHarTvangsgodkjent', () => {
     let component;
-    let hentPdfurler;
-    let dokument;
     const oppfolgingsdialog = getOppfolgingsdialog();
 
-    beforeEach(() => {
-        hentPdfurler = sinon.spy();
-    });
-
     it('Skal alltid vise OppfolgingsplanInnholdboks', () => {
-        dokument = { hentet: false };
         component = shallow(<ArbeidsgiverHarTvangsgodkjent
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
             oppfolgingsdialog={oppfolgingsdialog}
         />);
         expect(component.find(OppfolgingsplanInnholdboks)).to.have.length(1);
     });
 
-    it('Skal vise en spinner om dokument henter', () => {
-        dokument = { henter: true };
+    it('Skal alltid vise PlanEkspanderbar', () => {
         component = shallow(<ArbeidsgiverHarTvangsgodkjent
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
             oppfolgingsdialog={oppfolgingsdialog}
         />);
-        expect(component.find('div.app-spinner')).to.have.length(1);
-    });
-
-    it('Skal vise en spinner om dokument henter', () => {
-        dokument = { data: ['url1', 'url2'] };
-        component = shallow(<ArbeidsgiverHarTvangsgodkjent
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
-            oppfolgingsdialog={oppfolgingsdialog}
-        />);
-        expect(component.find('div.godkjentPlanPdf__dokument')).to.have.length(2);
-    });
-
-    it('Skal vise en spinner om dokument hentingFeilet', () => {
-        dokument = { hentingFeilet: true };
-        component = shallow(<ArbeidsgiverHarTvangsgodkjent
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
-            oppfolgingsdialog={oppfolgingsdialog}
-        />);
-        expect(component.find('div.godkjentPlanPdf__feilmelding')).to.have.length(1);
+        expect(component.find(PlanEkspanderbar)).to.have.length(1);
     });
 });

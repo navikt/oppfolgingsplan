@@ -41,8 +41,6 @@ const ReleasetPlan = (
         return (<GodkjentPlanAvbrutt
             oppfolgingsdialog={oppfolgingsdialog}
             oppfolgingsdialoger={oppfolgingsdialoger}
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
             delMedNavFunc={delMedNavFunc}
             delmednav={delmednav}
             fastlegeDeling={fastlegeDeling}
