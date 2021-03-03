@@ -25,7 +25,6 @@ import {
 } from '../../actions/oppfolgingsplan/avbrytdialog_actions';
 import { delMedFastlege } from '../../actions/oppfolgingsplan/delMedFastlege_actions';
 import { delMedNav as delMedNavFunc } from '../../actions/oppfolgingsplan/delmednav_actions';
-import { hentPdfurler } from '../../actions/oppfolgingsplan/dokument_actions';
 import { hentKontaktinfo } from '../../actions/oppfolgingsplan/kontaktinfo_actions';
 import {
     lagreKommentar,
@@ -206,7 +205,6 @@ Container.propTypes = {
     arbeidsforhold: oppfolgingsplanProptypes.arbeidsforholdReducerPt,
     arbeidsoppgaver: oppfolgingsplanProptypes.arbeidsoppgaverReducerPt,
     dineSykmeldinger: dinesykmeldingerReducerPt,
-    dokument: oppfolgingsplanProptypes.dokumentReducerPt,
     navigasjontoggles: oppfolgingsplanProptypes.navigasjonstogglesReducerPt,
     naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
     oppfolgingsdialogerReducer: oppfolgingsplanProptypes.oppfolgingsplanerAtPt,
@@ -227,7 +225,6 @@ Container.propTypes = {
     slettKommentar: PropTypes.func,
     hentArbeidsforhold: PropTypes.func,
     sjekkTilgang: PropTypes.func,
-    hentPdfurler: PropTypes.func,
     nullstillGodkjenning: PropTypes.func,
     delMedFastlege: PropTypes.func,
     delMedNav: PropTypes.func,
@@ -281,7 +278,6 @@ export function mapStateToProps(state, ownProps) {
         avbrytdialogReducer: state.avbrytdialogReducer,
         tiltak: state.tiltak,
         delmednav: state.delmednav,
-        dokument: state.dokument,
         fastlegeDeling: state.fastlegeDeling,
         kontaktinfo: state.kontaktinfo,
         naermesteleder: state.naermesteleder,
@@ -321,7 +317,6 @@ export default connect(mapStateToProps, {
     avvisDialog,
     nullstillGodkjenning,
     settAktivtSteg,
-    hentPdfurler,
     giSamtykke,
     settDialog,
     hentArbeidsforhold,

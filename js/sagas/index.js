@@ -4,7 +4,6 @@ import arbeidsoppgaveSagas from './oppfolgingsplan/arbeidsoppgaveSagas';
 import avbrytdialogSagas from './oppfolgingsplan/avbrytdialogSagas';
 import delMedFastlegeSagas from './oppfolgingsplan/delMedFastlegeSagas';
 import delMedNavSagas from './oppfolgingsplan/delMedNavSagas';
-import dokumentSagas from './oppfolgingsplan/dokumentSagas';
 import kommentarSagas from './oppfolgingsplan/kommentarSagas';
 import kontaktinfoSagas from './oppfolgingsplan/kontaktinfoSagas';
 import kopierOppfolgingsdialogSagas from './oppfolgingsplan/kopierOppfolgingsdialogSagas';
@@ -32,7 +31,6 @@ export default function* rootSaga() {
         delMedNavSagas(),
         nullstillGodkjenningSagas(),
         arbeidsoppgaveSagas(),
-        dokumentSagas(),
         kommentarSagas(),
         kopierOppfolgingsdialogSagas(),
         tilgangSagas(),

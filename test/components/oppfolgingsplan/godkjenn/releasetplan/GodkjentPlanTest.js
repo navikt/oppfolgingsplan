@@ -27,21 +27,12 @@ describe('GodkjentPlan', () => {
             navn: 'Test Testesen',
         },
     });
-    const hentPdfurler = sinon.spy();
-    const dokument = {
-        hentet: true,
-        henter: false,
-        hentingFeilet: false,
-        data: ['enUrl', 'toUrl'],
-    };
     const delmednav = {
         sendingFeilet: false,
     };
 
     const komponentDefault = shallow(<GodkjentPlan
         delmednav={delmednav}
-        hentPdfurler={hentPdfurler}
-        dokument={dokument}
         oppfolgingsdialog={oppfolgingsdialog}
     />);
 
@@ -91,8 +82,6 @@ describe('GodkjentPlan', () => {
 
         const k2 = shallow(<GodkjentPlan
             delmednav={delmednav}
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
             oppfolgingsdialog={tvungenGodkjentDialog}
         />);
 

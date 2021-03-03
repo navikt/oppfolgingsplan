@@ -257,12 +257,6 @@ export const avbrytplanReducerPt = PropTypes.shape({
         PropTypes.number,
     ]),
 });
-export const dokumentReducerPt = PropTypes.shape({
-    henter: PropTypes.bool,
-    hentet: PropTypes.bool,
-    hentingFeilet: PropTypes.bool,
-    id: PropTypes.number,
-});
 
 export const kopierPlanReducerPt = PropTypes.shape({
     sender: PropTypes.bool,

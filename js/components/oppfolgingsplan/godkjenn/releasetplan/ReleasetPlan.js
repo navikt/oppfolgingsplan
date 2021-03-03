@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
     delMedFastlegePt,
     delmednavPt,
-    dokumentReducerPt,
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
 import GodkjentPlan from './GodkjentPlan';
@@ -19,8 +18,6 @@ const manglerSamtykke = (oppfolgingsdialog) => {
 const ReleasetPlan = (
     {
         oppfolgingsdialog,
-        hentPdfurler,
-        dokument,
         giSamtykke,
         avbrytDialog,
         rootUrl,
@@ -53,8 +50,6 @@ const ReleasetPlan = (
             <GodkjentPlan
                 oppfolgingsdialog={oppfolgingsdialog}
                 avbrytDialog={avbrytDialog}
-                hentPdfurler={hentPdfurler}
-                dokument={dokument}
                 delMedNavFunc={delMedNavFunc}
                 delmednav={delmednav}
                 fastlegeDeling={fastlegeDeling}
@@ -75,12 +70,10 @@ ReleasetPlan.propTypes = {
     delmednav: delmednavPt,
     oppfolgingsdialog: oppfolgingsplanPt,
     fastlegeDeling: delMedFastlegePt,
-    hentPdfurler: PropTypes.func,
     delMedNavFunc: PropTypes.func,
     giSamtykke: PropTypes.func,
     avbrytDialog: PropTypes.func,
     delMedFastlege: PropTypes.func,
-    dokument: dokumentReducerPt,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),

@@ -13,13 +13,11 @@ const expect = chai.expect;
 
 describe('ReleasetPlanAT', () => {
     let component;
-    let hentPdfurler;
     let giSamtykke;
     let avbrytDialog;
     let delMedNavFunc;
 
     beforeEach(() => {
-        hentPdfurler = sinon.spy();
         giSamtykke = sinon.spy();
         avbrytDialog = sinon.spy();
         delMedNavFunc = sinon.spy();
@@ -29,7 +27,6 @@ describe('ReleasetPlanAT', () => {
         const oppfolgingsdialog = getOppfolgingsdialog();
         beforeEach(() => {
             component = shallow(<ReleasetPlanAT
-                hentPdfurler={hentPdfurler}
                 giSamtykke={giSamtykke}
                 avbrytDialog={avbrytDialog}
                 delmednav={delMedNavFunc}
@@ -56,7 +53,6 @@ describe('ReleasetPlanAT', () => {
         });
         beforeEach(() => {
             component = shallow(<ReleasetPlanAT
-                hentPdfurler={hentPdfurler}
                 giSamtykke={giSamtykke}
                 avbrytDialog={avbrytDialog}
                 delmednav={delMedNavFunc}

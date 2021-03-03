@@ -4,7 +4,6 @@ import getContextRoot from '../../../../utils/getContextRoot';
 import {
     delMedFastlegePt,
     delmednavPt,
-    dokumentReducerPt,
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
 import ArbeidsgiverHarTvangsgodkjent from './ArbeidsgiverHarTvangsgodkjent';
@@ -34,8 +33,6 @@ class ReleasetPlanAT extends Component {
     render() {
         const {
             oppfolgingsdialog,
-            hentPdfurler,
-            dokument,
             giSamtykke,
             avbrytDialog,
             fastlegeDeling,
@@ -52,8 +49,6 @@ class ReleasetPlanAT extends Component {
         }
         return (<ReleasetPlan
             oppfolgingsdialog={oppfolgingsdialog}
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
             giSamtykke={giSamtykke}
             avbrytDialog={avbrytDialog}
             fastlegeDeling={fastlegeDeling}
@@ -68,12 +63,10 @@ class ReleasetPlanAT extends Component {
 }
 
 ReleasetPlanAT.propTypes = {
-    hentPdfurler: PropTypes.func,
     giSamtykke: PropTypes.func,
     avbrytDialog: PropTypes.func,
     delMedFastlege: PropTypes.func,
     delMedNavFunc: PropTypes.func,
-    dokument: dokumentReducerPt,
     oppfolgingsdialog: oppfolgingsplanPt,
     delmednav: delmednavPt,
     fastlegeDeling: delMedFastlegePt,
