@@ -2,7 +2,6 @@ import chai from 'chai';
 import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import sinon from 'sinon';
 import PlanEkspanderbar from '../../../js/components/oppfolgingsplan/godkjenn/PlanEkspanderbar';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialoger';
 import ArbeidsgiverHarTvangsgodkjent from '../../../js/components/oppfolgingsplan/godkjenn/releasetplan/ArbeidsgiverHarTvangsgodkjent';
