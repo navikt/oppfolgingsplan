@@ -1,3 +1,5 @@
+import EtikettBase from 'nav-frontend-etiketter';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { STATUS_TILTAK } from '../../../../konstanter';
@@ -23,26 +25,26 @@ const TiltakListeRad = (
         lagreKommentarSkjema,
         visLagreKommentarSkjema,
     }) => {
-    let klasse = '';
+    let etikettType = '';
     let status = '';
 
     switch (tiltak.status) {
         case STATUS_TILTAK.AVTALT:
-            klasse = 'etikett--suksess';
+            etikettType = 'suksess';
             status = texts.status.avtalt;
             break;
         case STATUS_TILTAK.IKKE_AKTUELT:
-            klasse = 'etikett--advarsel';
+            etikettType = 'advarsel';
             status = texts.status.ikkAktuelt;
             break;
         default:
-            klasse = 'etikett--fokus';
+            etikettType = 'fokus';
             status = texts.status.foreslatt;
             break;
     }
 
     return (
-        <div className="tiltaktabell__rad__celle">
+        <div>
             <div className="tiltaktabell__rad__navn">
                 <span className="tiltak__rad__navn--tittel">
                     {tiltak.tiltaknavn}
@@ -52,11 +54,7 @@ const TiltakListeRad = (
             <p className="tiltaktabell__meta">{toDateMedMaanedNavn(tiltak.fom)} - {toDateMedMaanedNavn(tiltak.tom)}</p>
             }
             { tiltak.status &&
-            <div className={`tiltaktabell__rad__status etikett ${klasse}`} >
-                <span className="typo-normal">
-                    {status}
-                </span>
-            </div>
+            <EtikettBase mini type={etikettType}>{status}</EtikettBase>
             }
             <TiltakInformasjonKnapper
                 element={tiltak}
