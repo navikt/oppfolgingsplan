@@ -27,6 +27,9 @@ describe('GodkjentPlanAvbrutt', () => {
         oppfolgingsdialog = getOppfolgingsdialog({
             id: 1,
             arbeidsgiver: {
+                naermesteLeder: {
+                    navn: 'Test Testesen',
+                },
                 navn: 'Test Testesen',
             },
             arbeidstaker: {

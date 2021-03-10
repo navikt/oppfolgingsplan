@@ -42,6 +42,7 @@ const ReleasetPlan = (
             delmednav={delmednav}
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
+            rootUrl={rootUrl}
             rootUrlPlaner={rootUrlPlaner}
         />);
     }

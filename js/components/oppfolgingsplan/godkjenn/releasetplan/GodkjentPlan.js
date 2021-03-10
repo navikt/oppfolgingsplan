@@ -12,7 +12,8 @@ import Lightbox from '../../../Lightbox';
 import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
-import BildeTekstLinje from '../../../app/BildeTekstLinje';
+import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
+import { textBothApprovedOppfolgingsplan } from '../../../../utils/textUtils';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
@@ -24,27 +25,6 @@ const texts = {
         info: 'Hvis du endrer planen, må du sende den til godkjenning hos den andre. Etter godkjenning blir den en gjeldende plan.',
         button: 'Gjør endringer',
     },
-    tvungenGodkjenning: {
-        info: 'Planen er laget av arbeidsgiveren din. Er du uenig i innholdet, må du snakke med',
-    },
-};
-
-const textBothApprovedOppfolgingsplan = (lederNavn) => {
-    return `Denne versjonen av planen er godkjent av ${lederNavn} og deg.`;
-};
-
-export const TextForcedApprovedOppfolgingsplan = ({ rootUrl, oppfolgingsplan }) => {
-    return (
-        <BildeTekstLinje
-            imgUrl={`${rootUrl}/img/svg/report-problem-circle.svg`}
-            imgAlt=""
-            tekst={`${texts.tvungenGodkjenning.info} ${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}.`}
-        />
-    );
-};
-TextForcedApprovedOppfolgingsplan.propTypes = {
-    rootUrl: PropTypes.string,
-    oppfolgingsplan: oppfolgingsplanPt,
 };
 
 export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {

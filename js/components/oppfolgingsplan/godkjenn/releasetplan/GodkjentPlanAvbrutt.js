@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'nav-frontend-paneler';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
+import { textBothApprovedOppfolgingsplan } from '../../../../utils/textUtils';
 import {
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
     finnSistEndretAvNavn,
@@ -17,6 +18,7 @@ import GodkjentPlanAvbruttTidspunkt from './GodkjentPlanAvbruttTidspunkt';
 import getContextRoot from '../../../../utils/getContextRoot';
 import { ButtonDownload } from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
+import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
@@ -28,6 +30,7 @@ const textChangeBy = (personName, date) => {
     return `Denne oppfølgingsplanen ble åpnet for endring av ${personName} ${date}`;
 };
 
+
 class GodkjentPlanAvbrutt extends Component {
     render() {
         const {
@@ -37,9 +40,11 @@ class GodkjentPlanAvbrutt extends Component {
             delMedNavFunc,
             fastlegeDeling,
             delMedFastlege,
+            rootUrl,
             rootUrlPlaner,
         } = this.props;
         const aktivPlan = finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(oppfolgingsdialoger, oppfolgingsdialog.virksomhet.virksomhetsnummer);
+        const godkjentPlan = oppfolgingsdialog.godkjentPlan;
         return (
             <Panel border className="godkjentPlanAvbrutt">
                 <div className="godkjentPlanAvbrutt_lenke">
@@ -57,15 +62,20 @@ class GodkjentPlanAvbrutt extends Component {
                     tittel={texts.title}
                 >
                     <div className="godkjentPlanAvbrutt">
+                        { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}</p> }
+                        { godkjentPlan.tvungenGodkjenning &&
+                            <TextForcedApprovedOppfolgingsplan
+                                rootUrl={rootUrl}
+                                oppfolgingsplan={oppfolgingsdialog}
+                            />
+                        }
+
                         <GodkjentPlanAvbruttTidspunkt
                             oppfolgingsplan={oppfolgingsdialog}
                         />
                         <GodkjentPlanDeltBekreftelse
                             oppfolgingsplan={oppfolgingsdialog}
                         />
-                        <p>
-                            {textChangeBy(finnSistEndretAvNavn(oppfolgingsdialog), toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt))}
-                        </p>
                         <PlanEkspanderbar
                             oppfolgingsplan={oppfolgingsdialog}
                         />
@@ -97,6 +107,7 @@ GodkjentPlanAvbrutt.propTypes = {
     delMedNavFunc: PropTypes.func,
     fastlegeDeling: delMedFastlegePt,
     delMedFastlege: PropTypes.func,
+    rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
 };
 
