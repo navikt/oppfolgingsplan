@@ -67,7 +67,7 @@ class GodkjentPlanAvbrutt extends Component {
                         { godkjentPlan.tvungenGodkjenning &&
                             <TextForcedApprovedOppfolgingsplan
                                 rootUrl={rootUrl}
-                                text={tvungenGodkjenning}
+                                text={texts.tvungenGodkjenning}
                                 oppfolgingsplan={oppfolgingsdialog}
                             />
                         }
