@@ -24,6 +24,7 @@ import PlanEkspanderbar from '../PlanEkspanderbar';
 const texts = {
     linkActivePlan: 'Tilbake til den gjeldende utgave',
     title: 'Tidligere oppfølgingsplan',
+    tvungenGodkjenning: 'Planen er laget av arbeidsgiveren din.',
 };
 
 const textChangeBy = (personName, date) => {
@@ -66,6 +67,7 @@ class GodkjentPlanAvbrutt extends Component {
                         { godkjentPlan.tvungenGodkjenning &&
                             <TextForcedApprovedOppfolgingsplan
                                 rootUrl={rootUrl}
+                                text={tvungenGodkjenning}
                                 oppfolgingsplan={oppfolgingsdialog}
                             />
                         }

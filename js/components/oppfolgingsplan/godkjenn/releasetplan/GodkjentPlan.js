@@ -25,6 +25,12 @@ const texts = {
         info: 'Hvis du endrer planen, må du sende den til godkjenning hos den andre. Etter godkjenning blir den en gjeldende plan.',
         button: 'Gjør endringer',
     },
+    tvungenGodkjenning: 'Planen er laget av arbeidsgiveren din. Er du uenig i innholdet, må du snakke med',
+
+};
+
+const tvungenGodkjenningText = (oppfolgingsplan) => {
+    return `${texts.tvungenGodkjenning} ${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}.`;
 };
 
 export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {
@@ -99,6 +105,7 @@ class GodkjentPlan extends Component {
                         { godkjentPlan.tvungenGodkjenning &&
                             <TextForcedApprovedOppfolgingsplan
                                 rootUrl={rootUrl}
+                                text={tvungenGodkjenningText(oppfolgingsdialog)}
                                 oppfolgingsplan={oppfolgingsdialog}
                             />
                         }
