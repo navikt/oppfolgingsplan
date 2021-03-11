@@ -106,7 +106,6 @@ class GodkjentPlan extends Component {
                             <TextForcedApprovedOppfolgingsplan
                                 rootUrl={rootUrl}
                                 text={tvungenGodkjenningText(oppfolgingsdialog)}
-                                oppfolgingsplan={oppfolgingsdialog}
                             />
                         }
 

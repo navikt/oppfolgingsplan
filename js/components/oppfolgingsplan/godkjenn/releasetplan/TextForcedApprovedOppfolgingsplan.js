@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 
-const TextForcedApprovedOppfolgingsplan = ({ rootUrl, text, oppfolgingsplan }) => {
+const TextForcedApprovedOppfolgingsplan = ({ rootUrl, text }) => {
     return (
         <BildeTekstLinje
             imgUrl={`${rootUrl}/img/svg/report-problem-circle.svg`}
@@ -15,7 +14,7 @@ const TextForcedApprovedOppfolgingsplan = ({ rootUrl, text, oppfolgingsplan }) =
 
 TextForcedApprovedOppfolgingsplan.propTypes = {
     rootUrl: PropTypes.string,
-    oppfolgingsplan: oppfolgingsplanPt,
+    text: PropTypes.string,
 };
 
 export default TextForcedApprovedOppfolgingsplan;
