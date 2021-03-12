@@ -19,7 +19,6 @@ const ARBEIDSGIVERE = 'arbeidsgivere';
 const METADATA = 'metadata';
 const NAERMESTELEDERE = 'naermesteledere';
 const SYFOUNLEASH = 'syfounleash';
-const SYKEFORLOP = 'sykeforlop';
 const SYKMELDINGER = 'sykmeldinger';
 const VEDLIKEHOLD = 'vedlikehold';
 const TILGANG = 'tilgang';
@@ -40,7 +39,6 @@ lastFilTilMinne(ARBEIDSGIVERE);
 lastFilTilMinne(METADATA);
 lastFilTilMinne(NAERMESTELEDERE);
 lastFilTilMinne(SYFOUNLEASH);
-lastFilTilMinne(SYKEFORLOP);
 lastFilTilMinne(SYKMELDINGER);
 lastFilTilMinne(VEDLIKEHOLD);
 lastFilTilMinne(TILGANG);
@@ -198,16 +196,6 @@ function mockForOpplaeringsmiljo(server) {
     server.get('/syfooprest/api/naermesteleder/:fnr', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[NAERMESTELEDER]));
-    });
-
-    server.get('/syforest/sykeforloep', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[SYKEFORLOP]));
-    });
-
-    server.get('/syforest/sykeforloep/metadata', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[METADATA]));
     });
 
     server.post('/syforest/logging', (req, res) => {

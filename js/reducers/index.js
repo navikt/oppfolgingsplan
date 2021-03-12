@@ -21,7 +21,6 @@ import tiltak from './tiltak';
 import virksomhet from './virksomhet';
 
 import dineSykmeldinger from './dineSykmeldinger';
-import sykeforloep from './sykeforloep';
 import ledere from './ledere';
 import brukerinfo from './brukerinfo';
 import history from '../history';
@@ -50,7 +49,6 @@ const reducers = {
     naermesteleder,
     timeout,
     form: formReducer,
-    sykeforloep,
     ledere,
     brukerinfo,
 };
