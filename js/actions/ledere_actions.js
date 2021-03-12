@@ -1,8 +1,9 @@
 import * as actiontyper from './actiontyper';
 
-export const hentLedere = () => {
+export const hentLedere = (fodselsnummer) => {
     return {
         type: actiontyper.HENT_LEDERE_FORESPURT,
+        fodselsnummer,
     };
 };
 
@@ -12,15 +13,17 @@ export const henterLedere = () => {
     };
 };
 
-export const ledereHentet = (data) => {
+export const ledereHentet = (data, fodselsnummer) => {
     return {
         type: actiontyper.LEDERE_HENTET,
         data,
+        fodselsnummer,
     };
 };
 
-export const hentLedereFeilet = () => {
+export const hentLedereFeilet = (fodselsnummer) => {
     return {
         type: actiontyper.HENT_LEDERE_FEILET,
+        fodselsnummer,
     };
 };

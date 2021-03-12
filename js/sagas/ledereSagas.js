@@ -5,18 +5,24 @@ import {
     takeEvery,
     all,
 } from 'redux-saga/effects';
-import { get, post, log } from '@navikt/digisyfo-npm';
+import { get, log } from '@navikt/digisyfo-npm';
 import * as actions from '../actions/ledere_actions';
 import * as actiontyper from '../actions/actiontyper';
+import { HOST_NAMES } from '../konstanter';
+import { fullNaisUrl } from '../utils/urlUtils';
 
-export function* hentLedere() {
-    yield put(actions.henterLedere());
+export function* hentLedere(action) {
+    console.log('action', action)
+    yield put(actions.henterLedere(action.fodselsnummer));
     try {
-        const data = yield call(get, `${process.env.REACT_APP_SYFOREST_ROOT}/naermesteledere`);
-        yield put(actions.ledereHentet(data));
+        const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/nermesteledere/${action.fodselsnummer}`;
+        const url = fullNaisUrl(HOST_NAMES.SYFOOPREST, path);
+        const data = yield call(get, url);
+
+        yield put(actions.ledereHentet(data, action.fodselsnummer));
     } catch (e) {
         log(e);
-        yield put(actions.hentLedereFeilet());
+        yield put(actions.hentLedereFeilet(action.fodselsnummer));
     }
 }
 

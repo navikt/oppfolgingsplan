@@ -57,9 +57,6 @@ export class Container extends Component {
             this.props.sjekkTilgang();
         }
         this.props.hentDineSykmeldinger();
-        if (!henterEllerHarHentetLedere(naermesteLedere)) {
-            this.props.hentLedere();
-        }
         if (!henterEllerHarHentetOppfolgingsplaner(oppfolgingsdialogerReducer)) {
             this.props.hentOppfolgingsdialoger();
         }
