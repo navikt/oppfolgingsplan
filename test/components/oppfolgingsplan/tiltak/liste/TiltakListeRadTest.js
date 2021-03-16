@@ -21,10 +21,6 @@ describe('TiltakListeRad', () => {
         />);
     });
 
-    it('Skal vise korrekt div', () => {
-        expect(komponent.find('div.tiltaktabell__rad__celle')).to.have.length(1);
-    });
-
     it('Skal vise <p> med info om f.o.m og t.o.m', () => {
         const paragraf = komponent.find('p');
         expect(paragraf).to.have.length(1);

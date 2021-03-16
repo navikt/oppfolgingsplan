@@ -7,6 +7,7 @@ import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import Feilmelding from './Feilmelding';
 import DayPickerComponent from './DayPicker';
 import { fieldPropTypes } from '../../propTypes/fieldproptypes';
+
 export const DATOVELGERFELT_SKJEMA = 'DATOVELGERFELT_SKJEMA';
 
 export class DatoField extends Component {
