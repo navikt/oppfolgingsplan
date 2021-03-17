@@ -13,17 +13,15 @@ export const henterLedere = () => {
     };
 };
 
-export const ledereHentet = (data, fodselsnummer) => {
+export const ledereHentet = (data) => {
     return {
         type: actiontyper.LEDERE_HENTET,
         data,
-        fodselsnummer,
     };
 };
 
-export const hentLedereFeilet = (fodselsnummer) => {
+export const hentLedereFeilet = () => {
     return {
         type: actiontyper.HENT_LEDERE_FEILET,
-        fodselsnummer,
     };
 };

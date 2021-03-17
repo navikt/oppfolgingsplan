@@ -12,10 +12,9 @@ import { HOST_NAMES } from '../konstanter';
 import { fullNaisUrl } from '../utils/urlUtils';
 
 export function* hentLedere(action) {
-    console.log('action', action)
     yield put(actions.henterLedere(action.fodselsnummer));
     try {
-        const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/nermesteledere/${action.fodselsnummer}`;
+        const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/narmesteledere/${action.fodselsnummer}`;
         const url = fullNaisUrl(HOST_NAMES.SYFOOPREST, path);
         const data = yield call(get, url);
 

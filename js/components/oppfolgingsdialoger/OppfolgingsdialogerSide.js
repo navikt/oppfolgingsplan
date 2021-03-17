@@ -50,7 +50,6 @@ export class Container extends Component {
     componentWillMount() {
         const {
             tilgang,
-            naermesteLedere,
             oppfolgingsdialogerReducer,
         } = this.props;
         if (!henterEllerHarHentetTilgang(tilgang)) {

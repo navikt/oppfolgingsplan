@@ -153,7 +153,7 @@ function mockForOpplaeringsmiljo(server) {
         }));
     });
 
-    server.get('/syfooprest/api/nermesteledere/:fodselsnummer', (req, res) => {
+    server.get('/syfooprest/api/narmesteledere/:fodselsnummer', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[NAERMESTELEDERE]));
     });
