@@ -1,22 +1,22 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import {
-    henterEllerHarHentetKontaktinfo,
-    henterEllerHarHentetPerson,
-    henterEllerHarHentetNaermesteLeder,
-    henterEllerHarHentetVirksomhet,
-    henterEllerHarHentetArbeidsforhold,
-    finnUnikeElementer,
     finnOgHentArbeidsforholdSomMangler,
-    finnOgHentVirksomheterSomMangler,
-    finnOgHentPersonerSomMangler,
     finnOgHentKontaktinfoSomMangler,
     finnOgHentNaermesteLedereSomMangler,
+    finnOgHentNaermesteLedereListeSomMangler,
+    finnOgHentPersonerSomMangler,
+    finnOgHentVirksomheterSomMangler,
+    finnUnikeElementer,
+    henterEllerHarHentetArbeidsforhold,
+    henterEllerHarHentetKontaktinfo,
+    henterEllerHarHentetNaermesteLeder,
+    henterEllerHarHentetPerson,
+    henterEllerHarHentetVirksomhet,
 } from '../../js/utils/reducerUtils';
 import getOppfolgingsdialog from '../mock/mockOppfolgingsdialog';
 
 const expect = chai.expect;
-
 
 describe('reducerUtils', () => {
     let clock;
@@ -81,6 +81,15 @@ describe('reducerUtils', () => {
             finnOgHentNaermesteLedereSomMangler([oppfolgingsdialog], naermesteleder, hentNaermesteLeder);
             sinon.assert.calledOnce(hentNaermesteLeder);
             sinon.assert.calledWith(hentNaermesteLeder, '1000000000000', '123456789');
+        });
+    });
+
+    describe('finnOgHentNaermesteLedereListeSomMangler', () => {
+        it('Finner narmesteledere som skal hentes og kaller hentLedere', () => {
+            const hentLedere = sinon.spy();
+            finnOgHentNaermesteLedereListeSomMangler([oppfolgingsdialog], hentLedere);
+            sinon.assert.calledOnce(hentLedere);
+            sinon.assert.calledWith(hentLedere, '1000000000000');
         });
     });
 
