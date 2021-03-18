@@ -12,16 +12,16 @@ import { HOST_NAMES } from '../konstanter';
 import { fullNaisUrl } from '../utils/urlUtils';
 
 export function* hentLedere(action) {
-    yield put(actions.henterLedere(action.fodselsnummer));
+    yield put(actions.henterLedere());
     try {
         const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/narmesteledere/${action.fodselsnummer}`;
         const url = fullNaisUrl(HOST_NAMES.SYFOOPREST, path);
         const data = yield call(get, url);
 
-        yield put(actions.ledereHentet(data, action.fodselsnummer));
+        yield put(actions.ledereHentet(data));
     } catch (e) {
         log(e);
-        yield put(actions.hentLedereFeilet(action.fodselsnummer));
+        yield put(actions.hentLedereFeilet());
     }
 }
 
