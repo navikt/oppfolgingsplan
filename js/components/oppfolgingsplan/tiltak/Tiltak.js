@@ -16,11 +16,11 @@ import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import TiltakInfoboks from './TiltakInfoboks';
 import TiltakSkjema from './TiltakSkjema';
 import TiltakListe from './liste/TiltakListe';
-import StegTittel from "../StegTittel";
-import ObligatoriskeFelterInfotekst from "../ObligatoriskeFelterInfotekst";
+import StegTittel from '../StegTittel';
+import ObligatoriskeFelterInfotekst from '../ObligatoriskeFelterInfotekst';
 
 const texts = {
-    tittel: "Tiltak",
+    tittel: 'Tiltak',
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
     infoboks: {
         title: 'Hva kan gjøre det lettere å jobbe?',
@@ -138,8 +138,8 @@ class Tiltak extends Component {
             (() => {
                 return (
                     <div>
-                        <StegTittel tittel={texts.tittel}/>
-                        <ObligatoriskeFelterInfotekst/>
+                        <StegTittel tittel={texts.tittel} />
+                        <ObligatoriskeFelterInfotekst />
                         {isEmpty(oppfolgingsdialog.tiltakListe) ?
                             <div ref={this.formRef}>
                                 {
@@ -211,7 +211,7 @@ class Tiltak extends Component {
                                 />
                             </div>}
                     </div>
-                )
+                );
             })()
         );
     }

@@ -33,7 +33,7 @@ export const ikkeSendtTilGodkjenning = (oppfolgingsdialog) => {
     return oppfolgingsdialog
         && oppfolgingsdialog.status === STATUS.UNDER_ARBEID
         && !inneholderGodkjenninger(oppfolgingsdialog);
-}
+};
 
 export const inneholderGodkjenningerAvArbeidstaker = (oppfolgingsdialog) => {
     return oppfolgingsdialog.godkjenninger.length > 0
