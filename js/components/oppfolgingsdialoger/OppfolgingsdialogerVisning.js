@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
-import {
-    dinesykmeldingerReducerPt,
-    ledereReducerPt,
-} from '../../propTypes';
+import { dinesykmeldingerReducerPt, ledereReducerPt } from '../../propTypes';
 import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
 import {
-    finnAktiveOppfolgingsdialoger,
-    finnTidligereOppfolgingsdialoger,
-    harTidligereOppfolgingsdialoger,
+  finnAktiveOppfolgingsdialoger,
+  finnTidligereOppfolgingsdialoger,
+  harTidligereOppfolgingsdialoger,
 } from '../../utils/oppfolgingsdialogUtils';
 import { finnArbeidsgivereForGyldigeSykmeldinger } from '../../utils/sykmeldingUtils';
 import getContextRoot from '../../utils/getContextRoot';
@@ -19,115 +16,135 @@ import OppfolgingsdialogerIngenplan from './opprett/OppfolgingsdialogerIngenplan
 import OppfolgingsdialogTeasere from './OppfolgingsdialogTeasere';
 
 const texts = {
-    oppfolgingsdialogNyKnapp: {
-        button: 'Lag en ny oppfølgingsplan',
+  oppfolgingsdialogNyKnapp: {
+    button: 'Lag en ny oppfølgingsplan',
+  },
+  oppfolgingsdialogerVisning: {
+    teaserOutdatedPlaner: {
+      title: 'Tidligere oppfølgingsplaner',
     },
-    oppfolgingsdialogerVisning: {
-        teaserOutdatedPlaner: {
-            title: 'Tidligere oppfølgingsplaner',
-        },
-        teaserAktive: {
-            titleMultiplePlaner: 'Aktive oppfølgingsplaner',
-            titleSinglePlan: 'Aktiv oppfølgingsplan',
-        },
+    teaserAktive: {
+      titleMultiplePlaner: 'Aktive oppfølgingsplaner',
+      titleSinglePlan: 'Aktiv oppfølgingsplan',
     },
+  },
 };
 
 export const OppfolgingsdialogNyKnapp = ({ visOppfolgingsdialogOpprett }) => {
-    return (<div className="oppfolgingsdialogNyDialog">
-        <Knapp
-            onClick={() => {
-                visOppfolgingsdialogOpprett(true);
-            }}>
-            {texts.oppfolgingsdialogNyKnapp.button}
-        </Knapp>
-    </div>);
+  return (
+    <div className="oppfolgingsdialogNyDialog">
+      <Knapp
+        onClick={() => {
+          visOppfolgingsdialogOpprett(true);
+        }}
+      >
+        {texts.oppfolgingsdialogNyKnapp.button}
+      </Knapp>
+    </div>
+  );
 };
 OppfolgingsdialogNyKnapp.propTypes = {
-    visOppfolgingsdialogOpprett: PropTypes.func,
+  visOppfolgingsdialogOpprett: PropTypes.func,
 };
 
 class OppfolgingsdialogerVisning extends Component {
-    constructor() {
-        super();
-        this.state = {
-            visOppfolgingsdialogOpprett: false,
-        };
-        this.visOppfolgingsdialogOpprett = this.visOppfolgingsdialogOpprett.bind(this);
-    }
+  constructor() {
+    super();
+    this.state = {
+      visOppfolgingsdialogOpprett: false,
+    };
+    this.visOppfolgingsdialogOpprett = this.visOppfolgingsdialogOpprett.bind(
+      this
+    );
+  }
 
-    visOppfolgingsdialogOpprett(vis) {
-        this.setState({
-            visOppfolgingsdialogOpprett: vis,
-        });
-    }
-    render() {
-        const {
-            oppfolgingsdialoger = [],
-            opprettOppfolgingsdialog,
-            kopierOppfolgingsdialog,
-            dinesykmeldinger,
-            naermesteLedere,
-        } = this.props;
-        const aktivOppfolgingsdialoger = finnAktiveOppfolgingsdialoger(oppfolgingsdialoger, dinesykmeldinger.data);
-        const arbeidsgivereForSykmeldinger = finnArbeidsgivereForGyldigeSykmeldinger(dinesykmeldinger.data, naermesteLedere.data);
-        return (<div>
-            { this.state.visOppfolgingsdialogOpprett &&
-            <OppfolgingsdialogerOpprett
-                oppfolgingsdialoger={oppfolgingsdialoger}
-                arbeidsgivere={arbeidsgivereForSykmeldinger}
-                opprett={opprettOppfolgingsdialog}
-                kopier={kopierOppfolgingsdialog}
+  visOppfolgingsdialogOpprett(vis) {
+    this.setState({
+      visOppfolgingsdialogOpprett: vis,
+    });
+  }
+  render() {
+    const {
+      oppfolgingsdialoger = [],
+      opprettOppfolgingsdialog,
+      kopierOppfolgingsdialog,
+      dinesykmeldinger,
+      naermesteLedere,
+    } = this.props;
+    const aktivOppfolgingsdialoger = finnAktiveOppfolgingsdialoger(
+      oppfolgingsdialoger,
+      dinesykmeldinger.data
+    );
+    const arbeidsgivereForSykmeldinger = finnArbeidsgivereForGyldigeSykmeldinger(
+      dinesykmeldinger.data,
+      naermesteLedere.data
+    );
+    return (
+      <div>
+        {this.state.visOppfolgingsdialogOpprett && (
+          <OppfolgingsdialogerOpprett
+            oppfolgingsdialoger={oppfolgingsdialoger}
+            arbeidsgivere={arbeidsgivereForSykmeldinger}
+            opprett={opprettOppfolgingsdialog}
+            kopier={kopierOppfolgingsdialog}
+            visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
+          />
+        )}
+        {(oppfolgingsdialoger.length === 0 ||
+          !aktivOppfolgingsdialoger.length > 0) && (
+          <div className="blokk--l">
+            <OppfolgingsdialogerIngenplan
+              arbeidsgivere={arbeidsgivereForSykmeldinger}
+              oppfolgingsplaner={oppfolgingsdialoger}
+              visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
+              opprett={opprettOppfolgingsdialog}
+            />
+          </div>
+        )}
+        {aktivOppfolgingsdialoger.length > 0 && (
+          <div>
+            {arbeidsgivereForSykmeldinger.length > 1 && (
+              <OppfolgingsdialogNyKnapp
                 visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
-            />
-            }
-            { (oppfolgingsdialoger.length === 0 || !aktivOppfolgingsdialoger.length > 0) &&
-            <div className="blokk--l">
-                <OppfolgingsdialogerIngenplan
-                    arbeidsgivere={arbeidsgivereForSykmeldinger}
-                    oppfolgingsplaner={oppfolgingsdialoger}
-                    visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
-                    opprett={opprettOppfolgingsdialog}
-                />
-            </div>
-            }
-            { aktivOppfolgingsdialoger.length > 0 &&
-            <div>
-                { arbeidsgivereForSykmeldinger.length > 1 &&
-                    <OppfolgingsdialogNyKnapp
-                        visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
-                    />
-                }
-                <OppfolgingsdialogTeasere
-                    oppfolgingsdialoger={aktivOppfolgingsdialoger}
-                    tittel={aktivOppfolgingsdialoger.length > 1
-                        ? texts.oppfolgingsdialogerVisning.teaserAktive.titleMultiplePlaner
-                        : texts.oppfolgingsdialogerVisning.teaserAktive.titleSinglePlan}
-                    rootUrl={getContextRoot()}
-                    rootUrlPlaner={getContextRoot()}
-                />
-            </div>
-            }
-            { harTidligereOppfolgingsdialoger(oppfolgingsdialoger) &&
+              />
+            )}
             <OppfolgingsdialogTeasere
-                oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
-                harTidligerOppfolgingsdialoger
-                tittel={texts.oppfolgingsdialogerVisning.teaserOutdatedPlaner.title}
-                id="OppfolgingsdialogTeasereAT"
-                rootUrl={getContextRoot()}
-                rootUrlPlaner={getContextRoot()}
+              oppfolgingsdialoger={aktivOppfolgingsdialoger}
+              tittel={
+                aktivOppfolgingsdialoger.length > 1
+                  ? texts.oppfolgingsdialogerVisning.teaserAktive
+                      .titleMultiplePlaner
+                  : texts.oppfolgingsdialogerVisning.teaserAktive
+                      .titleSinglePlan
+              }
+              rootUrl={getContextRoot()}
+              rootUrlPlaner={getContextRoot()}
             />
-            }
-            <OppfolgingsplanFilm />
-        </div>);
-    }
+          </div>
+        )}
+        {harTidligereOppfolgingsdialoger(oppfolgingsdialoger) && (
+          <OppfolgingsdialogTeasere
+            oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(
+              oppfolgingsdialoger
+            )}
+            harTidligerOppfolgingsdialoger
+            tittel={texts.oppfolgingsdialogerVisning.teaserOutdatedPlaner.title}
+            id="OppfolgingsdialogTeasereAT"
+            rootUrl={getContextRoot()}
+            rootUrlPlaner={getContextRoot()}
+          />
+        )}
+        <OppfolgingsplanFilm />
+      </div>
+    );
+  }
 }
 OppfolgingsdialogerVisning.propTypes = {
-    dinesykmeldinger: dinesykmeldingerReducerPt,
-    naermesteLedere: ledereReducerPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
-    opprettOppfolgingsdialog: PropTypes.func,
-    kopierOppfolgingsdialog: PropTypes.func,
+  dinesykmeldinger: dinesykmeldingerReducerPt,
+  naermesteLedere: ledereReducerPt,
+  oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
+  opprettOppfolgingsdialog: PropTypes.func,
+  kopierOppfolgingsdialog: PropTypes.func,
 };
 
 export default OppfolgingsdialogerVisning;

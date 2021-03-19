@@ -4,144 +4,166 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Panel } from 'nav-frontend-paneler';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import {
-    finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
-    finnSistEndretAvNavn,
+  finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
+  finnSistEndretAvNavn,
 } from '../../../../utils/oppfolgingsdialogUtils';
 import {
-    delMedFastlegePt,
-    delmednavPt,
-    dokumentReducerPt,
-    oppfolgingsplanPt,
+  delMedFastlegePt,
+  delmednavPt,
+  dokumentReducerPt,
+  oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
-import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
+import GodkjentPlanDelKnapper, {
+  isGodkjentPlanDelKnapperAvailable,
+} from './GodkjentPlanDelKnapper';
 import GodkjentPlanAvbruttTidspunkt from './GodkjentPlanAvbruttTidspunkt';
 import getContextRoot from '../../../../utils/getContextRoot';
 import { ButtonDownload } from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 
 const texts = {
-    godkjentPlanAvbrutt: {
-        linkActivePlan: 'Tilbake til den gjeldende utgave',
-        title: 'Tidligere oppfølgingsplan',
-    },
-    godkjentPlanEkspanderbar: {
-        getDokumentFailed: 'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
-        utvidbarTitle: 'Se planen',
-    },
+  godkjentPlanAvbrutt: {
+    linkActivePlan: 'Tilbake til den gjeldende utgave',
+    title: 'Tidligere oppfølgingsplan',
+  },
+  godkjentPlanEkspanderbar: {
+    getDokumentFailed:
+      'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
+    utvidbarTitle: 'Se planen',
+  },
 };
 
 const textChangeBy = (personName, date) => {
-    return `Denne oppfølgingsplanen ble åpnet for endring av ${personName} ${date}`;
+  return `Denne oppfølgingsplanen ble åpnet for endring av ${personName} ${date}`;
 };
 
 export const GodkjentPlanEkspanderbar = ({ dokument }) => {
-    let panel;
+  let panel;
 
-    if (dokument.henter) {
-        panel = <div className="app-spinner" aria-label="Vent litt mens siden laster" />;
-    } else if (dokument.hentingFeilet) {
-        panel = (<div className="godkjentPlanPdf__feilmelding">
-            {texts.godkjentPlanEkspanderbar.getDokumentFailed}
-        </div>);
-    } else {
-        panel = dokument.data && dokument.data.map((url, idx) => {
-            return (<div key={idx} className="godkjentPlanPdf__dokument">
-                <img className="godkjentPlanPdf__side" src={url} alt="godkjentplan" type="application/pdf" />
-            </div>);
-        });
-    }
-    return (
-        <Ekspanderbartpanel border tittel={texts.godkjentPlanEkspanderbar.utvidbarTitle}>
-            <div className="godkjentPlanPdf">
-                { panel }
-            </div>
-        </Ekspanderbartpanel>
+  if (dokument.henter) {
+    panel = (
+      <div className="app-spinner" aria-label="Vent litt mens siden laster" />
     );
+  } else if (dokument.hentingFeilet) {
+    panel = (
+      <div className="godkjentPlanPdf__feilmelding">
+        {texts.godkjentPlanEkspanderbar.getDokumentFailed}
+      </div>
+    );
+  } else {
+    panel =
+      dokument.data &&
+      dokument.data.map((url, idx) => {
+        return (
+          <div key={idx} className="godkjentPlanPdf__dokument">
+            <img
+              className="godkjentPlanPdf__side"
+              src={url}
+              alt="godkjentplan"
+              type="application/pdf"
+            />
+          </div>
+        );
+      });
+  }
+  return (
+    <Ekspanderbartpanel
+      border
+      tittel={texts.godkjentPlanEkspanderbar.utvidbarTitle}
+    >
+      <div className="godkjentPlanPdf">{panel}</div>
+    </Ekspanderbartpanel>
+  );
 };
 GodkjentPlanEkspanderbar.propTypes = {
-    dokument: dokumentReducerPt,
+  dokument: dokumentReducerPt,
 };
 
 class GodkjentPlanAvbrutt extends Component {
-    componentWillMount() {
-        if ((!this.props.dokument.hentet && !this.props.dokument.henter) || this.props.dokument.id !== this.props.oppfolgingsdialog.id) {
-            this.props.hentPdfurler(this.props.oppfolgingsdialog.id, 1);
-        }
+  componentWillMount() {
+    if (
+      (!this.props.dokument.hentet && !this.props.dokument.henter) ||
+      this.props.dokument.id !== this.props.oppfolgingsdialog.id
+    ) {
+      this.props.hentPdfurler(this.props.oppfolgingsdialog.id, 1);
     }
+  }
 
-    render() {
-        const {
-            oppfolgingsdialog,
-            oppfolgingsdialoger,
-            dokument,
-            delmednav,
-            delMedNavFunc,
-            fastlegeDeling,
-            delMedFastlege,
-            rootUrlPlaner,
-        } = this.props;
-        const aktivPlan = finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(oppfolgingsdialoger, oppfolgingsdialog.virksomhet.virksomhetsnummer);
-        return (
-            <Panel border className="godkjentPlanAvbrutt">
-                <div className="godkjentPlanAvbrutt_lenke">
-                    { aktivPlan &&
-                    <a
-                        className="lenke"
-                        href={`${rootUrlPlaner}/oppfolgingsplaner/${aktivPlan.id}`}>
-                        {texts.godkjentPlanAvbrutt.linkActivePlan}
-                    </a>
-                    }
-                </div>
-                <OppfolgingsplanInnholdboks
-                    svgUrl={`${getContextRoot()}/img/svg/plan-avbrutt.svg`}
-                    svgAlt=""
-                    tittel={texts.godkjentPlanAvbrutt.title}
-                >
-                    <div className="godkjentPlanAvbrutt">
-                        <GodkjentPlanAvbruttTidspunkt
-                            oppfolgingsplan={oppfolgingsdialog}
-                        />
-                        <GodkjentPlanDeltBekreftelse
-                            oppfolgingsplan={oppfolgingsdialog}
-                        />
-                        <p>
-                            {textChangeBy(finnSistEndretAvNavn(oppfolgingsdialog), toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt))}
-                        </p>
-                        <GodkjentPlanEkspanderbar
-                            dokument={dokument}
-                        />
-                        {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper
-                            className="godkjentPlanAvbruttDelKnapper"
-                            oppfolgingsplan={oppfolgingsdialog}
-                            delmednav={delmednav}
-                            delMedNavFunc={delMedNavFunc}
-                            fastlegeDeling={fastlegeDeling}
-                            delMedFastlege={delMedFastlege}
-                        />
-                        }
-                        <div className="knapperad knapperad--justervenstre">
-                            <ButtonDownload
-                                oppfolgingsplan={oppfolgingsdialog}
-                            />
-                        </div>
-                    </div>
-                </OppfolgingsplanInnholdboks>
-            </Panel>
-        );
-    }
+  render() {
+    const {
+      oppfolgingsdialog,
+      oppfolgingsdialoger,
+      dokument,
+      delmednav,
+      delMedNavFunc,
+      fastlegeDeling,
+      delMedFastlege,
+      rootUrlPlaner,
+    } = this.props;
+    const aktivPlan = finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(
+      oppfolgingsdialoger,
+      oppfolgingsdialog.virksomhet.virksomhetsnummer
+    );
+    return (
+      <Panel border className="godkjentPlanAvbrutt">
+        <div className="godkjentPlanAvbrutt_lenke">
+          {aktivPlan && (
+            <a
+              className="lenke"
+              href={`${rootUrlPlaner}/oppfolgingsplaner/${aktivPlan.id}`}
+            >
+              {texts.godkjentPlanAvbrutt.linkActivePlan}
+            </a>
+          )}
+        </div>
+        <OppfolgingsplanInnholdboks
+          svgUrl={`${getContextRoot()}/img/svg/plan-avbrutt.svg`}
+          svgAlt=""
+          tittel={texts.godkjentPlanAvbrutt.title}
+        >
+          <div className="godkjentPlanAvbrutt">
+            <GodkjentPlanAvbruttTidspunkt oppfolgingsplan={oppfolgingsdialog} />
+            <GodkjentPlanDeltBekreftelse oppfolgingsplan={oppfolgingsdialog} />
+            <p>
+              {textChangeBy(
+                finnSistEndretAvNavn(oppfolgingsdialog),
+                toDateMedMaanedNavn(
+                  oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt
+                )
+              )}
+            </p>
+            <GodkjentPlanEkspanderbar dokument={dokument} />
+            {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && (
+              <GodkjentPlanDelKnapper
+                className="godkjentPlanAvbruttDelKnapper"
+                oppfolgingsplan={oppfolgingsdialog}
+                delmednav={delmednav}
+                delMedNavFunc={delMedNavFunc}
+                fastlegeDeling={fastlegeDeling}
+                delMedFastlege={delMedFastlege}
+              />
+            )}
+            <div className="knapperad knapperad--justervenstre">
+              <ButtonDownload oppfolgingsplan={oppfolgingsdialog} />
+            </div>
+          </div>
+        </OppfolgingsplanInnholdboks>
+      </Panel>
+    );
+  }
 }
 
 GodkjentPlanAvbrutt.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
-    delmednav: delmednavPt,
-    rootUrlPlaner: PropTypes.string,
-    dokument: dokumentReducerPt,
-    delMedNavFunc: PropTypes.func,
-    fastlegeDeling: delMedFastlegePt,
-    delMedFastlege: PropTypes.func,
-    hentPdfurler: PropTypes.func,
+  oppfolgingsdialog: oppfolgingsplanPt,
+  oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
+  delmednav: delmednavPt,
+  rootUrlPlaner: PropTypes.string,
+  dokument: dokumentReducerPt,
+  delMedNavFunc: PropTypes.func,
+  fastlegeDeling: delMedFastlegePt,
+  delMedFastlege: PropTypes.func,
+  hentPdfurler: PropTypes.func,
 };
 
 export default GodkjentPlanAvbrutt;

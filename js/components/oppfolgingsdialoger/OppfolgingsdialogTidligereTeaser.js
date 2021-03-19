@@ -5,40 +5,42 @@ import * as opProptypes from '../../propTypes/opproptypes';
 import { finnOppfolgingsdialogMotpartNavn } from '../../utils/oppfolgingsdialogUtils';
 import { hentPlanStatus } from '../../utils/teaserUtils';
 
-const OppfolgingsdialogTidligereTeaser = (
-    {
-        oppfolgingsdialog,
-        rootUrl,
-        rootUrlPlaner,
-    }) => {
-    const planStatus = hentPlanStatus(oppfolgingsdialog);
-    return (
-        <LenkepanelBase
-            href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`}
-            border>
-            <div className="inngangspanel">
-                <span className="oppfolgingsplanInnhold__ikon">
-                    <img alt="" src={`${rootUrl}/img/svg/${planStatus.img}`} />
-                </span>
-                <div className="inngangspanel__innhold">
-                    <header className="inngangspanel__header">
-                        <h3 className="js-title" id={`oppfolgingsdialog-header-${oppfolgingsdialog.id}`}>
-                            <span className="inngangspanel__tittel">
-                                {finnOppfolgingsdialogMotpartNavn(oppfolgingsdialog)}
-                            </span>
-                        </h3>
-                    </header>
-                    <p className="mute inngangspanel__tekst">
-                        {planStatus.tekst}
-                    </p>
-                </div>
-            </div>
-        </LenkepanelBase>);
+const OppfolgingsdialogTidligereTeaser = ({
+  oppfolgingsdialog,
+  rootUrl,
+  rootUrlPlaner,
+}) => {
+  const planStatus = hentPlanStatus(oppfolgingsdialog);
+  return (
+    <LenkepanelBase
+      href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`}
+      border
+    >
+      <div className="inngangspanel">
+        <span className="oppfolgingsplanInnhold__ikon">
+          <img alt="" src={`${rootUrl}/img/svg/${planStatus.img}`} />
+        </span>
+        <div className="inngangspanel__innhold">
+          <header className="inngangspanel__header">
+            <h3
+              className="js-title"
+              id={`oppfolgingsdialog-header-${oppfolgingsdialog.id}`}
+            >
+              <span className="inngangspanel__tittel">
+                {finnOppfolgingsdialogMotpartNavn(oppfolgingsdialog)}
+              </span>
+            </h3>
+          </header>
+          <p className="mute inngangspanel__tekst">{planStatus.tekst}</p>
+        </div>
+      </div>
+    </LenkepanelBase>
+  );
 };
 OppfolgingsdialogTidligereTeaser.propTypes = {
-    oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
-    rootUrl: PropTypes.string,
-    rootUrlPlaner: PropTypes.string,
+  oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
+  rootUrl: PropTypes.string,
+  rootUrlPlaner: PropTypes.string,
 };
 
 export default OppfolgingsdialogTidligereTeaser;

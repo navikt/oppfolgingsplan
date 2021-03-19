@@ -1,144 +1,144 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
 import {
-    get,
-    post,
-    hentSyfoapiUrl,
-    API_NAVN,
+  get,
+  post,
+  hentSyfoapiUrl,
+  API_NAVN,
 } from '../../js/gateway-api/gatewayApi';
 import {
-    avvisDialogSaga,
-    hentSykmeldtOppfolginger,
-    opprettOppfolgingsdialog,
-    godkjennDialogSaga,
+  avvisDialogSaga,
+  hentSykmeldtOppfolginger,
+  opprettOppfolgingsdialog,
+  godkjennDialogSaga,
 } from '../../js/sagas/oppfolgingsplan/oppfolgingsdialogerSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/oppfolgingsdialog_actions';
 
 describe('oppfolgingsdialogerSagas', () => {
-    let apiUrlBase;
+  let apiUrlBase;
 
-    beforeEach(() => {
-        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
+  beforeEach(() => {
+    apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
+  });
+
+  describe('hentArbeidsgiversOppfolginger', () => {
+    const generator = hentSykmeldtOppfolginger();
+
+    it(`Skal dispatche ${actions.HENTER_OPPFOLGINGSDIALOGER}`, () => {
+      const nextPut = put({
+        type: actions.HENTER_OPPFOLGINGSDIALOGER,
+      });
+      expect(generator.next().value).to.deep.equal(nextPut);
     });
 
-    describe('hentArbeidsgiversOppfolginger', () => {
-        const generator = hentSykmeldtOppfolginger();
-
-        it(`Skal dispatche ${actions.HENTER_OPPFOLGINGSDIALOGER}`, () => {
-            const nextPut = put({
-                type: actions.HENTER_OPPFOLGINGSDIALOGER,
-            });
-            expect(generator.next().value).to.deep.equal(nextPut);
-        });
-
-        it('Skal dernest kalle resttjenesten', () => {
-            const url = `${apiUrlBase}/arbeidstaker/oppfolgingsplaner`;
-            const nextCall = call(get, url);
-            expect(generator.next().value).to.deep.equal(nextCall);
-        });
-
-        it('Skal dernest sette oppfolgingsdialoger henter', () => {
-            const nextPut = put({
-                type: actions.OPPFOLGINGSDIALOGER_HENTET,
-                data: [],
-            });
-            expect(generator.next().value).to.deep.equal(nextPut);
-        });
+    it('Skal dernest kalle resttjenesten', () => {
+      const url = `${apiUrlBase}/arbeidstaker/oppfolgingsplaner`;
+      const nextCall = call(get, url);
+      expect(generator.next().value).to.deep.equal(nextCall);
     });
 
-    describe('opprettOppfolgingsdialog', () => {
-        const virksomhetsnummer = '123';
+    it('Skal dernest sette oppfolgingsdialoger henter', () => {
+      const nextPut = put({
+        type: actions.OPPFOLGINGSDIALOGER_HENTET,
+        data: [],
+      });
+      expect(generator.next().value).to.deep.equal(nextPut);
+    });
+  });
 
-        const generator = opprettOppfolgingsdialog({
-            virksomhetsnummer,
-        });
+  describe('opprettOppfolgingsdialog', () => {
+    const virksomhetsnummer = '123';
 
-        it(`Skal dispatche ${actions.OPPRETTER_OPPFOLGINGSDIALOG}`, () => {
-            const nextPut = put({
-                type: actions.OPPRETTER_OPPFOLGINGSDIALOG,
-            });
-            expect(generator.next().value).to.deep.equal(nextPut);
-        });
-
-        it('Skal dernest sende postcall', () => {
-            const url = `${apiUrlBase}/arbeidstaker/oppfolgingsplaner`;
-            const nextCall = call(post, url, {
-                virksomhetsnummer,
-            });
-            expect(generator.next().value).to.deep.equal(nextCall);
-        });
-
-        it(`Skal dispatche ${actions.OPPFOLGINGSDIALOG_OPPRETTET}`, () => {
-            const data = 1;
-            const nextPut = put({
-                type: actions.OPPFOLGINGSDIALOG_OPPRETTET,
-                data,
-            });
-            expect(generator.next(data).value).to.deep.equal(nextPut);
-        });
+    const generator = opprettOppfolgingsdialog({
+      virksomhetsnummer,
     });
 
-    describe('godkjennOppfolgingsdialog', () => {
-        const action = {
-            id: '12345678',
-            gyldighetstidspunkt: {},
-            status: 'TRUE',
-            delMedNav: true,
-        };
-
-        const generator = godkjennDialogSaga(action);
-
-        it(`Skal dispatche ${actions.GODKJENNER_DIALOG}`, () => {
-            const nextPut = put({
-                type: actions.GODKJENNER_DIALOG,
-            });
-            expect(generator.next().value).to.deep.equal(nextPut);
-        });
-
-        it('Skal dernest sende postcall', () => {
-            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker&delmednav=true`;
-            const nextCall = call(post, url, action.gyldighetstidspunkt);
-            expect(generator.next().value).to.deep.equal(nextCall);
-        });
-
-        it(`Skal dispatche ${actions.DIALOG_GODKJENT}`, () => {
-            const nextPut = put({
-                type: actions.DIALOG_GODKJENT,
-                id: action.id,
-                status: action.status,
-                gyldighetstidspunkt: {},
-                delMedNav: action.delMedNav,
-            });
-            expect(generator.next({}).value).to.deep.equal(nextPut);
-        });
+    it(`Skal dispatche ${actions.OPPRETTER_OPPFOLGINGSDIALOG}`, () => {
+      const nextPut = put({
+        type: actions.OPPRETTER_OPPFOLGINGSDIALOG,
+      });
+      expect(generator.next().value).to.deep.equal(nextPut);
     });
 
-    describe('avvisDialogSaga', () => {
-        const action = {
-            id: '12345678',
-        };
-
-        const generator = avvisDialogSaga(action);
-
-        it(`Skal dispatche ${actions.AVVISER_DIALOG}`, () => {
-            const nextPut = put({
-                type: actions.AVVISER_DIALOG,
-            });
-            expect(generator.next().value).to.deep.equal(nextPut);
-        });
-
-        it('Skal dernest sende postcall', () => {
-            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/avvis`;
-            const nextCall = call(post, url);
-            expect(generator.next().value).to.deep.equal(nextCall);
-        });
-
-        it(`Skal dispatche ${actions.DIALOG_AVVIST}`, () => {
-            const nextPut = put({
-                type: actions.DIALOG_AVVIST,
-                id: action.id,
-            });
-            expect(generator.next().value).to.deep.equal(nextPut);
-        });
+    it('Skal dernest sende postcall', () => {
+      const url = `${apiUrlBase}/arbeidstaker/oppfolgingsplaner`;
+      const nextCall = call(post, url, {
+        virksomhetsnummer,
+      });
+      expect(generator.next().value).to.deep.equal(nextCall);
     });
+
+    it(`Skal dispatche ${actions.OPPFOLGINGSDIALOG_OPPRETTET}`, () => {
+      const data = 1;
+      const nextPut = put({
+        type: actions.OPPFOLGINGSDIALOG_OPPRETTET,
+        data,
+      });
+      expect(generator.next(data).value).to.deep.equal(nextPut);
+    });
+  });
+
+  describe('godkjennOppfolgingsdialog', () => {
+    const action = {
+      id: '12345678',
+      gyldighetstidspunkt: {},
+      status: 'TRUE',
+      delMedNav: true,
+    };
+
+    const generator = godkjennDialogSaga(action);
+
+    it(`Skal dispatche ${actions.GODKJENNER_DIALOG}`, () => {
+      const nextPut = put({
+        type: actions.GODKJENNER_DIALOG,
+      });
+      expect(generator.next().value).to.deep.equal(nextPut);
+    });
+
+    it('Skal dernest sende postcall', () => {
+      const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker&delmednav=true`;
+      const nextCall = call(post, url, action.gyldighetstidspunkt);
+      expect(generator.next().value).to.deep.equal(nextCall);
+    });
+
+    it(`Skal dispatche ${actions.DIALOG_GODKJENT}`, () => {
+      const nextPut = put({
+        type: actions.DIALOG_GODKJENT,
+        id: action.id,
+        status: action.status,
+        gyldighetstidspunkt: {},
+        delMedNav: action.delMedNav,
+      });
+      expect(generator.next({}).value).to.deep.equal(nextPut);
+    });
+  });
+
+  describe('avvisDialogSaga', () => {
+    const action = {
+      id: '12345678',
+    };
+
+    const generator = avvisDialogSaga(action);
+
+    it(`Skal dispatche ${actions.AVVISER_DIALOG}`, () => {
+      const nextPut = put({
+        type: actions.AVVISER_DIALOG,
+      });
+      expect(generator.next().value).to.deep.equal(nextPut);
+    });
+
+    it('Skal dernest sende postcall', () => {
+      const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/avvis`;
+      const nextCall = call(post, url);
+      expect(generator.next().value).to.deep.equal(nextCall);
+    });
+
+    it(`Skal dispatche ${actions.DIALOG_AVVIST}`, () => {
+      const nextPut = put({
+        type: actions.DIALOG_AVVIST,
+        id: action.id,
+      });
+      expect(generator.next().value).to.deep.equal(nextPut);
+    });
+  });
 });

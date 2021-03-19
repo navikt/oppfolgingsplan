@@ -5,23 +5,23 @@ import getContextRoot from '../../../utils/getContextRoot';
 import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 
 const PlanEkspanderbar = ({ oppfolgingsplan }) => {
-    const texts = {
-        plan: {
-            title: 'Se planen',
-        },
-    };
+  const texts = {
+    plan: {
+      title: 'Se planen',
+    },
+  };
 
-    return (
-        <Ekspanderbartpanel border tittel={texts.plan.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsplan}
-                rootUrl={getContextRoot()}
-            />
-        </Ekspanderbartpanel>
-    );
+  return (
+    <Ekspanderbartpanel border tittel={texts.plan.title}>
+      <GodkjennPlanOversiktInformasjon
+        oppfolgingsdialog={oppfolgingsplan}
+        rootUrl={getContextRoot()}
+      />
+    </Ekspanderbartpanel>
+  );
 };
 PlanEkspanderbar.propTypes = {
-    oppfolgingsplan: oppfolgingsplanPt,
+  oppfolgingsplan: oppfolgingsplanPt,
 };
 
 export default PlanEkspanderbar;
