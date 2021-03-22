@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+import { textBothApprovedOppfolgingsplan } from '../../../../utils/textUtils';
 import {
     delMedFastlegePt,
     delmednavPt,
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
+import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import Lightbox from '../../../Lightbox';
 import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
-import { textBothApprovedOppfolgingsplan } from '../../../../utils/textUtils';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {

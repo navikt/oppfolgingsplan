@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Panel } from 'nav-frontend-paneler';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import { textBothApprovedOppfolgingsplan } from '../../../../utils/textUtils';
+import getContextRoot from '../../../../utils/getContextRoot';
 import {
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
     finnSistEndretAvNavn,
@@ -15,7 +16,6 @@ import {
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanAvbruttTidspunkt from './GodkjentPlanAvbruttTidspunkt';
-import getContextRoot from '../../../../utils/getContextRoot';
 import { ButtonDownload } from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
