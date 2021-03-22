@@ -27,10 +27,6 @@ const texts = {
     tvungenGodkjenning: 'Planen er laget av arbeidsgiveren din.',
 };
 
-const textChangeBy = (personName, date) => {
-    return `Denne oppfølgingsplanen ble åpnet for endring av ${personName} ${date}`;
-};
-
 
 class GodkjentPlanAvbrutt extends Component {
     render() {
