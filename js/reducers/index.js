@@ -4,7 +4,6 @@ import arbeidsoppgaver from './arbeidsoppgaver';
 import arbeidsforhold from './arbeidsforhold';
 import avbrytdialogReducer from './avbrytdialog';
 import delmednav from './delmednav';
-import dokument from './dokument';
 import fastlegeDeling from './fastlegeDeling';
 import kommentar from './kommentar';
 import kontaktinfo from './kontaktinfo';
@@ -31,7 +30,6 @@ const reducers = {
     avbrytdialogReducer,
     dineSykmeldinger,
     history,
-    dokument,
     kommentar,
     kopierDialogReducer,
     navigasjontoggles,

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+import { textBothApprovedOppfolgingsplan } from '../../../../utils/textUtils';
 import {
     delMedFastlegePt,
     delmednavPt,
-    dokumentReducerPt,
     oppfolgingsplanPt,
 } from '../../../../propTypes/opproptypes';
+import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import Lightbox from '../../../Lightbox';
 import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
-import BildeTekstLinje from '../../../app/BildeTekstLinje';
+import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
@@ -25,27 +25,12 @@ const texts = {
         info: 'Hvis du endrer planen, må du sende den til godkjenning hos den andre. Etter godkjenning blir den en gjeldende plan.',
         button: 'Gjør endringer',
     },
-    tvungenGodkjenning: {
-        info: 'Planen er laget av arbeidsgiveren din. Er du uenig i innholdet, må du snakke med',
-    },
+    tvungenGodkjenning: 'Planen er laget av arbeidsgiveren din. Er du uenig i innholdet, må du snakke med',
+
 };
 
-const textBothApprovedOppfolgingsplan = (lederNavn) => {
-    return `Denne versjonen av planen er godkjent av ${lederNavn} og deg.`;
-};
-
-export const TextForcedApprovedOppfolgingsplan = ({ rootUrl, oppfolgingsplan }) => {
-    return (
-        <BildeTekstLinje
-            imgUrl={`${rootUrl}/img/svg/report-problem-circle.svg`}
-            imgAlt=""
-            tekst={`${texts.tvungenGodkjenning.info} ${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}.`}
-        />
-    );
-};
-TextForcedApprovedOppfolgingsplan.propTypes = {
-    rootUrl: PropTypes.string,
-    oppfolgingsplan: oppfolgingsplanPt,
+const tvungenGodkjenningText = (oppfolgingsplan) => {
+    return `${texts.tvungenGodkjenning} ${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}.`;
 };
 
 export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {
@@ -74,12 +59,6 @@ class GodkjentPlan extends Component {
         };
         this.apneBekreftelse = this.apneBekreftelse.bind(this);
         this.lukkBekreftelse = this.lukkBekreftelse.bind(this);
-    }
-
-    componentWillMount() {
-        if ((!this.props.dokument.hentet && !this.props.dokument.henter) || this.props.dokument.id !== this.props.oppfolgingsdialog.id) {
-            this.props.hentPdfurler(this.props.oppfolgingsdialog.id, 1);
-        }
     }
 
     apneBekreftelse() {
@@ -126,7 +105,7 @@ class GodkjentPlan extends Component {
                         { godkjentPlan.tvungenGodkjenning &&
                             <TextForcedApprovedOppfolgingsplan
                                 rootUrl={rootUrl}
-                                oppfolgingsplan={oppfolgingsdialog}
+                                text={tvungenGodkjenningText(oppfolgingsdialog)}
                             />
                         }
 
@@ -169,10 +148,8 @@ GodkjentPlan.propTypes = {
     fastlegeDeling: delMedFastlegePt,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
-    dokument: dokumentReducerPt,
     delMedNavFunc: PropTypes.func,
     delMedFastlege: PropTypes.func,
-    hentPdfurler: PropTypes.func,
     avbrytDialog: PropTypes.func,
 };
 
