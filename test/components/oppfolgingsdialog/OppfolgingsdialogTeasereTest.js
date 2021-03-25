@@ -10,19 +10,16 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('OppfolgingsdialogTeasere', () => {
-    const oppdialoger = getOppfolgingsdialoger;
-    const tittel = 'tittel';
-    const komponent = shallow(<OppfolgingsdialogTeasere
-        oppfolgingsdialoger={oppdialoger}
-        tittel={tittel}
-    />);
+  const oppdialoger = getOppfolgingsdialoger;
+  const tittel = 'tittel';
+  const komponent = shallow(<OppfolgingsdialogTeasere oppfolgingsdialoger={oppdialoger} tittel={tittel} />);
 
-    it('Viser en header', () => {
-        expect(komponent.find('header')).to.have.length(1);
-        expect(komponent.find('header').text()).to.contain(tittel);
-    });
+  it('Viser en header', () => {
+    expect(komponent.find('header')).to.have.length(1);
+    expect(komponent.find('header').text()).to.contain(tittel);
+  });
 
-    it('Viser en OppfolgingsdialogTeasere per Oppfolgingsdialog', () => {
-        expect(komponent.find(OppfolgingsdialogTeaser)).to.have.length(oppdialoger.length);
-    });
+  it('Viser en OppfolgingsdialogTeasere per Oppfolgingsdialog', () => {
+    expect(komponent.find(OppfolgingsdialogTeaser)).to.have.length(oppdialoger.length);
+  });
 });

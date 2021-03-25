@@ -11,20 +11,16 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('ArbeidsgiverHarTvangsgodkjent', () => {
-    let component;
-    const oppfolgingsdialog = getOppfolgingsdialog();
+  let component;
+  const oppfolgingsdialog = getOppfolgingsdialog();
 
-    it('Skal alltid vise OppfolgingsplanInnholdboks', () => {
-        component = shallow(<ArbeidsgiverHarTvangsgodkjent
-            oppfolgingsdialog={oppfolgingsdialog}
-        />);
-        expect(component.find(OppfolgingsplanInnholdboks)).to.have.length(1);
-    });
+  it('Skal alltid vise OppfolgingsplanInnholdboks', () => {
+    component = shallow(<ArbeidsgiverHarTvangsgodkjent oppfolgingsdialog={oppfolgingsdialog} />);
+    expect(component.find(OppfolgingsplanInnholdboks)).to.have.length(1);
+  });
 
-    it('Skal alltid vise PlanEkspanderbar', () => {
-        component = shallow(<ArbeidsgiverHarTvangsgodkjent
-            oppfolgingsdialog={oppfolgingsdialog}
-        />);
-        expect(component.find(PlanEkspanderbar)).to.have.length(1);
-    });
+  it('Skal alltid vise PlanEkspanderbar', () => {
+    component = shallow(<ArbeidsgiverHarTvangsgodkjent oppfolgingsdialog={oppfolgingsdialog} />);
+    expect(component.find(PlanEkspanderbar)).to.have.length(1);
+  });
 });
