@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'nav-frontend-paneler';
-import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import { textBothApprovedOppfolgingsplan } from '../../../../utils/textUtils';
 import getContextRoot from '../../../../utils/getContextRoot';
-import {
-  finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
-  finnSistEndretAvNavn,
-} from '../../../../utils/oppfolgingsdialogUtils';
+import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from '../../../../utils/oppfolgingsdialogUtils';
 import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
@@ -23,67 +19,65 @@ const texts = {
   tvungenGodkjenning: 'Planen er laget av arbeidsgiveren din.',
 };
 
-class GodkjentPlanAvbrutt extends Component {
-  render() {
-    const {
-      oppfolgingsdialog,
-      oppfolgingsdialoger,
-      delmednav,
-      delMedNavFunc,
-      fastlegeDeling,
-      delMedFastlege,
-      rootUrl,
-      rootUrlPlaner,
-    } = this.props;
-    const aktivPlan = finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(
-      oppfolgingsdialoger,
-      oppfolgingsdialog.virksomhet.virksomhetsnummer
-    );
-    const godkjentPlan = oppfolgingsdialog.godkjentPlan;
-    return (
-      <Panel border className="godkjentPlanAvbrutt">
-        <div className="godkjentPlanAvbrutt_lenke">
-          {aktivPlan && (
-            <a className="lenke" href={`${rootUrlPlaner}/oppfolgingsplaner/${aktivPlan.id}`}>
-              {texts.linkActivePlan}
-            </a>
-          )}
-        </div>
-        <OppfolgingsplanInnholdboks
-          svgUrl={`${getContextRoot()}/img/svg/plan-avbrutt.svg`}
-          svgAlt=""
-          tittel={texts.title}
-        >
-          <div className="godkjentPlanAvbrutt">
-            {!godkjentPlan.tvungenGodkjenning && (
-              <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}</p>
-            )}
-            {godkjentPlan.tvungenGodkjenning && (
-              <TextForcedApprovedOppfolgingsplan rootUrl={rootUrl} text={texts.tvungenGodkjenning} />
-            )}
+const GodkjentPlanAvbrutt = ({
+  oppfolgingsdialog,
+  oppfolgingsdialoger,
+  delmednav,
+  delMedNavFunc,
+  fastlegeDeling,
+  delMedFastlege,
+  rootUrl,
+  rootUrlPlaner,
+}) => {
+  const aktivPlan = finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(
+    oppfolgingsdialoger,
+    oppfolgingsdialog.virksomhet.virksomhetsnummer
+  );
+  const godkjentPlan = oppfolgingsdialog.godkjentPlan;
 
-            <GodkjentPlanAvbruttTidspunkt oppfolgingsplan={oppfolgingsdialog} />
-            <GodkjentPlanDeltBekreftelse oppfolgingsplan={oppfolgingsdialog} />
-            <PlanEkspanderbar oppfolgingsplan={oppfolgingsdialog} />
-            {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && (
-              <GodkjentPlanDelKnapper
-                className="godkjentPlanAvbruttDelKnapper"
-                oppfolgingsplan={oppfolgingsdialog}
-                delmednav={delmednav}
-                delMedNavFunc={delMedNavFunc}
-                fastlegeDeling={fastlegeDeling}
-                delMedFastlege={delMedFastlege}
-              />
-            )}
-            <div className="knapperad knapperad--justervenstre">
-              <ButtonDownload oppfolgingsplan={oppfolgingsdialog} />
-            </div>
+  return (
+    <Panel border className="godkjentPlanAvbrutt">
+      <div className="godkjentPlanAvbrutt_lenke">
+        {aktivPlan && (
+          <a className="lenke" href={`${rootUrlPlaner}/oppfolgingsplaner/${aktivPlan.id}`}>
+            {texts.linkActivePlan}
+          </a>
+        )}
+      </div>
+      <OppfolgingsplanInnholdboks
+        svgUrl={`${getContextRoot()}/img/svg/plan-avbrutt.svg`}
+        svgAlt=""
+        tittel={texts.title}
+      >
+        <div className="godkjentPlanAvbrutt">
+          {!godkjentPlan.tvungenGodkjenning && (
+            <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}</p>
+          )}
+          {godkjentPlan.tvungenGodkjenning && (
+            <TextForcedApprovedOppfolgingsplan rootUrl={rootUrl} text={texts.tvungenGodkjenning} />
+          )}
+
+          <GodkjentPlanAvbruttTidspunkt oppfolgingsplan={oppfolgingsdialog} />
+          <GodkjentPlanDeltBekreftelse oppfolgingsplan={oppfolgingsdialog} />
+          <PlanEkspanderbar oppfolgingsplan={oppfolgingsdialog} />
+          {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && (
+            <GodkjentPlanDelKnapper
+              className="godkjentPlanAvbruttDelKnapper"
+              oppfolgingsplan={oppfolgingsdialog}
+              delmednav={delmednav}
+              delMedNavFunc={delMedNavFunc}
+              fastlegeDeling={fastlegeDeling}
+              delMedFastlege={delMedFastlege}
+            />
+          )}
+          <div className="knapperad knapperad--justervenstre">
+            <ButtonDownload oppfolgingsplan={oppfolgingsdialog} />
           </div>
-        </OppfolgingsplanInnholdboks>
-      </Panel>
-    );
-  }
-}
+        </div>
+      </OppfolgingsplanInnholdboks>
+    </Panel>
+  );
+};
 
 GodkjentPlanAvbrutt.propTypes = {
   oppfolgingsdialog: oppfolgingsplanPt,

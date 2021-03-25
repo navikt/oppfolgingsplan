@@ -63,7 +63,7 @@ export class Container extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { kopierDialogReducer, oppfolgingsdialogerReducer, naermesteLedere } = this.props;
+    const { kopierDialogReducer, oppfolgingsdialogerReducer } = this.props;
     if (oppfolgingsplanHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
       window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
       this.props.hentOppfolgingsdialoger();

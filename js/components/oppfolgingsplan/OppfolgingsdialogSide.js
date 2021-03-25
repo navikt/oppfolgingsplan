@@ -108,7 +108,6 @@ export class Container extends Component {
   }
 
   componentDidUpdate() {
-    const { oppfolgingsdialog } = this.props;
     const navigasjonSteg = this.props.navigasjontoggles.steg;
     const utfyllingssideHashes = ['#arbeidsoppgaver', '#tiltak', '#godkjenn'];
 
@@ -133,6 +132,12 @@ export class Container extends Component {
       this.setPageTitle(selectedPageTitle);
     } else {
       this.setPageTitle(pageTitleOppsummering);
+    }
+  }
+
+  setPageTitle(title) {
+    if (this.state.currentPageTitle !== title) {
+      this.setState({ currentPageTitle: title });
     }
   }
 
@@ -181,12 +186,6 @@ export class Container extends Component {
         })()}
       </Side>
     );
-  }
-
-  setPageTitle(title) {
-    if (this.state.currentPageTitle !== title) {
-      this.setState({ currentPageTitle: title });
-    }
   }
 }
 

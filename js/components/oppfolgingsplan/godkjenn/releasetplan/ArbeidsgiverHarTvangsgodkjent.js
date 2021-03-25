@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import getContextRoot from '../../../../utils/getContextRoot';
@@ -12,31 +12,27 @@ const texts = {
   buttonConfirm: 'Videre',
 };
 
-class ArbeidsgiverHarTvangsgodkjent extends Component {
-  render() {
-    const { oppfolgingsdialog, markerMottattTvungenGodkjenning } = this.props;
+const ArbeidsgiverHarTvangsgodkjent = ({ oppfolgingsdialog, markerMottattTvungenGodkjenning }) => {
+  return (
+    <OppfolgingsplanInnholdboks
+      liteikon
+      svgUrl={`${getContextRoot()}/img/svg/varseltrekant.svg`}
+      svgAlt=""
+      tittel={texts.title}
+    >
+      <div className="arbeidsgiverHarTvangsgodkjent">
+        <p>{texts.paragraphInfo}</p>
+        <PlanEkspanderbar oppfolgingsplan={oppfolgingsdialog} />
 
-    return (
-      <OppfolgingsplanInnholdboks
-        liteikon
-        svgUrl={`${getContextRoot()}/img/svg/varseltrekant.svg`}
-        svgAlt=""
-        tittel={texts.title}
-      >
-        <div className="arbeidsgiverHarTvangsgodkjent">
-          <p>{texts.paragraphInfo}</p>
-          <PlanEkspanderbar oppfolgingsplan={oppfolgingsdialog} />
-
-          <div className="knapperad">
-            <div className="knapperad__element">
-              <Hovedknapp onClick={markerMottattTvungenGodkjenning}>{texts.buttonConfirm}</Hovedknapp>
-            </div>
+        <div className="knapperad">
+          <div className="knapperad__element">
+            <Hovedknapp onClick={markerMottattTvungenGodkjenning}>{texts.buttonConfirm}</Hovedknapp>
           </div>
         </div>
-      </OppfolgingsplanInnholdboks>
-    );
-  }
-}
+      </div>
+    </OppfolgingsplanInnholdboks>
+  );
+};
 
 ArbeidsgiverHarTvangsgodkjent.propTypes = {
   oppfolgingsdialog: oppfolgingsplanPt,

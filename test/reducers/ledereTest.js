@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import deepFreeze from 'deep-freeze';
-import * as ledereActions from '../../js/actions/ledere_actions';
 import * as actiontyper from '../../js/actions/actiontyper';
 
 import ledere from '../../js/reducers/ledere';

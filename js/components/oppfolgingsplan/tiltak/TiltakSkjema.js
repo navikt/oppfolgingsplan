@@ -441,6 +441,8 @@ TiltakSkjemaKomponent.propTypes = {
   varselTekst: PropTypes.string,
   visFeilMelding: PropTypes.func,
   tiltakReducer: tiltakReducerPt,
+  touch: PropTypes.func,
+  untouch: PropTypes.func,
 };
 
 const ReduxSkjema = reduxForm({

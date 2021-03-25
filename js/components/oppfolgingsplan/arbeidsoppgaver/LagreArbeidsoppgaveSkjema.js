@@ -1,3 +1,6 @@
+import { Feiloppsummering } from 'nav-frontend-skjema';
+import connect from 'react-redux/lib/connect/connect';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
@@ -12,8 +15,6 @@ import { KANGJENNOMFOERES, TILRETTELEGGING } from './arbeidsoppgavesvar';
 import { arbeidsoppgaverReducerPt, arbeidsoppgavePt } from '../../../propTypes/opproptypes';
 import ArbeidsoppgaveKnapper from './ArbeidsoppgaveKnapper';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
-import { Feiloppsummering } from 'nav-frontend-skjema';
-import connect from 'react-redux/lib/connect/connect';
 
 const texts = {
   infoVarsel: `
@@ -258,6 +259,23 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     this.handleInitialize();
   }
 
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { arbeidsoppgavenavn, beskrivelse } = nextProps;
+
+    if (nextProps.gjennomfoeringSvar !== this.props.gjennomfoeringSvar && this.state.isFormSubmitted) {
+      if (nextProps.gjennomfoeringSvar === KANGJENNOMFOERES.KAN) {
+        this.touchAllFields();
+        this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavn);
+        this.removeError(FELTER.beskrivelse.id);
+      } else {
+        this.touchAllFields();
+        this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavn);
+        this.validateBeskrivelseFelt(beskrivelse);
+      }
+    }
+  }
+
   removeError = (id) => {
     const errors = Object.assign(this.state.errorList);
     const i = errors.findIndex((e) => {
@@ -276,22 +294,6 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
   touchAllFields() {
     this.props.touch('arbeidsoppgavenavn');
     this.props.touch('beskrivelse');
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { arbeidsoppgavenavn, beskrivelse } = nextProps;
-
-    if (nextProps.gjennomfoeringSvar !== this.props.gjennomfoeringSvar && this.state.isFormSubmitted) {
-      if (nextProps.gjennomfoeringSvar === KANGJENNOMFOERES.KAN) {
-        this.touchAllFields();
-        this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavn);
-        this.removeError(FELTER.beskrivelse.id);
-      } else {
-        this.touchAllFields();
-        this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavn);
-        this.validateBeskrivelseFelt(beskrivelse);
-      }
-    }
   }
 
   visFeiletOppgave() {
@@ -577,6 +579,8 @@ LagreArbeidsoppgaveSkjemaComponent.propTypes = {
   varselTekst: PropTypes.string,
   rootUrlImg: PropTypes.string,
   arbeidsoppgaverReducer: arbeidsoppgaverReducerPt,
+  touch: PropTypes.func,
+  gjennomfoeringSvar: PropTypes.string,
 };
 
 const valueSelector = formValueSelector(LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN);
@@ -587,10 +591,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-let ReduxSkjema = reduxForm({
+const ReduxSkjema = reduxForm({
   form: LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN,
 })(LagreArbeidsoppgaveSkjemaComponent);
 
-ReduxSkjema = connect(mapStateToProps)(ReduxSkjema);
-
-export default ReduxSkjema;
+export default connect(mapStateToProps)(ReduxSkjema);
