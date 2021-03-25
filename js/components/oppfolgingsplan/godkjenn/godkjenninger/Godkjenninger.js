@@ -20,6 +20,7 @@ const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, 
         nullstillGodkjenning={nullstillGodkjenning}
         avvisDialog={avvisDialog}
         rootUrl={getContextRoot()}
+        rootUrlPlaner={rootUrlPlaner}
       />
     );
   }
