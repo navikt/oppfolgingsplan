@@ -24,7 +24,7 @@ import {
     getStartDateFromTiltakListe,
 } from '../../../../utils/tiltakUtils';
 import { erHerokuApp } from '../../../../utils/urlUtils';
-import ObligatoriskeFelterInfotekst from "../../ObligatoriskeFelterInfotekst";
+import ObligatoriskeFelterInfotekst from '../../ObligatoriskeFelterInfotekst';
 
 const texts = {
     title: 'Send til lederen din for godkjenning',

@@ -64,7 +64,7 @@ const pageTitleSePlanen = 'Oppfølgingsplan - Se planen';
 const pageTitleOppsummering = 'Oppfølgingsplan - Oppsummering';
 
 const texts = {
-    pageTitles: [ pageTitleArbeidsoppgaver, pageTitleTiltak, pageTitleSePlanen ],
+    pageTitles: [pageTitleArbeidsoppgaver, pageTitleTiltak, pageTitleSePlanen],
     brodsmuler: {
         dittSykefravaer: 'Ditt sykefravær',
         dineOppfolgingsplaner: 'Dine oppfølgingsplaner',
@@ -87,7 +87,7 @@ export class Container extends Component {
             window.location.hash = hashValue;
             this.props.settAktivtSteg(1);
         }
-        this.state = { currentPageTitle: pageTitleOppsummering }
+        this.state = { currentPageTitle: pageTitleOppsummering };
     }
 
     componentWillMount() {
@@ -118,7 +118,7 @@ export class Container extends Component {
 
     componentDidUpdate() {
         const { oppfolgingsdialog } = this.props;
-        const navigasjonSteg = this.props.navigasjontoggles.steg
+        const navigasjonSteg = this.props.navigasjontoggles.steg;
         const utfyllingssideHashes = ['#arbeidsoppgaver', '#tiltak', '#godkjenn'];
 
         if (window.location.hash === '' && window.sessionStorage.getItem('hash')) {
@@ -194,7 +194,6 @@ export class Container extends Component {
             this.setState({ currentPageTitle: title });
         }
     }
-
 }
 
 Container.propTypes = {

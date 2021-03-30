@@ -110,8 +110,8 @@ class Arbeidsoppgave extends Component {
                         className="arbeidsoppgaverListe__rad arbeidsoppgaverListe__rad--element"
                         aria-label={element.arbeidsoppgavenavn}>
 
-                            <div>
-                                <div className="arbeidsoppgaverListe__radoverskrift">
+                        <div>
+                            <div className="arbeidsoppgaverListe__radoverskrift">
                                 <ArbeidsoppgaveOverskrift
                                     fnr={fnr}
                                     arbeidsoppgave={element}
@@ -122,21 +122,21 @@ class Arbeidsoppgave extends Component {
                                 />
                             </div>
                             {!this.state.visLagreSkjema &&
-                            <ArbeidsoppgaveInformasjon
-                                element={element}
-                            />
+                                <ArbeidsoppgaveInformasjon
+                                    element={element}
+                                />
                             }
                             {this.state.visLagreSkjema &&
-                            <LagreArbeidsoppgaveSkjema
-                                sendLagre={this.sendLagre}
-                                arbeidsoppgave={element}
-                                form={element.arbeidsoppgaveId.toString()}
-                                avbryt={this.visElementInformasjon}
-                                oppdateringFeilet={this.state.visLagringFeilet && feilMelding}
-                                varselTekst={this.state.varselTekst}
-                                arbeidsoppgaverReducer={arbeidsoppgaverReducer}
-                                rootUrlImg={rootUrlImg}
-                            />
+                                <LagreArbeidsoppgaveSkjema
+                                    sendLagre={this.sendLagre}
+                                    arbeidsoppgave={element}
+                                    form={element.arbeidsoppgaveId.toString()}
+                                    avbryt={this.visElementInformasjon}
+                                    oppdateringFeilet={this.state.visLagringFeilet && feilMelding}
+                                    varselTekst={this.state.varselTekst}
+                                    arbeidsoppgaverReducer={arbeidsoppgaverReducer}
+                                    rootUrlImg={rootUrlImg}
+                                />
                             }
                         </div>
 
@@ -175,6 +175,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const ArbeidsoppgaveContainer = connect(mapStateToProps, null, null, {pure: false})(Arbeidsoppgave);
+const ArbeidsoppgaveContainer = connect(mapStateToProps, null, null, { pure: false })(Arbeidsoppgave);
 
 export default ArbeidsoppgaveContainer;

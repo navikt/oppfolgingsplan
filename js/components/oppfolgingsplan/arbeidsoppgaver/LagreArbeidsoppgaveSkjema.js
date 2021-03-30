@@ -4,7 +4,7 @@ import {
     Field,
     formValueSelector,
     reduxForm,
-    SubmissionError
+    SubmissionError,
 } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
 import { tekstfeltRegex } from '../../../konstanter';
@@ -23,8 +23,8 @@ import {
 } from '../../../propTypes/opproptypes';
 import ArbeidsoppgaveKnapper from './ArbeidsoppgaveKnapper';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
-import { Feiloppsummering } from "nav-frontend-skjema";
-import connect from "react-redux/lib/connect/connect";
+import { Feiloppsummering } from 'nav-frontend-skjema';
+import connect from 'react-redux/lib/connect/connect';
 
 const texts = {
     infoVarsel: `
@@ -131,10 +131,10 @@ export const FELTER = {
 };
 
 export const ArbeidsoppgaveNavn = ({
-                                       felt,
-                                       isFormSubmitted,
-                                       validate
-                                   }) => {
+    felt,
+    isFormSubmitted,
+    validate,
+}) => {
     return (
         <div className="skjemaelement lagrearbeidsoppgaveskjema__inputgruppe">
             <label className="skjemaelement__label" id={felt.navn} htmlFor={`${felt.navn}-input`}>
@@ -186,7 +186,7 @@ export const ArbeidsoppgaveBeskrivelse = (
             />
         </div>
     );
-}
+};
 
 ArbeidsoppgaveBeskrivelse.propTypes = {
     felt: skjemaFeltBeskrivelsePt,
@@ -195,7 +195,7 @@ ArbeidsoppgaveBeskrivelse.propTypes = {
     validate: PropTypes.func,
 };
 
-export const ArbeidsoppgaveGjennomfoeringSvar = ({handleOptionChange, arbeidsoppgave}) => {
+export const ArbeidsoppgaveGjennomfoeringSvar = ({ handleOptionChange, arbeidsoppgave }) => {
     const feltId = arbeidsoppgave ? `kanGjennomfoeres-${arbeidsoppgave.arbeidsoppgaveId}` : 'kanGjennomfoeres';
 
     return (
@@ -284,8 +284,8 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     }
 
     removeError = (id) => {
-        let errors = Object.assign(this.state.errorList)
-        const i = errors.findIndex((e => e.skjemaelementId === id));
+        const errors = Object.assign(this.state.errorList);
+        const i = errors.findIndex(((e) => { return e.skjemaelementId === id; }));
 
         if (i !== -1) {
             errors.splice(i, 1);
@@ -293,7 +293,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
 
         this.setState({
             errorList: errors,
-        })
+        });
     }
 
     touchAllFields() {
@@ -302,7 +302,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        const {arbeidsoppgavenavn, beskrivelse} = nextProps;
+        const { arbeidsoppgavenavn, beskrivelse } = nextProps;
 
         if (nextProps.gjennomfoeringSvar !== this.props.gjennomfoeringSvar && this.state.isFormSubmitted) {
             if (nextProps.gjennomfoeringSvar === KANGJENNOMFOERES.KAN) {
@@ -411,13 +411,13 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
             errorObject.arbeidsoppgavenavn = feilmeldingerObject.arbeidsoppgavenavn;
             errorList.push({
                 skjemaelementId: FELTER.arbeidsoppgavenavn.id,
-                feilmelding: feilmeldingerObject.arbeidsoppgavenavn
+                feilmelding: feilmeldingerObject.arbeidsoppgavenavn,
             });
         }
 
         if (feilmeldingerObject.beskrivelse) {
             errorObject.beskrivelse = feilmeldingerObject.beskrivelse;
-            errorList.push({skjemaelementId: FELTER.beskrivelse.id, feilmelding: feilmeldingerObject.beskrivelse});
+            errorList.push({ skjemaelementId: FELTER.beskrivelse.id, feilmelding: feilmeldingerObject.beskrivelse });
         }
 
         if (feilmeldingerObject.arbeidsoppgavenavn || feilmeldingerObject.beskrivelse) {
@@ -451,8 +451,8 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     }
 
     updateFeilOppsummeringState = (feilmelding, elementId) => {
-        const i = this.state.errorList.findIndex((obj => obj.skjemaelementId === elementId));
-        let errorList = this.state.errorList;
+        const i = this.state.errorList.findIndex(((obj) => { return obj.skjemaelementId === elementId; }));
+        const errorList = this.state.errorList;
 
         if (i > -1 && feilmelding !== undefined) {
             errorList[i].feilmelding = feilmelding;
@@ -460,17 +460,17 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
             errorList.splice(i, 1);
             this.setState({
                 errorlist: errorList,
-            })
+            });
         } else if (i === -1 && feilmelding !== undefined) {
-            errorList.push({skjemaelementId: elementId, feilmelding: feilmelding})
+            errorList.push({ skjemaelementId: elementId, feilmelding });
             this.setState({
                 errorlist: errorList,
-            })
+            });
         }
     }
 
     validateArbeidsoppgavenavnFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
             feilmelding = 'Fyll inn arbeidsoppgave';
@@ -491,7 +491,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     }
 
     validateBeskrivelseFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
             feilmelding = 'Fyll inn beskrivelse';
@@ -519,12 +519,11 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
             return {
                 arbeidsoppgavenavn: this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavnValue),
             };
-        } else {
-            return {
-                arbeidsoppgavenavn: this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavnValue),
-                beskrivelse: this.validateBeskrivelseFelt(beskrivelseValue),
-            };
         }
+        return {
+            arbeidsoppgavenavn: this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavnValue),
+            beskrivelse: this.validateBeskrivelseFelt(beskrivelseValue),
+        };
     }
 
     render() {
@@ -573,7 +572,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
                     {this.state.gjennomfoeringSvarValgt !== KANGJENNOMFOERES.KAN &&
                     <InfoVarsel
                         rootUrlImg={rootUrlImg}
-                        tekst={texts.infoVarsel}/>
+                        tekst={texts.infoVarsel} />
                     }
                     {oppdateringFeilet &&
                     <ArbeidsoppgaveVarselFeil
@@ -611,16 +610,16 @@ LagreArbeidsoppgaveSkjemaComponent.propTypes = {
 
 const valueSelector = formValueSelector(LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN);
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         gjennomfoeringSvar: valueSelector(state, 'gjennomfoeringSvar'),
-    }
+    };
 };
 
 let ReduxSkjema = reduxForm({
     form: LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN,
 })(LagreArbeidsoppgaveSkjemaComponent);
 
-ReduxSkjema = connect(mapStateToProps)(ReduxSkjema)
+ReduxSkjema = connect(mapStateToProps)(ReduxSkjema);
 
 export default ReduxSkjema;
