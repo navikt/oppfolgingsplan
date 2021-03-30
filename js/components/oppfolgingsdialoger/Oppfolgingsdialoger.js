@@ -1,33 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {
-    dinesykmeldingerReducerPt,
-    ledereReducerPt,
-} from '../../propTypes';
-import Sidetopp from '../Sidetopp';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { dinesykmeldingerReducerPt, ledereReducerPt } from "../../propTypes";
+import Sidetopp from "../Sidetopp";
 import {
     erSykmeldtUtenOppfolgingsdialogerOgNaermesteLedere,
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
     finnTidligereOppfolgingsdialoger,
     harTidligereOppfolgingsdialoger,
-    isEmpty,
-} from '../../utils/oppfolgingsdialogUtils';
-import { sykmeldtHarGyldigSykmelding } from '../../utils/sykmeldingUtils';
-import IngenledereInfoboks from './IngenledereInfoboks';
-import getContextRoot from '../../utils/getContextRoot';
-import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
-import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
-import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
+    isEmpty
+} from "../../utils/oppfolgingsdialogUtils";
+import { sykmeldtHarGyldigSykmelding } from "../../utils/sykmeldingUtils";
+import IngenledereInfoboks from "./IngenledereInfoboks";
+import getContextRoot from "../../utils/getContextRoot";
+import OppfolgingsdialogerVisning from "./OppfolgingsdialogerVisning";
+import OppfolgingsdialogerInfoPersonvern from "./OppfolgingsdialogerInfoPersonvern";
+import * as oppfolgingsplanProptypes from "../../propTypes/opproptypes";
 import {
     finnOgHentNaermesteLedereListeSomMangler,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentPersonerSomMangler,
-    finnOgHentVirksomheterSomMangler,
-    henterEllerHarHentetLedere,
-} from '../../utils/reducerUtils';
-import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
-import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
-import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
+    finnOgHentVirksomheterSomMangler
+} from "../../utils/reducerUtils";
+import AvbruttPlanNotifikasjonBoksAdvarsel from "./AvbruttPlanNotifikasjonBoksAdvarsel";
+import OppfolgingsdialogUtenSykmelding from "./OppfolgingsdialogUtenSykmelding";
+import OppfolgingsdialogerUtenAktivSykmelding from "./OppfolgingsdialogerUtenAktivSykmelding";
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner',
@@ -49,12 +45,10 @@ class Oppfolgingsdialoger extends Component {
             hentNaermesteLeder,
             naermesteLedere,
         } = this.props;
+
         finnOgHentVirksomheterSomMangler(oppfolgingsdialoger, virksomhet, hentVirksomhet);
         finnOgHentPersonerSomMangler(oppfolgingsdialoger, person, hentPerson);
-
-        if (!henterEllerHarHentetLedere(naermesteLedere)) {
-            finnOgHentNaermesteLedereListeSomMangler(oppfolgingsdialoger, hentLedere);
-        }
+        finnOgHentNaermesteLedereListeSomMangler(oppfolgingsdialoger, naermesteLedere, hentLedere);
         finnOgHentNaermesteLedereSomMangler(oppfolgingsdialoger, naermesteleder, hentNaermesteLeder);
 
         window.sessionStorage.removeItem('hash');

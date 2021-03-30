@@ -117,9 +117,11 @@ export const finnOgHentArbeidsforholdSomMangler = (oppfolgingsdialoger, arbeidsf
     });
 };
 
-export const finnOgHentNaermesteLedereListeSomMangler = (oppfolgingsdialoger, hentLedere) => {
-    if (oppfolgingsdialoger[0] && oppfolgingsdialoger[0].arbeidstaker) {
-        hentLedere(oppfolgingsdialoger[0].arbeidstaker.fnr);
+export const finnOgHentNaermesteLedereListeSomMangler = (oppfolgingsdialoger, naermesteLedere, hentLedere) => {
+    if (!henterEllerHarHentetLedere(naermesteLedere)){
+        if (oppfolgingsdialoger[0] && oppfolgingsdialoger[0].arbeidstaker) {
+            hentLedere(oppfolgingsdialoger[0].arbeidstaker.fnr);
+        }
     }
 };
 

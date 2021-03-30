@@ -1,10 +1,10 @@
-import chai from 'chai';
-import sinon from 'sinon';
+import chai from "chai";
+import sinon from "sinon";
 import {
     finnOgHentArbeidsforholdSomMangler,
     finnOgHentKontaktinfoSomMangler,
-    finnOgHentNaermesteLedereSomMangler,
     finnOgHentNaermesteLedereListeSomMangler,
+    finnOgHentNaermesteLedereSomMangler,
     finnOgHentPersonerSomMangler,
     finnOgHentVirksomheterSomMangler,
     finnUnikeElementer,
@@ -12,9 +12,9 @@ import {
     henterEllerHarHentetKontaktinfo,
     henterEllerHarHentetNaermesteLeder,
     henterEllerHarHentetPerson,
-    henterEllerHarHentetVirksomhet,
-} from '../../js/utils/reducerUtils';
-import getOppfolgingsdialog from '../mock/mockOppfolgingsdialog';
+    henterEllerHarHentetVirksomhet
+} from "../../js/utils/reducerUtils";
+import getOppfolgingsdialog from "../mock/mockOppfolgingsdialog";
 
 const expect = chai.expect;
 
@@ -87,7 +87,11 @@ describe('reducerUtils', () => {
     describe('finnOgHentNaermesteLedereListeSomMangler', () => {
         it('Finner narmesteledere som skal hentes og kaller hentLedere', () => {
             const hentLedere = sinon.spy();
-            finnOgHentNaermesteLedereListeSomMangler([oppfolgingsdialog], hentLedere);
+            const naermesteLedere = {
+                henter: false,
+                hentet: false,
+            };
+            finnOgHentNaermesteLedereListeSomMangler([oppfolgingsdialog], naermesteLedere, hentLedere);
             sinon.assert.calledOnce(hentLedere);
             sinon.assert.calledWith(hentLedere, '1000000000000');
         });
