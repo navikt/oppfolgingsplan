@@ -2,15 +2,10 @@ import PropTypes from 'prop-types';
 import { childEllerChildren } from '../propTypes';
 
 export const Vis = ({ hvis, children, render }) => {
-    return hvis && render
-        ? render()
-        : hvis && children
-            ? children
-            : null;
+  return hvis && render ? render() : hvis && children ? children : null;
 };
 
 Vis.propTypes = {
-    hvis: PropTypes.bool,
-    children: childEllerChildren,
+  hvis: PropTypes.bool,
+  children: childEllerChildren,
 };
-

@@ -2,7 +2,6 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import sinon from 'sinon';
 import GodkjentPlan from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlan';
 import TextForcedApprovedOppfolgingsplan from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/TextForcedApprovedOppfolgingsplan';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsplan/godkjenn/releasetplan/GodkjentPlanDelKnapper';
@@ -16,80 +15,74 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('GodkjentPlan', () => {
-    const oppfolgingsdialog = getOppfolgingsdialog({
-        arbeidsgiver: {
-            naermesteLeder: {
-                navn: 'Test Testesen',
-            },
+  const oppfolgingsdialog = getOppfolgingsdialog({
+    arbeidsgiver: {
+      naermesteLeder: {
+        navn: 'Test Testesen',
+      },
+    },
+    arbeidstaker: {
+      navn: 'Test Testesen',
+    },
+  });
+  const delmednav = {
+    sendingFeilet: false,
+  };
+
+  const komponentDefault = shallow(<GodkjentPlan delmednav={delmednav} oppfolgingsdialog={oppfolgingsdialog} />);
+
+  it('Skal vise en GodkjentPlan', () => {
+    expect(komponentDefault.find(OppfolgingsplanInnholdboks)).to.have.length(1);
+  });
+
+  it('Skal vise en innholdstekst', () => {
+    expect(komponentDefault.find('p')).to.have.length(1);
+  });
+
+  it('Skal vise en GodkjentPlanDeltBekreftelse', () => {
+    expect(komponentDefault.find(GodkjentPlanDeltBekreftelse)).to.have.length(1);
+  });
+
+  it('Skal vise en PlanEkspanderbar', () => {
+    expect(komponentDefault.find(PlanEkspanderbar)).to.have.length(1);
+  });
+
+  it('Skal vise en GodkjentPlanDelKnapper', () => {
+    expect(komponentDefault.find(GodkjentPlanDelKnapper)).to.have.length(1);
+  });
+
+  it('Skal vise en GodkjentPlanHandlingKnapper', () => {
+    expect(komponentDefault.find(GodkjentPlanHandlingKnapper)).to.have.length(1);
+  });
+
+  describe('Tvungen Godkjenning', () => {
+    const tvungenGodkjentDialog = getOppfolgingsdialog({
+      arbeidsgiver: {
+        naermesteLeder: {
+          navn: 'Test Testesen',
         },
-        arbeidstaker: {
-            navn: 'Test Testesen',
+      },
+      arbeidstaker: {
+        navn: 'Test Testesen',
+      },
+      godkjentPlan: {
+        tvungenGodkjenning: true,
+        gyldighetstidspunkt: {
+          fom: '',
+          tom: '',
+          evalueres: '',
         },
-    });
-    const delmednav = {
-        sendingFeilet: false,
-    };
-
-    const komponentDefault = shallow(<GodkjentPlan
-        delmednav={delmednav}
-        oppfolgingsdialog={oppfolgingsdialog}
-    />);
-
-    it('Skal vise en GodkjentPlan', () => {
-        expect(komponentDefault.find(OppfolgingsplanInnholdboks)).to.have.length(1);
+      },
     });
 
-    it('Skal vise en innholdstekst', () => {
-        expect(komponentDefault.find('p')).to.have.length(1);
+    const k2 = shallow(<GodkjentPlan delmednav={delmednav} oppfolgingsdialog={tvungenGodkjentDialog} />);
+
+    it('Skal ikke vise infotekst', () => {
+      expect(k2.find('p')).to.have.length(0);
     });
 
-    it('Skal vise en GodkjentPlanDeltBekreftelse', () => {
-        expect(komponentDefault.find(GodkjentPlanDeltBekreftelse)).to.have.length(1);
+    it('Skal vise infotekst om tvungen godkjenning', () => {
+      expect(k2.find(TextForcedApprovedOppfolgingsplan)).to.have.length(1);
     });
-
-    it('Skal vise en PlanEkspanderbar', () => {
-        expect(komponentDefault.find(PlanEkspanderbar)).to.have.length(1);
-    });
-
-    it('Skal vise en GodkjentPlanDelKnapper', () => {
-        expect(komponentDefault.find(GodkjentPlanDelKnapper)).to.have.length(1);
-    });
-
-    it('Skal vise en GodkjentPlanHandlingKnapper', () => {
-        expect(komponentDefault.find(GodkjentPlanHandlingKnapper)).to.have.length(1);
-    });
-
-    describe('Tvungen Godkjenning', () => {
-        const tvungenGodkjentDialog = getOppfolgingsdialog({
-            arbeidsgiver: {
-                naermesteLeder: {
-                    navn: 'Test Testesen',
-                },
-            },
-            arbeidstaker: {
-                navn: 'Test Testesen',
-            },
-            godkjentPlan: {
-                tvungenGodkjenning: true,
-                gyldighetstidspunkt: {
-                    fom: '',
-                    tom: '',
-                    evalueres: '',
-                },
-            },
-        });
-
-        const k2 = shallow(<GodkjentPlan
-            delmednav={delmednav}
-            oppfolgingsdialog={tvungenGodkjentDialog}
-        />);
-
-        it('Skal ikke vise infotekst', () => {
-            expect(k2.find('p')).to.have.length(0);
-        });
-
-        it('Skal vise infotekst om tvungen godkjenning', () => {
-            expect(k2.find(TextForcedApprovedOppfolgingsplan)).to.have.length(1);
-        });
-    });
+  });
 });

@@ -6,36 +6,40 @@ import MottattGodkjenninger from './MottattGodkjenninger';
 import GodkjennPlanSendt from './GodkjennPlanSendt';
 
 const harMottattGodkjenninger = (oppfolgingsdialog) => {
-    const godkjenninger = oppfolgingsdialog.godkjenninger;
-    const aktoer = oppfolgingsdialog.arbeidstaker;
-    return godkjenninger.length > 0 && godkjenninger[0].godkjentAv.fnr && godkjenninger[0].godkjentAv.fnr !== aktoer.fnr;
+  const godkjenninger = oppfolgingsdialog.godkjenninger;
+  const aktoer = oppfolgingsdialog.arbeidstaker;
+  return godkjenninger.length > 0 && godkjenninger[0].godkjentAv.fnr && godkjenninger[0].godkjentAv.fnr !== aktoer.fnr;
 };
 
 const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, avvisDialog, rootUrlPlaner }) => {
-    if (harMottattGodkjenninger(oppfolgingsdialog)) {
-        return (<MottattGodkjenninger
-            oppfolgingsplan={oppfolgingsdialog}
-            godkjennPlan={godkjennPlan}
-            nullstillGodkjenning={nullstillGodkjenning}
-            avvisDialog={avvisDialog}
-            rootUrl={getContextRoot()}
-        />);
-    }
-    return (<GodkjennPlanSendt
-        oppfolgingsdialog={oppfolgingsdialog}
+  if (harMottattGodkjenninger(oppfolgingsdialog)) {
+    return (
+      <MottattGodkjenninger
+        oppfolgingsplan={oppfolgingsdialog}
+        godkjennPlan={godkjennPlan}
         nullstillGodkjenning={nullstillGodkjenning}
+        avvisDialog={avvisDialog}
         rootUrl={getContextRoot()}
         rootUrlPlaner={rootUrlPlaner}
-    />);
+      />
+    );
+  }
+  return (
+    <GodkjennPlanSendt
+      oppfolgingsdialog={oppfolgingsdialog}
+      nullstillGodkjenning={nullstillGodkjenning}
+      rootUrl={getContextRoot()}
+      rootUrlPlaner={rootUrlPlaner}
+    />
+  );
 };
 
-
 Godkjenninger.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-    avvisDialog: PropTypes.func,
-    nullstillGodkjenning: PropTypes.func,
-    godkjennPlan: PropTypes.func,
-    rootUrlPlaner: PropTypes.string,
+  oppfolgingsdialog: oppfolgingsplanPt,
+  avvisDialog: PropTypes.func,
+  nullstillGodkjenning: PropTypes.func,
+  godkjennPlan: PropTypes.func,
+  rootUrlPlaner: PropTypes.string,
 };
 
 export default Godkjenninger;

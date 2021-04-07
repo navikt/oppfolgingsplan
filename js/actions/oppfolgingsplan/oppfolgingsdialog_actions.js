@@ -19,111 +19,110 @@ export const DIALOG_AVVIST = 'DIALOG_AVVIST';
 export const AVVIS_DIALOG_FEILET = 'AVVIS_DIALOG_FEILET';
 
 export const henterOppfolgingsdialoger = () => {
-    return {
-        type: HENTER_OPPFOLGINGSDIALOGER,
-    };
+  return {
+    type: HENTER_OPPFOLGINGSDIALOGER,
+  };
 };
 
 export const oppfolgingsdialogerHentet = (data = []) => {
-    return {
-        type: OPPFOLGINGSDIALOGER_HENTET,
-        data,
-    };
+  return {
+    type: OPPFOLGINGSDIALOGER_HENTET,
+    data,
+  };
 };
 
 export const hentOppfolgingsdialogerFeilet = () => {
-    return {
-        type: HENT_OPPFOLGINGSDIALOGER_FEILET,
-    };
+  return {
+    type: HENT_OPPFOLGINGSDIALOGER_FEILET,
+  };
 };
 
 export const hentOppfolgingsdialoger = () => {
-    return {
-        type: HENT_OPPFOLGINGSDIALOGER_FORESPURT,
-    };
+  return {
+    type: HENT_OPPFOLGINGSDIALOGER_FORESPURT,
+  };
 };
 
 export const oppretterOppfolgingsdialog = () => {
-    return {
-        type: OPPRETTER_OPPFOLGINGSDIALOG,
-    };
+  return {
+    type: OPPRETTER_OPPFOLGINGSDIALOG,
+  };
 };
 
 export const oppfolgingsdialogOpprettet = (data) => {
-    return {
-        type: OPPFOLGINGSDIALOG_OPPRETTET,
-        data,
-    };
+  return {
+    type: OPPFOLGINGSDIALOG_OPPRETTET,
+    data,
+  };
 };
 
 export const opprettOppfolgingsdialogFeilet = () => {
-    return {
-        type: OPPRETT_OPPFOLGINGSDIALOG_FEILET,
-    };
+  return {
+    type: OPPRETT_OPPFOLGINGSDIALOG_FEILET,
+  };
 };
 
 export const opprettOppfolgingsdialog = (virksomhetsnummer) => {
-    return {
-        type: OPPRETT_OPPFOLGINGSDIALOG_FORESPURT,
-        virksomhetsnummer,
-    };
+  return {
+    type: OPPRETT_OPPFOLGINGSDIALOG_FORESPURT,
+    virksomhetsnummer,
+  };
 };
 
 export const godkjennDialog = (id, gyldighetstidspunkt, status, delMedNav) => {
-    return {
-        type: GODKJENN_DIALOG_FORESPURT,
-        id,
-        gyldighetstidspunkt,
-        status,
-        delMedNav,
-    };
+  return {
+    type: GODKJENN_DIALOG_FORESPURT,
+    id,
+    gyldighetstidspunkt,
+    status,
+    delMedNav,
+  };
 };
 
 export const godkjennerDialog = () => {
-    return {
-        type: GODKJENNER_DIALOG,
-    };
+  return {
+    type: GODKJENNER_DIALOG,
+  };
 };
 
 export const dialogGodkjent = (id, status, gyldighetstidspunkt, delMedNav) => {
-    return {
-        type: DIALOG_GODKJENT,
-        id,
-        gyldighetstidspunkt,
-        status,
-        delMedNav,
-    };
+  return {
+    type: DIALOG_GODKJENT,
+    id,
+    gyldighetstidspunkt,
+    status,
+    delMedNav,
+  };
 };
 
 export const godkjennDialogFeilet = () => {
-    return {
-        type: GODKJENN_DIALOG_FEILET,
-    };
+  return {
+    type: GODKJENN_DIALOG_FEILET,
+  };
 };
 
-
 export const avvisDialog = (id) => {
-    return {
-        type: AVVIS_DIALOG_FORESPURT,
-        id,
-    };
+  return {
+    type: AVVIS_DIALOG_FORESPURT,
+    id,
+  };
 };
 
 export const avviserDialog = () => {
-    return {
-        type: AVVISER_DIALOG,
-    };
+  return {
+    type: AVVISER_DIALOG,
+  };
 };
 
 export const dialogAvvist = (id) => {
-    return {
-        type: DIALOG_AVVIST,
-        id,
-    };
+  return {
+    type: DIALOG_AVVIST,
+    id,
+  };
 };
 
 export const avvisDialogFeilet = () => {
-    return {
-        type: AVVIS_DIALOG_FEILET,
-    };
+  return {
+    type: AVVIS_DIALOG_FEILET,
+  };
 };

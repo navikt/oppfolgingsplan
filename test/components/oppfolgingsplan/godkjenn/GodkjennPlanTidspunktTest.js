@@ -10,15 +10,14 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('GodkjennPlanTidspunkt', () => {
-    const oppfolgingsdialog = getOppfolgingsdialog();
-    const url = '/sykefravaerarbeidsgiver';
+  const oppfolgingsdialog = getOppfolgingsdialog();
+  const url = '/sykefravaerarbeidsgiver';
 
-    const komponent = shallow(<GodkjennPlanTidspunkt
-        rootUrl={url}
-        gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt}
-    />);
+  const komponent = shallow(
+    <GodkjennPlanTidspunkt rootUrl={url} gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt} />
+  );
 
-    it('Skal vise 2 BildeTekstLinje', () => {
-        expect(komponent.find(BildeTekstLinje)).to.have.length(2);
-    });
+  it('Skal vise 2 BildeTekstLinje', () => {
+    expect(komponent.find(BildeTekstLinje)).to.have.length(2);
+  });
 });

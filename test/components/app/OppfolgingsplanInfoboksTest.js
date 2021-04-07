@@ -9,12 +9,10 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('OppfolgingsplanInfoboks', () => {
-    const tittel = 'tittel';
-    const komponent = shallow(<OppfolgingsplanInfoboks
-        tittel={tittel}
-    />);
+  const tittel = 'tittel';
+  const komponent = shallow(<OppfolgingsplanInfoboks tittel={tittel} />);
 
-    it('Viser et Panel', () => {
-        expect(komponent.find(Panel)).to.have.length(1);
-    });
+  it('Viser et Panel', () => {
+    expect(komponent.find(Panel)).to.have.length(1);
+  });
 });
