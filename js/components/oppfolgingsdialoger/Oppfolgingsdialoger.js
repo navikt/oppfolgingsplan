@@ -16,10 +16,11 @@ import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
+  finnOgHentNaermesteLedereListeSomMangler,
   finnOgHentNaermesteLedereSomMangler,
   finnOgHentPersonerSomMangler,
-  finnOgHentVirksomheterSomMangler,
-} from '../../utils/reducerUtils';
+  finnOgHentVirksomheterSomMangler
+} from "../../utils/reducerUtils";
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
