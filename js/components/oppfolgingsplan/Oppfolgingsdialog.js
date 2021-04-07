@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
-    finnOgHentArbeidsforholdSomMangler,
-    finnOgHentKontaktinfoSomMangler,
-    finnOgHentNaermesteLedereSomMangler,
-    finnOgHentPersonerSomMangler,
-    finnOgHentVirksomheterSomMangler,
+  finnOgHentArbeidsforholdSomMangler,
+  finnOgHentKontaktinfoSomMangler,
+  finnOgHentNaermesteLedereSomMangler,
+  finnOgHentPersonerSomMangler,
+  finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
 import {
-    harNaermesteLeder,
-    inneholderGodkjenninger,
-    inneholderGodkjenningerAvArbeidstaker,
-    inneholderGodkjentPlan,
-    utenSamtykke,
+  harNaermesteLeder,
+  inneholderGodkjenninger,
+  inneholderGodkjenningerAvArbeidstaker,
+  inneholderGodkjentPlan,
+  utenSamtykke,
 } from '../../utils/oppfolgingsdialogUtils';
 import getContextRoot from '../../utils/getContextRoot';
 import Arbeidsoppgaver from './arbeidsoppgaver/Arbeidsoppgaver';
@@ -30,191 +30,209 @@ import Godkjenn from './godkjenn/godkjenn/Godkjenn';
 import Godkjenninger from './godkjenn/godkjenninger/Godkjenninger';
 
 const textOverskrift = (arbeidsgiver) => {
-    return `Oppfølgingsplan hos ${arbeidsgiver}`;
+  return `Oppfølgingsplan hos ${arbeidsgiver}`;
 };
 
 const skalViseSamtykke = (oppfolgingsdialog) => {
-    return harNaermesteLeder(oppfolgingsdialog)
-        && utenSamtykke(oppfolgingsdialog)
-        && (inneholderGodkjentPlan(oppfolgingsdialog) || inneholderGodkjenningerAvArbeidstaker(oppfolgingsdialog));
+  return (
+    harNaermesteLeder(oppfolgingsdialog) &&
+    utenSamtykke(oppfolgingsdialog) &&
+    (inneholderGodkjentPlan(oppfolgingsdialog) || inneholderGodkjenningerAvArbeidstaker(oppfolgingsdialog))
+  );
 };
 
 export const erAvvistAvArbeidstaker = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.godkjenninger.length === 1 && !oppfolgingsdialog.godkjenninger[0].godkjent &&
-        oppfolgingsdialog.arbeidstaker.fnr === oppfolgingsdialog.godkjenninger[0].godkjentAv.fnr;
+  return (
+    oppfolgingsdialog.godkjenninger.length === 1 &&
+    !oppfolgingsdialog.godkjenninger[0].godkjent &&
+    oppfolgingsdialog.arbeidstaker.fnr === oppfolgingsdialog.godkjenninger[0].godkjentAv.fnr
+  );
 };
 
 class Oppfolgingsdialog extends Component {
-    componentWillMount() {
-        const { oppfolgingsdialog, virksomhet, person, kontaktinfo, naermesteleder,
-            hentVirksomhet, hentPerson, hentNaermesteLeder, hentKontaktinfo,
-            arbeidsforhold, hentArbeidsforhold } = this.props;
-        this.props.settDialog(oppfolgingsdialog.id);
-        finnOgHentVirksomheterSomMangler([oppfolgingsdialog], virksomhet, hentVirksomhet);
-        finnOgHentPersonerSomMangler([oppfolgingsdialog], person, hentPerson);
-        finnOgHentNaermesteLedereSomMangler([oppfolgingsdialog], naermesteleder, hentNaermesteLeder);
-        finnOgHentKontaktinfoSomMangler([oppfolgingsdialog], kontaktinfo, hentKontaktinfo);
-        finnOgHentArbeidsforholdSomMangler([oppfolgingsdialog], arbeidsforhold, hentArbeidsforhold);
-    }
+  componentWillMount() {
+    const {
+      oppfolgingsdialog,
+      virksomhet,
+      person,
+      kontaktinfo,
+      naermesteleder,
+      hentVirksomhet,
+      hentPerson,
+      hentNaermesteLeder,
+      hentKontaktinfo,
+      arbeidsforhold,
+      hentArbeidsforhold,
+    } = this.props;
+    this.props.settDialog(oppfolgingsdialog.id);
+    finnOgHentVirksomheterSomMangler([oppfolgingsdialog], virksomhet, hentVirksomhet);
+    finnOgHentPersonerSomMangler([oppfolgingsdialog], person, hentPerson);
+    finnOgHentNaermesteLedereSomMangler([oppfolgingsdialog], naermesteleder, hentNaermesteLeder);
+    finnOgHentKontaktinfoSomMangler([oppfolgingsdialog], kontaktinfo, hentKontaktinfo);
+    finnOgHentArbeidsforholdSomMangler([oppfolgingsdialog], arbeidsforhold, hentArbeidsforhold);
+  }
 
-    render() {
-        const {
-            arbeidsoppgaver,
-            tiltak,
-            lagreKommentar,
-            slettKommentar,
-            oppfolgingsdialog,
-            settAktivtSteg,
-            avvisDialog,
-            dokument,
-            godkjennDialog,
-            hentPdfurler,
-            giSamtykke,
-            navigasjontoggles,
-            nullstillGodkjenning,
-            avbrytDialog,
-            lagreTiltak,
-            slettTiltak,
-            lagreArbeidsoppgave,
-            slettArbeidsoppgave,
-            delMedNavFunc,
-            delmednav,
-            fastlegeDeling,
-            delMedFastlege,
-            oppfolgingsdialoger,
-        } = this.props;
-        const oppfolgingsdialogAvbruttOgNyOpprettet = this.props.avbrytdialogReducer.sendt
-            && (this.props.avbrytdialogReducer.nyPlanId === oppfolgingsdialog.id)
-            && !inneholderGodkjenninger(oppfolgingsdialog);
-        let panel;
-        let disableNavigation = false;
-        let skalViseAvsluttOgLagre = false;
-        if (skalViseSamtykke(oppfolgingsdialog)) {
-            disableNavigation = true;
-            panel = (<Samtykke
-                sendSamtykke={giSamtykke}
-                oppfolgingsdialog={oppfolgingsdialog}
-            />);
-        } else if (harNaermesteLeder(oppfolgingsdialog) && inneholderGodkjenninger(oppfolgingsdialog) && !erAvvistAvArbeidstaker(oppfolgingsdialog)) {
-            disableNavigation = true;
-            panel = (<Godkjenninger
-                avvisDialog={avvisDialog}
-                oppfolgingsdialog={oppfolgingsdialog}
-                godkjennPlan={godkjennDialog}
-                nullstillGodkjenning={nullstillGodkjenning}
-                rootUrlPlaner={`${getContextRoot()}`}
-            />);
-        } else if (harNaermesteLeder(oppfolgingsdialog) && inneholderGodkjentPlan(oppfolgingsdialog)) {
-            disableNavigation = true;
-            panel = (<ReleasetPlanAT
-                oppfolgingsdialog={oppfolgingsdialog}
-                hentPdfurler={hentPdfurler}
-                dokument={dokument}
-                giSamtykke={giSamtykke}
-                avbrytDialog={avbrytDialog}
-                delMedNavFunc={delMedNavFunc}
-                delmednav={delmednav}
-                fastlegeDeling={fastlegeDeling}
-                delMedFastlege={delMedFastlege}
-                oppfolgingsdialoger={oppfolgingsdialoger}
-            />);
+  render() {
+    const {
+      arbeidsoppgaver,
+      tiltak,
+      lagreKommentar,
+      slettKommentar,
+      oppfolgingsdialog,
+      settAktivtSteg,
+      avvisDialog,
+      godkjennDialog,
+      giSamtykke,
+      navigasjontoggles,
+      nullstillGodkjenning,
+      avbrytDialog,
+      lagreTiltak,
+      slettTiltak,
+      lagreArbeidsoppgave,
+      slettArbeidsoppgave,
+      delMedNavFunc,
+      delmednav,
+      fastlegeDeling,
+      delMedFastlege,
+      oppfolgingsdialoger,
+    } = this.props;
+    const oppfolgingsdialogAvbruttOgNyOpprettet =
+      this.props.avbrytdialogReducer.sendt &&
+      this.props.avbrytdialogReducer.nyPlanId === oppfolgingsdialog.id &&
+      !inneholderGodkjenninger(oppfolgingsdialog);
+    let panel;
+    let disableNavigation = false;
+    let skalViseAvsluttOgLagre = false;
+    if (skalViseSamtykke(oppfolgingsdialog)) {
+      disableNavigation = true;
+      panel = <Samtykke sendSamtykke={giSamtykke} oppfolgingsdialog={oppfolgingsdialog} />;
+    } else if (
+      harNaermesteLeder(oppfolgingsdialog) &&
+      inneholderGodkjenninger(oppfolgingsdialog) &&
+      !erAvvistAvArbeidstaker(oppfolgingsdialog)
+    ) {
+      disableNavigation = true;
+      panel = (
+        <Godkjenninger
+          avvisDialog={avvisDialog}
+          oppfolgingsdialog={oppfolgingsdialog}
+          godkjennPlan={godkjennDialog}
+          nullstillGodkjenning={nullstillGodkjenning}
+          rootUrlPlaner={`${getContextRoot()}`}
+        />
+      );
+    } else if (harNaermesteLeder(oppfolgingsdialog) && inneholderGodkjentPlan(oppfolgingsdialog)) {
+      disableNavigation = true;
+      panel = (
+        <ReleasetPlanAT
+          oppfolgingsdialog={oppfolgingsdialog}
+          giSamtykke={giSamtykke}
+          avbrytDialog={avbrytDialog}
+          delMedNavFunc={delMedNavFunc}
+          delmednav={delmednav}
+          fastlegeDeling={fastlegeDeling}
+          delMedFastlege={delMedFastlege}
+          oppfolgingsdialoger={oppfolgingsdialoger}
+        />
+      );
+    } else {
+      (() => {
+        if (navigasjontoggles.steg === 1) {
+          skalViseAvsluttOgLagre = true;
+          panel = (
+            <Arbeidsoppgaver
+              arbeidsoppgaver={arbeidsoppgaver}
+              oppfolgingsdialog={oppfolgingsdialog}
+              lagreArbeidsoppgave={lagreArbeidsoppgave}
+              slettArbeidsoppgave={slettArbeidsoppgave}
+            />
+          );
+        } else if (navigasjontoggles.steg === 2) {
+          skalViseAvsluttOgLagre = true;
+          panel = (
+            <Tiltak
+              tiltak={tiltak}
+              oppfolgingsdialog={oppfolgingsdialog}
+              lagreTiltak={lagreTiltak}
+              slettTiltak={slettTiltak}
+              lagreKommentar={lagreKommentar}
+              slettKommentar={slettKommentar}
+            />
+          );
+        } else if (!harNaermesteLeder(oppfolgingsdialog)) {
+          panel = <IngenlederInfoboks />;
         } else {
-            (() => {
-                if (navigasjontoggles.steg === 1) {
-                    skalViseAvsluttOgLagre = true;
-                    panel = (<Arbeidsoppgaver
-                        arbeidsoppgaver={arbeidsoppgaver}
-                        oppfolgingsdialog={oppfolgingsdialog}
-                        lagreArbeidsoppgave={lagreArbeidsoppgave}
-                        slettArbeidsoppgave={slettArbeidsoppgave}
-                    />);
-                } else if (navigasjontoggles.steg === 2) {
-                    skalViseAvsluttOgLagre = true;
-                    panel = (<Tiltak
-                        tiltak={tiltak}
-                        oppfolgingsdialog={oppfolgingsdialog}
-                        lagreTiltak={lagreTiltak}
-                        slettTiltak={slettTiltak}
-                        lagreKommentar={lagreKommentar}
-                        slettKommentar={slettKommentar}
-                    />);
-                } else if (!harNaermesteLeder(oppfolgingsdialog)) {
-                    panel = (<IngenlederInfoboks />);
-                } else {
-                    panel = (<Godkjenn
-                        oppfolgingsdialog={oppfolgingsdialog}
-                        settAktivtSteg={settAktivtSteg}
-                        godkjennPlan={godkjennDialog}
-                        rootUrl={`${getContextRoot()}`}
-                    />);
-                }
-            })();
+          panel = (
+            <Godkjenn
+              oppfolgingsdialog={oppfolgingsdialog}
+              settAktivtSteg={settAktivtSteg}
+              godkjennPlan={godkjennDialog}
+              rootUrl={`${getContextRoot()}`}
+            />
+          );
         }
-
-        return (<div className="oppfolgingsdialog">
-            { oppfolgingsdialogAvbruttOgNyOpprettet &&
-            <AvbruttGodkjentPlanVarsel />
-            }
-            <SideOverskrift
-                tittel={textOverskrift(oppfolgingsdialog.virksomhet.navn)}
-            />
-            { !disableNavigation && <NavigasjonsTopp
-                disabled={disableNavigation}
-                navn={oppfolgingsdialog.virksomhet.navn}
-                settAktivtSteg={settAktivtSteg}
-                steg={navigasjontoggles.steg}
-            />
-            }
-            <div id="oppfolgingsdialogpanel">
-                { panel }
-            </div>
-            <NavigasjonsBunn
-                disabled={disableNavigation}
-                settAktivtSteg={settAktivtSteg}
-                steg={navigasjontoggles.steg}
-                rootUrlPlaner={getContextRoot()}
-            />
-            {skalViseAvsluttOgLagre && <LagreOgAvsluttKnapp />}
-        </div>);
+      })();
     }
+
+    return (
+      <div className="oppfolgingsdialog">
+        {oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel />}
+        <SideOverskrift tittel={textOverskrift(oppfolgingsdialog.virksomhet.navn)} />
+        {!disableNavigation && (
+          <NavigasjonsTopp
+            disabled={disableNavigation}
+            navn={oppfolgingsdialog.virksomhet.navn}
+            settAktivtSteg={settAktivtSteg}
+            steg={navigasjontoggles.steg}
+          />
+        )}
+        <div id="oppfolgingsdialogpanel">{panel}</div>
+        <NavigasjonsBunn
+          disabled={disableNavigation}
+          settAktivtSteg={settAktivtSteg}
+          steg={navigasjontoggles.steg}
+          rootUrlPlaner={getContextRoot()}
+        />
+        {skalViseAvsluttOgLagre && <LagreOgAvsluttKnapp />}
+      </div>
+    );
+  }
 }
 
 Oppfolgingsdialog.propTypes = {
-    avbrytdialogReducer: oppfolgingsplanProptypes.avbrytplanReducerPt,
-    arbeidsoppgaver: oppfolgingsplanProptypes.arbeidsoppgaverReducerPt,
-    tiltak: oppfolgingsplanProptypes.tiltakReducerPt,
-    oppfolgingsdialog: oppfolgingsplanProptypes.oppfolgingsplanPt,
-    navigasjontoggles: oppfolgingsplanProptypes.navigasjonstogglesReducerPt,
-    dokument: oppfolgingsplanProptypes.dokumentReducerPt,
-    virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
-    person: oppfolgingsplanProptypes.personReducerPt,
-    naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
-    kontaktinfo: oppfolgingsplanProptypes.kontaktinfoReducerPt,
-    arbeidsforhold: oppfolgingsplanProptypes.arbeidsforholdReducerPt,
-    fastlegeDeling: oppfolgingsplanProptypes.delMedFastlegePt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
-    delmednav: oppfolgingsplanProptypes.delmednavPt,
-    lagreKommentar: PropTypes.func,
-    slettKommentar: PropTypes.func,
-    delMedFastlege: PropTypes.func,
-    delMedNavFunc: PropTypes.func,
-    godkjennDialog: PropTypes.func,
-    nullstillGodkjenning: PropTypes.func,
-    hentPdfurler: PropTypes.func,
-    giSamtykke: PropTypes.func,
-    lagreArbeidsoppgave: PropTypes.func,
-    slettArbeidsoppgave: PropTypes.func,
-    lagreTiltak: PropTypes.func,
-    slettTiltak: PropTypes.func,
-    settAktivtSteg: PropTypes.func,
-    avvisDialog: PropTypes.func,
-    avbrytDialog: PropTypes.func,
-    settDialog: PropTypes.func,
-    hentVirksomhet: PropTypes.func,
-    hentKontaktinfo: PropTypes.func,
-    hentPerson: PropTypes.func,
-    hentNaermesteLeder: PropTypes.func,
-    hentArbeidsforhold: PropTypes.func,
+  avbrytdialogReducer: oppfolgingsplanProptypes.avbrytplanReducerPt,
+  arbeidsoppgaver: oppfolgingsplanProptypes.arbeidsoppgaverReducerPt,
+  tiltak: oppfolgingsplanProptypes.tiltakReducerPt,
+  oppfolgingsdialog: oppfolgingsplanProptypes.oppfolgingsplanPt,
+  navigasjontoggles: oppfolgingsplanProptypes.navigasjonstogglesReducerPt,
+  virksomhet: oppfolgingsplanProptypes.virksomhetReducerPt,
+  person: oppfolgingsplanProptypes.personReducerPt,
+  naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,
+  kontaktinfo: oppfolgingsplanProptypes.kontaktinfoReducerPt,
+  arbeidsforhold: oppfolgingsplanProptypes.arbeidsforholdReducerPt,
+  fastlegeDeling: oppfolgingsplanProptypes.delMedFastlegePt,
+  oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
+  delmednav: oppfolgingsplanProptypes.delmednavPt,
+  lagreKommentar: PropTypes.func,
+  slettKommentar: PropTypes.func,
+  delMedFastlege: PropTypes.func,
+  delMedNavFunc: PropTypes.func,
+  godkjennDialog: PropTypes.func,
+  nullstillGodkjenning: PropTypes.func,
+  giSamtykke: PropTypes.func,
+  lagreArbeidsoppgave: PropTypes.func,
+  slettArbeidsoppgave: PropTypes.func,
+  lagreTiltak: PropTypes.func,
+  slettTiltak: PropTypes.func,
+  settAktivtSteg: PropTypes.func,
+  avvisDialog: PropTypes.func,
+  avbrytDialog: PropTypes.func,
+  settDialog: PropTypes.func,
+  hentVirksomhet: PropTypes.func,
+  hentKontaktinfo: PropTypes.func,
+  hentPerson: PropTypes.func,
+  hentNaermesteLeder: PropTypes.func,
+  hentArbeidsforhold: PropTypes.func,
 };
 
 export default Oppfolgingsdialog;

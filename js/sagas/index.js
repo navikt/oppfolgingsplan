@@ -4,7 +4,6 @@ import arbeidsoppgaveSagas from './oppfolgingsplan/arbeidsoppgaveSagas';
 import avbrytdialogSagas from './oppfolgingsplan/avbrytdialogSagas';
 import delMedFastlegeSagas from './oppfolgingsplan/delMedFastlegeSagas';
 import delMedNavSagas from './oppfolgingsplan/delMedNavSagas';
-import dokumentSagas from './oppfolgingsplan/dokumentSagas';
 import kommentarSagas from './oppfolgingsplan/kommentarSagas';
 import kontaktinfoSagas from './oppfolgingsplan/kontaktinfoSagas';
 import kopierOppfolgingsdialogSagas from './oppfolgingsplan/kopierOppfolgingsdialogSagas';
@@ -22,26 +21,25 @@ import dineSykmeldingerSagas from './dineSykmeldingerSagas';
 import ledereSagas from './ledereSagas';
 
 export default function* rootSaga() {
-    yield all([
-        arbeidsforholdSagas(),
-        dineSykmeldingerSagas(),
-        samtykkeSagas(),
-        avbrytdialogSagas(),
-        oppfolgingsdialogerSagas(),
-        delMedFastlegeSagas(),
-        delMedNavSagas(),
-        nullstillGodkjenningSagas(),
-        arbeidsoppgaveSagas(),
-        dokumentSagas(),
-        kommentarSagas(),
-        kopierOppfolgingsdialogSagas(),
-        tilgangSagas(),
-        tiltakSagas(),
-        settDialogSagas(),
-        virksomhetSagas(),
-        personSagas(),
-        kontaktinfoSagas(),
-        naermesteLederSagas(),
-        ledereSagas(),
-    ]);
+  yield all([
+    arbeidsforholdSagas(),
+    dineSykmeldingerSagas(),
+    samtykkeSagas(),
+    avbrytdialogSagas(),
+    oppfolgingsdialogerSagas(),
+    delMedFastlegeSagas(),
+    delMedNavSagas(),
+    nullstillGodkjenningSagas(),
+    arbeidsoppgaveSagas(),
+    kommentarSagas(),
+    kopierOppfolgingsdialogSagas(),
+    tilgangSagas(),
+    tiltakSagas(),
+    settDialogSagas(),
+    virksomhetSagas(),
+    personSagas(),
+    kontaktinfoSagas(),
+    naermesteLederSagas(),
+    ledereSagas(),
+  ]);
 }

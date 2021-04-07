@@ -4,7 +4,6 @@ import arbeidsoppgaver from './arbeidsoppgaver';
 import arbeidsforhold from './arbeidsforhold';
 import avbrytdialogReducer from './avbrytdialog';
 import delmednav from './delmednav';
-import dokument from './dokument';
 import fastlegeDeling from './fastlegeDeling';
 import kommentar from './kommentar';
 import kontaktinfo from './kontaktinfo';
@@ -26,31 +25,30 @@ import brukerinfo from './brukerinfo';
 import history from '../history';
 
 const reducers = {
-    arbeidsforhold,
-    arbeidsoppgaver,
-    avbrytdialogReducer,
-    dineSykmeldinger,
-    history,
-    dokument,
-    kommentar,
-    kopierDialogReducer,
-    navigasjontoggles,
-    nullstill,
-    nyNaermesteLeder,
-    oppfolgingsdialoger,
-    samtykke,
-    fastlegeDeling,
-    delmednav,
-    tilgang,
-    tiltak,
-    person,
-    virksomhet,
-    kontaktinfo,
-    naermesteleder,
-    timeout,
-    form: formReducer,
-    ledere,
-    brukerinfo,
+  arbeidsforhold,
+  arbeidsoppgaver,
+  avbrytdialogReducer,
+  dineSykmeldinger,
+  history,
+  kommentar,
+  kopierDialogReducer,
+  navigasjontoggles,
+  nullstill,
+  nyNaermesteLeder,
+  oppfolgingsdialoger,
+  samtykke,
+  fastlegeDeling,
+  delmednav,
+  tilgang,
+  tiltak,
+  person,
+  virksomhet,
+  kontaktinfo,
+  naermesteleder,
+  timeout,
+  form: formReducer,
+  ledere,
+  brukerinfo,
 };
 
 export default reducers;

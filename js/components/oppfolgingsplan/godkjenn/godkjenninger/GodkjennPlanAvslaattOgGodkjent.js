@@ -10,89 +10,80 @@ import { SharingCheckbox } from './SharingCheckbox';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
-    godkjennPlanMottattKnapper: {
-        buttonApprove: 'Godkjenn',
-    },
-    godkjennPlanAvslaattOgGodkjent: {
-        title: 'Mottatt endring',
-        paragraphInfoWho: ' har gjort noen endringer i planen og sendt den tilbake til deg.',
-    },
-    delMedNav: 'Del planen med NAV',
-    preDelMedNav: 'Planen vil bli delt med NAV når du har godkjent den.',
+  godkjennPlanMottattKnapper: {
+    buttonApprove: 'Godkjenn',
+  },
+  godkjennPlanAvslaattOgGodkjent: {
+    title: 'Mottatt endring',
+    paragraphInfoWho: ' har gjort noen endringer i planen og sendt den tilbake til deg.',
+  },
+  delMedNav: 'Del planen med NAV',
+  preDelMedNav: 'Planen vil bli delt med NAV når du har godkjent den.',
 };
 
 export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsplan }) => {
-    const [delMedNav, setDelMedNav] = useState(false);
+  const [delMedNav, setDelMedNav] = useState(false);
 
-    const handleChange = () => {
-        setDelMedNav(!delMedNav);
-    };
+  const handleChange = () => {
+    setDelMedNav(!delMedNav);
+  };
 
-    return (
-        <div className="knapperad knapperad--justervenstre">
-            <SharingCheckbox checked={delMedNav} onChange={handleChange} oppfolgingsplan={oppfolgingsplan} />
-            <div className="knapperad__element">
-                <Hovedknapp
-                    name="godkjentKnapp"
-                    id="godkjentKnapp"
-                    autoFocus
-                    onClick={() => { godkjennPlan(oppfolgingsplan.id, null, true, delMedNav); }}>
-                    {texts.godkjennPlanMottattKnapper.buttonApprove}
-                </Hovedknapp>
-            </div>
-        </div>
-    );
+  return (
+    <div className="knapperad knapperad--justervenstre">
+      <SharingCheckbox checked={delMedNav} onChange={handleChange} oppfolgingsplan={oppfolgingsplan} />
+      <div className="knapperad__element">
+        <Hovedknapp
+          name="godkjentKnapp"
+          id="godkjentKnapp"
+          autoFocus
+          onClick={() => {
+            godkjennPlan(oppfolgingsplan.id, null, true, delMedNav);
+          }}
+        >
+          {texts.godkjennPlanMottattKnapper.buttonApprove}
+        </Hovedknapp>
+      </div>
+    </div>
+  );
 };
 GodkjennPlanMottattKnapper.propTypes = {
-    oppfolgingsplan: oppfolgingsplanPt,
-    godkjennPlan: PropTypes.func,
+  oppfolgingsplan: oppfolgingsplanPt,
+  godkjennPlan: PropTypes.func,
 };
 
-const GodkjennPlanAvslaattOgGodkjent = (
-    {
-        oppfolgingsplan,
-        rootUrl,
-        godkjennPlan,
-        avvisDialog,
-    }) => {
-    const sistOppfolgingsplan = oppfolgingsplan && hentGodkjenningsTidspunkt(oppfolgingsplan);
-    return (<div className="godkjennPlanAvslaattOgGodkjent">
-        <OppfolgingsplanInnholdboks
-            svgUrl={`${rootUrl}/img/svg/plan-mottatt-igjen.svg`}
-            svgAlt=""
-            tittel={texts.godkjennPlanAvslaattOgGodkjent.title}
-        >
-            <div>
-                <p>
-                    {`${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}${texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWho}`}
-                </p>
+const GodkjennPlanAvslaattOgGodkjent = ({ oppfolgingsplan, rootUrl, godkjennPlan, avvisDialog }) => {
+  const sistOppfolgingsplan = oppfolgingsplan && hentGodkjenningsTidspunkt(oppfolgingsplan);
+  return (
+    <div className="godkjennPlanAvslaattOgGodkjent">
+      <OppfolgingsplanInnholdboks
+        svgUrl={`${rootUrl}/img/svg/plan-mottatt-igjen.svg`}
+        svgAlt=""
+        tittel={texts.godkjennPlanAvslaattOgGodkjent.title}
+      >
+        <div>
+          <p>
+            {`${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}${texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWho}`}
+          </p>
 
-                <GodkjennPlanTidspunkt
-                    rootUrl={rootUrl}
-                    gyldighetstidspunkt={sistOppfolgingsplan}
-                />
-                <PlanEkspanderbar
-                    oppfolgingsplan={oppfolgingsplan}
-                />
-                <EditButton
-                    oppfolgingsdialog={oppfolgingsplan}
-                    avvisDialog={avvisDialog}
-                />
-                <GodkjennPlanMottattKnapper
-                    oppfolgingsplan={oppfolgingsplan}
-                    godkjennPlan={godkjennPlan}
-                    avvisDialog={avvisDialog}
-                />
-            </div>
-        </OppfolgingsplanInnholdboks>
-    </div>);
+          <GodkjennPlanTidspunkt rootUrl={rootUrl} gyldighetstidspunkt={sistOppfolgingsplan} />
+          <PlanEkspanderbar oppfolgingsplan={oppfolgingsplan} />
+          <EditButton oppfolgingsdialog={oppfolgingsplan} avvisDialog={avvisDialog} />
+          <GodkjennPlanMottattKnapper
+            oppfolgingsplan={oppfolgingsplan}
+            godkjennPlan={godkjennPlan}
+            avvisDialog={avvisDialog}
+          />
+        </div>
+      </OppfolgingsplanInnholdboks>
+    </div>
+  );
 };
 
 GodkjennPlanAvslaattOgGodkjent.propTypes = {
-    oppfolgingsplan: oppfolgingsplanPt,
-    rootUrl: PropTypes.string,
-    godkjennPlan: PropTypes.func,
-    avvisDialog: PropTypes.func,
+  oppfolgingsplan: oppfolgingsplanPt,
+  rootUrl: PropTypes.string,
+  godkjennPlan: PropTypes.func,
+  avvisDialog: PropTypes.func,
 };
 
 export default GodkjennPlanAvslaattOgGodkjent;
