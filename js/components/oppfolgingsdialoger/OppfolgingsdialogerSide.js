@@ -45,14 +45,11 @@ const texts = {
 
 export class Container extends Component {
   componentWillMount() {
-    const { tilgang, naermesteLedere, oppfolgingsdialogerReducer } = this.props;
+    const { tilgang, oppfolgingsdialogerReducer } = this.props;
     if (!henterEllerHarHentetTilgang(tilgang)) {
       this.props.sjekkTilgang();
     }
     this.props.hentDineSykmeldinger();
-    if (!henterEllerHarHentetLedere(naermesteLedere)) {
-      this.props.hentLedere();
-    }
     if (!henterEllerHarHentetOppfolgingsplaner(oppfolgingsdialogerReducer)) {
       this.props.hentOppfolgingsdialoger();
     }

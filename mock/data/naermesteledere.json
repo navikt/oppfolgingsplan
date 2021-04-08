@@ -1,12 +1,16 @@
 [
   {
-    "aktoerId": "1101101101102",
     "navn": "Albus Dumbledore",
+    "fnr": "11011011011",
     "epost": "albus@hogwarts.ac.uk",
-    "mobil": "110",
-    "orgnummer": "110110110",
-    "organisasjonsnavn": "Hogwarts School of Witchcraft and Wizardry",
-    "aktivTom": null,
-    "arbeidsgiverForskuttererLoenn": true
+    "tlf": "110",
+    "sistInnlogget": null,
+    "samtykke": null,
+    "evaluering": null,
+    "stillinger": [],
+    "virksomhetsnummer": "110110110",
+    "erAktiv": true,
+    "aktivFom": "2018-10-18T12:00:00+02:00",
+    "aktivTom": null
   }
 ]

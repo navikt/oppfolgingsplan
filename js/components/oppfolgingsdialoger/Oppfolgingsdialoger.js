@@ -16,10 +16,11 @@ import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
+  finnOgHentNaermesteLedereListeSomMangler,
   finnOgHentNaermesteLedereSomMangler,
   finnOgHentPersonerSomMangler,
-  finnOgHentVirksomheterSomMangler,
-} from '../../utils/reducerUtils';
+  finnOgHentVirksomheterSomMangler
+} from "../../utils/reducerUtils";
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
@@ -40,10 +41,14 @@ class Oppfolgingsdialoger extends Component {
       naermesteleder,
       hentPerson,
       hentVirksomhet,
+      hentLedere,
       hentNaermesteLeder,
+      naermesteLedere,
     } = this.props;
+
     finnOgHentVirksomheterSomMangler(oppfolgingsdialoger, virksomhet, hentVirksomhet);
     finnOgHentPersonerSomMangler(oppfolgingsdialoger, person, hentPerson);
+    finnOgHentNaermesteLedereListeSomMangler(oppfolgingsdialoger, naermesteLedere, hentLedere);
     finnOgHentNaermesteLedereSomMangler(oppfolgingsdialoger, naermesteleder, hentNaermesteLeder);
 
     window.sessionStorage.removeItem('hash');
@@ -120,6 +125,7 @@ Oppfolgingsdialoger.propTypes = {
   oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanProptypes.oppfolgingsplanPt),
   hentVirksomhet: PropTypes.func,
   hentPerson: PropTypes.func,
+  hentLedere: PropTypes.func,
   hentNaermesteLeder: PropTypes.func,
   kopierOppfolgingsdialog: PropTypes.func,
   opprettOppfolgingsdialog: PropTypes.func,
