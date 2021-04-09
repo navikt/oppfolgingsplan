@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import styled from 'styled-components';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { VenstreChevron } from 'nav-frontend-chevron';
+import Lenke from 'nav-frontend-lenker';
 import getContextRoot from '../../utils/getContextRoot';
 
 const tekster = {
@@ -21,32 +20,14 @@ const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
   }
 };
 
-const StyledLink = styled(Link)`
-  display: flex;
-  font-weight: bold;
-  align-items: center;
-`;
-
-const StyledNav = styled.nav`
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 2rem;
-`;
-
-const BackToOversikt = () => {
-  return (
-    <StyledNav>
-      <StyledLink to={`${getContextRoot()}/oppfolgingsplaner`}>
-        <VenstreChevron />
-        {tekster.knapp.oversikt}
-      </StyledLink>
-    </StyledNav>
-  );
-};
-
 const NavigasjonsBunn = ({ steg, settAktivtSteg, disabled }) => {
   if (disabled) {
-    return <BackToOversikt />;
+    return (
+      <Lenke href={`${getContextRoot()}/oppfolgingsplaner`}>
+        <VenstreChevron />
+        {tekster.knapp.oversikt}
+      </Lenke>
+    );
   }
   return (
     <nav className="navigasjonsBunn">
