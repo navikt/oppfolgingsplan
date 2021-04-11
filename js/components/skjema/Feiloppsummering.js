@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { scrollTo, erSynligIViewport } from '@navikt/digisyfo-npm';
+import { erSynligIViewport } from '@navikt/digisyfo-npm';
 import { Vis } from '../../utils';
+import { scrollTo } from '../../utils/browserUtils';
 
 const FeillisteMelding = ({ feltnavn, feilmelding }) => {
   return (

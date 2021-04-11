@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { scrollTo } from '@navikt/digisyfo-npm';
 import { arbeidsoppgaverReducerPt, oppfolgingsplanPt } from '../../../propTypes/opproptypes';
 import getContextRoot from '../../../utils/getContextRoot';
 import { capitalizeFirstLetter } from '../../../utils/textUtils';
@@ -15,6 +14,7 @@ import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
 import StegTittel from '../StegTittel';
 import ObligatoriskeFelterInfotekst from '../ObligatoriskeFelterInfotekst';
+import { scrollTo } from '../../../utils/browserUtils';
 
 const texts = {
   tittel: 'Arbeidsoppgaver',
