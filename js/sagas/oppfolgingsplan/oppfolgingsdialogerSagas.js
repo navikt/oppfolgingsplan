@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { log } from '@navikt/digisyfo-npm';
 import { API_NAVN, hentSyfoapiUrl, get, post } from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
 
@@ -11,7 +10,6 @@ export function* hentSykmeldtOppfolginger() {
     const data = yield call(get, url);
     yield put(actions.oppfolgingsdialogerHentet(data));
   } catch (e) {
-    log(e);
     yield put(actions.hentOppfolgingsdialogerFeilet());
   }
 }
@@ -30,7 +28,6 @@ export function* opprettOppfolgingsdialog(action) {
       window.location.reload();
       return;
     }
-    log(e);
     yield put(actions.opprettOppfolgingsdialogFeilet());
   }
 }
@@ -49,7 +46,6 @@ export function* godkjennDialogSaga(action) {
       window.location.reload();
       return;
     }
-    log(e);
     yield put(actions.godkjennDialogFeilet());
   }
 }
@@ -61,7 +57,6 @@ export function* avvisDialogSaga(action) {
     yield call(post, url);
     yield put(actions.dialogAvvist(action.id));
   } catch (e) {
-    log(e);
     yield put(actions.avvisDialogFeilet());
   }
 }

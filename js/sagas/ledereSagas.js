@@ -1,5 +1,5 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get, log } from '@navikt/digisyfo-npm';
+import { get } from '@navikt/digisyfo-npm';
 import * as actions from '../actions/ledere_actions';
 import * as actiontyper from '../actions/actiontyper';
 import { HOST_NAMES } from '../konstanter';
@@ -14,7 +14,6 @@ export function* hentLedere(action) {
 
     yield put(actions.ledereHentet(data));
   } catch (e) {
-    log(e);
     yield put(actions.hentLedereFeilet());
   }
 }

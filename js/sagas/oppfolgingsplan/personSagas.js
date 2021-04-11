@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { log } from '@navikt/digisyfo-npm';
 import { get } from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/person_actions';
 import { HOST_NAMES } from '../../konstanter';
@@ -15,7 +14,6 @@ export function* hentPersonSaga(action) {
 
     yield put(actions.personHentet(person, action.fnr));
   } catch (e) {
-    log(e);
     yield put(actions.hentPersonFeilet(action.fnr));
   }
 }
