@@ -1,6 +1,6 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get } from '@navikt/digisyfo-npm';
 import * as actions from '../../actions/oppfolgingsplan/kontaktinfo_actions';
+import { get } from '../../gateway-api';
 import { HOST_NAMES } from '../../konstanter';
 import { fullNaisUrl } from '../../utils/urlUtils';
 
