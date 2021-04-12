@@ -20,7 +20,6 @@ import AppSpinner from '../AppSpinner';
 import history from '../../history';
 import { brodsmule as brodsmulePt, dinesykmeldingerReducerPt, ledereReducerPt } from '../../propTypes';
 import {
-  henterEllerHarHentetLedere,
   henterEllerHarHentetOppfolgingsplaner,
   henterEllerHarHentetTilgang,
   oppfolgingsplanHarBlittOpprettet,
