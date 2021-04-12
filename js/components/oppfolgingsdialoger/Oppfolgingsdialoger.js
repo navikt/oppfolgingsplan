@@ -19,8 +19,8 @@ import {
   finnOgHentNaermesteLedereListeSomMangler,
   finnOgHentNaermesteLedereSomMangler,
   finnOgHentPersonerSomMangler,
-  finnOgHentVirksomheterSomMangler
-} from "../../utils/reducerUtils";
+  finnOgHentVirksomheterSomMangler,
+} from '../../utils/reducerUtils';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
