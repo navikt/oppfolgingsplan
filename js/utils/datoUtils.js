@@ -61,3 +61,26 @@ export const sluttDatoSenereEnnStartDato = (start, slutt) => {
   const sluttDato = fraInputdatoTilJSDato(slutt);
   return startDato.getTime() < sluttDato.getTime();
 };
+
+const toDate = (dato) => {
+  if (typeof dato === 'undefined' || dato === null) {
+    return null;
+  } else if (typeof date === 'string' && dato.includes('T') && !dato.includes('Z')) {
+    return new Date(`${dato}Z`);
+  }
+  return new Date(dato);
+};
+
+export const toDatePrettyPrint = (dato) => {
+  if (typeof dato === 'undefined' || dato === null) {
+    return null;
+  }
+
+  const _dato = toDate(dato);
+
+  const days = _dato.getUTCDate() < 10 ? `0${_dato.getUTCDate()}` : `${_dato.getUTCDate()}`;
+  const months = _dato.getUTCMonth() + 1 < 10 ? `0${_dato.getUTCMonth() + 1}` : `${_dato.getUTCMonth() + 1}`;
+  const years = _dato.getUTCFullYear();
+
+  return `${days}.${months}.${years}`;
+};
