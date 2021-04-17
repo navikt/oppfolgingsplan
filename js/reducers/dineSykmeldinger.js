@@ -1,5 +1,5 @@
-import { parseSykmelding } from '@navikt/digisyfo-npm';
 import * as actiontyper from '../actions/actiontyper';
+import { parseSykmelding } from '../utils/reducerUtils';
 
 const initiellState = {
   henter: false,

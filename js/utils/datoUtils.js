@@ -62,7 +62,7 @@ export const sluttDatoSenereEnnStartDato = (start, slutt) => {
   return startDato.getTime() < sluttDato.getTime();
 };
 
-const toDate = (dato) => {
+export const toDate = (dato) => {
   if (typeof dato === 'undefined' || dato === null) {
     return null;
   } else if (typeof date === 'string' && dato.includes('T') && !dato.includes('Z')) {
