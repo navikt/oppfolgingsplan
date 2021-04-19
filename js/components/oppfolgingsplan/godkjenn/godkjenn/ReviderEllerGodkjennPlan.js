@@ -79,7 +79,6 @@ ReviderEllerGodkjennPlan.propTypes = {
   oppfolgingsdialog: oppfolgingsplanPt,
   settAktivtSteg: PropTypes.func,
   visSendTilGodkjenning: PropTypes.func,
-  rootUrl: PropTypes.string,
 };
 
 export default ReviderEllerGodkjennPlan;

@@ -1,8 +1,8 @@
 const path = require('path');
-
-const mainPath = path.resolve(__dirname, 'js', 'index.js');
 const autoprefixer = require('autoprefixer');
 const Dotenv = require('dotenv-webpack');
+
+const mainPath = path.resolve(__dirname, 'js', 'index.js');
 
 module.exports = {
   entry: ['babel-polyfill', mainPath],
