@@ -6,7 +6,6 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import * as Sentry from '@sentry/browser';
-import { forlengInnloggetSesjon, setPerformOnHttpCalls, sjekkInnloggingssesjon } from '@navikt/digisyfo-npm';
 import AppRouter from './routers/AppRouter';
 import { hentVedlikehold } from './actions/vedlikehold_actions';
 import history from './history';
@@ -14,6 +13,7 @@ import rootSaga from './sagas';
 import '../styles/styles.less';
 import './logging';
 import reducers from './reducers';
+import { forlengInnloggetSesjon, sjekkInnloggingssesjon } from './timeout/timeout_actions';
 
 Sentry.init({
   dsn: 'https://0a85ce6fefed42a49d44a727614d6b97@sentry.gc.nav.no/25',
@@ -33,10 +33,6 @@ sagaMiddleware.run(rootSaga);
 store.dispatch(hentVedlikehold());
 store.dispatch(forlengInnloggetSesjon());
 // </OBS>
-
-setPerformOnHttpCalls(() => {
-  store.dispatch(forlengInnloggetSesjon());
-});
 
 setInterval(() => {
   store.dispatch(sjekkInnloggingssesjon());

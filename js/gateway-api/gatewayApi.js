@@ -1,4 +1,6 @@
 import ponyfill from 'fetch-ponyfill';
+import { store } from '../index';
+import { forlengInnloggetSesjon } from '../timeout/timeout_actions';
 
 const ponyfills = ponyfill();
 
@@ -48,6 +50,10 @@ const log = (...data) => {
 export function get(url, headers = null) {
   const customFetch = getFetch();
   const CustomHeaders = getHeaders();
+  if (store) {
+    store.dispatch(forlengInnloggetSesjon());
+  }
+
   return customFetch(url, {
     credentials: 'include',
     headers: headers || new CustomHeaders(),
@@ -78,6 +84,10 @@ export function get(url, headers = null) {
 export const post = (url, body) => {
   const customFetch = getFetch();
   const CustomHeaders = getHeaders();
+  if (store) {
+    store.dispatch(forlengInnloggetSesjon());
+  }
+
   return customFetch(url, {
     credentials: 'include',
     method: 'POST',
