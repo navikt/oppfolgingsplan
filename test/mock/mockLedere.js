@@ -11,8 +11,8 @@ export const getLedere = [
     navn: 'Navn Navnesen',
     epost: 'epost@epost.no',
     mobil: '99988777',
-    orgnummer: '123456788',
-    virksomhetsnummer: 'Arbeidsgiver',
+    virksomhetsnummer: '123456788',
+    organisasjonsnavn: 'Arbeidsgiver',
     aktivTom: null,
   },
 ];
