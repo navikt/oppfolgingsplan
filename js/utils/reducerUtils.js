@@ -137,10 +137,11 @@ export const finnOgHentArbeidsforholdSomMangler = (oppfolgingsdialoger, arbeidsf
   });
 };
 
-export const finnOgHentNaermesteLedereListeSomMangler = (oppfolgingsdialoger, naermesteLedere, hentLedere) => {
+export const finnOgHentNaermesteLedereListeSomMangler = (dinesykmeldinger, naermesteLedere, hentLedere) => {
   if (!henterEllerHarHentetLedere(naermesteLedere)) {
-    if (oppfolgingsdialoger[0] && oppfolgingsdialoger[0].arbeidstaker) {
-      hentLedere(oppfolgingsdialoger[0].arbeidstaker.fnr);
+    const sykmelding = dinesykmeldinger.data[0];
+    if (sykmelding) {
+      hentLedere(sykmelding.pasient.fnr);
     }
   }
 };
