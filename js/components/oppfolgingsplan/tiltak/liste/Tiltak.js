@@ -103,9 +103,6 @@ class Tiltak extends Component {
       visLagreSkjema: false,
       lagreKommentarSkjema: true,
     });
-    if (!this.state.erApen) {
-      this.apne();
-    }
   }
 
   skjulLagreKommentarSkjema() {
