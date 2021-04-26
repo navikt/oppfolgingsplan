@@ -85,6 +85,7 @@ function mockOpprettetIdResultat(res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(mockOpprettetIdResultat.rollingCounter));
 }
+
 mockOpprettetIdResultat.rollingCounter = 100;
 
 function mockForLokaltMiljo(server) {
@@ -167,11 +168,7 @@ function mockForOpplaeringsmiljo(server) {
     res.send(mockOppfolgingsplan.getOppfolgingsplaner(mockOppfolgingsplan.TYPE_DEFAULT));
   });
 
-/*  //TODO: vi mangler mock for oppretting av OP: POST mot '/syfooppfolgingsplanservice/api/arbeidstaker/oppfolgingsplaner'
-  server.post('/syfooppfolgingsplanservice/api/arbeidstaker/oppfolgingsplaner', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(123));
-  });*/
+  //TODO: Ser ut som om vi mangler mock for oppretting av OP: POST mot '/syfooppfolgingsplanservice/api/arbeidstaker/oppfolgingsplaner'
 
   server.get('/syfooppfolgingsplanservice/api/tilgang', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
@@ -268,5 +265,5 @@ module.exports = {
   mockForLokaltMiljo,
   mockForOpplaeringsmiljo,
   mockUnleashOpplaeringsmiljo,
-  mockUnleashLokal,
+  mockUnleashLokal
 };

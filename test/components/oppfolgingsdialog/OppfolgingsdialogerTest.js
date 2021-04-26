@@ -26,6 +26,7 @@ describe('Oppfolgingsdialoger', () => {
   const oppfolgingsdialoger = getOppfolgingsdialoger;
   let hentVirksomhet;
   let hentPerson;
+  let hentLedere;
   let hentKontaktinfo;
   const dagensDato = new Date('2017-01-01');
   dagensDato.setHours(0, 0, 0, 0);
@@ -86,6 +87,7 @@ describe('Oppfolgingsdialoger', () => {
     };
     naermesteLedere = { data: [] };
     hentPerson = sinon.spy();
+    hentLedere = sinon.spy();
     hentKontaktinfo = sinon.spy();
     hentVirksomhet = sinon.spy();
 
@@ -97,6 +99,7 @@ describe('Oppfolgingsdialoger', () => {
         hentVirksomhet={hentVirksomhet}
         hentNaermesteLeder={sinon.spy()}
         hentPerson={hentPerson}
+        hentLedere={hentLedere}
         hentKontaktinfo={hentKontaktinfo}
         naermesteleder={naermesteleder}
         virksomhet={virksomhet}
