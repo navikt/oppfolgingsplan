@@ -15,8 +15,7 @@ import {
   henterEllerHarHentetVirksomhet,
 } from '../../js/utils/reducerUtils';
 import getOppfolgingsdialog from '../mock/mockOppfolgingsdialog';
-import { getSykmeldinger } from "../mock/mockSykmeldinger";
-import { hentSykmeldingAktiv } from "./sykmeldingUtilsTest";
+import { hentSykmeldingAktiv } from './sykmeldingUtilsTest';
 
 const expect = chai.expect;
 
@@ -93,7 +92,7 @@ describe('reducerUtils', () => {
         henter: false,
         hentet: false,
       };
-      const dineSykmeldinger = {data: [hentSykmeldingAktiv(new Date('2017-09-28'))]};
+      const dineSykmeldinger = { data: [hentSykmeldingAktiv(new Date('2017-09-28'))] };
       finnOgHentNaermesteLedereListeSomMangler(dineSykmeldinger, naermesteLedere, hentLedere);
       sinon.assert.calledOnce(hentLedere);
       sinon.assert.calledWith(hentLedere, '12345678910');
