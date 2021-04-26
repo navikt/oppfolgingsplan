@@ -38,7 +38,7 @@ describe('OppfolgingdialogUtils', () => {
       oppfolgingsdialogUnderArbeid = {
         status: 'UNDER_ARBEID',
         virksomhet: {
-          virksomhetsnummer: sykmeldingGyldig.orgnummer,
+          virksomhetsnummer: sykmeldingGyldig.organisasjonsInformasjon.orgnummer,
         },
         godkjenninger: [],
         sistEndretAv: {
@@ -247,38 +247,34 @@ describe('OppfolgingdialogUtils', () => {
         tom: new Date('2017.12.15'),
       };
       sykmeldingUtgaatt = {
-        orgnummer: virksomhet.virksomhetsnummer,
-        mulighetForArbeid: {
-          perioder: [
-            {
-              fom: leggTilMnderPaaDato(dagensDato, -(MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 2)).toISOString(),
-              tom: leggTilMnderPaaDato(dagensDato, -(MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 1)).toISOString(),
-            },
-            {
-              fom: leggTilMnderPaaDato(dagensDato, -4).toISOString(),
-              tom: leggTilMnderOgDagerPaaDato(
-                dagensDato,
-                -MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING,
-                -1
-              ).toISOString(),
-            },
-          ],
+        organisasjonsInformasjon: {
+          orgnummer: virksomhet.virksomhetsnummer,
         },
+        sykmeldingsperioder: [
+          {
+            fom: leggTilMnderPaaDato(dagensDato, -(MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 2)).toISOString(),
+            tom: leggTilMnderPaaDato(dagensDato, -(MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 1)).toISOString(),
+          },
+          {
+            fom: leggTilMnderPaaDato(dagensDato, -4).toISOString(),
+            tom: leggTilMnderOgDagerPaaDato(dagensDato, -MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING, -1).toISOString(),
+          },
+        ],
       };
       sykmeldingAktiv = {
-        orgnummer: virksomhet.virksomhetsnummer,
-        mulighetForArbeid: {
-          perioder: [
-            {
-              fom: leggTilMnderPaaDato(dagensDato, -4).toISOString(),
-              tom: leggTilMnderOgDagerPaaDato(dagensDato, -2, -28).toISOString(),
-            },
-            {
-              fom: leggTilDagerPaaDato(dagensDato, -5).toISOString(),
-              tom: leggTilDagerPaaDato(dagensDato, 35).toISOString(),
-            },
-          ],
+        organisasjonsInformasjon: {
+          orgnummer: virksomhet.virksomhetsnummer,
         },
+        sykmeldingsperioder: [
+          {
+            fom: leggTilMnderPaaDato(dagensDato, -4).toISOString(),
+            tom: leggTilMnderOgDagerPaaDato(dagensDato, -2, -28).toISOString(),
+          },
+          {
+            fom: leggTilDagerPaaDato(dagensDato, -5).toISOString(),
+            tom: leggTilDagerPaaDato(dagensDato, 35).toISOString(),
+          },
+        ],
       };
     });
 

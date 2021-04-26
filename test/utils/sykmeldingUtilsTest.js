@@ -44,52 +44,46 @@ export const trekkMnderOgDagerFraDato = (dato, mnder, dager) => {
 
 export const hentsykmeldingUtgaattOver4mnd = (dagensDato) => {
   return getSykmelding({
-    mulighetForArbeid: {
-      perioder: [
-        {
-          fom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 3).toISOString(),
-          tom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 2).toISOString(),
-        },
-        {
-          fom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 1).toISOString(),
-          tom: trekkMnderOgDagerFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING, 1).toISOString(),
-        },
-      ],
-    },
+    sykmeldingsperioder: [
+      {
+        fom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 3).toISOString(),
+        tom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 2).toISOString(),
+      },
+      {
+        fom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 1).toISOString(),
+        tom: trekkMnderOgDagerFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING, 1).toISOString(),
+      },
+    ],
   });
 };
 
 export const hentSykmeldingUtgaatt = (dagensDato) => {
   return getSykmelding({
-    mulighetForArbeid: {
-      perioder: [
-        {
-          fom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 3).toISOString(),
-          tom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 2).toISOString(),
-        },
-        {
-          fom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 1).toISOString(),
-          tom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING).toISOString(),
-        },
-      ],
-    },
+    sykmeldingsperioder: [
+      {
+        fom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 3).toISOString(),
+        tom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 2).toISOString(),
+      },
+      {
+        fom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 1).toISOString(),
+        tom: trekkMnderFraDato(dagensDato, MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING).toISOString(),
+      },
+    ],
   });
 };
 
 export const hentSykmeldingAktiv = (dagensDato) => {
   return getSykmelding({
-    mulighetForArbeid: {
-      perioder: [
-        {
-          fom: trekkDagerFraDato(dagensDato, 35).toISOString(),
-          tom: trekkDagerFraDato(dagensDato, 5).toISOString(),
-        },
-        {
-          fom: trekkDagerFraDato(dagensDato, 5).toISOString(),
-          tom: leggTilDagerPaaDato(dagensDato, 35).toISOString(),
-        },
-      ],
-    },
+    sykmeldingsperioder: [
+      {
+        fom: trekkDagerFraDato(dagensDato, 35).toISOString(),
+        tom: trekkDagerFraDato(dagensDato, 5).toISOString(),
+      },
+      {
+        fom: trekkDagerFraDato(dagensDato, 5).toISOString(),
+        tom: leggTilDagerPaaDato(dagensDato, 35).toISOString(),
+      },
+    ],
   });
 };
 
@@ -134,7 +128,9 @@ describe('sykmeldingUtils', () => {
       };
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          orgnummer: null,
+          organisasjonsInformasjon: {
+            orgnummer: null,
+          },
         }),
       ];
       expect(skalViseOppfoelgingsdialogLenke(sykmeldinger, oppfolgingsdialoger)).to.equal(true);
@@ -158,7 +154,9 @@ describe('sykmeldingUtils', () => {
       };
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          orgnummer: null,
+          organisasjonsInformasjon: {
+            orgnummer: null,
+          },
         }),
       ];
       expect(skalViseOppfoelgingsdialogLenke(sykmeldinger, oppfolgingsdialoger)).to.equal(false);
@@ -171,7 +169,9 @@ describe('sykmeldingUtils', () => {
       };
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          orgnummer: null,
+          organisasjonsInformasjon: {
+            orgnummer: null,
+          },
         }),
       ];
       expect(skalViseOppfoelgingsdialogLenke(sykmeldinger, oppfolgingsdialoger)).to.equal(false);
@@ -190,7 +190,9 @@ describe('sykmeldingUtils', () => {
     it('skal returnere false med 1 sykmelding uten orgnummer', () => {
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          orgnummer: null,
+          organisasjonsInformasjon: {
+            orgnummer: null,
+          },
         }),
       ];
       expect(sykmeldtHarGyldigSykmelding(sykmeldinger)).to.equal(false);
@@ -204,7 +206,9 @@ describe('sykmeldingUtils', () => {
     it('skal returnere false med 1 sykmelding, som ikke har orgnummer, men som har siste gyldige sykmeldingsdato nyligere eller lik grensedato(4mnd siden)', () => {
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          orgnummer: null,
+          organisasjonsInformasjon: {
+            orgnummer: null,
+          },
         }),
       ];
       expect(sykmeldtHarGyldigSykmelding(sykmeldinger)).to.equal(false);

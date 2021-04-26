@@ -57,16 +57,14 @@ const getSykmeldinger = (type) => {
   return [
     {
       ...sykmelding,
-      mulighetForArbeid: {
-        ...sykmelding.mulighetForArbeid,
-        perioder: [
-          {
-            ...sykmelding.mulighetForArbeid.perioder[0],
-            fom: dateUtil.leggTilDagerPaDato(today, type.fomUke * 7).toJSON(),
-            tom: dateUtil.leggTilDagerPaDato(today, type.tomUke * 7).toJSON(),
-          },
-        ],
-      },
+      sykmeldingsperioder: [
+        ...sykmelding.sykmeldingsperioder,
+        {
+          ...sykmelding.sykmeldingsperioder[0],
+          fom: dateUtil.leggTilDagerPaDato(today, type.fomUke * 7).toJSON(),
+          tom: dateUtil.leggTilDagerPaDato(today, type.tomUke * 7).toJSON(),
+        },
+      ],
     },
   ];
 };
