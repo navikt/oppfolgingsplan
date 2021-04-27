@@ -130,17 +130,9 @@ function mockForOpplaeringsmiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/syforest/sykmeldinger', (req, res) => {
+  server.get('/syfooppfolgingsplanservice/api/sykmeldinger', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(getSykmeldinger(SYKMELDING_TYPE.SYKMELDING_AKTIV)));
-  });
-
-  server.post('/syforest/sykmeldinger/:id/actions/erUtenforVentetid', (req, res) => {
-    res.send(
-      JSON.stringify({
-        erUtenforVentetid: false,
-      })
-    );
   });
 
   server.get('/syfooprest/api/narmesteledere/:fodselsnummer', (req, res) => {
