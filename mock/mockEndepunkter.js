@@ -132,10 +132,6 @@ function mockForOpplaeringsmiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/syforest/sykmeldinger?type=arbeidsgiver', (req, res) => {
-    res.send(JSON.stringify(mockData[ARBEIDSGIVERS_SYKMELDINGER]));
-  });
-
   server.get('/syforest/sykmeldinger', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(getSykmeldinger(SYKMELDING_TYPE.SYKMELDING_AKTIV)));
@@ -223,10 +219,12 @@ function mockForOpplaeringsmiljo(server) {
   });
 
   server.get('/esso/logout', (req, res) => {
+    // noinspection HtmlUnknownTarget
     res.send('<p>Du har blitt sendt til utlogging.</p><p><a href="/sykefravaer">Gå til Ditt sykefravær</a></p>');
   });
 
   server.get('/dittnav', (req, res) => {
+    // noinspection HtmlUnknownTarget
     res.send(
       '<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/sykefravaer">Gå til Ditt sykefravær</a></p>'
     );
