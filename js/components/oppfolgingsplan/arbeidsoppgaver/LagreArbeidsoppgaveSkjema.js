@@ -5,14 +5,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
-import { tekstfeltRegex } from '../../../konstanter';
+import { tekstfeltBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../../../konstanter';
 import InfoVarsel from './InfoVarsel';
 import Checkbox from '../../skjema/Checkbox';
 import Tekstfelt from '../../skjema/TekstFelt';
 import Tekstomraade from '../../skjema/TekstOmrade';
 import Radioknapper from '../../skjema/Radioknapper';
 import { KANGJENNOMFOERES, TILRETTELEGGING } from './arbeidsoppgavesvar';
-import { arbeidsoppgaverReducerPt, arbeidsoppgavePt } from '../../../propTypes/opproptypes';
+import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
 import ArbeidsoppgaveKnapper from './ArbeidsoppgaveKnapper';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
@@ -463,7 +463,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
 
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn arbeidsoppgave';
-    } else if (value.match(tekstfeltRegex)) {
+    } else if (value.match(tekstfeltBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
       feilmelding = 'Ugyldig spesialtegn er oppgitt';
     }
 
@@ -587,12 +587,12 @@ const valueSelector = formValueSelector(LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN);
 
 const mapStateToProps = (state) => {
   return {
-    gjennomfoeringSvar: valueSelector(state, 'gjennomfoeringSvar'),
+    gjennomfoeringSvar: valueSelector(state, "gjennomfoeringSvar")
   };
 };
 
 const ReduxSkjema = reduxForm({
-  form: LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN,
+  form: LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN
 })(LagreArbeidsoppgaveSkjemaComponent);
 
 export default connect(mapStateToProps)(ReduxSkjema);

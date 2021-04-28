@@ -1,5 +1,5 @@
-export const OPPRETT_SKJEMANAVN = 'OPPRETT_SKJEMANAVN';
 export const tekstfeltRegex = new RegExp('.*<[^ ][^>]+[^ ]>.*');
+export const tekstfeltBegynnerMedUgyldigTegnRegex = new RegExp('^<');
 export const maanedListe = [
   'januar',
   'februar',
