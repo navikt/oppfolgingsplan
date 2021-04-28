@@ -130,7 +130,7 @@ function mockForOpplaeringsmiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/syfooppfolgingsplanservice/api/sykmeldinger', (req, res) => {
+  server.get('/syfooppfolgingsplanservice/api/arbeidstaker/sykmeldinger', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(getSykmeldinger(SYKMELDING_TYPE.SYKMELDING_AKTIV)));
   });

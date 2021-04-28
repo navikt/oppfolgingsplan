@@ -19,7 +19,7 @@ describe('dineSykmeldingerSagas', () => {
   });
 
   it('Skal dernest hente dine sykmeldinger', () => {
-    const nextCall = call(get, `${apiUrlBase}/sykmeldinger`);
+    const nextCall = call(get, `${apiUrlBase}/arbeidstaker/sykmeldinger`);
     expect(generator.next().value).to.deep.equal(nextCall);
   });
 
