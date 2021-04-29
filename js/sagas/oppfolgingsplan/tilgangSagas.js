@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { log } from '@navikt/digisyfo-npm';
 import { API_NAVN, hentSyfoapiUrl, get } from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/sjekkTilgang_actions';
 
@@ -14,7 +13,6 @@ export function* sjekkerTilgang() {
       yield put(actions.sjekkTilgang403());
       return;
     }
-    log(e);
     yield put(actions.sjekkTilgangFeilet());
   }
 }

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 import MaskedInput from 'react-maskedinput';
-import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import Feilmelding from './Feilmelding';
 import DayPickerComponent from './DayPicker';
 import { fieldPropTypes } from '../../propTypes/fieldproptypes';
+import { toDatePrettyPrint } from '../../utils/datoUtils';
 
 export const DATOVELGERFELT_SKJEMA = 'DATOVELGERFELT_SKJEMA';
 
