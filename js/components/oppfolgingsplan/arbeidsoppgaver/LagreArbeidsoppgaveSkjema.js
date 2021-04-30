@@ -1,20 +1,20 @@
-import { Feiloppsummering } from 'nav-frontend-skjema';
-import connect from 'react-redux/lib/connect/connect';
+import { Feiloppsummering } from "nav-frontend-skjema";
+import connect from "react-redux/lib/connect/connect";
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
-import { Panel } from 'nav-frontend-paneler';
-import { tekstfeltBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../../../konstanter';
-import InfoVarsel from './InfoVarsel';
-import Checkbox from '../../skjema/Checkbox';
-import Tekstfelt from '../../skjema/TekstFelt';
-import Tekstomraade from '../../skjema/TekstOmrade';
-import Radioknapper from '../../skjema/Radioknapper';
-import { KANGJENNOMFOERES, TILRETTELEGGING } from './arbeidsoppgavesvar';
-import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
-import ArbeidsoppgaveKnapper from './ArbeidsoppgaveKnapper';
-import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Field, formValueSelector, reduxForm, SubmissionError } from "redux-form";
+import { Panel } from "nav-frontend-paneler";
+import { tekstfeltBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from "../../../konstanter";
+import InfoVarsel from "./InfoVarsel";
+import Checkbox from "../../skjema/Checkbox";
+import Tekstfelt from "../../skjema/TekstFelt";
+import Tekstomraade from "../../skjema/TekstOmrade";
+import Radioknapper from "../../skjema/Radioknapper";
+import { KANGJENNOMFOERES, TILRETTELEGGING } from "./arbeidsoppgavesvar";
+import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from "../../../propTypes/opproptypes";
+import ArbeidsoppgaveKnapper from "./ArbeidsoppgaveKnapper";
+import ArbeidsoppgaveVarselFeil from "./ArbeidsoppgaveVarselFeil";
 
 const texts = {
   infoVarsel: `
@@ -24,100 +24,100 @@ const texts = {
     `,
   felter: {
     arbeidsoppgavenavn: {
-      question: 'Navn på arbeidsoppgave',
+      question: "Navn på arbeidsoppgave"
     },
     kanGjennomfoeres: {
-      question: 'Kan denne arbeidsoppgaven gjennomføres i sykeperioden?',
+      question: "Kan denne arbeidsoppgaven gjennomføres i sykeperioden?",
       answer: {
-        kan: 'Ja, den kan gjennomføres som normalt',
-        medTilrettelegging: 'Ja, den kan gjennomføres med tilrettelegging',
-        kanIkke: 'Nei, den kan ikke gjennomføres',
-      },
+        kan: "Ja, den kan gjennomføres som normalt",
+        medTilrettelegging: "Ja, den kan gjennomføres med tilrettelegging",
+        kanIkke: "Nei, den kan ikke gjennomføres"
+      }
     },
     tilrettelegging: {
-      question: 'Hva skal til for å gjennomføre denne arbeidsoppgaven?',
+      question: "Hva skal til for å gjennomføre denne arbeidsoppgaven?",
       answer: {
-        annetSted: 'Arbeide fra annet sted',
-        merTid: 'Mer gitt tid',
-        medHjelp: 'Med hjelp/hjelpemidler',
-      },
+        annetSted: "Arbeide fra annet sted",
+        merTid: "Mer gitt tid",
+        medHjelp: "Med hjelp/hjelpemidler"
+      }
     },
     beskrivelse: {
       question: {
-        tilrettelegging: 'Beskrivelse:',
-        kanIkke: 'Hva står i veien for å kunne gjennomføre denne arbeidsoppgaven?',
-      },
-    },
-  },
+        tilrettelegging: "Beskrivelse:",
+        kanIkke: "Hva står i veien for å kunne gjennomføre denne arbeidsoppgaven?"
+      }
+    }
+  }
 };
 
 export const skjemaFeltPt = PropTypes.shape({
   navn: PropTypes.string,
-  spoersmaal: PropTypes.string,
+  spoersmaal: PropTypes.string
 });
 
 export const skjemaFeltBeskrivelsePt = PropTypes.shape({
   navn: PropTypes.string,
   spoersmaal: PropTypes.shape({
     tilrettelegging: PropTypes.string,
-    kanikke: PropTypes.string,
-  }),
+    kanikke: PropTypes.string
+  })
 });
 
 const MAX_LENGTH = 1000;
 
-const LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN = 'lagreArbeidsgiver';
+const LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN = "lagreArbeidsgiver";
 
 export const FELTER = {
   arbeidsoppgavenavn: {
-    navn: 'arbeidsoppgavenavn',
-    id: 'arbeidsoppgavenavn-input',
-    spoersmaal: texts.felter.arbeidsoppgavenavn.question,
+    navn: "arbeidsoppgavenavn",
+    id: "arbeidsoppgavenavn-input",
+    spoersmaal: texts.felter.arbeidsoppgavenavn.question
   },
   kanGjennomfoeres: {
-    navn: 'gjennomfoeringSvar',
+    navn: "gjennomfoeringSvar",
     spoersmaal: texts.felter.kanGjennomfoeres.question,
     svar: [
       {
         tekst: texts.felter.kanGjennomfoeres.answer.kan,
-        verdi: KANGJENNOMFOERES.KAN,
+        verdi: KANGJENNOMFOERES.KAN
       },
       {
         tekst: texts.felter.kanGjennomfoeres.answer.medTilrettelegging,
-        verdi: KANGJENNOMFOERES.TILRETTELEGGING,
+        verdi: KANGJENNOMFOERES.TILRETTELEGGING
       },
       {
         tekst: texts.felter.kanGjennomfoeres.answer.kanIkke,
-        verdi: KANGJENNOMFOERES.KAN_IKKE,
-      },
-    ],
+        verdi: KANGJENNOMFOERES.KAN_IKKE
+      }
+    ]
   },
   tilrettelegging: {
-    navn: 'tilrettelegging',
+    navn: "tilrettelegging",
     spoersmaal: texts.felter.tilrettelegging.question,
     svar: [
       {
         tekst: texts.felter.tilrettelegging.answer.annetSted,
-        navn: TILRETTELEGGING.PAA_ANNET_STED,
+        navn: TILRETTELEGGING.PAA_ANNET_STED
       },
       {
         tekst: texts.felter.tilrettelegging.answer.merTid,
-        navn: TILRETTELEGGING.MED_MER_TID,
+        navn: TILRETTELEGGING.MED_MER_TID
       },
       {
         tekst: texts.felter.tilrettelegging.answer.medHjelp,
-        navn: TILRETTELEGGING.MED_HJELP,
-      },
-    ],
+        navn: TILRETTELEGGING.MED_HJELP
+      }
+    ]
   },
   beskrivelse: {
-    navn: 'beskrivelse',
-    id: 'beskrivelse-input',
+    navn: "beskrivelse",
+    id: "beskrivelse-input",
     spoersmaal: {
       tilrettelegging: texts.felter.beskrivelse.question.tilrettelegging,
-      kanikke: texts.felter.beskrivelse.question.kanIkke,
-    },
-  },
+      kanikke: texts.felter.beskrivelse.question.kanIkke
+    }
+  }
 };
 
 export const ArbeidsoppgaveNavn = ({ felt, isFormSubmitted, validate }) => {
@@ -143,7 +143,7 @@ export const ArbeidsoppgaveNavn = ({ felt, isFormSubmitted, validate }) => {
 ArbeidsoppgaveNavn.propTypes = {
   felt: skjemaFeltPt,
   isFormSubmitted: PropTypes.bool,
-  validate: PropTypes.func,
+  validate: PropTypes.func
 };
 
 export const ArbeidsoppgaveBeskrivelse = ({ felt, gjennomfoeringSvarValgt, isFormSubmitted, validate }) => {
@@ -171,11 +171,11 @@ ArbeidsoppgaveBeskrivelse.propTypes = {
   felt: skjemaFeltBeskrivelsePt,
   gjennomfoeringSvarValgt: PropTypes.string,
   isFormSubmitted: PropTypes.bool,
-  validate: PropTypes.func,
+  validate: PropTypes.func
 };
 
 export const ArbeidsoppgaveGjennomfoeringSvar = ({ handleOptionChange, arbeidsoppgave }) => {
-  const feltId = arbeidsoppgave ? `kanGjennomfoeres-${arbeidsoppgave.arbeidsoppgaveId}` : 'kanGjennomfoeres';
+  const feltId = arbeidsoppgave ? `kanGjennomfoeres-${arbeidsoppgave.arbeidsoppgaveId}` : "kanGjennomfoeres";
 
   return (
     <div className="skjemaelement lagrearbeidsoppgaveskjema__inputgruppe">
@@ -206,11 +206,11 @@ export const ArbeidsoppgaveGjennomfoeringSvar = ({ handleOptionChange, arbeidsop
 };
 ArbeidsoppgaveGjennomfoeringSvar.propTypes = {
   handleOptionChange: PropTypes.func,
-  arbeidsoppgave: arbeidsoppgavePt,
+  arbeidsoppgave: arbeidsoppgavePt
 };
 
 export const ArbeidsoppgaveTilrettelegging = ({ toggleCheckbox, arbeidsoppgave }) => {
-  const feltId = arbeidsoppgave ? `tilrettelegging-${arbeidsoppgave.arbeidsoppgaveId}` : 'tilrettelegging';
+  const feltId = arbeidsoppgave ? `tilrettelegging-${arbeidsoppgave.arbeidsoppgaveId}` : "tilrettelegging";
 
   return (
     <div className="skjemaelement lagrearbeidsoppgaveskjema__inputgruppe">
@@ -237,7 +237,7 @@ export const ArbeidsoppgaveTilrettelegging = ({ toggleCheckbox, arbeidsoppgave }
 
 ArbeidsoppgaveTilrettelegging.propTypes = {
   toggleCheckbox: PropTypes.func,
-  arbeidsoppgave: arbeidsoppgavePt,
+  arbeidsoppgave: arbeidsoppgavePt
 };
 
 export class LagreArbeidsoppgaveSkjemaComponent extends Component {
@@ -246,7 +246,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     this.state = {
       gjennomfoeringSvarValgt: KANGJENNOMFOERES.KAN,
       tilretteleggingerValgt: new Set(),
-      errorList: [],
+      errorList: []
     };
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
@@ -287,13 +287,13 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     }
 
     this.setState({
-      errorList: errors,
+      errorList: errors
     });
   };
 
   touchAllFields() {
-    this.props.touch('arbeidsoppgavenavn');
-    this.props.touch('beskrivelse');
+    this.props.touch("arbeidsoppgavenavn");
+    this.props.touch("beskrivelse");
   }
 
   visFeiletOppgave() {
@@ -305,7 +305,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
         this.props.arbeidsoppgave &&
         this.props.arbeidsoppgaverReducer.arbeidsoppgave.arbeidsoppgaveId &&
         this.props.arbeidsoppgave.arbeidsoppgaveId ===
-          this.props.arbeidsoppgaverReducer.arbeidsoppgave.arbeidsoppgaveId)
+        this.props.arbeidsoppgaverReducer.arbeidsoppgave.arbeidsoppgaveId)
     );
   }
 
@@ -336,14 +336,14 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
           initData.beskrivelse = arbeidsoppgave.gjennomfoering.kanBeskrivelse;
           this.setState({
             gjennomfoeringSvarValgt: KANGJENNOMFOERES.TILRETTELEGGING,
-            tilretteleggingerValgt: set,
+            tilretteleggingerValgt: set
           });
           break;
         }
         case KANGJENNOMFOERES.KAN_IKKE: {
           initData.beskrivelse = arbeidsoppgave.gjennomfoering.kanIkkeBeskrivelse;
           this.setState({
-            gjennomfoeringSvarValgt: KANGJENNOMFOERES.KAN_IKKE,
+            gjennomfoeringSvarValgt: KANGJENNOMFOERES.KAN_IKKE
           });
           break;
         }
@@ -360,7 +360,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
 
   handleOptionChange(e) {
     this.setState({
-      gjennomfoeringSvarValgt: e.target.value,
+      gjennomfoeringSvarValgt: e.target.value
     });
   }
 
@@ -372,23 +372,23 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
       set.add(e.target.name);
     }
     this.setState({
-      tilretteleggingerValgt: set,
+      tilretteleggingerValgt: set
     });
   }
 
   hentSkjemaClassName() {
-    return this.props.arbeidsoppgave ? 'oppfolgingsdialogtabell__rad__utvidbar' : 'panel';
+    return this.props.arbeidsoppgave ? "oppfolgingsdialogtabell__rad__utvidbar" : "panel";
   }
 
   handleSubmit(values) {
     const errorObject = {
-      arbeidsoppgavenavn: '',
-      beskrivelse: '',
-      _error: 'Validering av skjema feilet',
+      arbeidsoppgavenavn: "",
+      beskrivelse: "",
+      _error: "Validering av skjema feilet"
     };
 
     this.setState({
-      isFormSubmitted: true,
+      isFormSubmitted: true
     });
 
     const errorList = [];
@@ -398,7 +398,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
       errorObject.arbeidsoppgavenavn = feilmeldingerObject.arbeidsoppgavenavn;
       errorList.push({
         skjemaelementId: FELTER.arbeidsoppgavenavn.id,
-        feilmelding: feilmeldingerObject.arbeidsoppgavenavn,
+        feilmelding: feilmeldingerObject.arbeidsoppgavenavn
       });
     }
 
@@ -409,14 +409,14 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
 
     if (feilmeldingerObject.arbeidsoppgavenavn || feilmeldingerObject.beskrivelse) {
       this.setState({
-        errorList,
+        errorList
       });
 
       throw new SubmissionError(errorObject);
     }
 
     this.setState({
-      errorList: [],
+      errorList: []
     });
 
     const nyeVerdier = Object.assign(values);
@@ -448,12 +448,12 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     } else if (i > -1 && feilmelding === undefined) {
       errorList.splice(i, 1);
       this.setState({
-        errorlist: errorList,
+        errorlist: errorList
       });
     } else if (i === -1 && feilmelding !== undefined) {
       errorList.push({ skjemaelementId: elementId, feilmelding });
       this.setState({
-        errorlist: errorList,
+        errorlist: errorList
       });
     }
   };
@@ -462,9 +462,9 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     let feilmelding;
 
     if (!value || value.trim().length === 0) {
-      feilmelding = 'Fyll inn arbeidsoppgave';
+      feilmelding = "Fyll inn arbeidsoppgave";
     } else if (value.match(tekstfeltBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
-      feilmelding = 'Ugyldig spesialtegn er oppgitt';
+      feilmelding = "Ugyldig spesialtegn er oppgitt";
     }
 
     const navnLengde = value ? value.length : 0;
@@ -483,9 +483,9 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     let feilmelding;
 
     if (!value || value.trim().length === 0) {
-      feilmelding = 'Fyll inn beskrivelse';
+      feilmelding = "Fyll inn beskrivelse";
     } else if (value.match(tekstfeltRegex)) {
-      feilmelding = 'Ugyldig spesialtegn er oppgitt';
+      feilmelding = "Ugyldig spesialtegn er oppgitt";
     }
 
     const beskrivelseLengde = value ? value.length : 0;
@@ -506,12 +506,12 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
 
     if (values.gjennomfoeringSvar === KANGJENNOMFOERES.KAN) {
       return {
-        arbeidsoppgavenavn: this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavnValue),
+        arbeidsoppgavenavn: this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavnValue)
       };
     }
     return {
       arbeidsoppgavenavn: this.validateArbeidsoppgavenavnFelt(arbeidsoppgavenavnValue),
-      beskrivelse: this.validateBeskrivelseFelt(beskrivelseValue),
+      beskrivelse: this.validateBeskrivelseFelt(beskrivelseValue)
     };
   };
 
@@ -522,7 +522,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
       varselTekst,
       oppdateringFeilet,
       arbeidsoppgaverReducer,
-      rootUrlImg,
+      rootUrlImg
     } = this.props;
     return (
       <Panel border={this.border()}>
@@ -580,7 +580,7 @@ LagreArbeidsoppgaveSkjemaComponent.propTypes = {
   rootUrlImg: PropTypes.string,
   arbeidsoppgaverReducer: arbeidsoppgaverReducerPt,
   touch: PropTypes.func,
-  gjennomfoeringSvar: PropTypes.string,
+  gjennomfoeringSvar: PropTypes.string
 };
 
 const valueSelector = formValueSelector(LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN);
