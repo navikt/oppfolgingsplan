@@ -9,6 +9,7 @@ export function getSykmelding(soknad = {}) {
     {},
     {
       id: '73970c89-1173-4d73-b1cb-e8445c2840e2',
+      fnr: '12345678910',
       sykmeldingsperioder: [
         {
           fom: '2017-07-07',
@@ -29,6 +30,7 @@ export function getParsetSykmelding(soknad = {}) {
     {},
     {
       id: '73970c89-1173-4d73-b1cb-e8445c2840e2',
+      fnr: '12345678910',
       sykmeldingsperioder: [
         {
           fom: new Date('2017-07-07'),

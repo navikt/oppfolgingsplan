@@ -141,7 +141,7 @@ export const finnOgHentNaermesteLedereListeSomMangler = (dinesykmeldinger, naerm
   if (!henterEllerHarHentetLedere(naermesteLedere)) {
     const sykmelding = dinesykmeldinger.data[0];
     if (sykmelding) {
-      hentLedere(sykmelding.pasient.fnr);
+      hentLedere(sykmelding.fnr);
     }
   }
 };

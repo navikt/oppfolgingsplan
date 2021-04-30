@@ -48,6 +48,7 @@ export const getArbeidsgiver = (ag) => {
 export const getSykmeldinger = [
   {
     id: 'b341e1af-6a0d-4740-b8d9-eb3c5551fbc2',
+    fnr: '12345678910',
     sykmeldingsperioder: [
       {
         fom: new Date('2017-04-15'),
@@ -61,6 +62,7 @@ export const getSykmeldinger = [
   },
   {
     id: '31ac2ac8-aa31-4f5f-8bda-fd199aa7d8f4',
+    fnr: '12345678910',
     sykmeldingsperioder: [
       {
         fom: new Date('2017-04-15'),
@@ -76,6 +78,7 @@ export const getSykmeldinger = [
 
 const sykmelding = {
   id: '3456789',
+  fnr: '12345678910',
   sykmeldingsperioder: [
     {
       fom: new Date('2015-12-31'),
