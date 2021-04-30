@@ -254,5 +254,5 @@ module.exports = {
   mockForLokaltMiljo,
   mockForOpplaeringsmiljo,
   mockUnleashOpplaeringsmiljo,
-  mockUnleashLokal
+  mockUnleashLokal,
 };
