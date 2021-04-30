@@ -587,12 +587,12 @@ const valueSelector = formValueSelector(LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN);
 
 const mapStateToProps = (state) => {
   return {
-    gjennomfoeringSvar: valueSelector(state, "gjennomfoeringSvar")
+    gjennomfoeringSvar: valueSelector(state, 'gjennomfoeringSvar'),
   };
 };
 
 const ReduxSkjema = reduxForm({
-  form: LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN
+  form: LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN,
 })(LagreArbeidsoppgaveSkjemaComponent);
 
 export default connect(mapStateToProps)(ReduxSkjema);
