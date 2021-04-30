@@ -1,4 +1,3 @@
-import { timeout } from '@navikt/digisyfo-npm';
 import { reducer as formReducer } from 'redux-form';
 import arbeidsoppgaver from './arbeidsoppgaver';
 import arbeidsforhold from './arbeidsforhold';
@@ -18,6 +17,7 @@ import samtykke from './samtykke';
 import tilgang from './tilgang';
 import tiltak from './tiltak';
 import virksomhet from './virksomhet';
+import timeout from './timeout';
 
 import dineSykmeldinger from './dineSykmeldinger';
 import ledere from './ledere';

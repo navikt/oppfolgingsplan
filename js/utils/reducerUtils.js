@@ -1,3 +1,5 @@
+import { toDate } from '../utils/datoUtils';
+
 export const finnUnikeElementer = (liste) => {
   return new Set(Array.from(new Set(liste.map(JSON.stringify))).map(JSON.parse));
 };
@@ -137,10 +139,11 @@ export const finnOgHentArbeidsforholdSomMangler = (oppfolgingsdialoger, arbeidsf
   });
 };
 
-export const finnOgHentNaermesteLedereListeSomMangler = (oppfolgingsdialoger, naermesteLedere, hentLedere) => {
+export const finnOgHentNaermesteLedereListeSomMangler = (dinesykmeldinger, naermesteLedere, hentLedere) => {
   if (!henterEllerHarHentetLedere(naermesteLedere)) {
-    if (oppfolgingsdialoger[0] && oppfolgingsdialoger[0].arbeidstaker) {
-      hentLedere(oppfolgingsdialoger[0].arbeidstaker.fnr);
+    const sykmelding = dinesykmeldinger.data[0];
+    if (sykmelding) {
+      hentLedere(sykmelding.pasient.fnr);
     }
   }
 };
@@ -164,5 +167,38 @@ export const finnOgHentNaermesteLedereSomMangler = (oppfolgingsdialoger, naermes
     ) {
       hentNaermesteLeder(naermesteLederForFnrHosVirksomhet.fnr, naermesteLederForFnrHosVirksomhet.virksomhetsnummer);
     }
+  });
+};
+
+export const parseSykmelding = (sykmelding) => {
+  return Object.assign({}, sykmelding, {
+    startLegemeldtFravaer: (0, toDate)(sykmelding.startLegemeldtFravaer),
+    identdato: (0, toDate)(sykmelding.identdato),
+    sendtdato: (0, toDate)(sykmelding.sendtdato),
+    diagnose: Object.assign({}, sykmelding.diagnose, {
+      yrkesskadeDato: (0, toDate)(sykmelding.diagnose.yrkesskadeDato),
+    }),
+    mulighetForArbeid: Object.assign({}, sykmelding.mulighetForArbeid, {
+      perioder: sykmelding.mulighetForArbeid.perioder.map(function (p) {
+        return Object.assign({}, p, {
+          fom: (0, toDate)(p.fom),
+          tom: (0, toDate)(p.tom),
+        });
+      }),
+    }),
+    friskmelding: Object.assign({}, sykmelding.friskmelding, {
+      antattDatoReturSammeArbeidsgiver: (0, toDate)(sykmelding.friskmelding.antattDatoReturSammeArbeidsgiver),
+      tilbakemeldingReturArbeid: (0, toDate)(sykmelding.friskmelding.tilbakemeldingReturArbeid),
+      utenArbeidsgiverAntarTilbakeIArbeidDato: (0, toDate)(
+        sykmelding.friskmelding.utenArbeidsgiverAntarTilbakeIArbeidDato
+      ),
+      utenArbeidsgiverTilbakemelding: (0, toDate)(sykmelding.friskmelding.utenArbeidsgiverTilbakemelding),
+    }),
+    bekreftelse: Object.assign({}, sykmelding.bekreftelse, {
+      utstedelsesdato: (0, toDate)(sykmelding.bekreftelse.utstedelsesdato),
+    }),
+    tilbakedatering: Object.assign({}, sykmelding.tilbakedatering, {
+      dokumenterbarPasientkontakt: (0, toDate)(sykmelding.tilbakedatering.dokumenterbarPasientkontakt),
+    }),
   });
 };

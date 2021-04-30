@@ -1,6 +1,6 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get, log } from '@navikt/digisyfo-npm';
 import * as actions from '../../actions/oppfolgingsplan/kontaktinfo_actions';
+import { get } from '../../gateway-api';
 import { HOST_NAMES } from '../../konstanter';
 import { fullNaisUrl } from '../../utils/urlUtils';
 
@@ -13,7 +13,6 @@ export function* hentKontaktinfoSaga(action) {
     const kontaktinfo = yield call(get, url);
     yield put(actions.kontaktinfoHentet(kontaktinfo, action.fnr));
   } catch (e) {
-    log(e);
     yield put(actions.hentKontaktinfoFeilet(action.fnr));
   }
 }

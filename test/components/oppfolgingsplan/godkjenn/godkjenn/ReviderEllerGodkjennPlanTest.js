@@ -5,7 +5,6 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Bjorn } from '@navikt/digisyfo-npm';
 import ReviderEllerGodkjennPlan, {
   ReviderEllerGodkjennPlanKnapperad,
 } from '../../../../../js/components/oppfolgingsplan/godkjenn/godkjenn/ReviderEllerGodkjennPlan';
@@ -35,10 +34,6 @@ describe('ReviderEllerGodkjennPlan', () => {
           }}
         />
       );
-    });
-
-    it('Skal vise Bjorn', () => {
-      expect(komponent.find(Bjorn)).to.have.length(1);
     });
 
     it('Skal vise ReviderEllerGodkjennPlanKnapperad', () => {
