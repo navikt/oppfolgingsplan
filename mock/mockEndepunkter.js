@@ -251,8 +251,8 @@ function mockUnleashLokal(server) {
 }
 
 module.exports = {
-  mockForLokaltMiljo,
-  mockForOpplaeringsmiljo,
-  mockUnleashOpplaeringsmiljo,
-  mockUnleashLokal
+    mockForLokaltMiljo,
+    mockForOpplaeringsmiljo,
+    mockUnleashOpplaeringsmiljo,
+    mockUnleashLokal
 };
