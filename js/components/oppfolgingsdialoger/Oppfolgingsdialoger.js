@@ -44,11 +44,12 @@ class Oppfolgingsdialoger extends Component {
       hentLedere,
       hentNaermesteLeder,
       naermesteLedere,
+      dinesykmeldinger,
     } = this.props;
 
     finnOgHentVirksomheterSomMangler(oppfolgingsdialoger, virksomhet, hentVirksomhet);
     finnOgHentPersonerSomMangler(oppfolgingsdialoger, person, hentPerson);
-    finnOgHentNaermesteLedereListeSomMangler(oppfolgingsdialoger, naermesteLedere, hentLedere);
+    finnOgHentNaermesteLedereListeSomMangler(dinesykmeldinger, naermesteLedere, hentLedere);
     finnOgHentNaermesteLedereSomMangler(oppfolgingsdialoger, naermesteleder, hentNaermesteLeder);
 
     window.sessionStorage.removeItem('hash');

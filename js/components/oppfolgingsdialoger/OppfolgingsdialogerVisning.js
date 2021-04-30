@@ -61,6 +61,7 @@ class OppfolgingsdialogerVisning extends Component {
       visOppfolgingsdialogOpprett: vis,
     });
   }
+
   render() {
     const {
       oppfolgingsdialoger = [],
