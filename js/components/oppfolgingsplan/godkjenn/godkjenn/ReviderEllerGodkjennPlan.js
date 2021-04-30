@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Bjorn } from '@navikt/digisyfo-npm';
+import Veilederpanel from 'nav-frontend-veilederpanel';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { erArbeidstakerEgenLeder, erIkkeOppfolgingsdialogUtfylt } from '../../../../utils/oppfolgingsdialogUtils';
 import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
+import VeilederAvatar from '../../../app/VeilederAvatar';
 
 const texts = {
-  bjorn: 'Er du ferdig med denne planen og ønsker å sende den til arbeidsgiveren din for godkjenning?',
+  veileder: 'Er du ferdig med denne planen og ønsker å sende den til arbeidsgiveren din for godkjenning?',
   buttonGodkjenn: 'Jeg er ferdig',
   arbeidstakerLeaderSamePerson: {
     info: 'Fordi du er din egen leder, må du logge inn som arbeidsgiver for å fullføre planen.',
@@ -50,7 +51,7 @@ class ReviderEllerGodkjennPlan extends Component {
   }
 
   render() {
-    const { oppfolgingsdialog, settAktivtSteg, rootUrl } = this.props;
+    const { oppfolgingsdialog, settAktivtSteg } = this.props;
     const visEgenLederVisning = erArbeidstakerEgenLeder(oppfolgingsdialog);
     return (
       <div className="godkjennPlanOversiktInformasjon">
@@ -61,9 +62,7 @@ class ReviderEllerGodkjennPlan extends Component {
             </Alertstripe>
           ) : (
             <React.Fragment>
-              <Bjorn className="z-index-1" rootUrl={rootUrl}>
-                <p>{texts.bjorn}</p>
-              </Bjorn>
+              <Veilederpanel svg={<VeilederAvatar />}>{texts.veileder}</Veilederpanel>
               {this.state.visIkkeUtfyltFeilmelding && (
                 <IkkeUtfyltPlanFeilmelding oppfolgingsdialog={oppfolgingsdialog} settAktivtSteg={settAktivtSteg} />
               )}
@@ -80,7 +79,6 @@ ReviderEllerGodkjennPlan.propTypes = {
   oppfolgingsdialog: oppfolgingsplanPt,
   settAktivtSteg: PropTypes.func,
   visSendTilGodkjenning: PropTypes.func,
-  rootUrl: PropTypes.string,
 };
 
 export default ReviderEllerGodkjennPlan;

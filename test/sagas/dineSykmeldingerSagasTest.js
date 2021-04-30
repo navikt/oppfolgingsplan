@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import { get } from '@navikt/digisyfo-npm';
 import { put, call } from 'redux-saga/effects';
 import { hentDineSykmeldinger } from '../../js/sagas/dineSykmeldingerSagas';
 import * as actiontyper from '../../js/actions/actiontyper';
+import { get } from '../../js/gateway-api';
 
 describe('dineSykmeldingerSagas', () => {
   const generator = hentDineSykmeldinger();
