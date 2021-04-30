@@ -35,7 +35,7 @@ const textOverskrift = (arbeidsgiver) => {
 };
 
 const tekster = {
-  lagreAdvarselTekst: 'PLACEHOLDER FOR ADVARSELTEKST',
+  lagreAdvarselTekst: 'Du har ulagrede tiltak/arbeidsoppgaver. Vil du fortsette?',
 };
 
 const skalViseSamtykke = (oppfolgingsdialog) => {
