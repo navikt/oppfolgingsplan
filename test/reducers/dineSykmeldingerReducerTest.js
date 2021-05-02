@@ -16,7 +16,7 @@ export function getSykmelding(soknad = {}) {
           tom: '2017-07-23',
         },
       ],
-      organisasjonsInformasjon: {
+      organisasjonsinformasjon: {
         orgnummer: '123456789',
         orgNavn: 'LOMMEN BARNEHAVE',
       },
@@ -37,7 +37,7 @@ export function getParsetSykmelding(soknad = {}) {
           tom: new Date('2017-07-23'),
         },
       ],
-      organisasjonsInformasjon: {
+      organisasjonsinformasjon: {
         orgnummer: '123456789',
         orgNavn: 'LOMMEN BARNEHAVE',
       },

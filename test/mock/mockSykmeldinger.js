@@ -55,7 +55,7 @@ export const getSykmeldinger = [
         tom: new Date('2017-04-25'),
       },
     ],
-    organisasjonsInformasjon: {
+    organisasjonsinformasjon: {
       orgnummer: '123456781',
       orgNavn: 'Hogwarts School of Witchcraft and Wizardry',
     },
@@ -69,7 +69,7 @@ export const getSykmeldinger = [
         tom: new Date('2017-04-25'),
       },
     ],
-    organisasjonsInformasjon: {
+    organisasjonsinformasjon: {
       orgnummer: '123456789',
       orgNavn: 'Skogen Barnehave',
     },
@@ -85,7 +85,7 @@ const sykmelding = {
       tom: new Date('2016-01-06'),
     },
   ],
-  organisasjonsInformasjon: {
+  organisasjonsinformasjon: {
     orgnummer: '123456781',
     orgNavn: 'Selskapet AS',
   },

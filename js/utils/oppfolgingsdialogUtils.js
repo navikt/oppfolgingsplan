@@ -70,7 +70,7 @@ export const erOppfolgingsdialogKnyttetTilGyldigSykmelding = (oppfolgingsdialog,
   return (
     sykmeldinger.filter((sykmelding) => {
       return (
-        oppfolgingsdialog.virksomhet.virksomhetsnummer === sykmelding.organisasjonsInformasjon.orgnummer &&
+        oppfolgingsdialog.virksomhet.virksomhetsnummer === sykmelding.organisasjonsinformasjon.orgnummer &&
         erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, dagensDato)
       );
     }).length > 0

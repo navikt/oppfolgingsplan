@@ -38,7 +38,7 @@ describe('OppfolgingdialogUtils', () => {
       oppfolgingsdialogUnderArbeid = {
         status: 'UNDER_ARBEID',
         virksomhet: {
-          virksomhetsnummer: sykmeldingGyldig.organisasjonsInformasjon.orgnummer,
+          virksomhetsnummer: sykmeldingGyldig.organisasjonsinformasjon.orgnummer,
         },
         godkjenninger: [],
         sistEndretAv: {
@@ -247,7 +247,7 @@ describe('OppfolgingdialogUtils', () => {
         tom: new Date('2017.12.15'),
       };
       sykmeldingUtgaatt = {
-        organisasjonsInformasjon: {
+        organisasjonsinformasjon: {
           orgnummer: virksomhet.virksomhetsnummer,
         },
         sykmeldingsperioder: [
@@ -262,7 +262,7 @@ describe('OppfolgingdialogUtils', () => {
         ],
       };
       sykmeldingAktiv = {
-        organisasjonsInformasjon: {
+        organisasjonsinformasjon: {
           orgnummer: virksomhet.virksomhetsnummer,
         },
         sykmeldingsperioder: [

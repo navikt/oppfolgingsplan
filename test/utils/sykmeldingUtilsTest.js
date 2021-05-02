@@ -128,7 +128,7 @@ describe('sykmeldingUtils', () => {
       };
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          organisasjonsInformasjon: {
+          organisasjonsinformasjon: {
             orgnummer: null,
           },
         }),
@@ -154,7 +154,7 @@ describe('sykmeldingUtils', () => {
       };
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          organisasjonsInformasjon: {
+          organisasjonsinformasjon: {
             orgnummer: null,
           },
         }),
@@ -169,7 +169,7 @@ describe('sykmeldingUtils', () => {
       };
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          organisasjonsInformasjon: {
+          organisasjonsinformasjon: {
             orgnummer: null,
           },
         }),
@@ -190,7 +190,7 @@ describe('sykmeldingUtils', () => {
     it('skal returnere false med 1 sykmelding uten orgnummer', () => {
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          organisasjonsInformasjon: {
+          organisasjonsinformasjon: {
             orgnummer: null,
           },
         }),
@@ -206,7 +206,7 @@ describe('sykmeldingUtils', () => {
     it('skal returnere false med 1 sykmelding, som ikke har orgnummer, men som har siste gyldige sykmeldingsdato nyligere eller lik grensedato(4mnd siden)', () => {
       sykmeldinger = [
         Object.assign({}, sykmeldingAktiv, {
-          organisasjonsInformasjon: {
+          organisasjonsinformasjon: {
             orgnummer: null,
           },
         }),
