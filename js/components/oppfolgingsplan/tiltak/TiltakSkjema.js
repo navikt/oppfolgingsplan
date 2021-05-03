@@ -446,7 +446,7 @@ TiltakSkjemaKomponent.propTypes = {
 };
 
 const ReduxSkjema = reduxForm({
-  form: OPPRETT_TILTAK_NY
+  form: OPPRETT_TILTAK_NY,
 })(TiltakSkjemaKomponent);
 
 export default ReduxSkjema;
