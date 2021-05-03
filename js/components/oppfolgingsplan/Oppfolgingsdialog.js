@@ -34,8 +34,9 @@ const textOverskrift = (arbeidsgiver) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
 };
 
-const tekster = {
-  lagreAdvarselTekst: 'Du har ulagrede tiltak/arbeidsoppgaver. Vil du fortsette?',
+export const tekster = {
+  lagreOppgaveAdvarselTekst: 'Du har ulagrede arbeidsoppgaver. Vil du fortsette?',
+  lagreTiltakAdvarselTekst: 'Du har ulagrede tiltak. Vil du fortsette?',
 };
 
 const skalViseSamtykke = (oppfolgingsdialog) => {
@@ -50,8 +51,16 @@ const skalViseLagreAdvarsel = (inputFormer) => {
   return inputFormer !== undefined && Object.keys(inputFormer).length > 0;
 };
 
-export const LagreAdvarselstripe = () => {
-  return <Alertstripe type="advarsel">{tekster.lagreAdvarselTekst}</Alertstripe>;
+export const LagreAdvarselstripe = (props) => {
+  return props.steg === 1 ? (
+    <Alertstripe type="advarsel">{tekster.lagreOppgaveAdvarselTekst}</Alertstripe>
+  ) : (
+    <Alertstripe type="advarsel">{tekster.lagreTiltakAdvarselTekst}</Alertstripe>
+  );
+};
+
+LagreAdvarselstripe.propTypes = {
+  steg: PropTypes.number.isRequired,
 };
 
 export const erAvvistAvArbeidstaker = (oppfolgingsdialog) => {
@@ -206,7 +215,7 @@ class Oppfolgingsdialog extends Component {
         <div id="oppfolgingsdialogpanel" className="blokk">
           {panel}
         </div>
-        {visLagreAdvarsel && <LagreAdvarselstripe />}
+        {visLagreAdvarsel && <LagreAdvarselstripe steg={navigasjontoggles.steg} />}
         <NavigasjonsBunn
           disabled={disableNavigation}
           settAktivtSteg={settAktivtSteg}

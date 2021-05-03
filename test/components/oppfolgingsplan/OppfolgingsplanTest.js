@@ -6,6 +6,7 @@ import sinon from 'sinon';
 import Oppfolgingsdialog, {
   erAvvistAvArbeidstaker,
   LagreAdvarselstripe,
+  tekster,
 } from '../../../js/components/oppfolgingsplan/Oppfolgingsdialog';
 import IngenlederInfoboks from '../../../js/components/oppfolgingsdialoger/IngenlederInfoboks';
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsplan/arbeidsoppgaver/Arbeidsoppgaver';
@@ -387,7 +388,7 @@ describe('Oppfolgingsdialog', () => {
         alleInputFormer={alleInputFormer}
       />
     );
-    expect(component.find(LagreAdvarselstripe)).to.have.length(1);
+    expect(component.find(LagreAdvarselstripe)).to.contain.html(tekster.lagreOppgaveAdvarselTekst);
   });
 
   it('Skal vise advarsel om at åpent tiltak ikke er lagret', () => {
@@ -418,7 +419,7 @@ describe('Oppfolgingsdialog', () => {
         alleInputFormer={alleInputFormer}
       />
     );
-    expect(component.find(LagreAdvarselstripe)).to.have.length(1);
+    expect(component.find(LagreAdvarselstripe)).to.contain.html(tekster.lagreTiltakAdvarselTekst);
   });
 
   it('Skal ikke vise advarsel dersom ingen oppgaver er åpne', () => {
