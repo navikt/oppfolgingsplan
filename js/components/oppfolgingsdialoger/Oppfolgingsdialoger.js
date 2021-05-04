@@ -9,7 +9,7 @@ import {
   harTidligereOppfolgingsdialoger,
   isEmpty,
 } from '../../utils/oppfolgingsdialogUtils';
-import { sykmeldtHarGyldigSykmelding } from '../../utils/sykmeldingUtils';
+import { sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSykmeldinger } from '../../utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
@@ -22,8 +22,9 @@ import {
   finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
-import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
+import OppfolgingsdialogUtenGyldigSykmelding from './OppfolgingsdialogUtenGyldigSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
+import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 
 const texts = {
   pageTitle: 'Oppfølgingsplaner',
@@ -75,11 +76,26 @@ class Oppfolgingsdialoger extends Component {
       )
     ) {
       panel = <IngenledereInfoboks />;
-    } else if (!sykmeldtHarGyldigSykmelding(dinesykmeldinger.data)) {
+    } else if (sykmeldtHarIngenSykmeldinger(dinesykmeldinger.data)) {
       panel = (
         <div>
           <div className="blokk--l">
             <OppfolgingsdialogUtenSykmelding />
+          </div>
+
+          {!isEmpty(oppfolgingsdialoger) && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) && (
+            <OppfolgingsdialogerUtenAktivSykmelding
+              oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
+              tittel={texts.noActiveSykmelding.titleTidligerePlaner}
+            />
+          )}
+        </div>
+      );
+    } else if (!sykmeldtHarGyldigSykmelding(dinesykmeldinger.data)) {
+      panel = (
+        <div>
+          <div className="blokk--l">
+            <OppfolgingsdialogUtenGyldigSykmelding />
           </div>
 
           {!isEmpty(oppfolgingsdialoger) && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) && (

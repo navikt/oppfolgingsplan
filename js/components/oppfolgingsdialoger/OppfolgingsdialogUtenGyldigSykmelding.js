@@ -4,10 +4,10 @@ import getContextRoot from '../../utils/getContextRoot';
 
 const texts = {
   title: 'Aktiv oppfølgingsplan',
-  info: 'Du kan ikke lage en ny oppfølgingsplan fordi du ikke har sendt inn sykmeldingen din.',
+  info: 'Du kan ikke lage en ny oppfølgingsplan fordi du ikke er sykmeldt nå.',
 };
 
-const OppfolgingsdialogUtenSykmelding = () => {
+const OppfolgingsdialogUtenGyldigSykmelding = () => {
   return (
     <div className="oppfolgingsdialogUtenAktivSykmelding">
       <header className="oppfolgingsdialogUtenAktivSykmelding__header">
@@ -27,4 +27,4 @@ const OppfolgingsdialogUtenSykmelding = () => {
   );
 };
 
-export default OppfolgingsdialogUtenSykmelding;
+export default OppfolgingsdialogUtenGyldigSykmelding;

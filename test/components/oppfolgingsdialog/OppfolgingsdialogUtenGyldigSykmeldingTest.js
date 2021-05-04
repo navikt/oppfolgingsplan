@@ -2,7 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import OppfolgingsdialogUtenSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenSykmelding';
+import OppfolgingsdialogUtenGyldigSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenGyldigSykmelding';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
@@ -14,7 +14,7 @@ describe('OppfolgingsdialogUtenSykmelding', () => {
 
   beforeEach(() => {
     oppdialoger = getOppfolgingsdialog();
-    komponent = shallow(<OppfolgingsdialogUtenSykmelding oppfolgingsdialog={oppdialoger} />);
+    komponent = shallow(<OppfolgingsdialogUtenGyldigSykmelding oppfolgingsdialog={oppdialoger} />);
   });
 
   it('Viser en div', () => {

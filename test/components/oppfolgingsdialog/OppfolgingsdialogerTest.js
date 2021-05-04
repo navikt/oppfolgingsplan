@@ -7,14 +7,15 @@ import Sidetopp from '../../../js/components/Sidetopp';
 import Oppfolgingsdialoger from '../../../js/components/oppfolgingsdialoger/Oppfolgingsdialoger';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerInfoPersonvern';
-import OppfolgingsdialogUtenSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenSykmelding';
+import OppfolgingsdialogUtenGyldigSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenGyldigSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogerUtenAktivSykmelding';
 import { getOppfolgingsdialoger } from '../../mock/mockOppfolgingsdialoger';
 import {
-  hentSykmeldingIkkeGyldigForOppfoelging,
   hentSykmeldingGyldigForOppfoelging,
+  hentSykmeldingIkkeGyldigForOppfoelging,
   leggTilDagerPaaDato,
 } from '../../mock/mockSykmeldinger';
+import OppfolgingsdialogUtenSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenSykmelding';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -147,8 +148,9 @@ describe('Oppfolgingsdialoger', () => {
       );
     });
 
-    it('Skal vise OppfolgingsdialogUtenSykmelding', () => {
-      expect(component1.find(OppfolgingsdialogUtenSykmelding)).to.have.length(1);
+    it('Skal vise OppfolgingsdialogUtenGyldigSykmelding', () => {
+      expect(component1.find(OppfolgingsdialogUtenGyldigSykmelding)).to.have.length(1);
+      expect(component1.find(OppfolgingsdialogUtenSykmelding)).to.have.length(0);
     });
 
     it('Skal vise ikke OppfolgingsdialogerUtenAktivSykmelding, dersom det ikke er tidligere planer', () => {
@@ -209,6 +211,39 @@ describe('Oppfolgingsdialoger', () => {
         />
       );
       expect(component2.find(OppfolgingsdialogerUtenAktivSykmelding)).to.have.length(1);
+    });
+  });
+
+  describe('Uten sendt sykmelding', () => {
+    let oppfolgingsdialogerComponent;
+    let dinesykmeldingerListe;
+
+    beforeEach(() => {
+      dinesykmeldingerListe = {
+        data: [],
+      };
+
+      oppfolgingsdialogerComponent = shallow(
+        <Oppfolgingsdialoger
+          oppfolgingsdialoger={oppfolgingsdialoger}
+          dinesykmeldinger={dinesykmeldingerListe}
+          naermesteLedere={naermesteLedere}
+          hentVirksomhet={sinon.spy()}
+          hentNaermesteLeder={sinon.spy()}
+          hentLedere={sinon.spy()}
+          hentPerson={sinon.spy()}
+          hentKontaktinfo={sinon.spy()}
+          naermesteleder={naermesteleder}
+          virksomhet={virksomhet}
+          person={person}
+          kontaktinfo={kontaktinfo}
+        />
+      );
+    });
+
+    it('Skal vise OppfolgingsdialogUtenSykmelding', () => {
+      expect(oppfolgingsdialogerComponent.find(OppfolgingsdialogUtenSykmelding)).to.have.length(1);
+      expect(oppfolgingsdialogerComponent.find(OppfolgingsdialogUtenGyldigSykmelding)).to.have.length(0);
     });
   });
 
