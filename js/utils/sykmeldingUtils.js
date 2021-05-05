@@ -15,26 +15,21 @@ export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (virksomhetsnumm
   return naermesteLeder ? naermesteLeder.navn : undefined;
 };
 
-export const sykmeldtHarIngenSykmeldinger = (sykmeldinger) => {
+export const sykmeldtHarIngenSendteSykmeldinger = (sykmeldinger) => {
   return sykmeldinger.length === 0;
 };
 
 export const sykmeldtHarGyldigSykmelding = (sykmeldinger) => {
   const tomGrenseDato = new Date();
-  if (sykmeldinger.length > 0) {
-    return (
-      sykmeldinger
-        .filter((sykmelding) => {
-          return (
-            sykmelding.organisasjonsinformasjon.orgnummer && sykmelding.organisasjonsinformasjon.orgnummer !== null
-          );
-        })
-        .filter((sykmelding) => {
-          return erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, tomGrenseDato);
-        }).length > 0
-    );
-  }
-  return sykmeldtHarIngenSykmeldinger(sykmeldinger);
+  return (
+    sykmeldinger
+      .filter((sykmelding) => {
+        return sykmelding.organisasjonsinformasjon.orgnummer && sykmelding.organisasjonsinformasjon.orgnummer !== null;
+      })
+      .filter((sykmelding) => {
+        return erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, tomGrenseDato);
+      }).length > 0
+  );
 };
 
 export const finnArbeidsgivereForGyldigeSykmeldinger = (sykmeldinger, naermesteLedere) => {

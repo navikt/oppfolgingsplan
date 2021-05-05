@@ -3,18 +3,15 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import OppfolgingsdialogUtenGyldigSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenGyldigSykmelding';
-import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
-describe('OppfolgingsdialogUtenSykmelding', () => {
-  let oppdialoger;
+describe('OppfolgingsdialogUtenGyldigSykmelding', () => {
   let komponent;
 
   beforeEach(() => {
-    oppdialoger = getOppfolgingsdialog();
-    komponent = shallow(<OppfolgingsdialogUtenGyldigSykmelding oppfolgingsdialog={oppdialoger} />);
+    komponent = shallow(<OppfolgingsdialogUtenGyldigSykmelding sykmeldtHarIngenSendteSykmeldinger={false} />);
   });
 
   it('Viser en div', () => {
@@ -39,5 +36,23 @@ describe('OppfolgingsdialogUtenSykmelding', () => {
 
   it('Viser en p', () => {
     expect(komponent.find('p.oppfolgingsdialoger__start_tekst')).to.have.length(1);
+  });
+
+  it('Viser text om at den sykmeldte ikke er sykmeldt nå', () => {
+    const text = komponent.find('p.oppfolgingsdialoger__start_tekst');
+    expect(text.text()).to.equal('Du kan ikke lage en ny oppfølgingsplan fordi du ikke er sykmeldt nå.');
+  });
+});
+
+describe('OppfolgingsdialogUtenGyldigSykmelding', () => {
+  let komponent;
+  beforeEach(() => {
+    komponent = shallow(<OppfolgingsdialogUtenGyldigSykmelding sykmeldtHarIngenSendteSykmeldinger={true} />);
+  });
+  it('Viser text om at den sykmeldte ikke har sendt inn sykmeldingen sin', () => {
+    const text = komponent.find('p.oppfolgingsdialoger__start_tekst');
+    expect(text.text()).to.equal(
+      'Du kan ikke lage en ny oppfølgingsplan fordi du ikke har sendt inn sykmeldingen din.'
+    );
   });
 });

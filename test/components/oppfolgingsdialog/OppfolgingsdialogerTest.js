@@ -15,7 +15,6 @@ import {
   hentSykmeldingIkkeGyldigForOppfoelging,
   leggTilDagerPaaDato,
 } from '../../mock/mockSykmeldinger';
-import OppfolgingsdialogUtenSykmelding from '../../../js/components/oppfolgingsdialoger/OppfolgingsdialogUtenSykmelding';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -150,7 +149,6 @@ describe('Oppfolgingsdialoger', () => {
 
     it('Skal vise OppfolgingsdialogUtenGyldigSykmelding', () => {
       expect(component1.find(OppfolgingsdialogUtenGyldigSykmelding)).to.have.length(1);
-      expect(component1.find(OppfolgingsdialogUtenSykmelding)).to.have.length(0);
     });
 
     it('Skal vise ikke OppfolgingsdialogerUtenAktivSykmelding, dersom det ikke er tidligere planer', () => {
@@ -239,11 +237,6 @@ describe('Oppfolgingsdialoger', () => {
           kontaktinfo={kontaktinfo}
         />
       );
-    });
-
-    it('Skal vise OppfolgingsdialogUtenSykmelding', () => {
-      expect(oppfolgingsdialogerComponent.find(OppfolgingsdialogUtenSykmelding)).to.have.length(1);
-      expect(oppfolgingsdialogerComponent.find(OppfolgingsdialogUtenGyldigSykmelding)).to.have.length(0);
     });
   });
 

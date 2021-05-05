@@ -9,7 +9,7 @@ import {
   harTidligereOppfolgingsdialoger,
   isEmpty,
 } from '../../utils/oppfolgingsdialogUtils';
-import { sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSykmeldinger } from '../../utils/sykmeldingUtils';
+import { sykmeldtHarGyldigSykmelding, sykmeldtHarIngenSendteSykmeldinger } from '../../utils/sykmeldingUtils';
 import IngenledereInfoboks from './IngenledereInfoboks';
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsdialogerVisning from './OppfolgingsdialogerVisning';
@@ -24,7 +24,6 @@ import {
 import AvbruttPlanNotifikasjonBoksAdvarsel from './AvbruttPlanNotifikasjonBoksAdvarsel';
 import OppfolgingsdialogUtenGyldigSykmelding from './OppfolgingsdialogUtenGyldigSykmelding';
 import OppfolgingsdialogerUtenAktivSykmelding from './OppfolgingsdialogerUtenAktivSykmelding';
-import OppfolgingsdialogUtenSykmelding from './OppfolgingsdialogUtenSykmelding';
 
 const texts = {
   pageTitle: 'Oppfølgingsplaner',
@@ -76,26 +75,13 @@ class Oppfolgingsdialoger extends Component {
       )
     ) {
       panel = <IngenledereInfoboks />;
-    } else if (sykmeldtHarIngenSykmeldinger(dinesykmeldinger.data)) {
-      panel = (
-        <div>
-          <div className="blokk--l">
-            <OppfolgingsdialogUtenSykmelding />
-          </div>
-
-          {!isEmpty(oppfolgingsdialoger) && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) && (
-            <OppfolgingsdialogerUtenAktivSykmelding
-              oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
-              tittel={texts.noActiveSykmelding.titleTidligerePlaner}
-            />
-          )}
-        </div>
-      );
     } else if (!sykmeldtHarGyldigSykmelding(dinesykmeldinger.data)) {
       panel = (
         <div>
           <div className="blokk--l">
-            <OppfolgingsdialogUtenGyldigSykmelding />
+            <OppfolgingsdialogUtenGyldigSykmelding
+              sykmeldtHarIngenSendteSykmeldinger={sykmeldtHarIngenSendteSykmeldinger(dinesykmeldinger.data)}
+            />
           </div>
 
           {!isEmpty(oppfolgingsdialoger) && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) && (
@@ -133,6 +119,7 @@ class Oppfolgingsdialoger extends Component {
     );
   }
 }
+
 Oppfolgingsdialoger.propTypes = {
   dinesykmeldinger: dinesykmeldingerReducerPt,
   naermesteleder: oppfolgingsplanProptypes.naermestelederReducerPt,

@@ -214,6 +214,11 @@ describe('sykmeldingUtils', () => {
       expect(sykmeldtHarGyldigSykmelding(sykmeldinger)).to.equal(false);
     });
 
+    it('skal returnere false hvis ingen sykmeldinger', () => {
+      sykmeldinger = [];
+      expect(sykmeldtHarGyldigSykmelding(sykmeldinger)).to.equal(false);
+    });
+
     it('skal returnere true med 1 sykmelding, som har siste gyldige sykmeldingsdato nyligere enn grensedato(4mnd siden)', () => {
       sykmeldinger = [sykmeldingAktiv];
       expect(sykmeldtHarGyldigSykmelding(sykmeldinger)).to.equal(true);
