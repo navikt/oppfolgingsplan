@@ -233,6 +233,7 @@ Container.propTypes = {
   hentPerson: PropTypes.func,
   hentKontaktinfo: PropTypes.func,
   hentNaermesteLeder: PropTypes.func,
+  alleInputFormer: PropTypes.func,
 };
 
 export function mapStateToProps(state, ownProps) {
@@ -300,6 +301,7 @@ export function mapStateToProps(state, ownProps) {
         tittel: texts.brodsmuler.dinOppfolgingsplan,
       },
     ],
+    alleInputFormer: state.form,
   };
 }
 
