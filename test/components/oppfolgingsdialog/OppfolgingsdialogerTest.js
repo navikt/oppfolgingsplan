@@ -238,6 +238,10 @@ describe('Oppfolgingsdialoger', () => {
         />
       );
     });
+
+    it('Skal vise OppfolgingsdialogUtenGyldigSykmelding hvis ingen sendte sykmeldinger', () => {
+      expect(oppfolgingsdialogerComponent.find(OppfolgingsdialogUtenGyldigSykmelding)).to.have.length(1);
+    });
   });
 
   describe('Standard visning', () => {

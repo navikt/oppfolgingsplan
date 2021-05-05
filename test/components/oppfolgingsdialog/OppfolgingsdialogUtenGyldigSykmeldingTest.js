@@ -11,7 +11,10 @@ describe('OppfolgingsdialogUtenGyldigSykmelding', () => {
   let komponent;
 
   beforeEach(() => {
-    komponent = shallow(<OppfolgingsdialogUtenGyldigSykmelding sykmeldtHarIngenSendteSykmeldinger={false} />);
+    const isIngenSykmeldinger = false;
+    komponent = shallow(
+      <OppfolgingsdialogUtenGyldigSykmelding sykmeldtHarIngenSendteSykmeldinger={isIngenSykmeldinger} />
+    );
   });
 
   it('Viser en div', () => {
@@ -47,8 +50,12 @@ describe('OppfolgingsdialogUtenGyldigSykmelding', () => {
 describe('OppfolgingsdialogUtenGyldigSykmelding', () => {
   let komponent;
   beforeEach(() => {
-    komponent = shallow(<OppfolgingsdialogUtenGyldigSykmelding sykmeldtHarIngenSendteSykmeldinger={true} />);
+    const isIngenSykmeldinger = true;
+    komponent = shallow(
+      <OppfolgingsdialogUtenGyldigSykmelding sykmeldtHarIngenSendteSykmeldinger={isIngenSykmeldinger} />
+    );
   });
+
   it('Viser text om at den sykmeldte ikke har sendt inn sykmeldingen sin', () => {
     const text = komponent.find('p.oppfolgingsdialoger__start_tekst');
     expect(text.text()).to.equal(
