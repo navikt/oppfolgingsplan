@@ -181,11 +181,6 @@ function mockForOpplaeringsmiljo(server) {
     res.send(JSON.stringify(mockData[NAERMESTELEDER]));
   });
 
-  server.post('/syforest/logging', (req, res) => {
-    console.log(req.body);
-    res.send(JSON.stringify({}));
-  });
-
   server.get('/esso/logout', (req, res) => {
     // noinspection HtmlUnknownTarget
     res.send('<p>Du har blitt sendt til utlogging.</p><p><a href="/sykefravaer">Gå til Ditt sykefravær</a></p>');
