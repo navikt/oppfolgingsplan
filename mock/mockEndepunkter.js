@@ -186,28 +186,6 @@ function mockForOpplaeringsmiljo(server) {
     res.send(JSON.stringify({}));
   });
 
-  server.get('/syforest/informasjon/hendelser', (req, res) => {
-    res.send(JSON.stringify([]));
-  });
-
-  server.get('/syforest/informasjon/arbeidsgivere', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(mockData[ARBEIDSGIVERE]));
-  });
-
-  server.get('/syforest/informasjon/vedlikehold', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(mockData[VEDLIKEHOLD]));
-  });
-
-  server.get('/syforest/informasjon/bruker', (req, res) => {
-    res.send(
-      JSON.stringify({
-        strengtFortroligAdresse: false,
-      })
-    );
-  });
-
   server.get('/esso/logout', (req, res) => {
     // noinspection HtmlUnknownTarget
     res.send('<p>Du har blitt sendt til utlogging.</p><p><a href="/sykefravaer">Gå til Ditt sykefravær</a></p>');
