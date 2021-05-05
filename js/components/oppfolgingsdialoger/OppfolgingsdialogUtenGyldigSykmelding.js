@@ -1,13 +1,15 @@
 import React from 'react';
 import { Panel } from 'nav-frontend-paneler';
 import getContextRoot from '../../utils/getContextRoot';
+import PropTypes from 'prop-types';
 
 const texts = {
   title: 'Aktiv oppfølgingsplan',
-  info: 'Du kan ikke lage en ny oppfølgingsplan fordi du ikke er sykmeldt nå.',
+  infoIngenGyldigeSykmeldinger: 'Du kan ikke lage en ny oppfølgingsplan fordi du ikke er sykmeldt nå.',
+  infoIngenSendteSykmeldinger: 'Du kan ikke lage en ny oppfølgingsplan fordi du ikke har sendt inn sykmeldingen din.',
 };
 
-const OppfolgingsdialogUtenGyldigSykmelding = () => {
+const OppfolgingsdialogUtenGyldigSykmelding = ({ sykmeldtHarIngenSendteSykmeldinger }) => {
   return (
     <div className="oppfolgingsdialogUtenAktivSykmelding">
       <header className="oppfolgingsdialogUtenAktivSykmelding__header">
@@ -18,13 +20,21 @@ const OppfolgingsdialogUtenGyldigSykmelding = () => {
           <img alt="" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg`} />
           <div className="inngangspanel__innhold">
             <div>
-              <p className="oppfolgingsdialoger__start_tekst">{texts.info}</p>
+              {sykmeldtHarIngenSendteSykmeldinger ? (
+                <p className="oppfolgingsdialoger__start_tekst">{texts.infoIngenSendteSykmeldinger}</p>
+              ) : (
+                <p className="oppfolgingsdialoger__start_tekst">{texts.infoIngenGyldigeSykmeldinger}</p>
+              )}
             </div>
           </div>
         </div>
       </Panel>
     </div>
   );
+};
+
+OppfolgingsdialogUtenGyldigSykmelding.propTypes = {
+  sykmeldtHarIngenSendteSykmeldinger: PropTypes.bool,
 };
 
 export default OppfolgingsdialogUtenGyldigSykmelding;
