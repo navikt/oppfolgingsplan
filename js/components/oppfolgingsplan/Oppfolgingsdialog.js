@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Alertstripe from 'nav-frontend-alertstriper';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
 import {
   finnOgHentArbeidsforholdSomMangler,
@@ -33,12 +34,33 @@ const textOverskrift = (arbeidsgiver) => {
   return `Oppfølgingsplan hos ${arbeidsgiver}`;
 };
 
+export const tekster = {
+  lagreOppgaveAdvarselTekst: 'Du har ulagrede arbeidsoppgaver. Vil du fortsette?',
+  lagreTiltakAdvarselTekst: 'Du har ulagrede tiltak. Vil du fortsette?',
+};
+
 const skalViseSamtykke = (oppfolgingsdialog) => {
   return (
     harNaermesteLeder(oppfolgingsdialog) &&
     utenSamtykke(oppfolgingsdialog) &&
     (inneholderGodkjentPlan(oppfolgingsdialog) || inneholderGodkjenningerAvArbeidstaker(oppfolgingsdialog))
   );
+};
+
+const skalViseLagreAdvarsel = (inputFormer) => {
+  return inputFormer !== undefined && Object.keys(inputFormer).length > 0;
+};
+
+export const LagreAdvarselstripe = (props) => {
+  return props.steg === 1 ? (
+    <Alertstripe type="advarsel">{tekster.lagreOppgaveAdvarselTekst}</Alertstripe>
+  ) : (
+    <Alertstripe type="advarsel">{tekster.lagreTiltakAdvarselTekst}</Alertstripe>
+  );
+};
+
+LagreAdvarselstripe.propTypes = {
+  steg: PropTypes.number.isRequired,
 };
 
 export const erAvvistAvArbeidstaker = (oppfolgingsdialog) => {
@@ -95,6 +117,7 @@ class Oppfolgingsdialog extends Component {
       fastlegeDeling,
       delMedFastlege,
       oppfolgingsdialoger,
+      alleInputFormer,
     } = this.props;
     const oppfolgingsdialogAvbruttOgNyOpprettet =
       this.props.avbrytdialogReducer.sendt &&
@@ -103,6 +126,7 @@ class Oppfolgingsdialog extends Component {
     let panel;
     let disableNavigation = false;
     let skalViseAvsluttOgLagre = false;
+    let visLagreAdvarsel = false;
     if (skalViseSamtykke(oppfolgingsdialog)) {
       disableNavigation = true;
       panel = <Samtykke sendSamtykke={giSamtykke} oppfolgingsdialog={oppfolgingsdialog} />;
@@ -139,6 +163,7 @@ class Oppfolgingsdialog extends Component {
       (() => {
         if (navigasjontoggles.steg === 1) {
           skalViseAvsluttOgLagre = true;
+          visLagreAdvarsel = skalViseLagreAdvarsel(alleInputFormer);
           panel = (
             <Arbeidsoppgaver
               arbeidsoppgaver={arbeidsoppgaver}
@@ -149,6 +174,7 @@ class Oppfolgingsdialog extends Component {
           );
         } else if (navigasjontoggles.steg === 2) {
           skalViseAvsluttOgLagre = true;
+          visLagreAdvarsel = skalViseLagreAdvarsel(alleInputFormer);
           panel = (
             <Tiltak
               tiltak={tiltak}
@@ -189,6 +215,7 @@ class Oppfolgingsdialog extends Component {
         <div id="oppfolgingsdialogpanel" className="blokk">
           {panel}
         </div>
+        {visLagreAdvarsel && <LagreAdvarselstripe steg={navigasjontoggles.steg} />}
         <NavigasjonsBunn
           disabled={disableNavigation}
           settAktivtSteg={settAktivtSteg}
@@ -235,6 +262,7 @@ Oppfolgingsdialog.propTypes = {
   hentPerson: PropTypes.func,
   hentNaermesteLeder: PropTypes.func,
   hentArbeidsforhold: PropTypes.func,
+  alleInputFormer: PropTypes.func,
 };
 
 export default Oppfolgingsdialog;
