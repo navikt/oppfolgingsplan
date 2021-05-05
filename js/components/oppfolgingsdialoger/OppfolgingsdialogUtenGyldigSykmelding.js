@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Panel } from 'nav-frontend-paneler';
 import getContextRoot from '../../utils/getContextRoot';
-import PropTypes from 'prop-types';
 
 const texts = {
   title: 'Aktiv oppfølgingsplan',
