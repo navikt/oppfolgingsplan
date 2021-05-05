@@ -61,10 +61,6 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (sykmeldinger, naermesteL
     });
 };
 
-export const skalViseOppfoelgingsdialogLenke = (sykmeldinger, oppfolgingsdialoger) => {
-  return sykmeldtHarGyldigSykmelding(sykmeldinger) || oppfolgingsdialoger.data.length > 0;
-};
-
 export const sykmeldtHarManglendeNaermesteLeder = (arbeidsgivere) => {
   return (
     arbeidsgivere.filter((arbeidsgiver) => {
