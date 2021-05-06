@@ -1,11 +1,22 @@
 import * as actiontyper from '../actions/actiontyper';
-import { parseSykmelding } from '../utils/reducerUtils';
+import { toDate } from '../utils/datoUtils';
 
 const initiellState = {
   henter: false,
   hentingFeilet: false,
   hentet: false,
   data: [],
+};
+
+export const parseSykmelding = (sykmelding) => {
+  return Object.assign({}, sykmelding, {
+    sykmeldingsperioder: sykmelding.sykmeldingsperioder.map((p) => {
+      return {
+        fom: toDate(p.fom),
+        tom: toDate(p.tom),
+      };
+    }),
+  });
 };
 
 const dineSykmeldinger = (state = initiellState, action = {}) => {

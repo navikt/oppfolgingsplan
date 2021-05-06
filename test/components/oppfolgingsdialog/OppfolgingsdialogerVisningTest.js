@@ -108,11 +108,15 @@ describe('Oppfolgingsdialoger', () => {
         const sykmeldingListe = [
           {
             ...hentSykmeldingGyldigForOppfoelging(dagensDato),
-            orgnummer: '12345678',
+            organisasjonsinformasjon: {
+              orgnummer: '12345678',
+            },
           },
           {
             ...hentSykmeldingGyldigForOppfoelging(dagensDato),
-            orgnummer: '12345679',
+            organisasjonsinformasjon: {
+              orgnummer: '12345679',
+            },
           },
         ];
         const naermesteLederListe = {
@@ -124,13 +128,13 @@ describe('Oppfolgingsdialoger', () => {
               {
                 ...oppfolgingsdialogAktiv,
                 virksomhet: {
-                  virksomhetsnummer: sykmeldingListe[0].orgnummer,
+                  virksomhetsnummer: sykmeldingListe[0].organisasjonsinformasjon.orgnummer,
                 },
               },
               {
                 ...oppfolgingsdialogAktiv,
                 virksomhet: {
-                  virksomhetsnummer: sykmeldingListe[1].orgnummer,
+                  virksomhetsnummer: sykmeldingListe[1].organisasjonsinformasjon.orgnummer,
                 },
               },
             ]}

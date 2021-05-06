@@ -20,7 +20,7 @@ export const sykmeldtHarGyldigSykmelding = (sykmeldinger) => {
   return (
     sykmeldinger
       .filter((sykmelding) => {
-        return sykmelding.orgnummer && sykmelding.orgnummer !== null;
+        return sykmelding.organisasjonsinformasjon.orgnummer && sykmelding.organisasjonsinformasjon.orgnummer !== null;
       })
       .filter((sykmelding) => {
         return erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, tomGrenseDato);
@@ -36,10 +36,16 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (sykmeldinger, naermesteL
     })
     .map((sykmelding) => {
       return {
-        virksomhetsnummer: sykmelding.orgnummer,
-        navn: sykmelding.arbeidsgiver,
-        harNaermesteLeder: sykmeldtHarNaermestelederHosArbeidsgiver(sykmelding.orgnummer, naermesteLedere),
-        naermesteLeder: finnSykmeldtSinNaermestelederNavnHosArbeidsgiver(sykmelding.orgnummer, naermesteLedere),
+        virksomhetsnummer: sykmelding.organisasjonsinformasjon.orgnummer,
+        navn: sykmelding.organisasjonsinformasjon.orgNavn,
+        harNaermesteLeder: sykmeldtHarNaermestelederHosArbeidsgiver(
+          sykmelding.organisasjonsinformasjon.orgnummer,
+          naermesteLedere
+        ),
+        naermesteLeder: finnSykmeldtSinNaermestelederNavnHosArbeidsgiver(
+          sykmelding.organisasjonsinformasjon.orgnummer,
+          naermesteLedere
+        ),
       };
     })
     .filter((sykmelding, idx, self) => {

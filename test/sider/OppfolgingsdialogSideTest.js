@@ -159,7 +159,9 @@ describe('Container', () => {
           dineSykmeldinger: {
             data: [
               Object.assign({}, hentSykmeldingGyldigForOppfoelging(dagensDato), {
-                orgnummer: '12345678',
+                organisasjonsinformasjon: {
+                  orgnummer: '12345678',
+                },
               }),
             ],
           },

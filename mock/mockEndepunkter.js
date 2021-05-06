@@ -57,16 +57,14 @@ const getSykmeldinger = (type) => {
   return [
     {
       ...sykmelding,
-      mulighetForArbeid: {
-        ...sykmelding.mulighetForArbeid,
-        perioder: [
-          {
-            ...sykmelding.mulighetForArbeid.perioder[0],
-            fom: dateUtil.leggTilDagerPaDato(today, type.fomUke * 7).toJSON(),
-            tom: dateUtil.leggTilDagerPaDato(today, type.tomUke * 7).toJSON(),
-          },
-        ],
-      },
+      sykmeldingsperioder: [
+        ...sykmelding.sykmeldingsperioder,
+        {
+          ...sykmelding.sykmeldingsperioder[0],
+          fom: dateUtil.leggTilDagerPaDato(today, type.fomUke * 7).toJSON(),
+          tom: dateUtil.leggTilDagerPaDato(today, type.tomUke * 7).toJSON(),
+        },
+      ],
     },
   ];
 };
@@ -132,17 +130,9 @@ function mockForOpplaeringsmiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/syforest/sykmeldinger', (req, res) => {
+  server.get('/syfooppfolgingsplanservice/api/arbeidstaker/sykmeldinger', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(getSykmeldinger(SYKMELDING_TYPE.SYKMELDING_AKTIV)));
-  });
-
-  server.post('/syforest/sykmeldinger/:id/actions/erUtenforVentetid', (req, res) => {
-    res.send(
-      JSON.stringify({
-        erUtenforVentetid: false,
-      })
-    );
   });
 
   server.get('/syfooprest/api/narmesteledere/:fodselsnummer', (req, res) => {

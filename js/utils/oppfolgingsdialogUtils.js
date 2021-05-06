@@ -56,7 +56,7 @@ export function getOppfolgingsdialog(oppfolgingsdialoger, id) {
 
 export const erSykmeldingGyldigForOppfolgingMedGrensedato = (sykmelding, dato) => {
   return (
-    sykmelding.mulighetForArbeid.perioder.filter((periode) => {
+    sykmelding.sykmeldingsperioder.filter((periode) => {
       const tomGrenseDato = new Date(dato);
       tomGrenseDato.setHours(0, 0, 0, 0);
       tomGrenseDato.setMonth(tomGrenseDato.getMonth() - MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING);
@@ -70,7 +70,7 @@ export const erOppfolgingsdialogKnyttetTilGyldigSykmelding = (oppfolgingsdialog,
   return (
     sykmeldinger.filter((sykmelding) => {
       return (
-        oppfolgingsdialog.virksomhet.virksomhetsnummer === sykmelding.orgnummer &&
+        oppfolgingsdialog.virksomhet.virksomhetsnummer === sykmelding.organisasjonsinformasjon.orgnummer &&
         erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, dagensDato)
       );
     }).length > 0
