@@ -15,6 +15,10 @@ export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (virksomhetsnumm
   return naermesteLeder ? naermesteLeder.navn : undefined;
 };
 
+export const sykmeldtHarIngenSendteSykmeldinger = (sykmeldinger) => {
+  return sykmeldinger.length === 0;
+};
+
 export const sykmeldtHarGyldigSykmelding = (sykmeldinger) => {
   const tomGrenseDato = new Date();
   return (
@@ -55,10 +59,6 @@ export const finnArbeidsgivereForGyldigeSykmeldinger = (sykmeldinger, naermesteL
         }) === idx
       );
     });
-};
-
-export const skalViseOppfoelgingsdialogLenke = (sykmeldinger, oppfolgingsdialoger) => {
-  return sykmeldtHarGyldigSykmelding(sykmeldinger) || oppfolgingsdialoger.data.length > 0;
 };
 
 export const sykmeldtHarManglendeNaermesteLeder = (arbeidsgivere) => {
