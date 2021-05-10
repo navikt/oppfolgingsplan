@@ -29,23 +29,13 @@ server.engine('html', mustacheExpress());
 
 const renderApp = (decoratorFragments) => {
   return new Promise((resolve, reject) => {
-    server.render(
-      'index.html',
-      Object.assign(
-        {
-          SYFOREST_URL: '/syforest',
-        },
-        decoratorFragments,
-        settings
-      ),
-      (err, html) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(html);
-        }
+    server.render('index.html', Object.assign({}, decoratorFragments, settings), (err, html) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(html);
       }
-    );
+    });
   });
 };
 
