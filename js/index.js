@@ -8,7 +8,6 @@ import AppRouter from './routers/AppRouter';
 import { hentVedlikehold } from './actions/vedlikehold_actions';
 import history from './history';
 import '../styles/styles.less';
-import './logging';
 import { forlengInnloggetSesjon, sjekkInnloggingssesjon } from './timeout/timeout_actions';
 import store from './store';
 
