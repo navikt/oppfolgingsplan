@@ -83,17 +83,7 @@ jobs:
           CLUSTER: prod-sbs
           RESOURCE: naiserator-prod.yaml
 
-      # Notify Slack
-      - name: Successful deploy notification prod
-        if: success()
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_TITLE: 'Successful deployment! :rocket:'
-          SLACK_MESSAGE: 'A new release of `${{ github.event.repository.name }}` has been deployed to prod.'
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          MSG_MINIMAL: commit
-          SLACK_COLOR: ${{ job.status }}
-          
+      # Notify Slack          
       - name: Unsuccessful deploy notification prod
         if: failure()
         uses: rtCamp/action-slack-notify@v2

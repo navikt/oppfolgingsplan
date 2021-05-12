@@ -58,12 +58,6 @@ export function scrollTo(el, duration = 500, callback) {
   step();
 }
 
-export function getCookie(name) {
-  const re = new RegExp(`${name}=([^;]+)`);
-  const match = re.exec(document.cookie);
-  return match !== null ? match[1] : '';
-}
-
 export function erSynligIViewport(element) {
   const rect = element.getBoundingClientRect();
   return (

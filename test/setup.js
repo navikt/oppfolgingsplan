@@ -47,6 +47,5 @@ global.navigator = {
 };
 global.window.APP_SETTINGS = {
   APP_ROOT: '/oppfolgingsplan',
-  REST_ROOT: '/syforest',
 };
 copyProps(window, global);

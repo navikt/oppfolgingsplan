@@ -19,7 +19,6 @@ const Icon = styled.img`
 const IconTextBox = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 2em;
 `;
 
 export const SharingCheckbox = ({ oppfolgingsplan, checked, onChange }) => {
