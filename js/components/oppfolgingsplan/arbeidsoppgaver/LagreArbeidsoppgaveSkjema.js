@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
 import {
-  tekstfeltBegynnerMedUgyldigTegnRegex,
   tekstfeltInneholderUgyldigTegnRegex,
   tekstfeltRegex,
 } from '../../../konstanter';
@@ -468,7 +467,6 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn arbeidsoppgave';
     } else if (
-      value.match(tekstfeltBegynnerMedUgyldigTegnRegex) ||
       value.match(tekstfeltInneholderUgyldigTegnRegex) ||
       value.match(tekstfeltRegex)
     ) {

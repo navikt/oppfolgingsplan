@@ -5,7 +5,6 @@ import { Panel } from 'nav-frontend-paneler';
 import { Feiloppsummering } from 'nav-frontend-skjema';
 import {
   STATUS_TILTAK,
-  tekstfeltBegynnerMedUgyldigTegnRegex,
   tekstfeltInneholderUgyldigTegnRegex,
   tekstfeltRegex,
 } from '../../../konstanter';
@@ -286,7 +285,6 @@ export class TiltakSkjemaKomponent extends Component {
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn overskrift';
     } else if (
-      value.match(tekstfeltBegynnerMedUgyldigTegnRegex) ||
       value.match(tekstfeltInneholderUgyldigTegnRegex) ||
       value.match(tekstfeltRegex)
     ) {
