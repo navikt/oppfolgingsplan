@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
 import { Feiloppsummering } from 'nav-frontend-skjema';
-import { STATUS_TILTAK, tekstfeltBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../../../konstanter';
+import {
+  STATUS_TILTAK,
+  tekstfeltBegynnerMedUgyldigTegnRegex,
+  tekstfeltInneholderUgyldigTegnRegex,
+  tekstfeltRegex,
+} from '../../../konstanter';
 import {
   erGyldigDato,
   erGyldigDatoformat,
@@ -280,7 +285,11 @@ export class TiltakSkjemaKomponent extends Component {
 
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn overskrift';
-    } else if (value.match(tekstfeltBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
+    } else if (
+      value.match(tekstfeltBegynnerMedUgyldigTegnRegex) ||
+      value.match(tekstfeltInneholderUgyldigTegnRegex) ||
+      value.match(tekstfeltRegex)
+    ) {
       feilmelding = 'Ugyldig spesialtegn er oppgitt';
     }
 
