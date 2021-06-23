@@ -1,5 +1,7 @@
 export const tekstfeltRegex = new RegExp('.*<[^ ][^>]+[^ ]>.*');
-export const tekstfeltInneholderUgyldigTegnRegex = new RegExp('^[^a-zA-Z0-9-å,Å,ø,Ø,Æ,æ]+[0-9A-Za-z:;., !$?\\-_]');
+export const tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex = new RegExp(
+  '^[^a-zA-Z0-9åÅøØÆæ]+[0-9A-Za-z:;.,!$?\\-_]'
+);
 export const maanedListe = [
   'januar',
   'februar',
