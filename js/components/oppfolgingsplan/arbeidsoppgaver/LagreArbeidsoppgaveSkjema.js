@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
-import { tekstfeltBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../../../konstanter';
+import { tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../../../konstanter';
 import InfoVarsel from './InfoVarsel';
 import Checkbox from '../../skjema/Checkbox';
 import Tekstfelt from '../../skjema/TekstFelt';
@@ -463,7 +463,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
 
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn arbeidsoppgave';
-    } else if (value.match(tekstfeltBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
+    } else if (value.match(tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
       feilmelding = 'Ugyldig spesialtegn er oppgitt';
     }
 
