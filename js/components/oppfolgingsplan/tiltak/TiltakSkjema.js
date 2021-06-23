@@ -5,7 +5,7 @@ import { Panel } from 'nav-frontend-paneler';
 import { Feiloppsummering } from 'nav-frontend-skjema';
 import {
   STATUS_TILTAK,
-  tekstfeltInneholderUgyldigTegnRegex,
+  tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex,
   tekstfeltRegex,
 } from '../../../konstanter';
 import {
@@ -284,10 +284,7 @@ export class TiltakSkjemaKomponent extends Component {
 
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn overskrift';
-    } else if (
-      value.match(tekstfeltInneholderUgyldigTegnRegex) ||
-      value.match(tekstfeltRegex)
-    ) {
+    } else if (value.match(tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
       feilmelding = 'Ugyldig spesialtegn er oppgitt';
     }
 
