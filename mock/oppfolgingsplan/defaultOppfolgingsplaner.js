@@ -10,21 +10,7 @@ function getDefaultOppfolgingsplaner() {
         navn: '',
       },
       godkjentPlan: null,
-      godkjenninger: [
-        {
-          godkjent: true,
-          godkjenningsTidspunkt: new Date(),
-          godkjentAv: {
-            fnr: '11011011011',
-          },
-          gyldighetstidspunkt: {
-            fom: new Date(),
-            tom: new Date(),
-            evalueres: new Date(),
-          },
-          delMedNav: true,
-        },
-      ],
+      godkjenninger: [],
       arbeidsoppgaveListe: [
         {
           arbeidsoppgaveId: 6406,
