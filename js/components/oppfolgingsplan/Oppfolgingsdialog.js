@@ -73,6 +73,9 @@ export const erAvvistAvArbeidstaker = (oppfolgingsdialog) => {
 
 class Oppfolgingsdialog extends Component {
   componentWillMount() {
+    window.location.hash = 'godkjenn';
+    window.sessionStorage.setItem('hash', 'godkjenn');
+
     const {
       oppfolgingsdialog,
       virksomhet,

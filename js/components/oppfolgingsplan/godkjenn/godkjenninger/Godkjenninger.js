@@ -12,6 +12,9 @@ const harMottattGodkjenninger = (oppfolgingsdialog) => {
 };
 
 const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, avvisDialog, rootUrlPlaner }) => {
+  window.location.hash = 'godkjenn';
+  window.sessionStorage.setItem('hash', 'godkjenn');
+
   if (harMottattGodkjenninger(oppfolgingsdialog)) {
     return (
       <MottattGodkjenninger
