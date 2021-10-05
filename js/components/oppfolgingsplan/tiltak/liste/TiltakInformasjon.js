@@ -71,6 +71,7 @@ export const visVarsel = (fnr, tiltak) => {
   return (
     tiltak &&
     !tiltak.gjennomfoering &&
+    !tiltak.beskrivelseIkkeAktuelt &&
     fnr === (tiltak.opprettetAv && tiltak.opprettetAv.fnr) &&
     tiltak.sistEndretAv.fnr === fnr
   );
