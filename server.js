@@ -6,6 +6,7 @@ const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const getDecorator = require('./decorator');
 const prometheus = require('prom-client');
+const appProxy = require('./server/appProxy');
 
 // Prometheus metrics
 const collectDefaultMetrics = prometheus.collectDefaultMetrics;
@@ -51,11 +52,6 @@ const startServer = (html) => {
 
   server.use('/oppfolgingsplan/img', express.static(path.resolve(__dirname, 'dist/resources/img')));
 
-  server.get(['/', '/oppfolgingsplan/?', /^\/oppfolgingsplan\/(?!(resources|img)).*$/], nocache, (req, res) => {
-    res.send(html);
-    httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
-  });
-
   server.get('/actuator/metrics', (req, res) => {
     res.set('Content-Type', prometheus.register.contentType);
     res.end(prometheus.register.metrics());
@@ -70,14 +66,17 @@ const startServer = (html) => {
 
   if (env === 'opplaering') {
     require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
-    require('./mock/mockEndepunkter').mockUnleashOpplaeringsmiljo(server);
-  }
-
-  if (env === 'local') {
+  } else if (env === 'local') {
     require('./mock/mockEndepunkter').mockForLokaltMiljo(server);
     require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
-    require('./mock/mockEndepunkter').mockUnleashLokal(server);
+  } else {
+    appProxy(server);
   }
+
+  server.get(['/', '/oppfolgingsplan/?', /^\/oppfolgingsplan\/(?!(resources|img)).*$/], nocache, (req, res) => {
+    res.send(html);
+    httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
+  });
 
   const port = env !== 'local' ? process.env.PORT || 8080 : 8081;
   server.listen(port, () => {

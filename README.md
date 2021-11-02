@@ -1,5 +1,5 @@
 # Oppfolgingsplan
-Frontend for digitalisering av sykefraværsoppfølging (DigiSYFO) http://tjenester.nav.no/oppfolgingsplan/oppfolgingsplaner
+Frontend for digitalisering av sykefraværsoppfølging (DigiSYFO) https://www.nav.no/oppfolgingsplan/oppfolgingsplaner
 
 ## TL;DR
 React-app for oppfølgingsplanen på Ditt Sykefravær.

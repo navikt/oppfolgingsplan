@@ -7,9 +7,6 @@ describe('oppfolgingsdialoger_actions', () => {
   let dagensDato;
   beforeEach(() => {
     window = window || {};
-    window.APP_SETTINGS = {
-      OPPFOELGINGSDIALOGREST_ROOT: 'http://tjenester.nav.no/oppfoelgingsdialog/api',
-    };
     dagensDato = new Date('2017-01-01');
     clock = sinon.useFakeTimers(dagensDato.getTime());
   });

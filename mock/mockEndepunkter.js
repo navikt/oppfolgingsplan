@@ -9,7 +9,6 @@ const mockData = {};
 const ARBEIDSGIVERE = 'arbeidsgivere';
 const METADATA = 'metadata';
 const NAERMESTELEDERE = 'naermesteledere';
-const SYFOUNLEASH = 'syfounleash';
 const SYKMELDINGER = 'sykmeldinger';
 const VEDLIKEHOLD = 'vedlikehold';
 const TILGANG = 'tilgang';
@@ -29,7 +28,6 @@ const lastFilTilMinne = (filnavn) => {
 lastFilTilMinne(ARBEIDSGIVERE);
 lastFilTilMinne(METADATA);
 lastFilTilMinne(NAERMESTELEDERE);
-lastFilTilMinne(SYFOUNLEASH);
 lastFilTilMinne(SYKMELDINGER);
 lastFilTilMinne(VEDLIKEHOLD);
 lastFilTilMinne(TILGANG);
@@ -135,7 +133,7 @@ function mockForOpplaeringsmiljo(server) {
     res.send(JSON.stringify(getSykmeldinger(SYKMELDING_TYPE.SYKMELDING_AKTIV)));
   });
 
-  server.get('/syfooprest/api/narmesteledere/:fodselsnummer', (req, res) => {
+  server.get('/oppfolgingsplan/api/syfooprest/api/narmesteledere/:fodselsnummer', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[NAERMESTELEDERE]));
   });
@@ -152,7 +150,7 @@ function mockForOpplaeringsmiljo(server) {
     res.send(JSON.stringify(mockData[TILGANG]));
   });
 
-  server.get('/syfooprest/api/virksomhet/:virksomhetsnummer', (req, res) => {
+  server.get('/oppfolgingsplan/api/syfooprest/api/virksomhet/:virksomhetsnummer', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[VIRKSOMHET]));
   });
@@ -161,22 +159,22 @@ function mockForOpplaeringsmiljo(server) {
     res.send();
   });
 
-  server.get('/syfooprest/api/arbeidsforhold', (req, res) => {
+  server.get('/oppfolgingsplan/api/syfooprest/api/arbeidsforhold', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[ARBEIDSFORHOLD]));
   });
 
-  server.get('/syfooprest/api/person/:fnr', (req, res) => {
+  server.get('/oppfolgingsplan/api/syfooprest/api/person/:fnr', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[PERSON]));
   });
 
-  server.get('/syfooprest/api/kontaktinfo/:fnr', (req, res) => {
+  server.get('/oppfolgingsplan/api/syfooprest/api/kontaktinfo/:fnr', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[KONTAKTINFO]));
   });
 
-  server.get('/syfooprest/api/naermesteleder/:fnr', (req, res) => {
+  server.get('/oppfolgingsplan/api/syfooprest/api/naermesteleder/:fnr', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[NAERMESTELEDER]));
   });
@@ -194,28 +192,7 @@ function mockForOpplaeringsmiljo(server) {
   });
 }
 
-function mockUnleashOpplaeringsmiljo(server) {
-  server.post('/syfounleash/', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(mockData[SYFOUNLEASH]));
-  });
-}
-
-function mockUnleashLokal(server) {
-  server.post('/syfounleash/', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    const toggles = req.body.reduce((acc, cur) => {
-      return Object.assign({}, acc, {
-        [cur]: true,
-      });
-    }, {});
-    res.send(JSON.stringify(toggles));
-  });
-}
-
 module.exports = {
   mockForLokaltMiljo,
   mockForOpplaeringsmiljo,
-  mockUnleashOpplaeringsmiljo,
-  mockUnleashLokal,
 };

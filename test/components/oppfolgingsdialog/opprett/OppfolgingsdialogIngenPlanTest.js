@@ -8,13 +8,15 @@ import OppfolgingsdialogerIngenplan, {
 } from '../../../../js/components/oppfolgingsdialoger/opprett/OppfolgingsdialogerIngenplan';
 import getOppfolgingsdialog, { hentOppfolgingsdialogTidligere } from '../../../mock/mockOppfolgingsdialoger';
 
+const FakeTimers = require('@sinonjs/fake-timers');
+
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('OppfolgingsdialogerIngenplan', () => {
-  let klokke;
   const dagensDato = new Date('2017-01-01');
 
+  let klokke;
   let komponent;
   let opprett;
   let visOppfolgingsdialogOpprett;
@@ -22,7 +24,10 @@ describe('OppfolgingsdialogerIngenplan', () => {
   let arbeidsgiver;
 
   beforeEach(() => {
-    klokke = sinon.useFakeTimers(dagensDato.getTime());
+    klokke = FakeTimers.install({
+      now: dagensDato,
+      toFake: ['setTimeout', 'clearTimeout', 'setImmediate', 'clearImmediate', 'setInterval', 'clearInterval', 'Date'],
+    });
     opprett = sinon.spy();
     visOppfolgingsdialogOpprett = sinon.spy();
     arbeidsgivere = [];
@@ -41,7 +46,7 @@ describe('OppfolgingsdialogerIngenplan', () => {
   });
 
   afterEach(() => {
-    klokke.restore();
+    klokke.uninstall();
   });
 
   it('Skal vise OppfolgingsdialogerIngenplanKnapper', () => {

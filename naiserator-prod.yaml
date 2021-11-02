@@ -2,7 +2,7 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: oppfolgingsplan
-  namespace: default
+  namespace: teamsykefravr
   labels:
     team: teamsykefravr
 spec:
@@ -34,12 +34,11 @@ spec:
       cpu: 200m
       memory: 256Mi
   ingresses:
-    - "https://tjenester.nav.no/oppfolgingsplan"
-    - "https://oppfolgingsplan.nais.oera.no"
+    - "https://www.nav.no/oppfolgingsplan"
   env:
-    - name: APPRES_CMS_URL
-      value: https://appres.nav.no
+    - name: DECORATOR_URL
+      value: https://nav.no/dekoratoren
     - name: LOGINSERVICE_URL
       value: https://loginservice.nav.no/login
-    - name: SYFOOPRESTAPI_URL
-      value: https://syfooprest.nais.oera.no/syfooprest/api
+    - name: SYFOOPREST_URL
+      value: https://syfooprest.nav.no

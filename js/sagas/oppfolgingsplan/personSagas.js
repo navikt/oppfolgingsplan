@@ -1,15 +1,11 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get } from '../../gateway-api/gatewayApi';
+import { call, fork, put, takeEvery } from 'redux-saga/effects';
+import { get } from '../../gateway-api';
 import * as actions from '../../actions/oppfolgingsplan/person_actions';
-import { HOST_NAMES } from '../../konstanter';
-import { fullNaisUrl } from '../../utils/urlUtils';
 
 export function* hentPersonSaga(action) {
   yield put(actions.henterPerson(action.fnr));
   try {
-    const host = HOST_NAMES.SYFOOPREST;
-    const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/person/${action.fnr}`;
-    const url = fullNaisUrl(host, path);
+    const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/api/person/${action.fnr}`;
     const person = yield call(get, url);
 
     yield put(actions.personHentet(person, action.fnr));
