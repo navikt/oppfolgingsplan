@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { STATUS_TILTAK } from '../../../../konstanter';
-import { kommentarReducerPt, tiltakPt } from '../../../../propTypes/opproptypes';
+import { STATUS_TILTAK } from '@/konstanter';
+import { kommentarReducerPt, tiltakPt } from '@/propTypes/opproptypes';
 import TiltakVarselFeil from './../TiltakVarselFeil';
 import KommentarListe from '../kommentar/KommentarListe';
 import LagreKommentarSkjema from '../kommentar/LagreKommentarSkjema';
 import TiltakForeslaattAv from '../TiltakForeslaattAv';
-import { sorterKommentarerEtterOpprettet } from '../../../../utils/tiltakUtils';
+import { sorterKommentarerEtterOpprettet } from '@/utils/tiltakUtils';
 import TiltakVarselVurdering from './TiltakVarselVurdering';
 
 const texts = {
@@ -86,7 +86,7 @@ class TiltakInformasjon extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.props.element.tiltakId === nextProps.kommentarReducer.feiletTiltakId &&
       nextProps.kommentarReducer.lagringFeilet &&

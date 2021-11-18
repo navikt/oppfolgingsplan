@@ -1,8 +1,7 @@
 import React from 'react';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import GodkjennPlanOversiktInformasjon from './godkjenn/GodkjennPlanOversiktInformasjon';
-import getContextRoot from '../../../utils/getContextRoot';
-import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 
 const PlanEkspanderbar = ({ oppfolgingsplan }) => {
   const texts = {
@@ -13,7 +12,7 @@ const PlanEkspanderbar = ({ oppfolgingsplan }) => {
 
   return (
     <Ekspanderbartpanel border tittel={texts.plan.title}>
-      <GodkjennPlanOversiktInformasjon oppfolgingsdialog={oppfolgingsplan} rootUrl={getContextRoot()} />
+      <GodkjennPlanOversiktInformasjon oppfolgingsdialog={oppfolgingsplan} />
     </Ekspanderbartpanel>
   );
 };

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import getContextRoot from '../../../utils/getContextRoot';
-import { oppfolgingsplanPt, tiltakReducerPt } from '../../../propTypes/opproptypes';
-import { STATUS_TILTAK } from '../../../konstanter';
-import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
-import { sorterTiltakEtterNyeste } from '../../../utils/tiltakUtils';
-import { capitalizeFirstLetter } from '../../../utils/textUtils';
+import { oppfolgingsplanPt, tiltakReducerPt } from '@/propTypes/opproptypes';
+import { STATUS_TILTAK } from '@/konstanter';
+import { isEmpty } from '@/utils/oppfolgingsdialogUtils';
+import { sorterTiltakEtterNyeste } from '@/utils/tiltakUtils';
+import { capitalizeFirstLetter } from '@/utils/textUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import TiltakInfoboks from './TiltakInfoboks';
@@ -14,7 +14,8 @@ import TiltakSkjema from './TiltakSkjema';
 import TiltakListe from './liste/TiltakListe';
 import StegTittel from '../StegTittel';
 import ObligatoriskeFelterInfotekst from '../ObligatoriskeFelterInfotekst';
-import { scrollTo } from '../../../utils/browserUtils';
+import { scrollTo } from '@/utils/browserUtils';
+import { TiltakOnboardingImage, VarseltrekantImage } from '@/images/imageComponents';
 
 const texts = {
   tittel: 'Tiltak',
@@ -47,7 +48,7 @@ class Tiltak extends Component {
     this.formRef = React.createRef();
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     window.location.hash = 'tiltak';
     window.sessionStorage.setItem('hash', 'tiltak');
   }
@@ -56,7 +57,7 @@ class Tiltak extends Component {
     window.scrollTo(0, this.formRef.current.offsetTop);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       !nextProps.tiltak.feiletTiltakId &&
       nextProps.tiltak.lagringFeilet &&
@@ -72,6 +73,7 @@ class Tiltak extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.visTiltakSkjema && this.state.visTiltakSkjema && this.lagreSkjema) {
+      // eslint-disable-next-line react/no-find-dom-node
       const form = findDOMNode(this.lagreSkjema);
       scrollTo(form, 300);
     }
@@ -142,7 +144,7 @@ class Tiltak extends Component {
             <div ref={this.formRef}>
               {!this.state.visTiltakSkjema ? (
                 <OppfolgingsplanInfoboks
-                  svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
+                  svgUrl={TiltakOnboardingImage}
                   svgAlt=""
                   tittel={texts.infoboks.title}
                   tekst={texts.infoboks.info}
@@ -188,7 +190,7 @@ class Tiltak extends Component {
               )}
               <TiltakListe
                 liste={sorterTiltakEtterNyeste(oppfolgingsdialog.tiltakListe)}
-                urlImgVarsel={`${getContextRoot()}/img/svg/varseltrekant.svg`}
+                urlImgVarsel={VarseltrekantImage}
                 sendLagre={this.sendLagreTiltak}
                 sendSlett={this.sendSlettTiltak}
                 sendLagreKommentar={this.sendLagreKommentar}

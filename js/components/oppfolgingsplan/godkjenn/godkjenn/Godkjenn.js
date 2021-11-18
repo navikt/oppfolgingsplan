@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import GodkjennPlanOversiktInformasjon from './GodkjennPlanOversiktInformasjon';
 import ReviderEllerGodkjennPlan from './ReviderEllerGodkjennPlan';
 import GodkjennPlanLightboks from './GodkjennPlanLightboks';
@@ -18,7 +18,7 @@ class Godkjenn extends Component {
     this.formRef = React.createRef();
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     window.location.hash = 'godkjenn';
     window.sessionStorage.setItem('hash', 'godkjenn');
   }
@@ -48,7 +48,7 @@ class Godkjenn extends Component {
     const { oppfolgingsdialog, settAktivtSteg, rootUrl } = this.props;
     return (
       <div ref={this.formRef} className="godkjennPlanOversikt">
-        <GodkjennPlanOversiktInformasjon oppfolgingsdialog={oppfolgingsdialog} rootUrl={rootUrl} />
+        <GodkjennPlanOversiktInformasjon oppfolgingsdialog={oppfolgingsdialog} />
         {!this.state.visGodkjenPlanSkjema && (
           <ReviderEllerGodkjennPlan
             oppfolgingsdialog={oppfolgingsdialog}

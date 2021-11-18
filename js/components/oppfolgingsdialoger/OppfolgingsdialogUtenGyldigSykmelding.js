@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Panel } from 'nav-frontend-paneler';
-import getContextRoot from '../../utils/getContextRoot';
+import { OppfolgingsdialogIkkeAktivSykmeldingImage } from '@/images/imageComponents';
 
 const texts = {
   title: 'Aktiv oppfølgingsplan',
@@ -17,7 +17,7 @@ const OppfolgingsdialogUtenGyldigSykmelding = ({ sykmeldtHarIngenSendteSykmeldin
       </header>
       <Panel border>
         <div className="oppfolgingsdialogUtenAktivSykmelding__blokk">
-          <img alt="" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-illustrasjon-ikke-aktiv-sykmelt.svg`} />
+          <img alt="" src={OppfolgingsdialogIkkeAktivSykmeldingImage} />
           <div className="inngangspanel__innhold">
             <div>
               {sykmeldtHarIngenSendteSykmeldinger ? (

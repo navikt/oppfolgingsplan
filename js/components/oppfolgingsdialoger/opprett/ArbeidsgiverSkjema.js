@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import getContextRoot from '../../../utils/getContextRoot';
 import {
   erAktivOppfolgingsdialogOpprettetMedArbeidsgiver,
   erOppfolgingsdialogOpprettbarMedArbeidsgiver,
   erOppfolgingsdialogOpprettbarMedMinstEnArbeidsgiver,
   hentAktivOppfolgingsdialogOpprettetMedArbeidsgiver,
-} from '../../../utils/oppfolgingsdialogUtils';
+} from '@/utils/oppfolgingsdialogUtils';
 import { dinesykmeldingerReducerPt, fieldPropTypes, opprettOppfolgingArbeidsgiverPt } from '../../../propTypes';
 import Radioknapper from '../../skjema/Radioknapper';
+import { VarseltrekantImage } from '@/images/imageComponents';
 
 const texts = {
   arbeidsgiverSkjema: {
@@ -47,11 +48,7 @@ export const VelgArbeidsgiverUndertekst = ({ oppfolgingsdialoger, arbeidsgiver }
   } else if (!arbeidsgiver.harNaermesteLeder) {
     return (
       <div className="velgArbeidsgiverUndertekst">
-        <img
-          className="velgArbeidsgiverUndertekst__ikon"
-          src={`${getContextRoot()}/img/svg/varseltrekant.svg`}
-          alt=""
-        />
+        <img className="velgArbeidsgiverUndertekst__ikon" src={VarseltrekantImage} alt="" />
         <span className="velgArbeidsgiverUndertekst__tekst">{texts.velgArbeidsgiverUndertekst.noLeader}</span>
       </div>
     );

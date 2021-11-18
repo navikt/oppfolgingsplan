@@ -1,4 +1,5 @@
 import React from 'react';
+import referee from '@sinonjs/referee';
 import chai from 'chai';
 import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
@@ -10,6 +11,16 @@ import getOppfolgingsdialog, { hentOppfolgingsdialogTidligere } from '../../../m
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
+const assertTrue = referee.assert;
+
+function faketimerFix(date) {
+  const timer = sinon.useFakeTimers(date);
+  performance.mark = () => void 0;
+  performance.clearMarks = () => void 0;
+  performance.measure = () => void 0;
+  performance.clearMeasures = () => void 0;
+  return timer;
+}
 
 describe('OppfolgingsdialogerIngenplan', () => {
   let klokke;
@@ -22,7 +33,7 @@ describe('OppfolgingsdialogerIngenplan', () => {
   let arbeidsgiver;
 
   beforeEach(() => {
-    klokke = sinon.useFakeTimers(dagensDato.getTime());
+    klokke = faketimerFix(dagensDato.getTime());
     opprett = sinon.spy();
     visOppfolgingsdialogOpprett = sinon.spy();
     arbeidsgivere = [];
@@ -85,7 +96,7 @@ describe('OppfolgingsdialogerIngenplan', () => {
         />
       );
       komponent.find('button').simulate('click');
-      expect(opprett.calledOnce).to.equal(true);
+      assertTrue(opprett.calledOnce);
     });
 
     it('Skal vise knapp som kaller visOppfolgingsdialogOpprett, om AT har flere arbeidsgivere', () => {
@@ -99,7 +110,7 @@ describe('OppfolgingsdialogerIngenplan', () => {
         />
       );
       komponent.find('button').simulate('click');
-      expect(visOppfolgingsdialogOpprett.calledOnce).to.equal(true);
+      assertTrue(visOppfolgingsdialogOpprett.calledOnce);
     });
 
     it('Skal vise knapp som kaller visOppfolgingsdialogOpprett, om AT har tidligere godkjent oppfolgingsdialog med virksomhet', () => {
@@ -113,7 +124,7 @@ describe('OppfolgingsdialogerIngenplan', () => {
         />
       );
       komponent.find('button').simulate('click');
-      expect(visOppfolgingsdialogOpprett.calledOnce).to.equal(true);
+      assertTrue(visOppfolgingsdialogOpprett.calledOnce);
     });
   });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import getContextRoot from '../../../../utils/getContextRoot';
 import MottattGodkjenninger from './MottattGodkjenninger';
 import GodkjennPlanSendt from './GodkjennPlanSendt';
@@ -31,7 +31,6 @@ const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, 
     <GodkjennPlanSendt
       oppfolgingsdialog={oppfolgingsdialog}
       nullstillGodkjenning={nullstillGodkjenning}
-      rootUrl={getContextRoot()}
       rootUrlPlaner={rootUrlPlaner}
     />
   );

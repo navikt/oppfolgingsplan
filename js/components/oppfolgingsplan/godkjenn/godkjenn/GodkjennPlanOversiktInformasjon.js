@@ -2,11 +2,11 @@ import EtikettBase from 'nav-frontend-etiketter';
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { KANGJENNOMFOERES, STATUS_TILTAK } from '../../../../konstanter';
-import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
-import { capitalizeFirstLetter } from '../../../../utils/textUtils';
-import { sorterTiltakerEtterStatus } from '../../../../utils/tiltakUtils';
-import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
+import { KANGJENNOMFOERES, STATUS_TILTAK } from '@/konstanter';
+import { toDateMedMaanedNavn } from '@/utils/datoUtils';
+import { capitalizeFirstLetter } from '@/utils/textUtils';
+import { sorterTiltakerEtterStatus } from '@/utils/tiltakUtils';
+import { sorterArbeidsoppgaverEtterOpprettet } from '@/utils/arbeidsoppgaveUtils';
 import {
   arbeidsoppgavePt,
   oppfolgingsplanPt,
@@ -14,7 +14,8 @@ import {
   stillingPt,
   tiltakPt,
   virksomhetPt,
-} from '../../../../propTypes/opproptypes';
+} from '@/propTypes/opproptypes';
+import { HakeGronnLysImage, HakeOransjeImage, KryssRoedImage, VarseltrekantImage } from '@/images/imageComponents';
 
 const texts = {
   informasjonPanelOverskrift: {
@@ -206,26 +207,25 @@ export const InformasjonPanelArbeidsoppgaverEtterGjennomfoering = ({
   arbeidsoppgaver,
   type,
   tittel,
-  rootUrl,
 }) => {
   let hentPanelType;
   let imgUrl;
   switch (type) {
     case KANGJENNOMFOERES.KAN:
       hentPanelType = 'oppfolgingsplanLapp--groenn';
-      imgUrl = `${rootUrl}/img/svg/hake-groenn--lys.svg`;
+      imgUrl = HakeGronnLysImage;
       break;
     case KANGJENNOMFOERES.TILRETTELEGGING:
       hentPanelType = 'oppfolgingsplanLapp--gul';
-      imgUrl = `${rootUrl}/img/svg/hake-oransje.svg`;
+      imgUrl = HakeOransjeImage;
       break;
     case KANGJENNOMFOERES.KAN_IKKE:
       hentPanelType = 'oppfolgingsplanLapp--roed';
-      imgUrl = `${rootUrl}/img/svg/kryss-roed.svg`;
+      imgUrl = KryssRoedImage;
       break;
     default:
       hentPanelType = 'oppfolgingsplanLapp--graa';
-      imgUrl = `${rootUrl}/img/svg/varseltrekant.svg`;
+      imgUrl = VarseltrekantImage;
       break;
   }
   const arbeidstaker = oppfolgingsdialog.arbeidstaker;
@@ -275,10 +275,9 @@ InformasjonPanelArbeidsoppgaverEtterGjennomfoering.propTypes = {
   arbeidsoppgaver: PropTypes.arrayOf(arbeidsoppgavePt),
   type: PropTypes.string,
   tittel: PropTypes.string,
-  rootUrl: PropTypes.string,
 };
 
-export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppgaver, rootUrl }) => {
+export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppgaver }) => {
   const arbeidsoppgaverKanGjennomfoeres = arbeidsoppgaver.filter((arbeidsoppgave) => {
     return arbeidsoppgave.gjennomfoering && arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN;
   });
@@ -304,7 +303,6 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
           arbeidsoppgaver={arbeidsoppgaverKanGjennomfoeres}
           type={KANGJENNOMFOERES.KAN}
           tittel={texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.titles.kan}
-          rootUrl={rootUrl}
         />
       )}
       {arbeidsoppgaverMedTilrettelegging.length > 0 && (
@@ -313,7 +311,6 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
           arbeidsoppgaver={arbeidsoppgaverMedTilrettelegging}
           type={KANGJENNOMFOERES.TILRETTELEGGING}
           tittel={texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.titles.tilrettelegging}
-          rootUrl={rootUrl}
         />
       )}
       {arbeidsoppgaverKanIkkeGjennomfoeres.length > 0 && (
@@ -322,7 +319,6 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
           arbeidsoppgaver={arbeidsoppgaverKanIkkeGjennomfoeres}
           type={KANGJENNOMFOERES.KAN_IKKE}
           tittel={texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.titles.kanIkke}
-          rootUrl={rootUrl}
         />
       )}
       {arbeidsoppgaverIkkeVurdert.length > 0 && (
@@ -331,7 +327,6 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
           arbeidsoppgaver={arbeidsoppgaverIkkeVurdert}
           type={KANGJENNOMFOERES.IKKE_VURDERT}
           tittel={texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.titles.ikkeVurdert}
-          rootUrl={rootUrl}
         />
       )}
     </div>
@@ -340,7 +335,6 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
 InformasjonPanelArbeidsoppgaver.propTypes = {
   oppfolgingsdialog: oppfolgingsplanPt,
   arbeidsoppgaver: PropTypes.arrayOf(arbeidsoppgavePt),
-  rootUrl: PropTypes.string,
 };
 
 export const getTiltakStatus = (tiltak) => {
@@ -456,7 +450,7 @@ InformasjonPanelTiltak.propTypes = {
   tiltakListe: PropTypes.arrayOf(tiltakPt),
 };
 
-const GodkjennPlanOversiktInformasjon = ({ oppfolgingsdialog, rootUrl }) => {
+const GodkjennPlanOversiktInformasjon = ({ oppfolgingsdialog }) => {
   return (
     <div className="godkjennPlanOversiktInformasjon">
       <InformasjonPanelOverskrift oppfolgingsdialog={oppfolgingsdialog} />
@@ -472,7 +466,6 @@ const GodkjennPlanOversiktInformasjon = ({ oppfolgingsdialog, rootUrl }) => {
         <InformasjonPanelArbeidsoppgaver
           oppfolgingsdialog={oppfolgingsdialog}
           arbeidsoppgaver={sorterArbeidsoppgaverEtterOpprettet(oppfolgingsdialog.arbeidsoppgaveListe)}
-          rootUrl={rootUrl}
         />
       )}
 
@@ -484,7 +477,6 @@ const GodkjennPlanOversiktInformasjon = ({ oppfolgingsdialog, rootUrl }) => {
 };
 GodkjennPlanOversiktInformasjon.propTypes = {
   oppfolgingsdialog: oppfolgingsplanPt,
-  rootUrl: PropTypes.string,
 };
 
 export default GodkjennPlanOversiktInformasjon;

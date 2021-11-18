@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import GodkjentPlan from './GodkjentPlan';
 import GodkjentPlanAvbrutt from './GodkjentPlanAvbrutt';
 import Samtykke from '../samtykke/Samtykke';
@@ -15,7 +15,6 @@ const ReleasetPlan = ({
   oppfolgingsdialog,
   giSamtykke,
   avbrytDialog,
-  rootUrl,
   rootUrlPlaner,
   delMedNavFunc,
   delmednav,
@@ -24,7 +23,7 @@ const ReleasetPlan = ({
   oppfolgingsdialoger,
 }) => {
   if (manglerSamtykke(oppfolgingsdialog)) {
-    return <Samtykke sendSamtykke={giSamtykke} oppfolgingsdialog={oppfolgingsdialog} rootUrl={rootUrl} />;
+    return <Samtykke sendSamtykke={giSamtykke} oppfolgingsdialog={oppfolgingsdialog} />;
   } else if (oppfolgingsdialog.godkjentPlan && oppfolgingsdialog.godkjentPlan.avbruttPlan) {
     return (
       <GodkjentPlanAvbrutt
@@ -34,7 +33,6 @@ const ReleasetPlan = ({
         delmednav={delmednav}
         fastlegeDeling={fastlegeDeling}
         delMedFastlege={delMedFastlege}
-        rootUrl={rootUrl}
         rootUrlPlaner={rootUrlPlaner}
       />
     );
@@ -48,7 +46,6 @@ const ReleasetPlan = ({
         delmednav={delmednav}
         fastlegeDeling={fastlegeDeling}
         delMedFastlege={delMedFastlege}
-        rootUrl={rootUrl}
         rootUrlPlaner={rootUrlPlaner}
       />
       <OppfolgingsdialogPlanInfoboks />
@@ -65,7 +62,6 @@ ReleasetPlan.propTypes = {
   giSamtykke: PropTypes.func,
   avbrytDialog: PropTypes.func,
   delMedFastlege: PropTypes.func,
-  rootUrl: PropTypes.string,
   rootUrlPlaner: PropTypes.string,
   oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
 };

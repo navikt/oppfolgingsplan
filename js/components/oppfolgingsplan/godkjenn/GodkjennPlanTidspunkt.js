@@ -1,22 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { gyldighetstidspunktPt, oppfolgingsplanPt } from '../../../propTypes/opproptypes';
-import { toDateMedMaanedNavn } from '../../../utils/datoUtils';
+import { gyldighetstidspunktPt, oppfolgingsplanPt } from '@/propTypes/opproptypes';
+import { toDateMedMaanedNavn } from '@/utils/datoUtils';
 import BildeTekstLinje from '../../app/BildeTekstLinje';
+import { BubbleImage, CalendarImage } from '@/images/imageComponents';
 
-const GodkjennPlanTidspunkt = ({ rootUrl, gyldighetstidspunkt }) => {
+const GodkjennPlanTidspunkt = ({ gyldighetstidspunkt }) => {
   return (
     gyldighetstidspunkt && (
       <React.Fragment>
         <BildeTekstLinje
-          imgUrl={`${rootUrl}/img/svg/calendar.svg`}
+          imgUrl={CalendarImage}
           imgAlt=""
           tekst={`Planens varighet: ${toDateMedMaanedNavn(gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(
             gyldighetstidspunkt.tom
           )}`}
         />
         <BildeTekstLinje
-          imgUrl={`${rootUrl}/img/svg/bubble.svg`}
+          imgUrl={BubbleImage}
           imgAlt=""
           tekst={`Planen evalueres: ${toDateMedMaanedNavn(gyldighetstidspunkt.evalueres)}`}
         />
@@ -26,7 +27,6 @@ const GodkjennPlanTidspunkt = ({ rootUrl, gyldighetstidspunkt }) => {
 };
 
 GodkjennPlanTidspunkt.propTypes = {
-  rootUrl: PropTypes.string,
   gyldighetstidspunkt: gyldighetstidspunktPt,
   avvisDialog: PropTypes.func,
   oppfolgingsdialog: oppfolgingsplanPt,

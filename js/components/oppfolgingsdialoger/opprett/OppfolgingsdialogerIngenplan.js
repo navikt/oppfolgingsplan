@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Panel } from 'nav-frontend-paneler';
-import { opprettOppfolgingArbeidsgiverPt } from '../../../propTypes';
-import { erOppfolgingsplanOpprettbarDirekte } from '../../../utils/oppfolgingsdialogUtils';
-import getContextRoot from '../../../utils/getContextRoot';
-import { oppfolgingsplanPt } from '../../../propTypes/opproptypes';
+import { opprettOppfolgingArbeidsgiverPt } from '@/propTypes';
+import { erOppfolgingsplanOpprettbarDirekte } from '@/utils/oppfolgingsdialogUtils';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
+import { OppfolgingsdialogTomImage } from '@/images/imageComponents';
 
 const texts = {
   tittel: 'Aktiv oppfølgingsplan',
@@ -64,7 +64,7 @@ const OppfolgingsdialogerIngenplan = ({ arbeidsgivere, oppfolgingsplaner, oppret
       </header>
       <Panel border>
         <div className="oppfolgingsdialogerIngenplan__blokk">
-          <img alt="" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-tom.svg`} />
+          <img alt="" src={OppfolgingsdialogTomImage} />
           <div className="inngangspanel__innhold">
             <header className="inngangspanel__header">
               <h3 className="js-title">

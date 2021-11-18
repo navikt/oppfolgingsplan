@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import getContextRoot from '../../../../utils/getContextRoot';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+import { VarseltrekantImage } from '@/images/imageComponents';
 
 const texts = {
   title: 'Lederen din har laget en oppfølgingsplan',
@@ -14,12 +14,7 @@ const texts = {
 
 const ArbeidsgiverHarTvangsgodkjent = ({ oppfolgingsdialog, markerMottattTvungenGodkjenning }) => {
   return (
-    <OppfolgingsplanInnholdboks
-      liteikon
-      svgUrl={`${getContextRoot()}/img/svg/varseltrekant.svg`}
-      svgAlt=""
-      tittel={texts.title}
-    >
+    <OppfolgingsplanInnholdboks liteikon svgUrl={VarseltrekantImage} svgAlt="" tittel={texts.title}>
       <div className="arbeidsgiverHarTvangsgodkjent">
         <p>{texts.paragraphInfo}</p>
         <PlanEkspanderbar oppfolgingsplan={oppfolgingsdialog} />

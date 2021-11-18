@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { kommentarPt, kommentarReducerPt } from '../../../../propTypes/opproptypes';
-import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
+import { kommentarPt, kommentarReducerPt } from '@/propTypes/opproptypes';
+import { toDateMedMaanedNavn } from '@/utils/datoUtils';
 import TiltakVarselFeil from '../TiltakVarselFeil';
 
 const texts = {
@@ -60,7 +60,7 @@ export class KommentarListeElement extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.kommentar.id === nextProps.kommentarReducer.feiletKommentarId &&
       nextProps.elementId === nextProps.kommentarReducer.feiletTiltakId &&
