@@ -265,7 +265,7 @@ Oppfolgingsdialog.propTypes = {
   hentPerson: PropTypes.func,
   hentNaermesteLeder: PropTypes.func,
   hentArbeidsforhold: PropTypes.func,
-  alleInputFormer: PropTypes.func,
+  alleInputFormer: PropTypes.objectOf(PropTypes.any),
 };
 
 export default Oppfolgingsdialog;

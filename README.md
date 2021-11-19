@@ -1,5 +1,5 @@
 # Oppfolgingsplan
-Frontend for digitalisering av sykefraværsoppfølging (DigiSYFO) http://tjenester.nav.no/oppfolgingsplan/oppfolgingsplaner
+Frontend for digitalisering av sykefraværsoppfølging (DigiSYFO)
 
 ## TL;DR
 React-app for oppfølgingsplanen på Ditt Sykefravær.
@@ -13,7 +13,7 @@ Du må ha Node installert.
     - `$ npm install`
     - `$ npm start`
     - Eventuelt kan komandoene kjøres fra `package.json` i intellij.
-    - Sjekk at appen kjører på http://localhost:8080/oppfolgingsplan/oppfolgingsplaner
+    - Sjekk at appen kjører på http://localhost:8080/syk/oppfolgingsplan/oppfolgingsplaner
 * Kjør tester med `npm test` eller `npm test:watch`
 * Lint JS-kode med `npm run lint` eller `npm run lint:fix`
 

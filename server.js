@@ -26,10 +26,10 @@ function disableCache(res) {
 }
 
 server.get('/', (req, res) => {
-  res.redirect('/oppfolgingsplan');
+  res.redirect('/syk/oppfolgingsplan');
 });
 
-server.use(['/static', '/oppfolgingsplan/static'], express.static(DIST_DIR, { index: false }));
+server.use(['/static', '/syk/oppfolgingsplan/static'], express.static(DIST_DIR, { index: false }));
 server.get('/internal/isAlive|isReady', (req, res) => res.sendStatus(200));
 
 if (env === 'opplaering') {

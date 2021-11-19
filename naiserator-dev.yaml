@@ -2,9 +2,9 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: oppfolgingsplan
-  namespace: default
+  namespace: team-esyfo
   labels:
-    team: teamsykefravr
+    team: team-esyfo
 spec:
   image: {{ image }}
   replicas:
@@ -13,13 +13,13 @@ spec:
     cpuThresholdPercentage: 90
   port: 8080
   liveness:
-    path: /health/isAlive
+    path: /isAlive
     initialDelay: 20
     timeout: 5
     periodSeconds: 5
     failureThreshold: 30
   readiness:
-    path: /health/isReady
+    path: /isReady
     initialDelay: 20
     periodSeconds: 5
     timeout: 5
@@ -34,14 +34,15 @@ spec:
       cpu: 200m
       memory: 256Mi
   ingresses:
-    - "https://tjenester-q1.nav.no/oppfolgingsplan"
-    - "https://oppfolgingsplan.nais.oera-q.local"
+    - "https://www-gcp.dev.nav.no/syk/oppfolgingsplan"
   env:
     - name: DECORATOR_URL
       value: https://dekoratoren.dev.nav.no
     - name: DECORATOR_ENV
       value: "dev"
     - name: LOGINSERVICE_URL
-      value: https://loginservice-q.nav.no/login
+      value: https://loginservice.dev.nav.no/login
     - name: SYFOOPREST_URL
       value: https://syfooprest.dev.nav.no
+    - name: DITTNAV_URL
+      value: https://www.dev.nav.no/person/dittnav

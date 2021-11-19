@@ -13,7 +13,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const setupDev = async (app, compiler) => {
   mockForOpplaeringsmiljo(app);
   mockForLokaltMiljo(app);
-  app.use('/oppfolgingsplan/static/', express.static(path.resolve(__dirname, 'dist')));
+  app.use('/syk/oppfolgingsplan/static/', express.static(path.resolve(__dirname, 'dist')));
 
   app.use('*', (req, res) => {
     const filename = path.join(compiler.outputPath, 'index.html');
@@ -34,7 +34,7 @@ module.exports = {
   entry: './js/index.tsx',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/oppfolgingsplan/static/',
+    publicPath: '/syk/oppfolgingsplan/static/',
     filename: 'bundle.js',
     clean: true,
   },

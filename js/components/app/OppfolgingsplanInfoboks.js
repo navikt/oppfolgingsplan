@@ -17,7 +17,7 @@ const OppfolgingsplanInfoboks = ({ svgUrl, svgAlt, tittel, tekst, children }) =>
 };
 
 OppfolgingsplanInfoboks.propTypes = {
-  svgUrl: PropTypes.objectOf(PropTypes.any),
+  svgUrl: PropTypes.string,
   svgAlt: PropTypes.string,
   tittel: PropTypes.string,
   tekst: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),

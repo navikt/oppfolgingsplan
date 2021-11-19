@@ -5,7 +5,7 @@ export const erHerokuApp = () => {
 };
 
 export const getSykefravaerUrl = () => {
-  return erHerokuApp() ? 'https://sykefravaer.herokuapp.com' : '/sykefravaer';
+  return erHerokuApp() ? 'https://sykefravaer.herokuapp.com' : process.env.REACT_APP_SYKEFRAVAER_ROOT;
 };
 
 export const isLocal = () => {
@@ -13,16 +13,5 @@ export const isLocal = () => {
 };
 
 export const isPreProd = () => {
-  return window.location.href.indexOf('-q') > -1;
-};
-
-export const getNaisInfix = () => {
-  return isPreProd() ? '-q' : '';
-};
-
-export const fullNaisUrl = (host, path) => {
-  if (isLocal() || erHerokuApp()) {
-    return path;
-  }
-  return `https://${host}${getNaisInfix()}.nav.no${path}`;
+  return window.location.href.indexOf('www-gcp.dev') > -1;
 };

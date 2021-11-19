@@ -234,7 +234,7 @@ Container.propTypes = {
   hentPerson: PropTypes.func,
   hentKontaktinfo: PropTypes.func,
   hentNaermesteLeder: PropTypes.func,
-  alleInputFormer: PropTypes.func,
+  alleInputFormer: PropTypes.objectOf(PropTypes.any),
 };
 
 export function mapStateToProps(state, ownProps) {
@@ -290,7 +290,7 @@ export function mapStateToProps(state, ownProps) {
     brodsmuler: [
       {
         tittel: texts.brodsmuler.dittSykefravaer,
-        sti: '/sykefravaer',
+        sti: process.env.REACT_APP_SYKEFRAVAER_ROOT,
         erKlikkbar: true,
       },
       {
