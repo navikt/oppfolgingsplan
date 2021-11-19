@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsdialogUtils';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
+import { hentGodkjenningsTidspunkt } from '@/utils/oppfolgingsdialogUtils';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import { EditButton } from './EditButton';
 import { SharingCheckbox } from './SharingCheckbox';
 import PlanEkspanderbar from '../PlanEkspanderbar';
+import { PlanMottattIgjenImage } from '@/images/imageComponents';
 
 const texts = {
   godkjennPlanMottattKnapper: {
@@ -51,12 +52,12 @@ GodkjennPlanMottattKnapper.propTypes = {
   godkjennPlan: PropTypes.func,
 };
 
-const GodkjennPlanAvslaattOgGodkjent = ({ oppfolgingsplan, rootUrl, godkjennPlan, avvisDialog }) => {
+const GodkjennPlanAvslaattOgGodkjent = ({ oppfolgingsplan, godkjennPlan, avvisDialog }) => {
   const sistOppfolgingsplan = oppfolgingsplan && hentGodkjenningsTidspunkt(oppfolgingsplan);
   return (
     <div className="godkjennPlanAvslaattOgGodkjent">
       <OppfolgingsplanInnholdboks
-        svgUrl={`${rootUrl}/img/svg/plan-mottatt-igjen.svg`}
+        svgUrl={PlanMottattIgjenImage}
         svgAlt=""
         tittel={texts.godkjennPlanAvslaattOgGodkjent.title}
       >
@@ -65,7 +66,7 @@ const GodkjennPlanAvslaattOgGodkjent = ({ oppfolgingsplan, rootUrl, godkjennPlan
             {`${oppfolgingsplan.arbeidsgiver.naermesteLeder.navn}${texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWho}`}
           </p>
 
-          <GodkjennPlanTidspunkt rootUrl={rootUrl} gyldighetstidspunkt={sistOppfolgingsplan} />
+          <GodkjennPlanTidspunkt gyldighetstidspunkt={sistOppfolgingsplan} />
           <PlanEkspanderbar oppfolgingsplan={oppfolgingsplan} />
           <EditButton oppfolgingsdialog={oppfolgingsplan} avvisDialog={avvisDialog} />
           <GodkjennPlanMottattKnapper
@@ -81,7 +82,6 @@ const GodkjennPlanAvslaattOgGodkjent = ({ oppfolgingsplan, rootUrl, godkjennPlan
 
 GodkjennPlanAvslaattOgGodkjent.propTypes = {
   oppfolgingsplan: oppfolgingsplanPt,
-  rootUrl: PropTypes.string,
   godkjennPlan: PropTypes.func,
   avvisDialog: PropTypes.func,
 };

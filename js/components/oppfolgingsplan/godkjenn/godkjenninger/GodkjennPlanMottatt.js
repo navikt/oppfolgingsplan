@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
@@ -9,6 +9,7 @@ import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
 import { EditButton } from './EditButton';
 import { SharingCheckbox } from './SharingCheckbox';
 import PlanEkspanderbar from '../PlanEkspanderbar';
+import { PlanMottattImage } from '@/images/imageComponents';
 
 const texts = {
   godkjennPlanMottattUtvidbar: {
@@ -65,13 +66,9 @@ GodkjennPlanMottattKnapper.propTypes = {
   godkjennPlan: PropTypes.func,
 };
 
-const GodkjennPlanMottatt = ({ oppfolgingsdialog, rootUrl, rootUrlPlaner, godkjennPlan, avvisDialog }) => {
+const GodkjennPlanMottatt = ({ oppfolgingsdialog, rootUrlPlaner, godkjennPlan, avvisDialog }) => {
   return (
-    <OppfolgingsplanInnholdboks
-      svgUrl={`${rootUrl}/img/svg/plan-mottatt.svg`}
-      svgAlt=""
-      tittel={texts.godkjennPlanMottatt.title}
-    >
+    <OppfolgingsplanInnholdboks svgUrl={PlanMottattImage} svgAlt="" tittel={texts.godkjennPlanMottatt.title}>
       <div className="godkjennPlanMottatt">
         <div className="blokk">
           <p>
@@ -80,10 +77,7 @@ const GodkjennPlanMottatt = ({ oppfolgingsdialog, rootUrl, rootUrlPlaner, godkje
         </div>
 
         <div className="blokk--xxs">
-          <GodkjennPlanTidspunkt
-            rootUrl={rootUrl}
-            gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt}
-          />
+          <GodkjennPlanTidspunkt gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt} />
         </div>
         <PlanEkspanderbar oppfolgingsplan={oppfolgingsdialog} />
         <EditButton oppfolgingsdialog={oppfolgingsdialog} avvisDialog={avvisDialog} />
@@ -103,7 +97,6 @@ const GodkjennPlanMottatt = ({ oppfolgingsdialog, rootUrl, rootUrlPlaner, godkje
 
 GodkjennPlanMottatt.propTypes = {
   oppfolgingsdialog: oppfolgingsplanPt,
-  rootUrl: PropTypes.string,
   rootUrlPlaner: PropTypes.string,
   avvisDialog: PropTypes.func,
   godkjennPlan: PropTypes.func,

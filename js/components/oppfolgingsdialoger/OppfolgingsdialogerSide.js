@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as oppfolgingsplanProptypes from '../../propTypes/opproptypes';
-import { populerPlanFraState } from '../../utils/stateUtils';
-import { kopierOppfolgingsdialog } from '../../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
-import {
-  hentOppfolgingsdialoger,
-  opprettOppfolgingsdialog,
-} from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
-import { hentNaermesteLeder } from '../../actions/oppfolgingsplan/naermesteLeder_actions';
-import { bekreftNyNaermesteLeder } from '../../actions/oppfolgingsplan/nyNaermesteleder_actions';
-import { hentPerson } from '../../actions/oppfolgingsplan/person_actions';
-import { sjekkTilgang } from '../../actions/oppfolgingsplan/sjekkTilgang_actions';
-import { hentVirksomhet } from '../../actions/oppfolgingsplan/virksomhet_actions';
+import { populerPlanFraState } from '@/utils/stateUtils';
+import { kopierOppfolgingsdialog } from '@/actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
+import { hentOppfolgingsdialoger, opprettOppfolgingsdialog } from '@/actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import { hentNaermesteLeder } from '@/actions/oppfolgingsplan/naermesteLeder_actions';
+import { bekreftNyNaermesteLeder } from '@/actions/oppfolgingsplan/nyNaermesteleder_actions';
+import { hentPerson } from '@/actions/oppfolgingsplan/person_actions';
+import { sjekkTilgang } from '@/actions/oppfolgingsplan/sjekkTilgang_actions';
+import { hentVirksomhet } from '@/actions/oppfolgingsplan/virksomhet_actions';
 import getContextRoot from '../../utils/getContextRoot';
 import Side from '../../sider/Side';
 import Feilmelding from '../Feilmelding';
@@ -23,11 +20,12 @@ import {
   henterEllerHarHentetOppfolgingsplaner,
   henterEllerHarHentetTilgang,
   oppfolgingsplanHarBlittOpprettet,
-} from '../../utils/reducerUtils';
-import { hentDineSykmeldinger } from '../../actions/dineSykmeldinger_actions';
-import { hentLedere } from '../../actions/ledere_actions';
+} from '@/utils/reducerUtils';
+import { hentDineSykmeldinger } from '@/actions/dineSykmeldinger_actions';
+import { hentLedere } from '@/actions/ledere_actions';
 import Oppfolgingsdialoger from './Oppfolgingsdialoger';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
+import { OppfolgingsdialogIkkeTilgangImage } from '@/images/imageComponents';
 
 const texts = {
   pageTitle: 'Oppfølgingsplaner - Oversikt',
@@ -43,7 +41,7 @@ const texts = {
 };
 
 export class Container extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { tilgang, oppfolgingsdialogerReducer } = this.props;
     if (!henterEllerHarHentetTilgang(tilgang)) {
       this.props.sjekkTilgang();
@@ -58,7 +56,7 @@ export class Container extends Component {
     window.sessionStorage.removeItem('evalueringsdato');
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { kopierDialogReducer, oppfolgingsdialogerReducer } = this.props;
     if (oppfolgingsplanHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
       window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
@@ -100,7 +98,7 @@ export class Container extends Component {
           } else if (!tilgang.data.harTilgang) {
             return (
               <OppfolgingsplanInfoboks
-                svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-infoboks-ikkeTilgang.svg`}
+                svgUrl={OppfolgingsdialogIkkeTilgangImage}
                 svgAlt=""
                 tittel={texts.infoboksNoAccess.title}
                 tekst={texts.infoboksNoAccess.info}

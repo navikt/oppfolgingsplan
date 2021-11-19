@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import GodkjennPlanAvslaatt from './GodkjennPlanAvslaatt';
 import GodkjennPlanAvslaattOgGodkjent from './GodkjennPlanAvslaattOgGodkjent';
 import GodkjennPlanMottatt from './GodkjennPlanMottatt';
@@ -35,7 +35,6 @@ const MottattGodkjenninger = ({
         avvisDialog={avvisDialog}
         godkjennPlan={godkjennPlan}
         oppfolgingsdialog={oppfolgingsplan}
-        rootUrl={rootUrl}
         rootUrlPlaner={rootUrlPlaner}
       />
     );

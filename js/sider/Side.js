@@ -7,10 +7,10 @@ import Brodsmuler from '../components/Brodsmuler';
 import Feilmelding from '../components/Feilmelding';
 import * as actions from '../actions/brukerinfo_actions';
 import { brodsmule as brodsmulePt } from '../propTypes';
-import { toggleHeleAppen } from '../toggles';
+import { toggleHeleAppen } from '@/toggles';
 import TimeoutBox from '../timeout/TimeoutBox';
 
-const DocumentTitle = require('react-document-title');
+import DocumentTitle from 'react-document-title';
 
 export const Utlogget = () => {
   return (
@@ -60,11 +60,11 @@ export class SideComponent extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.sjekkInnlogging();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.laster && !nextProps.laster) {
       const timeoutHandle = window.setTimeout(() => {
         this.setState({

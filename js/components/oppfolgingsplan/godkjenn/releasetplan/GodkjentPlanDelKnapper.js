@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Knapp } from 'nav-frontend-knapper';
-import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import FadingIconWithText from './FadingIconWithText';
 
 const texts = {
@@ -54,7 +54,7 @@ const GodkjentPlanDelKnapper = ({ oppfolgingsplan, delmednav, delMedNavFunc, fas
     if (prevProp === false && delmednav.sendt) {
       setShowFadingIconWithText(true);
     }
-  }, [delmednav.sendt]);
+  }, [delmednav.sendt, prevProp]);
 
   return (
     <div>

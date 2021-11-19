@@ -11,10 +11,9 @@ Du må ha Node installert.
 
 * For å kjøre koden lokalt: 
     - `$ npm install`
-    - `$ npm run dev`
-    - I et annet vindu `$ npm run start-local`
+    - `$ npm start`
     - Eventuelt kan komandoene kjøres fra `package.json` i intellij.
-    - Sjekk at appen kjører på http://localhost:8081/oppfolgingsplan/oppfolgingsplaner
+    - Sjekk at appen kjører på http://localhost:8080/oppfolgingsplan/oppfolgingsplaner
 * Kjør tester med `npm test` eller `npm test:watch`
 * Lint JS-kode med `npm run lint` eller `npm run lint:fix`
 

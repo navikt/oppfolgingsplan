@@ -9,7 +9,6 @@ const OppfolgingsdialogTeasere = ({
   className,
   tittel = '',
   id,
-  rootUrl,
   rootUrlPlaner,
   harTidligerOppfolgingsdialoger,
 }) => {
@@ -22,12 +21,7 @@ const OppfolgingsdialogTeasere = ({
         {!harTidligerOppfolgingsdialoger &&
           oppfolgingsdialoger.map((oppfolgingsdialog, idx) => {
             return (
-              <OppfolgingsdialogTeaser
-                oppfolgingsdialog={oppfolgingsdialog}
-                key={idx}
-                rootUrl={rootUrl}
-                rootUrlPlaner={rootUrlPlaner}
-              />
+              <OppfolgingsdialogTeaser oppfolgingsdialog={oppfolgingsdialog} key={idx} rootUrlPlaner={rootUrlPlaner} />
             );
           })}
         {harTidligerOppfolgingsdialoger &&
@@ -36,7 +30,6 @@ const OppfolgingsdialogTeasere = ({
               <OppfolgingsdialogTidligereTeaser
                 oppfolgingsdialog={oppfolgingsdialog}
                 key={idx}
-                rootUrl={rootUrl}
                 rootUrlPlaner={rootUrlPlaner}
               />
             );
@@ -52,7 +45,6 @@ OppfolgingsdialogTeasere.propTypes = {
   className: PropTypes.string,
   tittel: PropTypes.string,
   id: PropTypes.string,
-  rootUrl: PropTypes.string,
   rootUrlPlaner: PropTypes.string,
 };
 

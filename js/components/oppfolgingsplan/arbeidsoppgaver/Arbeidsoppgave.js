@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
+import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '@/propTypes/opproptypes';
 import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
 import ArbeidsoppgaveOverskrift from './ArbeidsoppgaveOverskrift';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
@@ -32,7 +32,7 @@ class Arbeidsoppgave extends Component {
     this.sendLagre = this.sendLagre.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.element.arbeidsoppgaveId === nextProps.arbeidsoppgaverReducer.feiletOppgaveId) {
       if (
         ((nextProps.arbeidsoppgaverReducer.lagringFeilet &&
@@ -100,7 +100,7 @@ class Arbeidsoppgave extends Component {
   }
 
   render() {
-    const { element, fnr, arbeidsoppgaverReducer, rootUrlImg, feilMelding } = this.props;
+    const { element, fnr, arbeidsoppgaverReducer, feilMelding } = this.props;
     return (() => {
       return (
         <article
@@ -115,7 +115,6 @@ class Arbeidsoppgave extends Component {
                 lagreSkjema={this.state.visLagreSkjema}
                 visLagreSkjema={this.visLagreSkjema}
                 sendSlett={this.sendSlett}
-                rootUrlImg={rootUrlImg}
               />
             </div>
             {!this.state.visLagreSkjema && <ArbeidsoppgaveInformasjon element={element} />}
@@ -128,7 +127,6 @@ class Arbeidsoppgave extends Component {
                 oppdateringFeilet={this.state.visLagringFeilet && feilMelding}
                 varselTekst={this.state.varselTekst}
                 arbeidsoppgaverReducer={arbeidsoppgaverReducer}
-                rootUrlImg={rootUrlImg}
               />
             )}
           </div>

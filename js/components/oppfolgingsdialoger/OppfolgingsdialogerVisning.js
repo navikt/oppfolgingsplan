@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
 import { dinesykmeldingerReducerPt, ledereReducerPt } from '../../propTypes';
-import { oppfolgingsplanPt } from '../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import {
   finnAktiveOppfolgingsdialoger,
   finnTidligereOppfolgingsdialoger,
   harTidligereOppfolgingsdialoger,
-} from '../../utils/oppfolgingsdialogUtils';
-import { finnArbeidsgivereForGyldigeSykmeldinger } from '../../utils/sykmeldingUtils';
+} from '@/utils/oppfolgingsdialogUtils';
+import { finnArbeidsgivereForGyldigeSykmeldinger } from '@/utils/sykmeldingUtils';
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsplanFilm from './OppfolgingsplanFilm';
 import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
@@ -108,7 +108,6 @@ class OppfolgingsdialogerVisning extends Component {
                   ? texts.oppfolgingsdialogerVisning.teaserAktive.titleMultiplePlaner
                   : texts.oppfolgingsdialogerVisning.teaserAktive.titleSinglePlan
               }
-              rootUrl={getContextRoot()}
               rootUrlPlaner={getContextRoot()}
             />
           </div>
@@ -119,7 +118,6 @@ class OppfolgingsdialogerVisning extends Component {
             harTidligerOppfolgingsdialoger
             tittel={texts.oppfolgingsdialogerVisning.teaserOutdatedPlaner.title}
             id="OppfolgingsdialogTeasereAT"
-            rootUrl={getContextRoot()}
             rootUrlPlaner={getContextRoot()}
           />
         )}

@@ -1,30 +1,34 @@
-var Webpack = require('webpack');
-var path = require('path');
-var buildPath = path.resolve(__dirname, 'dist/resources');
-var mainPath = path.resolve(__dirname, 'js', 'index.js');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var autoprefixer = require('autoprefixer');
-var Dotenv = require('dotenv-webpack');
+/* eslint-disable */
+const Webpack = require('webpack');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const extensions = ['.tsx', '.jsx', '.js', '.ts', '.json'];
+const CopyPlugin = require('copy-webpack-plugin');
 
-var config = function () {
-  var extractLess = new MiniCssExtractPlugin({
-    filename: 'styles.css',
-    disable: false,
-  });
-
+const config = function () {
   return {
-    // We change to normal source mapping
     devtool: 'source-map',
-    entry: ['babel-polyfill', mainPath],
+    entry: './js/index.tsx',
     output: {
-      path: buildPath,
+      path: path.resolve(__dirname, './dist'),
+      publicPath: '/oppfolgingsplan/static/',
       filename: 'bundle-prod.js',
+      clean: true,
     },
     mode: 'production',
     resolve: {
       alias: {
         react: path.join(__dirname, 'node_modules', 'react'),
       },
+      plugins: [
+        new TsconfigPathsPlugin({
+          extensions,
+        }),
+      ],
+      extensions,
     },
     module: {
       rules: [
@@ -38,48 +42,39 @@ var config = function () {
               loader: 'css-loader',
             },
             {
-              loader: 'postcss-loader',
+              loader: "postcss-loader",
               options: {
-                plugins: function () {
-                  return [autoprefixer];
+                postcssOptions: {
+                  plugins: [['postcss-preset-env']],
                 },
               },
             },
             {
               loader: 'less-loader',
-              options: {
-                globalVars: {
-                  nodeModulesPath: '~',
-                  coreModulePath: '~',
-                },
-              },
             },
           ],
         },
         {
-          test: /\.js$/,
-          exclude: [/node_modules/],
-          use: [
-            {
-              loader: 'babel-loader',
-              options: {
-                presets: ['react', 'env', 'babel-preset-stage-0'],
-              },
-            },
-          ],
+          test: /\.(js|ts|tsx)$/,
+          use: { loader: 'babel-loader' },
+          exclude: /node_modules/,
         },
         {
-          test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/,
-          use: [
-            {
-              loader: 'svg-url-loader',
-            },
-          ],
+          test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico|mp4)$/,
+          type: 'asset/resource',
         },
       ],
     },
     plugins: [
-      extractLess,
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'public/index.html',
+        hash: true,
+      }),
+      new CopyPlugin({ patterns: [{ from: 'filmtekster' }] }),
+      new MiniCssExtractPlugin({
+        filename: 'styles.css',
+      }),
       new Webpack.DefinePlugin({
         'process.env.NODE_ENV': '"production"',
       }),

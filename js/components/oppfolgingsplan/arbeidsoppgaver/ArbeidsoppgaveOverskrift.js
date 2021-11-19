@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { KANGJENNOMFOERES } from '../../../konstanter';
-import { arbeidsoppgavePt } from '../../../propTypes/opproptypes';
+import { KANGJENNOMFOERES } from '@/konstanter';
+import { arbeidsoppgavePt } from '@/propTypes/opproptypes';
 import ArbeidsoppgaveInformasjonKnapper from './ArbeidsoppgaveInformasjonKnapper';
+import { AdvarselImage, HakeGronnImage, HakeOransjeImage, KryssRoedImage } from '@/images/imageComponents';
 
 const texts = {
   hentArbeidsoppgaveUnderTekst: {
@@ -14,17 +15,17 @@ const texts = {
   },
 };
 
-export const hentArbeidsoppgaveIkon = (arbeidsoppgave, rootUrlImg) => {
+export const hentArbeidsoppgaveIkon = (arbeidsoppgave) => {
   if (arbeidsoppgave.gjennomfoering) {
     if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN) {
-      return `${rootUrlImg}/img/svg/hake-groenn.svg`;
+      return HakeGronnImage;
     } else if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING) {
-      return `${rootUrlImg}/img/svg/hake-oransje.svg`;
+      return HakeOransjeImage;
     } else if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN_IKKE) {
-      return `${rootUrlImg}/img/svg/kryss-roed.svg`;
+      return KryssRoedImage;
     }
   }
-  return `${rootUrlImg}/img/svg/advarsel.svg`;
+  return AdvarselImage;
 };
 
 export const hentArbeidsoppgaveUnderTekst = (arbeidsoppgave) => {
@@ -46,16 +47,12 @@ const ArbeidsoppgaveOverskriftImg = styled.div`
   flex-grow: 0;
 `;
 
-const ArbeidsoppgaveOverskrift = ({ fnr, arbeidsoppgave, lagreSkjema, visLagreSkjema, sendSlett, rootUrlImg }) => {
+const ArbeidsoppgaveOverskrift = ({ fnr, arbeidsoppgave, lagreSkjema, visLagreSkjema, sendSlett }) => {
   return (
     <div className="arbeidsoppgaveTabellUtvidbarOverskrift">
       <div className="arbeidsoppgaverListe__kol">
         <ArbeidsoppgaveOverskriftImg>
-          <img
-            className="arbeidsoppgaveOverskrift__ikon"
-            src={hentArbeidsoppgaveIkon(arbeidsoppgave, rootUrlImg)}
-            alt=""
-          />
+          <img className="arbeidsoppgaveOverskrift__ikon" src={hentArbeidsoppgaveIkon(arbeidsoppgave)} alt="" />
         </ArbeidsoppgaveOverskriftImg>
         <div className="arbeidsoppgaveOverskrift__tekst">
           <p>{arbeidsoppgave.arbeidsoppgavenavn}</p>
@@ -79,7 +76,6 @@ ArbeidsoppgaveOverskrift.propTypes = {
   lagreSkjema: PropTypes.bool,
   visLagreSkjema: PropTypes.func,
   sendSlett: PropTypes.func,
-  rootUrlImg: PropTypes.string,
 };
 
 export default ArbeidsoppgaveOverskrift;

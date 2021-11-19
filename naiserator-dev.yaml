@@ -37,9 +37,11 @@ spec:
     - "https://tjenester-q1.nav.no/oppfolgingsplan"
     - "https://oppfolgingsplan.nais.oera-q.local"
   env:
-    - name: APPRES_CMS_URL
-      value: https://appres-q1.nav.no
+    - name: DECORATOR_URL
+      value: https://dekoratoren.dev.nav.no
+    - name: DECORATOR_ENV
+      value: "dev"
     - name: LOGINSERVICE_URL
       value: https://loginservice-q.nav.no/login
-    - name: SYFOOPRESTAPI_URL
-      value: https://syfooprest.nais.oera-q.local/syfooprest/api
+    - name: SYFOOPREST_URL
+      value: https://syfooprest.dev.nav.no

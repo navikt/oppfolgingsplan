@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { tiltakPt, tiltakReducerPt } from '../../../propTypes/opproptypes';
+import { tiltakPt, tiltakReducerPt } from '@/propTypes/opproptypes';
 
 const texts = {
   buttonAbort: 'Avbryt',
@@ -24,7 +24,7 @@ class TiltakKnapper extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       (nextProps.tiltakReducer &&
         nextProps.tiltakReducer.lagrer &&
