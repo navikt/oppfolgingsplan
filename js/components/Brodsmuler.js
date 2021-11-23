@@ -102,7 +102,7 @@ class Brodsmuler extends Component {
       <nav className="brodsmuler" aria-label="Du er her: ">
         <img src={PersonImage} alt="" className="brodsmuler__ikon" />
         <div className="brodsmuler__smuler">
-          <a href="/dittnav" className="js-smule brodsmuler__smule">
+          <a href={process.env.DITTNAV_URL} className="js-smule brodsmuler__smule">
             Ditt NAV
           </a>
           {brodsmuler.length > 0 && <span className="brodsmule__skille"> / </span>}

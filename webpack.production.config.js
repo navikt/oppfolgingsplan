@@ -14,7 +14,7 @@ const config = function () {
     entry: './js/index.tsx',
     output: {
       path: path.resolve(__dirname, './dist'),
-      publicPath: '/oppfolgingsplan/static/',
+      publicPath: '/syk/oppfolgingsplan/static/',
       filename: 'bundle-prod.js',
       clean: true,
     },

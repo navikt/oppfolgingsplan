@@ -174,7 +174,7 @@ export const mapStateToProps = (state) => {
     brodsmuler: [
       {
         tittel: texts.brodsmuler.dittSykefravaer,
-        sti: '/sykefravaer',
+        sti: process.env.REACT_APP_SYKEFRAVAER_ROOT,
         erKlikkbar: true,
       },
       {

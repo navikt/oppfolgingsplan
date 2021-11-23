@@ -3,11 +3,11 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const appProxy = (server) => {
   server.use(
-    '/oppfolgingsplan/api/syfooprest',
+    '/syk/oppfolgingsplan/api/syfooprest',
     createProxyMiddleware({
       target: process.env.SYFOOPREST_URL,
       pathRewrite: {
-        '^/oppfolgingsplan/api/syfooprest': '/syfooprest/api',
+        '^/syk/oppfolgingsplan/api/syfooprest': '/syfooprest/api',
       },
       onError: (err, req, res) => {
         res.statusCode = 500;

@@ -134,7 +134,7 @@ function mockForOpplaeringsmiljo(server) {
     res.send(JSON.stringify(getSykmeldinger(SYKMELDING_TYPE.SYKMELDING_AKTIV)));
   });
 
-  server.get('/oppfolgingsplan/api/syfooprest/narmesteledere/:fodselsnummer', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/syfooprest/narmesteledere/:fodselsnummer', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[NAERMESTELEDERE]));
   });
@@ -151,7 +151,7 @@ function mockForOpplaeringsmiljo(server) {
     res.send(JSON.stringify(mockData[TILGANG]));
   });
 
-  server.get('/oppfolgingsplan/api/syfooprest/virksomhet/:virksomhetsnummer', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/syfooprest/virksomhet/:virksomhetsnummer', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[VIRKSOMHET]));
   });
@@ -160,35 +160,35 @@ function mockForOpplaeringsmiljo(server) {
     res.send();
   });
 
-  server.get('/oppfolgingsplan/api/syfooprest/arbeidsforhold', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/syfooprest/arbeidsforhold', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[ARBEIDSFORHOLD]));
   });
 
-  server.get('/oppfolgingsplan/api/syfooprest/person/:fnr', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/syfooprest/person/:fnr', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[PERSON]));
   });
 
-  server.get('/oppfolgingsplan/api/syfooprest/kontaktinfo/:fnr', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/syfooprest/kontaktinfo/:fnr', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[KONTAKTINFO]));
   });
 
-  server.get('/oppfolgingsplan/api/syfooprest/naermesteleder/:fnr', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/syfooprest/naermesteleder/:fnr', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[NAERMESTELEDER]));
   });
 
   server.get('/esso/logout', (req, res) => {
     // noinspection HtmlUnknownTarget
-    res.send('<p>Du har blitt sendt til utlogging.</p><p><a href="/sykefravaer">Gå til Ditt sykefravær</a></p>');
+    res.send('<p>Du har blitt sendt til utlogging.</p><p><a href="/syk/sykefravaer">Gå til Ditt sykefravær</a></p>');
   });
 
   server.get('/dittnav', (req, res) => {
     // noinspection HtmlUnknownTarget
     res.send(
-      '<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/sykefravaer">Gå til Ditt sykefravær</a></p>'
+      '<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/syk/sykefravaer">Gå til Ditt sykefravær</a></p>'
     );
   });
 }
