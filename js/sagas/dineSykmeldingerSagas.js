@@ -1,7 +1,8 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import * as actions from '../actions/dineSykmeldinger_actions';
 import * as actiontyper from '../actions/actiontyper';
-import { get, API_NAVN, hentSyfoapiUrl } from '../gateway-api';
+import { get } from '@/api/axios';
+import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 
 export function* hentDineSykmeldinger() {
   yield put(actions.henterDineSykmeldinger());

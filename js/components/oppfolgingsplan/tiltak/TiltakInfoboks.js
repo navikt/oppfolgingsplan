@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { Knapp } from 'nav-frontend-knapper';
 import styled from 'styled-components';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 
 export const tekster = {
   tittel: 'Hva kan gjøre det lettere å jobbe?',

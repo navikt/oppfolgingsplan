@@ -17,11 +17,9 @@ import samtykke from './samtykke';
 import tilgang from './tilgang';
 import tiltak from './tiltak';
 import virksomhet from './virksomhet';
-import timeout from './timeout';
 
 import dineSykmeldinger from './dineSykmeldinger';
 import ledere from './ledere';
-import brukerinfo from './brukerinfo';
 import history from '../history';
 
 const reducers = {
@@ -45,10 +43,8 @@ const reducers = {
   virksomhet,
   kontaktinfo,
   naermesteleder,
-  timeout,
   form: formReducer,
   ledere,
-  brukerinfo,
 };
 
 export default reducers;

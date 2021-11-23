@@ -1,10 +1,10 @@
-import { call, fork, put, takeEvery } from 'redux-saga/effects';
-import { get } from '@/gateway-api';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { get } from '@/api/axios';
 import * as actions from '../../actions/oppfolgingsplan/person_actions';
 
 export function* hentPersonSaga(action) {
-  yield put(actions.henterPerson(action.fnr));
   try {
+    yield put(actions.henterPerson(action.fnr));
     const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/person/${action.fnr}`;
     const person = yield call(get, url);
 
@@ -14,10 +14,6 @@ export function* hentPersonSaga(action) {
   }
 }
 
-function* watchHentPerson() {
-  yield takeEvery(actions.HENT_PERSON_FORESPURT, hentPersonSaga);
-}
-
 export default function* personSagas() {
-  yield fork(watchHentPerson);
+  yield takeEvery(actions.HENT_PERSON_FORESPURT, hentPersonSaga);
 }

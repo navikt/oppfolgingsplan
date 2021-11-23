@@ -8,6 +8,10 @@ const getHtmlWithDecorator = (filePath) =>
     filePath: filePath,
     urlLookupTable: false,
     chatbot: true,
+    redirectToApp: true,
+    enforceLogin: true,
+    utloggingsvarsel: true,
+    level: 'Level4',
   });
 
 module.exports = getHtmlWithDecorator;

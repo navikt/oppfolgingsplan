@@ -1,26 +1,21 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { post } from '@/api/axios';
+import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 import * as actions from '../../actions/oppfolgingsplan/delMedFastlege_actions';
 
 export function* delMedFastlege(action) {
-  const fnr = action.fnr;
-
-  yield put(actions.delerMedFastlege(fnr));
   try {
+    yield put(actions.delerMedFastlege(action.fnr));
     const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${
       action.id
     }/delmedfastlege`;
     yield call(post, url);
-    yield put(actions.deltMedFastlege(action.id, fnr));
+    yield put(actions.deltMedFastlege(action.id, action.fnr));
   } catch (e) {
-    yield put(actions.delMedFastlegeFeilet(fnr));
+    yield put(actions.delMedFastlegeFeilet(action.fnr));
   }
 }
 
-function* watchDelMedFastlege() {
-  yield takeEvery(actions.DEL_MED_FASTLEGE_FORESPURT, delMedFastlege);
-}
-
 export default function* delMedFastlegeSagas() {
-  yield fork(watchDelMedFastlege);
+  yield takeEvery(actions.DEL_MED_FASTLEGE_FORESPURT, delMedFastlege);
 }

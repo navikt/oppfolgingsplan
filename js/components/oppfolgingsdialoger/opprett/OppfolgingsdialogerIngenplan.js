@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import { opprettOppfolgingArbeidsgiverPt } from '@/propTypes';
 import { erOppfolgingsplanOpprettbarDirekte } from '@/utils/oppfolgingsdialogUtils';
 import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
