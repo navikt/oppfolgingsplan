@@ -1,10 +1,11 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
+import { post } from '@/api/axios';
+import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 
 export function* kopierOppfolgingsdialog(action) {
-  yield put(actions.kopiererOppfolgingsdialog());
   try {
+    yield put(actions.kopiererOppfolgingsdialog());
     const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/kopier`;
     const data = yield call(post, url);
     yield put(actions.oppfolgingsdialogKopiert(data));
@@ -13,10 +14,6 @@ export function* kopierOppfolgingsdialog(action) {
   }
 }
 
-function* watchKopierOppfolgingsdialog() {
-  yield takeEvery(actions.KOPIER_OPPFOLGINGSDIALOG_FORESPURT, kopierOppfolgingsdialog);
-}
-
 export default function* kopierOppfolgingsdialogSagas() {
-  yield fork(watchKopierOppfolgingsdialog);
+  yield takeEvery(actions.KOPIER_OPPFOLGINGSDIALOG_FORESPURT, kopierOppfolgingsdialog);
 }

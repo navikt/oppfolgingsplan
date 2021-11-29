@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import { textBothApprovedOppfolgingsplan } from '@/utils/textUtils';
 import { finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt } from '@/utils/oppfolgingsdialogUtils';
 import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '@/propTypes/opproptypes';

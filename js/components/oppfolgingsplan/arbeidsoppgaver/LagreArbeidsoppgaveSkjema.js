@@ -4,7 +4,7 @@ import connect from 'react-redux/lib/connect/connect';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import { tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '@/konstanter';
 import InfoVarsel from './InfoVarsel';
 import Checkbox from '../../skjema/Checkbox';

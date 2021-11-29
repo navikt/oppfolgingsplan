@@ -3,7 +3,7 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { Knapp } from 'nav-frontend-knapper';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import TiltakInfoboks, { tekster } from '../../../../js/components/oppfolgingsplan/tiltak/TiltakInfoboks';
 
 chai.use(chaiEnzyme());

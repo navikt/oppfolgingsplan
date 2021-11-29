@@ -1,5 +1,5 @@
 import * as actiontyper from '../actions/actiontyper';
-import { toDate } from '../utils/datoUtils';
+import { toDate } from '@/utils/datoUtils';
 
 const initiellState = {
   henter: false,
@@ -61,13 +61,6 @@ const dineSykmeldinger = (state = initiellState, action = {}) => {
         henter: false,
         hentingFeilet: true,
         hentet: true,
-      };
-    }
-    case actiontyper.BRUKER_ER_UTLOGGET: {
-      return {
-        data: [],
-        hentingFeilet: false,
-        henter: false,
       };
     }
     default: {

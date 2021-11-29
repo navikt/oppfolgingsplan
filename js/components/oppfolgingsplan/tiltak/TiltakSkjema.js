@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import { Feiloppsummering } from 'nav-frontend-skjema';
 import {
   STATUS_TILTAK,

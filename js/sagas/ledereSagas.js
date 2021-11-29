@@ -1,7 +1,7 @@
 import { call, fork, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../actions/ledere_actions';
 import * as actiontyper from '../actions/actiontyper';
-import { get } from '@/gateway-api';
+import { get } from '@/api/axios';
 
 export function* hentLedere(action) {
   yield put(actions.henterLedere());

@@ -1,10 +1,10 @@
-import { call, fork, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../../actions/oppfolgingsplan/kontaktinfo_actions';
-import { get } from '@/gateway-api';
+import { get } from '@/api/axios';
 
 export function* hentKontaktinfoSaga(action) {
-  yield put(actions.henterKontaktinfo(action.fnr));
   try {
+    yield put(actions.henterKontaktinfo(action.fnr));
     const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/kontaktinfo/${action.fnr}`;
     const kontaktinfo = yield call(get, url);
     yield put(actions.kontaktinfoHentet(kontaktinfo, action.fnr));
@@ -13,10 +13,6 @@ export function* hentKontaktinfoSaga(action) {
   }
 }
 
-function* watchHentKontaktinfo() {
-  yield takeEvery(actions.HENT_KONTAKTINFO_FORESPURT, hentKontaktinfoSaga);
-}
-
 export default function* kontaktinfoSagas() {
-  yield fork(watchHentKontaktinfo);
+  yield takeEvery(actions.HENT_KONTAKTINFO_FORESPURT, hentKontaktinfoSaga);
 }

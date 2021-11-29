@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import { SamtykkeIllustrasjonImage } from '@/images/imageComponents';
 
