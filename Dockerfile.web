@@ -2,10 +2,10 @@ FROM node:16-alpine
 WORKDIR /oppfolgingsplan
 
 COPY server.js package.json ./
-
 COPY node_modules ./node_modules
 COPY dist ./dist
 COPY server ./server
+COPY mock ./mock
 
 CMD ["node", "server.js", "opplaering"]
 
