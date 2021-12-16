@@ -4,15 +4,15 @@ import connect from 'react-redux/lib/connect/connect';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
-import { Panel } from 'nav-frontend-paneler';
-import { tekstfeltBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../../../konstanter';
+import Panel from 'nav-frontend-paneler';
+import { tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '@/konstanter';
 import InfoVarsel from './InfoVarsel';
 import Checkbox from '../../skjema/Checkbox';
 import Tekstfelt from '../../skjema/TekstFelt';
 import Tekstomraade from '../../skjema/TekstOmrade';
 import Radioknapper from '../../skjema/Radioknapper';
 import { KANGJENNOMFOERES, TILRETTELEGGING } from './arbeidsoppgavesvar';
-import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '../../../propTypes/opproptypes';
+import { arbeidsoppgavePt, arbeidsoppgaverReducerPt } from '@/propTypes/opproptypes';
 import ArbeidsoppgaveKnapper from './ArbeidsoppgaveKnapper';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
@@ -52,11 +52,13 @@ const texts = {
 };
 
 export const skjemaFeltPt = PropTypes.shape({
+  id: PropTypes.string,
   navn: PropTypes.string,
   spoersmaal: PropTypes.string,
 });
 
 export const skjemaFeltBeskrivelsePt = PropTypes.shape({
+  id: PropTypes.string,
   navn: PropTypes.string,
   spoersmaal: PropTypes.shape({
     tilrettelegging: PropTypes.string,
@@ -463,7 +465,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
 
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn arbeidsoppgave';
-    } else if (value.match(tekstfeltBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
+    } else if (value.match(tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
       feilmelding = 'Ugyldig spesialtegn er oppgitt';
     }
 
@@ -516,14 +518,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
   };
 
   render() {
-    const {
-      arbeidsoppgave,
-      handleSubmit,
-      varselTekst,
-      oppdateringFeilet,
-      arbeidsoppgaverReducer,
-      rootUrlImg,
-    } = this.props;
+    const { arbeidsoppgave, handleSubmit, varselTekst, oppdateringFeilet, arbeidsoppgaverReducer } = this.props;
     return (
       <Panel border={this.border()}>
         <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()}>
@@ -551,9 +546,7 @@ export class LagreArbeidsoppgaveSkjemaComponent extends Component {
               isFormSubmitted={this.state.isFormSubmitted}
             />
           )}
-          {this.state.gjennomfoeringSvarValgt !== KANGJENNOMFOERES.KAN && (
-            <InfoVarsel rootUrlImg={rootUrlImg} tekst={texts.infoVarsel} />
-          )}
+          {this.state.gjennomfoeringSvarValgt !== KANGJENNOMFOERES.KAN && <InfoVarsel tekst={texts.infoVarsel} />}
           {oppdateringFeilet && <ArbeidsoppgaveVarselFeil tekst={varselTekst} />}
           {this.state.errorList.length > 0 && (
             <Feiloppsummering tittel="For å gå videre må du rette opp følgende:" feil={this.state.errorList} />
@@ -577,10 +570,11 @@ LagreArbeidsoppgaveSkjemaComponent.propTypes = {
   initialize: PropTypes.func,
   oppdateringFeilet: PropTypes.bool,
   varselTekst: PropTypes.string,
-  rootUrlImg: PropTypes.string,
   arbeidsoppgaverReducer: arbeidsoppgaverReducerPt,
   touch: PropTypes.func,
   gjennomfoeringSvar: PropTypes.string,
+  arbeidsoppgavenavn: PropTypes.string,
+  beskrivelse: PropTypes.string,
 };
 
 const valueSelector = formValueSelector(LAGRE_ARBEIDSOPPGAVE_SKJEMANAVN);

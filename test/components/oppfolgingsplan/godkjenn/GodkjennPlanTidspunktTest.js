@@ -11,10 +11,9 @@ const expect = chai.expect;
 
 describe('GodkjennPlanTidspunkt', () => {
   const oppfolgingsdialog = getOppfolgingsdialog();
-  const url = '/sykefravaerarbeidsgiver';
 
   const komponent = shallow(
-    <GodkjennPlanTidspunkt rootUrl={url} gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt} />
+    <GodkjennPlanTidspunkt gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt} />
   );
 
   it('Skal vise 2 BildeTekstLinje', () => {

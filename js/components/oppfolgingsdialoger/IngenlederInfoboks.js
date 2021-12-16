@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import getContextRoot from '../../utils/getContextRoot';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
+import { OppfolgingsdialogIngenlederImage } from '@/images/imageComponents';
 
 const texts = {
   infoboks: {
@@ -20,7 +21,7 @@ const IngenledereInfoboks = () => {
   return (
     <div>
       <OppfolgingsplanInfoboks
-        svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialog-ingenleder.svg`}
+        svgUrl={OppfolgingsdialogIngenlederImage}
         svgAlt=""
         tittel={texts.infoboks.title}
         tekst={texts.infoboks.info}

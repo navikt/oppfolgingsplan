@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import getContextRoot from '../../../../utils/getContextRoot';
 import MottattGodkjenninger from './MottattGodkjenninger';
 import GodkjennPlanSendt from './GodkjennPlanSendt';
@@ -12,6 +12,9 @@ const harMottattGodkjenninger = (oppfolgingsdialog) => {
 };
 
 const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, avvisDialog, rootUrlPlaner }) => {
+  window.location.hash = 'godkjenn';
+  window.sessionStorage.setItem('hash', 'godkjenn');
+
   if (harMottattGodkjenninger(oppfolgingsdialog)) {
     return (
       <MottattGodkjenninger
@@ -28,7 +31,6 @@ const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, 
     <GodkjennPlanSendt
       oppfolgingsdialog={oppfolgingsdialog}
       nullstillGodkjenning={nullstillGodkjenning}
-      rootUrl={getContextRoot()}
       rootUrlPlaner={rootUrlPlaner}
     />
   );

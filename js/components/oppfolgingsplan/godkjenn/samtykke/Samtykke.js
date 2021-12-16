@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Panel } from 'nav-frontend-paneler';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import getContextRoot from '../../../../utils/getContextRoot';
+import Panel from 'nav-frontend-paneler';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
+import { SamtykkeIllustrasjonImage } from '@/images/imageComponents';
 
 const texts = {
   title: 'Vil du gjøre det lettere for andre som skal fylle ut?',
@@ -63,7 +63,7 @@ class Samtykke extends Component {
     return (
       <div className="panel blokk">
         <div className="illustrertTittel">
-          <img className="illustrertTittel__img" src={`${getContextRoot()}/img/svg/samtykke-illustrasjon.svg`} alt="" />
+          <img className="illustrertTittel__img" src={SamtykkeIllustrasjonImage} alt="" />
           <h2 className="illustrertTittel__tittel">{texts.title}</h2>
         </div>
         <p className="samtykke__tekst">

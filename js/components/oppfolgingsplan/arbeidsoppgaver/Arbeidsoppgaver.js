@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { arbeidsoppgaverReducerPt, oppfolgingsplanPt } from '../../../propTypes/opproptypes';
+import { arbeidsoppgaverReducerPt, oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import getContextRoot from '../../../utils/getContextRoot';
-import { capitalizeFirstLetter } from '../../../utils/textUtils';
-import { isEmpty, ikkeSendtTilGodkjenning } from '../../../utils/oppfolgingsdialogUtils';
-import { sorterArbeidsoppgaverEtterOpprettet } from '../../../utils/arbeidsoppgaveUtils';
+import { capitalizeFirstLetter } from '@/utils/textUtils';
+import { isEmpty } from '@/utils/oppfolgingsdialogUtils';
+import { sorterArbeidsoppgaverEtterOpprettet } from '@/utils/arbeidsoppgaveUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import NotifikasjonBoksVurderingOppgave from './NotifikasjonBoksVurderingOppgave';
@@ -14,7 +14,8 @@ import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
 import StegTittel from '../StegTittel';
 import ObligatoriskeFelterInfotekst from '../ObligatoriskeFelterInfotekst';
-import { scrollTo } from '../../../utils/browserUtils';
+import { scrollTo } from '@/utils/browserUtils';
+import { ArbeidsoppgaveOnboardingImage } from '@/images/imageComponents';
 
 const texts = {
   tittel: 'Arbeidsoppgaver',
@@ -83,13 +84,9 @@ class Arbeidsoppgaver extends Component {
     this.formRef = React.createRef();
   }
 
-  componentWillMount() {
-    const { oppfolgingsdialog } = this.props;
-
-    if (ikkeSendtTilGodkjenning(oppfolgingsdialog)) {
-      window.location.hash = 'arbeidsoppgaver';
-      window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
-    }
+  UNSAFE_componentWillMount() {
+    window.location.hash = 'arbeidsoppgaver';
+    window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
   }
 
   componentDidMount() {
@@ -100,7 +97,7 @@ class Arbeidsoppgaver extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       !nextProps.arbeidsoppgaver.feiletOppgaveId &&
       nextProps.arbeidsoppgaver.lagringFeilet &&
@@ -160,6 +157,7 @@ class Arbeidsoppgaver extends Component {
   }
 
   scrollToForm() {
+    // eslint-disable-next-line react/no-find-dom-node
     const form = findDOMNode(this.lagreSkjema);
     scrollTo(form, 300);
   }
@@ -192,7 +190,7 @@ class Arbeidsoppgaver extends Component {
               )}
               {!this.state.visArbeidsoppgaveSkjema ? (
                 <OppfolgingsplanInfoboks
-                  svgUrl={`${getContextRoot()}/img/svg/arbeidsoppgave-onboarding.svg`}
+                  svgUrl={ArbeidsoppgaveOnboardingImage}
                   svgAlt=""
                   tittel={texts.infoboks.title}
                   tekst={texts.infoboks.info}

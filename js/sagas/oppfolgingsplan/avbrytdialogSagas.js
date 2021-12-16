@@ -1,28 +1,23 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { post } from '@/api/axios';
+import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 import * as actions from '../../actions/oppfolgingsplan/avbrytdialog_actions';
 
 export function* avbrytDialog(action) {
-  const fnr = action.fnr;
-
-  yield put(actions.avbryterDialog(fnr));
   try {
+    yield put(actions.avbryterDialog(action.fnr));
     const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/avbryt`;
     yield call(post, url);
-    yield put(actions.dialogAvbrutt(action.id, fnr));
+    yield put(actions.dialogAvbrutt(action.id, action.fnr));
   } catch (e) {
-    if (e.message === '409') {
+    if (e.code === 409) {
       window.location.reload();
       return;
     }
-    yield put(actions.avbrytDialogFeilet(fnr));
+    yield put(actions.avbrytDialogFeilet(action.fnr));
   }
 }
 
-function* watchAvbrytDialog() {
-  yield takeEvery(actions.AVBRYT_DIALOG_FORESPURT, avbrytDialog);
-}
-
 export default function* avbrytdialogSagas() {
-  yield fork(watchAvbrytDialog);
+  yield takeEvery(actions.AVBRYT_DIALOG_FORESPURT, avbrytDialog);
 }

@@ -1,54 +1,45 @@
-import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { post } from '@/api/axios';
+import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 import * as actions from '../../actions/oppfolgingsplan/arbeidsoppgave_actions';
-import { input2RSArbeidsoppgave } from '../../utils/arbeidsoppgaveUtils';
+import { input2RSArbeidsoppgave } from '@/utils/arbeidsoppgaveUtils';
 
 export function* lagreArbeidsoppgave(action) {
-  const fnr = action.fnr;
-  yield put(actions.lagrerArbeidsoppgave(fnr, action.arbeidsoppgave.arbeidsoppgaveId));
   const body = input2RSArbeidsoppgave(action.arbeidsoppgave);
   try {
+    yield put(actions.lagrerArbeidsoppgave(action.fnr, action.arbeidsoppgave.arbeidsoppgaveId));
     const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${
       action.id
     }/lagreArbeidsoppgave`;
     const data = yield call(post, url, body);
-    yield put(actions.arbeidsoppgaveLagret(action.id, data, action.arbeidsoppgave, fnr));
+    yield put(actions.arbeidsoppgaveLagret(action.id, data, action.arbeidsoppgave, action.fnr));
   } catch (e) {
-    if (e.message === '409') {
+    if (e.code === 409) {
       window.location.reload();
       return;
     }
-    yield put(actions.lagreArbeidsoppgaveFeilet(fnr, body));
+    yield put(actions.lagreArbeidsoppgaveFeilet(action.fnr, body));
   }
 }
 
 export function* slettArbeidsoppgave(action) {
-  const fnr = action.fnr;
-
-  yield put(actions.sletterArbeidsoppgave(fnr));
   try {
+    yield put(actions.sletterArbeidsoppgave(action.fnr));
     const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidsoppgave/actions/${
       action.arbeidsoppgaveId
     }/slett`;
     yield call(post, url);
-    yield put(actions.arbeidsoppgaveSlettet(action.id, action.arbeidsoppgaveId, fnr));
+    yield put(actions.arbeidsoppgaveSlettet(action.id, action.arbeidsoppgaveId, action.fnr));
   } catch (e) {
-    if (e.message === '409') {
+    if (e.code === 409) {
       window.location.reload();
       return;
     }
-    yield put(actions.slettArbeidsoppgaveFeilet(fnr, action.arbeidsoppgaveId));
+    yield put(actions.slettArbeidsoppgaveFeilet(action.fnr, action.arbeidsoppgaveId));
   }
 }
 
-function* watchLagreArbeidsoppgave() {
-  yield takeEvery(actions.LAGRE_ARBEIDSOPPGAVE_FORESPURT, lagreArbeidsoppgave);
-}
-
-function* watchSlettArbeidsoppgave() {
-  yield takeEvery(actions.SLETT_ARBEIDSOPPGAVE_FORESPURT, slettArbeidsoppgave);
-}
-
 export default function* arbeidsoppgaveSagas() {
-  yield all([fork(watchLagreArbeidsoppgave), fork(watchSlettArbeidsoppgave)]);
+  yield takeEvery(actions.LAGRE_ARBEIDSOPPGAVE_FORESPURT, lagreArbeidsoppgave);
+  yield takeEvery(actions.SLETT_ARBEIDSOPPGAVE_FORESPURT, slettArbeidsoppgave);
 }

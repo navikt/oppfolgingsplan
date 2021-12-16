@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getContextRoot from '../../../../utils/getContextRoot';
-import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import ArbeidsgiverHarTvangsgodkjent from './ArbeidsgiverHarTvangsgodkjent';
 import ReleasetPlan from './ReleasetPlan';
 
@@ -61,7 +61,6 @@ class ReleasetPlanAT extends Component {
         delMedNavFunc={delMedNavFunc}
         delmednav={delmednav}
         oppfolgingsdialoger={oppfolgingsdialoger}
-        rootUrl={`${getContextRoot()}`}
         rootUrlPlaner={`${getContextRoot()}`}
       />
     );

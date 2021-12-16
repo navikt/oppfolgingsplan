@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { kommentarReducerPt, tiltakPt, tiltakReducerPt } from '../../../../propTypes/opproptypes';
+import { kommentarReducerPt, tiltakPt, tiltakReducerPt } from '@/propTypes/opproptypes';
 import TiltakSkjema from '../TiltakSkjema';
 import TiltakListeRad from './TiltakListeRad';
 import TiltakInformasjon from './TiltakInformasjon';
@@ -36,7 +36,7 @@ class Tiltak extends Component {
     this.skjulLagreKommentarSkjema = this.skjulLagreKommentarSkjema.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.props.element.tiltakId === nextProps.kommentarReducer.tiltakId &&
       this.props.kommentarReducer.lagrer &&

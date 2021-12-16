@@ -1,26 +1,21 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { post } from '@/api/axios';
+import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 import * as actions from '../../actions/oppfolgingsplan/nullstillGodkjenning_actions';
 
 export function* nullstillGodkjenning(action) {
-  const fnr = action.fnr;
-
-  yield put(actions.nullstillerGodkjenning(fnr));
   try {
+    yield put(actions.nullstillerGodkjenning(action.fnr));
     const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${
       action.id
     }/nullstillGodkjenning`;
     yield call(post, url);
-    yield put(actions.nullstiltGodkjenning(action.id, fnr));
+    yield put(actions.nullstiltGodkjenning(action.id, action.fnr));
   } catch (e) {
-    yield put(actions.nullstillGodkjenningFeilet(fnr));
+    yield put(actions.nullstillGodkjenningFeilet(action.fnr));
   }
 }
 
-function* watchNullstillGodkjenning() {
-  yield takeEvery(actions.NULLSTILL_GODKJENNING_FORESPURT, nullstillGodkjenning);
-}
-
 export default function* nullstillGodkjenningSagas() {
-  yield fork(watchNullstillGodkjenning);
+  yield takeEvery(actions.NULLSTILL_GODKJENNING_FORESPURT, nullstillGodkjenning);
 }

@@ -8,14 +8,14 @@ import {
   finnOgHentNaermesteLedereSomMangler,
   finnOgHentPersonerSomMangler,
   finnOgHentVirksomheterSomMangler,
-} from '../../utils/reducerUtils';
+} from '@/utils/reducerUtils';
 import {
   harNaermesteLeder,
   inneholderGodkjenninger,
   inneholderGodkjenningerAvArbeidstaker,
   inneholderGodkjentPlan,
   utenSamtykke,
-} from '../../utils/oppfolgingsdialogUtils';
+} from '@/utils/oppfolgingsdialogUtils';
 import getContextRoot from '../../utils/getContextRoot';
 import Arbeidsoppgaver from './arbeidsoppgaver/Arbeidsoppgaver';
 import AvbruttGodkjentPlanVarsel from './AvbruttGodkjentPlanVarsel';
@@ -72,7 +72,10 @@ export const erAvvistAvArbeidstaker = (oppfolgingsdialog) => {
 };
 
 class Oppfolgingsdialog extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
+    window.location.hash = 'godkjenn';
+    window.sessionStorage.setItem('hash', 'godkjenn');
+
     const {
       oppfolgingsdialog,
       virksomhet,
@@ -262,7 +265,7 @@ Oppfolgingsdialog.propTypes = {
   hentPerson: PropTypes.func,
   hentNaermesteLeder: PropTypes.func,
   hentArbeidsforhold: PropTypes.func,
-  alleInputFormer: PropTypes.func,
+  alleInputFormer: PropTypes.objectOf(PropTypes.any),
 };
 
 export default Oppfolgingsdialog;

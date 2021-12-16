@@ -1,14 +1,11 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../../actions/oppfolgingsplan/arbeidsforhold_actions';
-import { fullNaisUrl } from '../../utils/urlUtils';
-import { HOST_NAMES } from '../../konstanter';
-import { get } from '../../gateway-api';
+import { get } from '@/api/axios';
 
 export function* hentArbeidsforhold(action) {
-  yield put(actions.henterArbeidsforhold(action.fnr, action.virksomhetsnummer));
   try {
-    const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/arbeidsforhold?fnr=${action.fnr}&virksomhetsnummer=${action.virksomhetsnummer}&fom=${action.fom}`;
-    const url = fullNaisUrl(HOST_NAMES.SYFOOPREST, path);
+    yield put(actions.henterArbeidsforhold(action.fnr, action.virksomhetsnummer));
+    const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/arbeidsforhold?fnr=${action.fnr}&virksomhetsnummer=${action.virksomhetsnummer}&fom=${action.fom}`;
     const stillinger = yield call(get, url);
     yield put(actions.hentetArbeidsforhold(stillinger, action.fnr, action.virksomhetsnummer));
   } catch (e) {
@@ -16,10 +13,6 @@ export function* hentArbeidsforhold(action) {
   }
 }
 
-function* watchHentArbeidsforhold() {
-  yield takeEvery(actions.HENT_ARBEIDSFORHOLD_FORESPURT, hentArbeidsforhold);
-}
-
 export default function* arbeidsforholdSagas() {
-  yield fork(watchHentArbeidsforhold);
+  yield takeEvery(actions.HENT_ARBEIDSFORHOLD_FORESPURT, hentArbeidsforhold);
 }

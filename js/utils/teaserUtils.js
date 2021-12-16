@@ -1,6 +1,12 @@
-import { STATUS } from '../konstanter';
+import { STATUS } from '@/konstanter';
 import { finnSistEndretAvNavn } from './oppfolgingsdialogUtils';
 import { toDateMedMaanedNavn } from './datoUtils';
+import {
+  PlanGodkjentImage,
+  PlanAvbruttImage,
+  OppfolgingsdialogTomImage,
+  PlanIkkeAktivSykmeldingImage,
+} from '@/images/imageComponents';
 
 const texts = {
   hentPlanStatus: {
@@ -29,18 +35,18 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
         `${toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(
           oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom
         )}`;
-      status.img = 'plan-godkjent.svg';
+      status.img = PlanGodkjentImage;
       break;
     case STATUS.AVBRUTT:
       status.tekst = texts.hentPlanStatus.avbrutt;
-      status.img = 'plan-avbrutt.svg';
+      status.img = PlanAvbruttImage;
       break;
     case STATUS.UNDER_ARBEID:
       status.tekst = textStatusUnderArbeid(
         toDateMedMaanedNavn(oppfolgingsdialog.sistEndretDato),
         finnSistEndretAvNavn(oppfolgingsdialog)
       );
-      status.img = 'oppfolgingsdialog-tom.svg';
+      status.img = OppfolgingsdialogTomImage;
       break;
     case STATUS.AKTIV:
       status.tekst =
@@ -50,7 +56,7 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
         `${toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(
           oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom
         )}`;
-      status.img = 'plan-godkjent.svg';
+      status.img = PlanGodkjentImage;
       break;
     default:
       status.tekst =
@@ -60,7 +66,7 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
         `${toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(
           oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom
         )}`;
-      status.img = 'plan-godkjent.svg';
+      status.img = PlanGodkjentImage;
       break;
   }
   return status;
@@ -74,6 +80,6 @@ export const hentStatusUtenAktivSykmelding = (oppfolgingsdialog) => {
             oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom
           )}`
         : '',
-    img: 'plan-ikke-aktiv-sykmelding--hake.svg',
+    img: PlanIkkeAktivSykmeldingImage,
   };
 };

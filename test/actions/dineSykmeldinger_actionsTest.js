@@ -9,9 +9,6 @@ const expect = chai.expect;
 describe('dineSykmeldinger_actions', () => {
   beforeEach(() => {
     window = window || {};
-    window.APP_SETTINGS = {
-      REST_ROOT: 'http://tjenester.nav.no/syforest',
-    };
   });
 
   it('Skal ha en henterDineSykmeldinger()-funksjon som returnerer riktig action', () => {

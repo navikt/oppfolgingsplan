@@ -3,7 +3,7 @@ name: main
 on: push
 
 env:
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/oppfolgingsplan:${{ github.sha }}
+  IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
 
 jobs:
   build:
@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Use Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16'
       - name: Cache node modules
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -33,35 +33,32 @@ jobs:
           npm run test
       - name: Build
         run: |
-          npm run nais-build
-      - name: Login to Github Package Registry
-        env:
-          DOCKER_USERNAME: x-access-token
-          DOCKER_PASSWORD: ${{ secrets.GITHUB_ACCESS_TOKEN }}
-        run: |
-          echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin docker.pkg.github.com
+          npm run build
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and publish Docker image
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           docker build --tag ${IMAGE} .
-          docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           docker push ${IMAGE}
           echo ${IMAGE}
 
   deploy-dev:
     if: github.ref == 'refs/heads/master'
-    name: Deploy to NAIS Dev-sbs
+    name: Deploy to dev-gcp
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
+          CLUSTER: dev-gcp
           RESOURCE: naiserator-dev.yaml
-      
+
       # Notify Slack
       - name: Unsuccessful deploy notification dev
         if: failure()
@@ -75,28 +72,18 @@ jobs:
 
   deploy-prod:
     if: github.ref == 'refs/heads/master'
-    name: Deploy to NAIS Prod-sbs
+    name: Deploy to prod-gcp
     needs: deploy-dev
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-sbs
+          CLUSTER: prod-gcp
           RESOURCE: naiserator-prod.yaml
 
       # Notify Slack
-      - name: Successful deploy notification prod
-        if: success()
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_TITLE: 'Successful deployment! :rocket:'
-          SLACK_MESSAGE: 'A new release of `${{ github.event.repository.name }}` has been deployed to prod.'
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          MSG_MINIMAL: commit
-          SLACK_COLOR: ${{ job.status }}
-          
       - name: Unsuccessful deploy notification prod
         if: failure()
         uses: rtCamp/action-slack-notify@v2

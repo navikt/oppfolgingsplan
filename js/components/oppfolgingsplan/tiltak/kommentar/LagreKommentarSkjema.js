@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Field, reduxForm } from 'redux-form';
-import { tekstfeltRegex } from '../../../../konstanter';
-import { kommentarReducerPt } from '../../../../propTypes/opproptypes';
+import { tekstfeltRegex } from '@/konstanter';
+import { kommentarReducerPt } from '@/propTypes/opproptypes';
 import TekstOmrade from '../../../skjema/TekstOmrade';
 import TiltakVarselFeil from '../TiltakVarselFeil';
 
@@ -86,7 +86,7 @@ export class LagreKommentarSkjemaComponent extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.kommentarReducer.tiltakId === this.props.elementId) {
       this.setState({
         spinner: nextProps.kommentarReducer.lagrer,

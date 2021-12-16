@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 
 const OppfolgingsplanInfoboks = ({ svgUrl, svgAlt, tittel, tekst, children }) => {
   return (

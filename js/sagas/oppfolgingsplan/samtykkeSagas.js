@@ -1,26 +1,21 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { post } from '@/api/axios';
+import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 import * as actions from '../../actions/oppfolgingsplan/samtykke_actions';
 
 export function* giSamtykke(action) {
-  const fnr = action.fnr;
-
-  yield put(actions.girSamtykke(fnr));
+  yield put(actions.girSamtykke(action.fnr));
   try {
     const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${
       action.id
     }/samtykk?samtykke=${action.samtykke}`;
     yield call(post, url);
-    yield put(actions.samtykkeGitt(action.id, action.samtykke, fnr));
+    yield put(actions.samtykkeGitt(action.id, action.samtykke, action.fnr));
   } catch (e) {
-    yield put(actions.giSamtykkeFeilet(fnr));
+    yield put(actions.giSamtykkeFeilet(action.fnr));
   }
 }
 
-function* watchGiSamtykke() {
-  yield takeEvery(actions.GI_SAMTYKKE_FORESPURT, giSamtykke);
-}
-
 export default function* samtykkeSagas() {
-  yield fork(watchGiSamtykke);
+  yield takeEvery(actions.GI_SAMTYKKE_FORESPURT, giSamtykke);
 }

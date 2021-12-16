@@ -4,11 +4,16 @@ import { Route, Router } from 'react-router';
 import OppfolgingsdialogerSide from '../components/oppfolgingsdialoger/OppfolgingsdialogerSide';
 import OppfolgingsdialogSide from '../components/oppfolgingsplan/OppfolgingsdialogSide';
 
+const appendToBase = (path) => {
+  return process.env.REACT_APP_CONTEXT_ROOT + path;
+};
+
 const AppRouter = ({ history }) => {
   return (
     <Router history={history}>
-      <Route path="/oppfolgingsplan/oppfolgingsplaner" component={OppfolgingsdialogerSide} />
-      <Route path="/oppfolgingsplan/oppfolgingsplaner/:oppfolgingsdialogId" component={OppfolgingsdialogSide} />
+      <Route path={appendToBase('/oppfolgingsplaner')} component={OppfolgingsdialogerSide} />
+      <Route path={appendToBase('/oppfolgingsplaner/:oppfolgingsdialogId')} component={OppfolgingsdialogSide} />
+      <Route path="*" component={OppfolgingsdialogerSide} />
     </Router>
   );
 };

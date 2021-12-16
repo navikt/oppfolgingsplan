@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import { textBothApprovedOppfolgingsplan } from '../../../../utils/textUtils';
-import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
+import { textBothApprovedOppfolgingsplan } from '@/utils/textUtils';
+import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import Lightbox from '../../../Lightbox';
@@ -11,6 +11,7 @@ import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './God
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import PlanEkspanderbar from '../PlanEkspanderbar';
+import { HakeGronnLysImage } from '@/images/imageComponents';
 
 const texts = {
   godkjentPlan: {
@@ -73,7 +74,6 @@ class GodkjentPlan extends Component {
     const {
       oppfolgingsdialog,
       avbrytDialog,
-      rootUrl,
       rootUrlPlaner,
       delMedNavFunc,
       delmednav,
@@ -86,7 +86,7 @@ class GodkjentPlan extends Component {
       <React.Fragment>
         <OppfolgingsplanInnholdboks
           classnames="godkjentPlanOppfolgingsplanInfoboks"
-          svgUrl={`${rootUrl}/img/svg/hake-groenn--lys.svg`}
+          svgUrl={HakeGronnLysImage}
           svgAlt=""
           tittel={texts.godkjentPlan.title}
           mediumIcon
@@ -102,11 +102,10 @@ class GodkjentPlan extends Component {
               <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}</p>
             )}
             {godkjentPlan.tvungenGodkjenning && (
-              <TextForcedApprovedOppfolgingsplan rootUrl={rootUrl} text={tvungenGodkjenningText(oppfolgingsdialog)} />
+              <TextForcedApprovedOppfolgingsplan text={tvungenGodkjenningText(oppfolgingsdialog)} />
             )}
 
             <GodkjennPlanTidspunkt
-              rootUrl={rootUrl}
               gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt}
               oppfolgingsdialog={oppfolgingsdialog}
               avbrytDialog={avbrytDialog}
@@ -139,7 +138,6 @@ GodkjentPlan.propTypes = {
   oppfolgingsdialog: oppfolgingsplanPt,
   delmednav: delmednavPt,
   fastlegeDeling: delMedFastlegePt,
-  rootUrl: PropTypes.string,
   rootUrlPlaner: PropTypes.string,
   delMedNavFunc: PropTypes.func,
   delMedFastlege: PropTypes.func,

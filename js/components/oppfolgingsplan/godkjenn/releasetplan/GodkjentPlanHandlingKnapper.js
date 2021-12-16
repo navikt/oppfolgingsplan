@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import { erGyldigDatoIFortiden } from '../../../../utils/datoUtils';
-import { STATUS } from '../../../../konstanter';
-import { API_NAVN, hentSyfoapiUrl } from '../../../../gateway-api';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
+import { erGyldigDatoIFortiden } from '@/utils/datoUtils';
+import { STATUS } from '@/konstanter';
+import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 
 const texts = {
   buttonEndre: 'Gjør endringer',

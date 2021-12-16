@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
-import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsdialogUtils';
+import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
+import { finnNyesteGodkjenning } from '@/utils/oppfolgingsdialogUtils';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanVenterInfo from '../godkjenn/GodkjennPlanVenterInfo';
 import PlanEkspanderbar from '../PlanEkspanderbar';
+import { HakeGronnLysImage } from '@/images/imageComponents';
 
 const texts = {
   godkjennPlanSendt: {
@@ -27,19 +28,13 @@ const GodkjenPlanSentBlokk = (narmestelederName) => {
   );
 };
 
-const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, rootUrlPlaner }) => {
+const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrlPlaner }) => {
   return (
-    <OppfolgingsplanInnholdboks
-      svgUrl={`${rootUrl}/img/svg/hake-groenn--lys.svg`}
-      liteikon
-      svgAlt=""
-      tittel={texts.godkjennPlanSendt.title}
-    >
+    <OppfolgingsplanInnholdboks svgUrl={HakeGronnLysImage} liteikon svgAlt="" tittel={texts.godkjennPlanSendt.title}>
       <div className="godkjennPlanSendt">
         {GodkjenPlanSentBlokk(oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}
 
         <GodkjennPlanTidspunkt
-          rootUrl={rootUrl}
           gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsdialog.godkjenninger).gyldighetstidspunkt}
         />
 
@@ -61,7 +56,6 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
 GodkjennPlanSendt.propTypes = {
   oppfolgingsdialog: oppfolgingsplanPt,
   nullstillGodkjenning: PropTypes.func,
-  rootUrl: PropTypes.string,
   rootUrlPlaner: PropTypes.string,
 };
 
