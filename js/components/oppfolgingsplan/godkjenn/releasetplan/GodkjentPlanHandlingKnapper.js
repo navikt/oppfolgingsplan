@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { oppfolgingsplanPt } from '@/propTypes/opproptypes';
 import { erGyldigDatoIFortiden } from '@/utils/datoUtils';
 import { STATUS } from '@/konstanter';
-import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 
 const texts = {
   buttonEndre: 'Gjør endringer',
@@ -15,7 +14,7 @@ export const ButtonDownload = ({ oppfolgingsplan }) => {
     <div className="godkjentPlanKnapper__knapp godkjentPlanDelKnapper__lastNed">
       <a
         className="lenke"
-        href={`${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/dokument/${oppfolgingsplan.id}/`}
+        href={`${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/dokument/${oppfolgingsplan.id}/`}
         download="oppfølgingsplan"
       >
         {texts.buttonDownload}

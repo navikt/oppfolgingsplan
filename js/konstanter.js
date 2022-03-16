@@ -18,10 +18,6 @@ export const maanedListe = [
 ];
 export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING = 4;
 
-export const HOST_NAMES = {
-  SYFOOPREST: 'syfooprest',
-};
-
 export const KANGJENNOMFOERES = {
   KAN: 'KAN',
   KAN_IKKE: 'KAN_IKKE',

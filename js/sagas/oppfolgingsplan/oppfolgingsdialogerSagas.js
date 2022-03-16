@@ -1,12 +1,11 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { get, post } from '@/api/axios';
-import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 import * as actions from '../../actions/oppfolgingsplan/oppfolgingsdialog_actions';
 
 export function* hentSykmeldtOppfolginger() {
   try {
     yield put(actions.henterOppfolgingsdialoger());
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidstaker/oppfolgingsplaner`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/arbeidstaker/oppfolgingsplaner`;
     const data = yield call(get, url);
     yield put(actions.oppfolgingsdialogerHentet(data));
   } catch (e) {
@@ -17,7 +16,7 @@ export function* hentSykmeldtOppfolginger() {
 export function* opprettOppfolgingsdialog(action) {
   try {
     yield put(actions.oppretterOppfolgingsdialog());
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidstaker/oppfolgingsplaner`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/arbeidstaker/oppfolgingsplaner`;
     const data = yield call(post, url, {
       virksomhetsnummer: action.virksomhetsnummer,
     });
@@ -35,9 +34,7 @@ export function* godkjennDialogSaga(action) {
   try {
     yield put(actions.godkjennerDialog());
     const delMedNav = `&delmednav=${action.delMedNav}`;
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${
-      action.id
-    }/godkjenn?status=${action.status}&aktoer=arbeidstaker${delMedNav}`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker${delMedNav}`;
     const data = yield call(post, url, action.gyldighetstidspunkt);
     yield put(actions.dialogGodkjent(action.id, action.status, data, action.delMedNav));
   } catch (e) {
@@ -52,7 +49,7 @@ export function* godkjennDialogSaga(action) {
 export function* avvisDialogSaga(action) {
   try {
     yield put(actions.avviserDialog());
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/avvis`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/oppfolgingsplan/actions/${action.id}/avvis`;
     yield call(post, url);
     yield put(actions.dialogAvvist(action.id));
   } catch (e) {

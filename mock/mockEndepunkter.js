@@ -80,31 +80,31 @@ function mockForLokaltMiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/tiltak/actions/:response/lagreKommentar', (req, res) => {
     mockOpprettetIdResultat(res);
   });
 
-  server.post('/syfooppfolgingsplanservice/api/kommentar/actions/:response/slett', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/kommentar/actions/:response/slett', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/arbeidsoppgave/actions/:id/slett', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/arbeidsoppgave/actions/:id/slett', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:id/slett', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/tiltak/actions/:id/slett', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/lagreArbeidsoppgave', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/oppfolgingsplan/actions/:id/lagreArbeidsoppgave', (req, res) => {
     mockOpprettetIdResultat(res);
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/lagreTiltak', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/oppfolgingsplan/actions/:id/lagreTiltak', (req, res) => {
     mockOpprettetIdResultat(res);
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/godkjenn', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/oppfolgingsplan/actions/:id/godkjenn', (req, res) => {
     res.send({
       fom: req.body.fom,
       tom: req.body.tom,
@@ -112,15 +112,15 @@ function mockForLokaltMiljo(server) {
     });
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/samtykk', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/oppfolgingsplan/actions/:id/samtykk', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/nullstillGodkjenning', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/oppfolgingsplan/actions/:id/nullstillGodkjenning', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/avvis', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/oppfolgingsplan/actions/:id/avvis', (req, res) => {
     res.send();
   });
 }
@@ -129,53 +129,53 @@ function mockForOpplaeringsmiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/syfooppfolgingsplanservice/api/arbeidstaker/sykmeldinger', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/oppfolgingsplanservice/arbeidstaker/sykmeldinger', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(getSykmeldinger(SYKMELDING_TYPE.SYKMELDING_AKTIV)));
   });
 
-  server.get('/syk/oppfolgingsplan/api/syfooprest/narmesteledere/:fodselsnummer', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/oppfolgingsplanservice/v2/narmesteledere/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[NAERMESTELEDERE]));
   });
 
-  server.get('/syfooppfolgingsplanservice/api/arbeidstaker/oppfolgingsplaner', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/oppfolgingsplanservice/arbeidstaker/oppfolgingsplaner', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(mockOppfolgingsplan.getOppfolgingsplaner(mockOppfolgingsplan.TYPE_DEFAULT));
   });
 
-  //TODO: Ser ut som om vi mangler mock for oppretting av OP: POST mot '/syfooppfolgingsplanservice/api/arbeidstaker/oppfolgingsplaner'
+  //TODO: Ser ut som om vi mangler mock for oppretting av OP: POST mot '/syk/oppfolgingsplan/api/oppfolgingsplanservice/arbeidstaker/oppfolgingsplaner'
 
-  server.get('/syfooppfolgingsplanservice/api/tilgang', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/oppfolgingsplanservice/tilgang', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[TILGANG]));
   });
 
-  server.get('/syk/oppfolgingsplan/api/syfooprest/virksomhet/:virksomhetsnummer', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/oppfolgingsplanservice/v2/virksomhet/:virksomhetsnummer', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[VIRKSOMHET]));
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/sett', (req, res) => {
+  server.post('/syk/oppfolgingsplan/api/oppfolgingsplanservice/oppfolgingsplan/actions/:id/sett', (req, res) => {
     res.send();
   });
 
-  server.get('/syk/oppfolgingsplan/api/syfooprest/arbeidsforhold', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/oppfolgingsplanservice/v2/arbeidsforhold', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[ARBEIDSFORHOLD]));
   });
 
-  server.get('/syk/oppfolgingsplan/api/syfooprest/person/:fnr', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/oppfolgingsplanservice/v2/person/:fnr', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[PERSON]));
   });
 
-  server.get('/syk/oppfolgingsplan/api/syfooprest/kontaktinfo/:fnr', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/oppfolgingsplanservice/v2/kontaktinfo/:fnr', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[KONTAKTINFO]));
   });
 
-  server.get('/syk/oppfolgingsplan/api/syfooprest/naermesteleder/:fnr', (req, res) => {
+  server.get('/syk/oppfolgingsplan/api/oppfolgingsplanservice/v2/narmesteleder/:fnr', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[NAERMESTELEDER]));
   });
