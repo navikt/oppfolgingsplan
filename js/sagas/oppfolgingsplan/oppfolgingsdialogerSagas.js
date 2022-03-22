@@ -34,7 +34,11 @@ export function* godkjennDialogSaga(action) {
   try {
     yield put(actions.godkjennerDialog());
     const delMedNav = `&delmednav=${action.delMedNav}`;
-    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker${delMedNav}`;
+
+    const url = action.gyldighetstidspunkt
+      ? `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidstaker${delMedNav}`
+      : `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/oppfolgingsplan/actions/${action.id}/godkjennsist?status=${action.status}&aktoer=arbeidstaker${delMedNav}`;
+
     const data = yield call(post, url, action.gyldighetstidspunkt);
     yield put(actions.dialogGodkjent(action.id, action.status, data, action.delMedNav));
   } catch (e) {
