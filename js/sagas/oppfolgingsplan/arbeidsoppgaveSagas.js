@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { post } from '@/api/axios';
-import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 import * as actions from '../../actions/oppfolgingsplan/arbeidsoppgave_actions';
 import { input2RSArbeidsoppgave } from '@/utils/arbeidsoppgaveUtils';
 
@@ -8,9 +7,7 @@ export function* lagreArbeidsoppgave(action) {
   const body = input2RSArbeidsoppgave(action.arbeidsoppgave);
   try {
     yield put(actions.lagrerArbeidsoppgave(action.fnr, action.arbeidsoppgave.arbeidsoppgaveId));
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${
-      action.id
-    }/lagreArbeidsoppgave`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/oppfolgingsplan/actions/${action.id}/lagreArbeidsoppgave`;
     const data = yield call(post, url, body);
     yield put(actions.arbeidsoppgaveLagret(action.id, data, action.arbeidsoppgave, action.fnr));
   } catch (e) {
@@ -25,9 +22,7 @@ export function* lagreArbeidsoppgave(action) {
 export function* slettArbeidsoppgave(action) {
   try {
     yield put(actions.sletterArbeidsoppgave(action.fnr));
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidsoppgave/actions/${
-      action.arbeidsoppgaveId
-    }/slett`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/arbeidsoppgave/actions/${action.arbeidsoppgaveId}/slett`;
     yield call(post, url);
     yield put(actions.arbeidsoppgaveSlettet(action.id, action.arbeidsoppgaveId, action.fnr));
   } catch (e) {

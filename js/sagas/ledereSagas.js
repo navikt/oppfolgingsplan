@@ -1,4 +1,4 @@
-import { call, fork, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../actions/ledere_actions';
 import * as actiontyper from '../actions/actiontyper';
 import { get } from '@/api/axios';
@@ -6,7 +6,7 @@ import { get } from '@/api/axios';
 export function* hentLedere(action) {
   yield put(actions.henterLedere());
   try {
-    const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/narmesteledere/${action.fodselsnummer}`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/v2/narmesteledere/${action.fodselsnummer}`;
     const data = yield call(get, url);
 
     yield put(actions.ledereHentet(data));
@@ -15,10 +15,6 @@ export function* hentLedere(action) {
   }
 }
 
-function* watchHentLedere() {
-  yield takeEvery(actiontyper.HENT_LEDERE_FORESPURT, hentLedere);
-}
-
 export default function* ledereSagas() {
-  yield fork(watchHentLedere);
+  yield takeEvery(actiontyper.HENT_LEDERE_FORESPURT, hentLedere);
 }

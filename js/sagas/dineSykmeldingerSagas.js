@@ -2,12 +2,14 @@ import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import * as actions from '../actions/dineSykmeldinger_actions';
 import * as actiontyper from '../actions/actiontyper';
 import { get } from '@/api/axios';
-import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 
 export function* hentDineSykmeldinger() {
   yield put(actions.henterDineSykmeldinger());
   try {
-    const data = yield call(get, `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidstaker/sykmeldinger`);
+    const data = yield call(
+      get,
+      `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/arbeidstaker/sykmeldinger`
+    );
     yield put(actions.setDineSykmeldinger(data));
   } catch (e) {
     yield put(actions.hentDineSykmeldingerFeilet());

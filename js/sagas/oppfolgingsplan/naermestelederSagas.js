@@ -13,7 +13,7 @@ export const mapNarmesteLederToPerson = (narmesteLeder) => {
 export function* hentNaermesteLederSaga(action) {
   try {
     yield put(actions.henterNaermesteLeder(action.fnr, action.virksomhetsnummer));
-    const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/naermesteleder/${action.fnr}?virksomhetsnummer=${action.virksomhetsnummer}`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/v2/narmesteleder/${action.fnr}?virksomhetsnummer=${action.virksomhetsnummer}`;
     const narmesteLeder = yield call(get, url);
     yield put(personHentet(mapNarmesteLederToPerson(narmesteLeder), narmesteLeder.fnr));
     yield put(actions.naermesteLederHentet(narmesteLeder, action.fnr, action.virksomhetsnummer));

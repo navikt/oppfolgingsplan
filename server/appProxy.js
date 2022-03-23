@@ -1,15 +1,17 @@
 /* eslint-disable */
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const winstonLogger = require('./winstonLogger');
 
 const appProxy = (server) => {
   server.use(
-    '/syk/oppfolgingsplan/api/syfooprest',
+    '/syk/oppfolgingsplan/api/oppfolgingsplanservice',
     createProxyMiddleware({
-      target: process.env.SYFOOPREST_URL,
+      target: process.env.SYFOOPPFOLGINGSPLANSERVICE_HOST,
       pathRewrite: {
-        '^/syk/oppfolgingsplan/api/syfooprest': '/syfooprest/api',
+        '^/syk/oppfolgingsplan/api/oppfolgingsplanservice': '/syfooppfolgingsplanservice/api',
       },
       onError: (err, req, res) => {
+        winstonLogger.error(err);
         res.statusCode = 500;
         res.setHeader('Content-Type', 'application/json');
         res.write(
