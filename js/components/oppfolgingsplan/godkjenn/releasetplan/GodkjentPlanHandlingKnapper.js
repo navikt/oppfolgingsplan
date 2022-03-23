@@ -14,7 +14,7 @@ export const ButtonDownload = ({ oppfolgingsplan }) => {
     <div className="godkjentPlanKnapper__knapp godkjentPlanDelKnapper__lastNed">
       <a
         className="lenke"
-        href={`${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/dokument/${oppfolgingsplan.id}/`}
+        href={`${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/dokument/${oppfolgingsplan.id}/ekstern`}
         download="oppfølgingsplan"
       >
         {texts.buttonDownload}
