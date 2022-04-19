@@ -43,6 +43,6 @@ spec:
     - name: LOGINSERVICE_URL
       value: https://loginservice.dev.nav.no/login
     - name: DITTNAV_URL
-      value: https://www.dev.nav.no/person/dittnav
+      value: https://www.nav.no/person/dittnav
     - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
       value: https://syfooppfolgingsplanservice.dev-fss-pub.nais.io
