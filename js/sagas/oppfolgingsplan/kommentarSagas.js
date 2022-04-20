@@ -1,14 +1,11 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { post } from '@/api/axios';
-import { API_NAVN, hentSyfoapiUrl } from '@/api/apiUtils';
 import * as actions from '../../actions/oppfolgingsplan/kommentar_actions';
 
 export function* lagreKommentar(action) {
   try {
     yield put(actions.lagrerKommentar(action.fnr, action.tiltakId));
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/tiltak/actions/${
-      action.tiltakId
-    }/lagreKommentar`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/tiltak/actions/${action.tiltakId}/lagreKommentar`;
     const data = yield call(post, url, action.kommentar);
     yield put(actions.kommentarLagret(action.id, action.tiltakId, data, action.kommentar, action.fnr));
   } catch (e) {
@@ -23,7 +20,7 @@ export function* lagreKommentar(action) {
 export function* slettKommentar(action) {
   try {
     yield put(actions.sletterKommentar(action.fnr));
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/kommentar/actions/${action.kommentarId}/slett`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/kommentar/actions/${action.kommentarId}/slett`;
     yield call(post, url);
     yield put(actions.kommentarSlettet(action.id, action.tiltakId, action.kommentarId, action.fnr));
   } catch (e) {

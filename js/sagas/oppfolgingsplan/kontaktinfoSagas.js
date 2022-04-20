@@ -5,7 +5,7 @@ import { get } from '@/api/axios';
 export function* hentKontaktinfoSaga(action) {
   try {
     yield put(actions.henterKontaktinfo(action.fnr));
-    const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/kontaktinfo/${action.fnr}`;
+    const url = `${process.env.REACT_APP_SYFOOPPFOLGINGSPLANSERVICE_PROXY_PATH}/v2/kontaktinfo/${action.fnr}`;
     const kontaktinfo = yield call(get, url);
     yield put(actions.kontaktinfoHentet(kontaktinfo, action.fnr));
   } catch (e) {

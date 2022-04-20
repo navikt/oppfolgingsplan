@@ -15,7 +15,6 @@ import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
 import { oppfolgingsplanPt } from '../../../../propTypes/opproptypes';
 import { getEndDateFromTiltakListe, getStartDateFromTiltakListe } from '../../../../utils/tiltakUtils';
-import { erHerokuApp } from '../../../../utils/urlUtils';
 import ObligatoriskeFelterInfotekst from '../../ObligatoriskeFelterInfotekst';
 
 const texts = {
@@ -334,15 +333,7 @@ export class GodkjennPlanLightboksComponent extends Component {
           )}
           <div className="knapperad">
             <div className="knapperad__element">
-              <Hovedknapp
-                htmlType="submit"
-                spinner={this.state.submitting}
-                onClick={(e) => {
-                  if (erHerokuApp()) {
-                    e.preventDefault();
-                  }
-                }}
-              >
+              <Hovedknapp htmlType="submit" spinner={this.state.submitting}>
                 {texts.buttonSend}
               </Hovedknapp>
             </div>
