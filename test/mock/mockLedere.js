@@ -5,6 +5,7 @@ export const getLedere = [
     mobil: '99988777',
     virksomhetsnummer: '123456789',
     organisasjonsnavn: 'Arbeidsgiver AS',
+    erAktiv: true,
     aktivTom: null,
   },
   {
@@ -13,6 +14,7 @@ export const getLedere = [
     mobil: '99988777',
     virksomhetsnummer: '123456788',
     organisasjonsnavn: 'Arbeidsgiver',
+    erAktiv: true,
     aktivTom: null,
   },
 ];

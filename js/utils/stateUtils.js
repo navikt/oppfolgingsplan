@@ -26,7 +26,11 @@ const finnNaermesteLeder = (fnr, virksomhetsnummer, state) => {
   return (
     state.naermesteleder.data
       .filter((naermesteleder) => {
-        return naermesteleder.fnr === fnr && naermesteleder.virksomhetsnummer === virksomhetsnummer;
+        return (
+          naermesteleder.fnr === fnr &&
+          naermesteleder.virksomhetsnummer === virksomhetsnummer &&
+          naermesteleder.naermesteLeder.erAktiv
+        );
       })
       .map((naermesteleder) => {
         return naermesteleder.naermesteLeder;

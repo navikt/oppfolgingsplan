@@ -3,14 +3,14 @@ import { erSykmeldingGyldigForOppfolgingMedGrensedato } from './oppfolgingsdialo
 export const sykmeldtHarNaermestelederHosArbeidsgiver = (virksomhetsnummer, naermesteLedere) => {
   return (
     naermesteLedere.filter((leder) => {
-      return virksomhetsnummer === leder.virksomhetsnummer;
+      return virksomhetsnummer === leder.virksomhetsnummer && leder.erAktiv;
     }).length > 0
   );
 };
 
 export const finnSykmeldtSinNaermestelederNavnHosArbeidsgiver = (virksomhetsnummer, naermesteLedere) => {
   const naermesteLeder = naermesteLedere.filter((leder) => {
-    return virksomhetsnummer === leder.virksomhetsnummer;
+    return virksomhetsnummer === leder.virksomhetsnummer && leder.erAktiv;
   })[0];
   return naermesteLeder ? naermesteLeder.navn : undefined;
 };
