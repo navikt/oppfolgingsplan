@@ -103,7 +103,7 @@ class Brodsmuler extends Component {
         <img src={PersonImage} alt="" className="brodsmuler__ikon" />
         <div className="brodsmuler__smuler">
           <a href={process.env.DITTNAV_URL} className="js-smule brodsmuler__smule">
-            Ditt NAV
+            Min side
           </a>
           {brodsmuler.length > 0 && <span className="brodsmule__skille"> / </span>}
           {this.visCollapsed() && (

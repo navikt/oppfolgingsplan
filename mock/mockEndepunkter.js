@@ -188,7 +188,7 @@ function mockForOpplaeringsmiljo(server) {
   server.get('/dittnav', (req, res) => {
     // noinspection HtmlUnknownTarget
     res.send(
-      '<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/syk/sykefravaer">Gå til Ditt sykefravær</a></p>'
+      '<p>Min side er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/syk/sykefravaer">Gå til Ditt sykefravær</a></p>'
     );
   });
 }
