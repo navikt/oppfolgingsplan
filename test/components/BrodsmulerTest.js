@@ -8,13 +8,13 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('Brodsmuler', () => {
-  it('Skal vise Ditt NAV dersom ingen brødsmuler sendes inn', () => {
+  it('Skal vise Min side dersom ingen brødsmuler sendes inn', () => {
     const brodsmuler = [];
     const component = shallow(<Brodsmuler brodsmuler={brodsmuler} />);
-    expect(component).to.contain('Ditt NAV');
+    expect(component).to.contain('Min side');
   });
 
-  it('Skal vise Ditt NAV og én brødsmule dersom én brødsmule sendes inn', () => {
+  it('Skal vise Min side og én brødsmule dersom én brødsmule sendes inn', () => {
     const brodsmuler = [
       {
         tittel: 'Sykmelding',
@@ -22,7 +22,7 @@ describe('Brodsmuler', () => {
       },
     ];
     const component = mount(<Brodsmuler brodsmuler={brodsmuler} />);
-    expect(component.text()).to.contain('Ditt NAV');
+    expect(component.text()).to.contain('Min side');
     expect(component.text()).to.contain('Sykmelding');
     expect(component.find('.js-smuletekst').length).to.equal(1);
     expect(component.find('.js-smule').length).to.equal(1);
