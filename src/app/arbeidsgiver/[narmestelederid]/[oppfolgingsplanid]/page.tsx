@@ -1,5 +1,5 @@
 import React from "react";
-import { OppfolgingsplanStepper } from "@/components/oppfolgingsplanStepper/oppfolgingsplanStepper";
+import { OppfolgingsplanStepper } from "@/components/oppfolgingsplanStepper/oppfolgingsplanStepper.tsx";
 import { VStack } from "@navikt/ds-react";
 import { OppfolgingsplanForm } from "@/components/form/oppfolgingsplan/oppfolgingsplanForm.tsx";
 

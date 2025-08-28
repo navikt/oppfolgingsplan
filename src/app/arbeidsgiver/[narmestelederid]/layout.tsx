@@ -3,12 +3,13 @@ import "@/app/globals.css";
 import React from "react";
 import { fetchDecoratorReact } from "@navikt/nav-dekoratoren-moduler/ssr";
 import Script from "next/script";
-import { publicEnv } from "@/constants/envs";
-import { createBreadcrumbsAG } from "@/components/breadcrumbs/breadcrumbs";
-import { fetchSykmeldt } from "@/server/fetch/fetchSykmeldt";
-import { SideMenuContainer } from "@/components/sideMenuContainer/sideMenuContainer";
+import { publicEnv } from "@/constants/envs.ts";
+import { createBreadcrumbsAG } from "@/components/breadcrumbs/breadcrumbs.ts";
+import { fetchSykmeldt } from "@/server/fetch/fetchSykmeldt.ts";
+import { SideMenuContainer } from "@/components/sideMenuContainer/sideMenuContainer.tsx";
 import { logger } from "@navikt/next-logger";
-import { redirectToLogin } from "@/auth/redirectToLogin";
+import { redirectToLogin } from "@/auth/redirectToLogin.ts";
+import PrototypeStoreProvider from "@/context/StoreProvider.tsx";
 
 function createDecoratorEnv(): "dev" | "prod" {
   switch (publicEnv.NEXT_PUBLIC_RUNTIME_ENVIRONMENT) {
@@ -79,7 +80,7 @@ export default async function RootLayout({
       <body>
         <Decorator.Header />
         <SideMenuContainer sykmeldtData={sykmeldtResult.data}>
-          {children}
+          <PrototypeStoreProvider>{children}</PrototypeStoreProvider>
         </SideMenuContainer>
         <Decorator.Footer />
         <Decorator.Scripts loader={Script} />
